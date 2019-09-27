@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Dropdown.init(elems); //inicializa los elementos
 });*/
 
-
+/*
 (function ($) {
     $(function () {
 
@@ -19,3 +19,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }); // End Document Ready
 })(jQuery); // End of jQuery name space
+*/
