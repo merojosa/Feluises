@@ -39,40 +39,49 @@
     }
 </style>
 
-
-<div class="row">
-    <div class="col s4 push-s4">
-
-        <div class="card">
-
-            <div class="card-action red white-text">
-                <h3> LogIn</h3>
-            </div>
-
-            <div class="card-content">
-
-                <div class="form-field">
-                    <label for="username">UserName</label>
-                    <input type="text" id="username" />
-                </div><br>
-
-                <div class="form-field">
-                    <label for="password">Pasword</label>
-                    <input type="password" id="password" />
-                </div><br>
-
-                <div class="form-field">
-                    <input type="checkbox" id="remember1" />
-                    <label for="remember">Remember me</label>
-                </div><br>
-
-                <div class="form-field center-align">
-                    <buttom class="btn-large red">Login</buttom>
-                </div><br>
-
-            </div>
-
-        </div>
-    </div>
+<div>
+    @Html.ActionLink("LogIn", "Index", "loginController")
 
 </div>
+
+
+<body>
+    <div class="row">
+        <div class="col s4 push-s4">
+
+            <div class="card">
+
+                <div class="card-action red white-text">
+                    <h3> LogIn</h3>
+                </div>
+
+                <div class="card-content">
+
+                    <div class="form-field">
+                        <label for="username">UserName</label>
+                        <input type="text" id="username" />
+                    </div><br>
+
+                    <div class="form-field">
+                        <label for="password">Pasword</label>
+                        <input type="password" id="password" />
+                    </div><br>
+
+                    <div class="form-field">
+                        <input type="checkbox" id="remember1" />
+                        <label for="remember">Remember me</label>
+                    </div><br>
+
+                          <div class="form-field center-align">
+
+                            <a href="~/Views/Home/Index.cshtml" <buttom class="btn-large red">Login</buttom></a>
+                              <!--<buttom class="btn-large red">Login</buttom>-->
+                          </div><br>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
