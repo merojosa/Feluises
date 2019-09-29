@@ -68,11 +68,8 @@ CREATE TABLE Requeriment(
 	endDate DATE,
 	complexity SMALLINT DEFAULT 0,
 	CONSTRAINT PK_Requeriment PRIMARY KEY(idProjectFKPK, idModuleFKPK, idRequerimentPK),
-	CONSTRAINT FK_Requeriment_Project FOREIGN KEY(idProjectFKPK) REFERENCES Module(idProjectFKPK)
+	CONSTRAINT FK_Requeriment_Project FOREIGN KEY(idProjectFKPK,idModuleFKPK) REFERENCES Module(idProjectFKPK,idModulePK)
 	ON DELETE CASCADE
-	ON UPDATE CASCADE,
-	CONSTRAINT FK_Requeriment_Module FOREIGN KEY(idModuleFKPK) REFERENCES Module(idModulePK)
-	ON DELETE SET DEFAULT
 	ON UPDATE CASCADE,
 	CONSTRAINT FK_Requeriment_Employee FOREIGN KEY(idEmployeeFK) REFERENCES Employee(idEmployeePK)
 	ON DELETE SET DEFAULT
