@@ -30,13 +30,14 @@ CREATE TABLE Project(
 
 CREATE TABLE Employee(
 	idEmployeePK CHAR(9) PRIMARY KEY, 
-	EmployeeName VARCHAR(20) NOT NULL,
-	EmployeeLastName VARCHAR(20) NOT NULL,
-	EmployeeSecondLastName VARCHAR(20),
-	EmployeeBirthDate DATE,
-	EmployeeHireDate DATE NOT NULL,
+	employeeName VARCHAR(20) NOT NULL,
+	employeeLastName VARCHAR(20) NOT NULL,
+	employeeSecondLastName VARCHAR(20),
+	employeeBirthDate DATE,
+	employeeHireDate DATE NOT NULL,
+	developerFlag SMALLINT DEFAULT 0,
 	tel VARCHAR(20) NOT NULL,
-	email VARCHAR(30) NOT NULL
+	email VARCHAR(30) NOT NULL,
 	province VARCHAR(20),
 	canton VARCHAR(20),
 	district VARCHAR(20),
@@ -59,7 +60,7 @@ CREATE TABLE Requeriment(
 	idProjectFKPK INT,
 	idModuleFKPK INT DEFAULT -1,
 	idRequerimentPK INT,
-	idEmployeeFK INT DEFAULT -1,
+	idEmployeeFK CHAR(9) DEFAULT '?????????',
 	estimatedDuration INT,
 	realDuration INT,
 	status SMALLINT DEFAULT 0,
@@ -67,7 +68,7 @@ CREATE TABLE Requeriment(
 	endDate DATE,
 	complexity SMALLINT DEFAULT 0,
 	CONSTRAINT PK_Requeriment PRIMARY KEY(idProjectFKPK, idModuleFKPK, idRequerimentPK),
-	CONSTRAINT FK_Requeriment_Project FOREIGN KEY(idProjectFKPK) REFERENCES Module(idProjectFKPK),
+	CONSTRAINT FK_Requeriment_Project FOREIGN KEY(idProjectFKPK) REFERENCES Module(idProjectFKPK)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE,
 	CONSTRAINT FK_Requeriment_Module FOREIGN KEY(idModuleFKPK) REFERENCES Module(idModulePK)
@@ -81,7 +82,7 @@ CREATE TABLE Requeriment(
 CREATE TABLE Developer_Knowledge(
 	idEmployeeFKPK CHAR(9), 
 	devKnowledgePK VARCHAR(30),
-	CONSTRAINT PK_DeveloperKnowledge PRIMARY KEY(idEmployeeFKPK,devKnowledgeFK),
+	CONSTRAINT PK_DeveloperKnowledge PRIMARY KEY(idEmployeeFKPK,devKnowledgePK),
 	CONSTRAINT FK_DeveloperKnowledge_Employee FOREIGN KEY(idEmployeeFKPK) REFERENCES Employee(idEmployeePK)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
