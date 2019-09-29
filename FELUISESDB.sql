@@ -1,17 +1,17 @@
-CREATE TABLE CLIENT(
-	idClient CHAR(9), 
+CREATE TABLE Client(
+	idClientPK CHAR(9), 
 	clientName VARCHAR(20) NOT NULL,
 	clientLastName VARCHAR(20) NOT NULL,
 	clientSecondLastName VARCHAR(20),
 	company VARCHAR(20),
-	Tel VARCHAR(20) NOT NULL,
+	tel VARCHAR(20) NOT NULL,
 	email VARCHAR(30) NOT NULL,
-	CONSTRAINT CLIENT_PK PRIMARY KEY(idClient)
+	CONSTRAINT PK_Client PRIMARY KEY(idClientPK)
 );
 
-CREATE TABLE PROYECT(
-	idProyect INT PRIMARY KEY, 
-	proyectName CHAR(20) NOT NULL UNIQUE,
+CREATE TABLE Project(
+	idProjectPK INT, 
+	projectName CHAR(20) NOT NULL UNIQUE,
 	objective VARCHAR(256) NOT NULL,
 	estimatedCost NUMERIC(20, 2), 
 	realCost NUMERIC(20, 2) DEFAULT 0, 
@@ -19,60 +19,81 @@ CREATE TABLE PROYECT(
 	finishingDate DATE,
 	budget NUMERIC(20, 2) CHECK (budget > 0),
 	estimatedDuration INTEGER, --DERIVADO
-	idClient CHAR(9) DEFAULT -1,
-	CONSTRAINT FK_Client FOREIGN KEY (idClient) REFERENCES CLIENT(idClient)
+	idClientFK CHAR(9) DEFAULT -1,
+	CONSTRAINT PK_Project PRIMARY KEY(idProjectPK),
+	CONSTRAINT FK_Project_Client FOREIGN KEY (idClientFK) REFERENCES Client(idClientPK)
 	ON DELETE SET DEFAULT
 	ON UPDATE CASCADE,
-	CONSTRAINT CK_estimatedCost  CHECK (estimatedCost > 0),
-	CONSTRAINT CK_budget  CHECK (budget > 0)
+	CONSTRAINT CK_Project_EstimatedCost CHECK (estimatedCost > 0),
+	CONSTRAINT CK_Project_Budget CHECK (budget > 0)
 );
 
-CREATE TABLE EMPLOYEE(
-	idEmployee CHAR(9) PRIMARY KEY, 
+CREATE TABLE Employee(
+	idEmployeePK CHAR(9) PRIMARY KEY, 
 	employeeName VARCHAR(20) NOT NULL,
 	employeeLastName VARCHAR(20) NOT NULL,
 	employeeSecondLastName VARCHAR(20),
 	employeeBirthDate DATE,
 	employeeHireDate DATE NOT NULL,
+	developerFlag SMALLINT DEFAULT 0,
+	tel VARCHAR(20) NOT NULL,
+	email VARCHAR(30) NOT NULL,
 	province VARCHAR(20),
 	canton VARCHAR(20),
 	district VARCHAR(20),
 	exactDirection VARCHAR(35),
-	leaderFlag BIT DEFAULT 0,
-	developerFlag BIT DEFAULT 1,
-	idLeaderSupervise CHAR(9) DEFAULT -1,
-	idProyect INT DEFAULT -1,
-	CONSTRAINT FK_leader FOREIGN KEY (idLeaderSupervise) REFERENCES EMPLOYEE(idEmployee)
-	ON DELETE SET DEFAULT
-	ON UPDATE CASCADE,
-	CONSTRAINT FK_Proyect FOREIGN KEY (idProyect) REFERENCES PROYECT(idProyect)
-	ON DELETE SET DEFAULT
-	ON UPDATE CASCADE
+	pricePerHour NUMERIC(20,2),
+	availability SMALLINT DEFAULT 0,
 );
 
-CREATE TABLE MODULE(
-	idProyect INT,
-	idModule INT,
+CREATE TABLE Module(
+	idProjectFKPK INT,
+	idModulePK INT,
 	Name VARCHAR(30) NOT NULL,
-	CONSTRAINT MODULE_PK PRIMARY KEY(idProyect,idModule),
-	CONSTRAINT IDPROYECT_PK FOREIGN KEY(idProyect) REFERENCES PROYECT(idProyect)
+	CONSTRAINT PK_Module PRIMARY KEY(idProjectFKPK,idModulePK),
+	CONSTRAINT FK_Module_idModule FOREIGN KEY(idProjectFKPK) REFERENCES Project(idProjectPK)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
 
-CREATE TABLE DEVELOPER_KNOWLEDGE(
-	idEmployee CHAR(9), 
-	devKnowledge VARCHAR(30),
-	CONSTRAINT DEVKNOWLEDGE_PK PRIMARY KEY(idEmployee,devKnowledge),
-	CONSTRAINT EMPLOYEE_FK FOREIGN KEY(idEmployee) REFERENCES EMPLOYEE(idEmployee)
-	ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE Requeriment(
+	idProjectFKPK INT,
+	idModuleFKPK INT DEFAULT -1,
+	idRequerimentPK INT,
+	idEmployeeFK CHAR(9) DEFAULT '?????????',
+	estimatedDuration INT,
+	realDuration INT,
+	status SMALLINT DEFAULT 0,
+	startingDate DATE NOT NULL,
+	endDate DATE,
+	complexity SMALLINT DEFAULT 0,
+	CONSTRAINT PK_Requeriment PRIMARY KEY(idProjectFKPK, idModuleFKPK, idRequerimentPK),
+	CONSTRAINT FK_Requeriment_Project FOREIGN KEY(idProjectFKPK,idModuleFKPK) REFERENCES Module(idProjectFKPK,idModulePK)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+	CONSTRAINT FK_Requeriment_Employee FOREIGN KEY(idEmployeeFK) REFERENCES Employee(idEmployeePK)
+	ON DELETE SET DEFAULT
+	ON UPDATE CASCADE
 );
 
-CREATE TABLE WORKS_IN(
-    idEmployee CHAR(9),
-    idProyect INT,
-    role INT
-    CONSTRAINT WORKSIN_PK PRIMARY KEY(idEmployee,idProyect),
-    CONSTRAINT WORKSIN_EMPLOYEE_FK FOREIGN KEY(idEmployee) REFERENCES EMPLOYEE(idEmployee),
-    CONSTRAINT WORKSIN_PROJECT_FK FOREIGN KEY(idProyect) REFERENCES PROYECT(idProyect)
+CREATE TABLE Developer_Knowledge(
+	idEmployeeFKPK CHAR(9), 
+	devKnowledgePK VARCHAR(30),
+	CONSTRAINT PK_DeveloperKnowledge PRIMARY KEY(idEmployeeFKPK,devKnowledgePK),
+	CONSTRAINT FK_DeveloperKnowledge_Employee FOREIGN KEY(idEmployeeFKPK) REFERENCES Employee(idEmployeePK)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE WorksIn(
+    idEmployeeFKPK CHAR(9),
+    idProjectFKPK INT,
+    role INT,
+    CONSTRAINT PK_WorksIn PRIMARY KEY(idEmployeeFKPK,idProjectFKPK),
+    CONSTRAINT FK_WorksIn_Employee FOREIGN KEY(idEmployeeFKPK) REFERENCES Employee(idEmployeePK)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+    CONSTRAINT FK_WorksIn_Project FOREIGN KEY(idProjectFKPK) REFERENCES Project(idProjectPK)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
