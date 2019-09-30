@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a15d371d98c24d21b3894a575774df8f" Name="Diagram1">
+        <EntityTypeShape EntityType="Gr02Proy2Model.Client" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.Credentials" Width="1.625" PointX="0.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.DeveloperKnowledge" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.Employee" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.Module" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.Project" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.Requeriment" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.sysdiagrams" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy2Model.WorksIn" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_Project_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_DeveloperKnowledge_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_Requeriment_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_WorksIn_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_Module_idProject" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_Requeriment_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy2Model.FK_WorksIn_Project" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Gr02Proy2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClientPK" />
+          </Key>
+          <Property Name="idClientPK" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="clientName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="clientLastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="clientSecondLastName" Type="varchar" MaxLength="20" />
+          <Property Name="company" Type="varchar" MaxLength="20" />
+          <Property Name="tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="DeveloperKnowledge">
+          <Key>
+            <PropertyRef Name="idEmployeeFKPK" />
+            <PropertyRef Name="devKnowledgePK" />
+          </Key>
+          <Property Name="idEmployeeFKPK" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="devKnowledgePK" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="idEmployeePK" />
+          </Key>
+          <Property Name="idEmployeePK" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="employeeName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeLastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeSecondLastName" Type="varchar" MaxLength="20" />
+          <Property Name="employeeBirthDate" Type="date" />
+          <Property Name="employeeHireDate" Type="date" Nullable="false" />
+          <Property Name="developerFlag" Type="smallint" />
+          <Property Name="tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="province" Type="varchar" MaxLength="20" />
+          <Property Name="canton" Type="varchar" MaxLength="20" />
+          <Property Name="district" Type="varchar" MaxLength="20" />
+          <Property Name="exactDirection" Type="varchar" MaxLength="35" />
+          <Property Name="pricePerHour" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="availability" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="idProjectFKPK" />
+            <PropertyRef Name="idModulePK" />
+          </Key>
+          <Property Name="idProjectFKPK" Type="int" Nullable="false" />
+          <Property Name="idModulePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="idProjectPK" />
+          </Key>
+          <Property Name="idProjectPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectName" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="objective" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="estimatedCost" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="realCost" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="startingDate" Type="date" />
+          <Property Name="finishingDate" Type="date" />
+          <Property Name="budget" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="estimatedDuration" Type="int" />
+          <Property Name="idClientFK" Type="char" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="Requeriment">
+          <Key>
+            <PropertyRef Name="idProjectFKPK" />
+            <PropertyRef Name="idModuleFKPK" />
+            <PropertyRef Name="idRequerimentPK" />
+          </Key>
+          <Property Name="idProjectFKPK" Type="int" Nullable="false" />
+          <Property Name="idModuleFKPK" Type="int" Nullable="false" />
+          <Property Name="idRequerimentPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEmployeeFK" Type="char" MaxLength="9" />
+          <Property Name="estimatedDuration" Type="int" />
+          <Property Name="realDuration" Type="int" />
+          <Property Name="status" Type="smallint" />
+          <Property Name="startingDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="complexity" Type="smallint" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="WorksIn">
+          <Key>
+            <PropertyRef Name="idEmployeeFKPK" />
+            <PropertyRef Name="idProjectFKPK" />
+          </Key>
+          <Property Name="idEmployeeFKPK" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="idProjectFKPK" Type="int" Nullable="false" />
+          <Property Name="role" Type="int" />
+        </EntityType>
+        <Association Name="FK_DeveloperKnowledge_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeveloperKnowledge" Type="Self.DeveloperKnowledge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="DeveloperKnowledge">
+              <PropertyRef Name="idEmployeeFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Module_idProject">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="idProjectPK" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="idProjectFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClientPK" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="idClientFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requeriment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Requeriment" Type="Self.Requeriment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="Requeriment">
+              <PropertyRef Name="idEmployeeFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requeriment_Project">
+          <End Role="Module" Type="Self.Module" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Requeriment" Type="Self.Requeriment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="idProjectFKPK" />
+              <PropertyRef Name="idModulePK" />
+            </Principal>
+            <Dependent Role="Requeriment">
+              <PropertyRef Name="idProjectFKPK" />
+              <PropertyRef Name="idModuleFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorksIn_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorksIn" Type="Self.WorksIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="WorksIn">
+              <PropertyRef Name="idEmployeeFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorksIn_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorksIn" Type="Self.WorksIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="idProjectPK" />
+            </Principal>
+            <Dependent Role="WorksIn">
+              <PropertyRef Name="idProjectFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gr02Proy2ModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeveloperKnowledge" EntityType="Self.DeveloperKnowledge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requeriment" EntityType="Self.Requeriment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorksIn" EntityType="Self.WorksIn" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DeveloperKnowledge_Employee" Association="Self.FK_DeveloperKnowledge_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DeveloperKnowledge" EntitySet="DeveloperKnowledge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Module_idProject" Association="Self.FK_Module_idProject">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Client" Association="Self.FK_Project_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requeriment_Employee" Association="Self.FK_Requeriment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requeriment" EntitySet="Requeriment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requeriment_Project" Association="Self.FK_Requeriment_Project">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Requeriment" EntitySet="Requeriment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorksIn_Employee" Association="Self.FK_WorksIn_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorksIn" EntitySet="WorksIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorksIn_Project" Association="Self.FK_WorksIn_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="WorksIn" EntitySet="WorksIn" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gr02Proy2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClientPK" />
+          </Key>
+          <Property Name="idClientPK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="clientName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clientLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clientSecondLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Project_Client" FromRole="Client" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DeveloperKnowledge">
+          <Key>
+            <PropertyRef Name="idEmployeeFKPK" />
+            <PropertyRef Name="devKnowledgePK" />
+          </Key>
+          <Property Name="idEmployeeFKPK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="devKnowledgePK" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_DeveloperKnowledge_Employee" FromRole="DeveloperKnowledge" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="idEmployeePK" />
+          </Key>
+          <Property Name="idEmployeePK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="employeeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeSecondLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="employeeBirthDate" Type="DateTime" Precision="0" />
+          <Property Name="employeeHireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="developerFlag" Type="Int16" />
+          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="canton" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="exactDirection" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="pricePerHour" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="availability" Type="Int16" />
+          <NavigationProperty Name="DeveloperKnowledge" Relationship="Self.FK_DeveloperKnowledge_Employee" FromRole="Employee" ToRole="DeveloperKnowledge" />
+          <NavigationProperty Name="Requeriment" Relationship="Self.FK_Requeriment_Employee" FromRole="Employee" ToRole="Requeriment" />
+          <NavigationProperty Name="WorksIn" Relationship="Self.FK_WorksIn_Employee" FromRole="Employee" ToRole="WorksIn" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="idProjectFKPK" />
+            <PropertyRef Name="idModulePK" />
+          </Key>
+          <Property Name="idProjectFKPK" Type="Int32" Nullable="false" />
+          <Property Name="idModulePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Module_idProject" FromRole="Module" ToRole="Project" />
+          <NavigationProperty Name="Requeriment" Relationship="Self.FK_Requeriment_Project" FromRole="Module" ToRole="Requeriment" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="idProjectPK" />
+          </Key>
+          <Property Name="idProjectPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectName" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="objective" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estimatedCost" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="realCost" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="startingDate" Type="DateTime" Precision="0" />
+          <Property Name="finishingDate" Type="DateTime" Precision="0" />
+          <Property Name="budget" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="estimatedDuration" Type="Int32" />
+          <Property Name="idClientFK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Project_Client" FromRole="Project" ToRole="Client" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_Module_idProject" FromRole="Project" ToRole="Module" />
+          <NavigationProperty Name="WorksIn" Relationship="Self.FK_WorksIn_Project" FromRole="Project" ToRole="WorksIn" />
+        </EntityType>
+        <EntityType Name="Requeriment">
+          <Key>
+            <PropertyRef Name="idProjectFKPK" />
+            <PropertyRef Name="idModuleFKPK" />
+            <PropertyRef Name="idRequerimentPK" />
+          </Key>
+          <Property Name="idProjectFKPK" Type="Int32" Nullable="false" />
+          <Property Name="idModuleFKPK" Type="Int32" Nullable="false" />
+          <Property Name="idRequerimentPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEmployeeFK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="estimatedDuration" Type="Int32" />
+          <Property Name="realDuration" Type="Int32" />
+          <Property Name="status" Type="Int16" />
+          <Property Name="startingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="complexity" Type="Int16" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Requeriment_Employee" FromRole="Requeriment" ToRole="Employee" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_Requeriment_Project" FromRole="Requeriment" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WorksIn">
+          <Key>
+            <PropertyRef Name="idEmployeeFKPK" />
+            <PropertyRef Name="idProjectFKPK" />
+          </Key>
+          <Property Name="idEmployeeFKPK" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idProjectFKPK" Type="Int32" Nullable="false" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_WorksIn_Employee" FromRole="WorksIn" ToRole="Employee" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_WorksIn_Project" FromRole="WorksIn" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Project_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClientPK" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="idClientFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeveloperKnowledge_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeveloperKnowledge" Type="Self.DeveloperKnowledge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="DeveloperKnowledge">
+              <PropertyRef Name="idEmployeeFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requeriment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Requeriment" Type="Self.Requeriment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="Requeriment">
+              <PropertyRef Name="idEmployeeFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorksIn_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorksIn" Type="Self.WorksIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="idEmployeePK" />
+            </Principal>
+            <Dependent Role="WorksIn">
+              <PropertyRef Name="idEmployeeFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Module_idProject">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="idProjectPK" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="idProjectFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requeriment_Project">
+          <End Role="Module" Type="Self.Module" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Requeriment" Type="Self.Requeriment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="idProjectFKPK" />
+              <PropertyRef Name="idModulePK" />
+            </Principal>
+            <Dependent Role="Requeriment">
+              <PropertyRef Name="idProjectFKPK" />
+              <PropertyRef Name="idModuleFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorksIn_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorksIn" Type="Self.WorksIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="idProjectPK" />
+            </Principal>
+            <Dependent Role="WorksIn">
+              <PropertyRef Name="idProjectFKPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FeLuisesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" />
+          <EntitySet Name="DeveloperKnowledge" EntityType="Self.DeveloperKnowledge" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Module" EntityType="Self.Module" />
+          <EntitySet Name="Project" EntityType="Self.Project" />
+          <EntitySet Name="Requeriment" EntityType="Self.Requeriment" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="WorksIn" EntityType="Self.WorksIn" />
+          <AssociationSet Name="FK_Project_Client" Association="Self.FK_Project_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeveloperKnowledge_Employee" Association="Self.FK_DeveloperKnowledge_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DeveloperKnowledge" EntitySet="DeveloperKnowledge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requeriment_Employee" Association="Self.FK_Requeriment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requeriment" EntitySet="Requeriment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorksIn_Employee" Association="Self.FK_WorksIn_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="WorksIn" EntitySet="WorksIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Module_idProject" Association="Self.FK_Module_idProject">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requeriment_Project" Association="Self.FK_Requeriment_Project">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Requeriment" EntitySet="Requeriment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorksIn_Project" Association="Self.FK_WorksIn_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="WorksIn" EntitySet="WorksIn" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Gr02Proy2ModelStoreContainer" CdmEntityContainer="FeLuisesEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idClientPK" ColumnName="idClientPK" />
+                <ScalarProperty Name="clientName" ColumnName="clientName" />
+                <ScalarProperty Name="clientLastName" ColumnName="clientLastName" />
+                <ScalarProperty Name="clientSecondLastName" ColumnName="clientSecondLastName" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credentials">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Credentials">
+              <MappingFragment StoreEntitySet="Credentials">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeveloperKnowledge">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.DeveloperKnowledge">
+              <MappingFragment StoreEntitySet="DeveloperKnowledge">
+                <ScalarProperty Name="idEmployeeFKPK" ColumnName="idEmployeeFKPK" />
+                <ScalarProperty Name="devKnowledgePK" ColumnName="devKnowledgePK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="idEmployeePK" ColumnName="idEmployeePK" />
+                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="employeeLastName" ColumnName="employeeLastName" />
+                <ScalarProperty Name="employeeSecondLastName" ColumnName="employeeSecondLastName" />
+                <ScalarProperty Name="employeeBirthDate" ColumnName="employeeBirthDate" />
+                <ScalarProperty Name="employeeHireDate" ColumnName="employeeHireDate" />
+                <ScalarProperty Name="developerFlag" ColumnName="developerFlag" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="exactDirection" ColumnName="exactDirection" />
+                <ScalarProperty Name="pricePerHour" ColumnName="pricePerHour" />
+                <ScalarProperty Name="availability" ColumnName="availability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Module">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="idProjectFKPK" ColumnName="idProjectFKPK" />
+                <ScalarProperty Name="idModulePK" ColumnName="idModulePK" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="idProjectPK" ColumnName="idProjectPK" />
+                <ScalarProperty Name="projectName" ColumnName="projectName" />
+                <ScalarProperty Name="objective" ColumnName="objective" />
+                <ScalarProperty Name="estimatedCost" ColumnName="estimatedCost" />
+                <ScalarProperty Name="realCost" ColumnName="realCost" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="finishingDate" ColumnName="finishingDate" />
+                <ScalarProperty Name="budget" ColumnName="budget" />
+                <ScalarProperty Name="estimatedDuration" ColumnName="estimatedDuration" />
+                <ScalarProperty Name="idClientFK" ColumnName="idClientFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requeriment">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.Requeriment">
+              <MappingFragment StoreEntitySet="Requeriment">
+                <ScalarProperty Name="idProjectFKPK" ColumnName="idProjectFKPK" />
+                <ScalarProperty Name="idModuleFKPK" ColumnName="idModuleFKPK" />
+                <ScalarProperty Name="idRequerimentPK" ColumnName="idRequerimentPK" />
+                <ScalarProperty Name="idEmployeeFK" ColumnName="idEmployeeFK" />
+                <ScalarProperty Name="estimatedDuration" ColumnName="estimatedDuration" />
+                <ScalarProperty Name="realDuration" ColumnName="realDuration" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="complexity" ColumnName="complexity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorksIn">
+            <EntityTypeMapping TypeName="Gr02Proy2Model.WorksIn">
+              <MappingFragment StoreEntitySet="WorksIn">
+                <ScalarProperty Name="idEmployeeFKPK" ColumnName="idEmployeeFKPK" />
+                <ScalarProperty Name="idProjectFKPK" ColumnName="idProjectFKPK" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
