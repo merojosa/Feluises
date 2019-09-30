@@ -10,7 +10,7 @@ CREATE TABLE Client(
 );
 
 CREATE TABLE Project(
-	idProjectPK INT, 
+	idProjectPK INT AUTO_INCREMENT, 
 	projectName CHAR(20) NOT NULL UNIQUE,
 	objective VARCHAR(256) NOT NULL,
 	estimatedCost NUMERIC(20, 2), 
@@ -49,7 +49,7 @@ CREATE TABLE Employee(
 
 CREATE TABLE Module(
 	idProjectFKPK INT,
-	idModulePK INT,
+	idModulePK INT AUTO_INCREMENT,
 	name VARCHAR(30) NOT NULL,
 	CONSTRAINT PK_Module PRIMARY KEY(idProjectFKPK,idModulePK),
 	CONSTRAINT FK_Module_idProject FOREIGN KEY(idProjectFKPK) REFERENCES Project(idProjectPK)
@@ -60,7 +60,7 @@ CREATE TABLE Module(
 CREATE TABLE Requeriment(
 	idProjectFKPK INT,
 	idModuleFKPK INT DEFAULT -1,
-	idRequerimentPK INT,
+	idRequerimentPK INT AUTO_INCREMENT,
 	idEmployeeFK CHAR(9) DEFAULT '?????????',
 	estimatedDuration INT,
 	realDuration INT,
