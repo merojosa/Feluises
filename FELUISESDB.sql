@@ -29,7 +29,7 @@ CREATE TABLE Project(
 );
 
 CREATE TABLE Employee(
-	idEmployeePK CHAR(9) PRIMARY KEY, 
+	idEmployeePK CHAR(9), 
 	employeeName VARCHAR(20) NOT NULL,
 	employeeLastName VARCHAR(20) NOT NULL,
 	employeeSecondLastName VARCHAR(20),
@@ -44,14 +44,15 @@ CREATE TABLE Employee(
 	exactDirection VARCHAR(35),
 	pricePerHour NUMERIC(20,2),
 	availability SMALLINT DEFAULT 0,
+	CONSTRAINT PK_Employee  PRIMARY KEY(idEmployeePK)
 );
 
 CREATE TABLE Module(
 	idProjectFKPK INT,
 	idModulePK INT,
-	Name VARCHAR(30) NOT NULL,
+	name VARCHAR(30) NOT NULL,
 	CONSTRAINT PK_Module PRIMARY KEY(idProjectFKPK,idModulePK),
-	CONSTRAINT FK_Module_idModule FOREIGN KEY(idProjectFKPK) REFERENCES Project(idProjectPK)
+	CONSTRAINT FK_Module_idProject FOREIGN KEY(idProjectFKPK) REFERENCES Project(idProjectPK)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
@@ -76,7 +77,7 @@ CREATE TABLE Requeriment(
 	ON UPDATE CASCADE
 );
 
-CREATE TABLE Developer_Knowledge(
+CREATE TABLE DeveloperKnowledge(
 	idEmployeeFKPK CHAR(9), 
 	devKnowledgePK VARCHAR(30),
 	CONSTRAINT PK_DeveloperKnowledge PRIMARY KEY(idEmployeeFKPK,devKnowledgePK),
@@ -88,7 +89,7 @@ CREATE TABLE Developer_Knowledge(
 CREATE TABLE WorksIn(
     idEmployeeFKPK CHAR(9),
     idProjectFKPK INT,
-    role INT,
+    role INT DEFAULT 0,
     CONSTRAINT PK_WorksIn PRIMARY KEY(idEmployeeFKPK,idProjectFKPK),
     CONSTRAINT FK_WorksIn_Employee FOREIGN KEY(idEmployeeFKPK) REFERENCES Employee(idEmployeePK)
 	ON DELETE CASCADE
