@@ -273,8 +273,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LogIn\login.cshtml" />
-    <Content Include="Views\LogIn\Index.cshtml" />
+    <Content Include="Views\LogIn\Login.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />

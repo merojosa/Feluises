@@ -9,7 +9,7 @@ namespace FeLuisesScrumDEV.Controllers
     public class loginController : Controller
     {
         // GET: login
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
