@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
+
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +13,17 @@
     <!--Poner el script luego de esto-->
     @Scripts.Render("~/bundles/jquery")
     <script>
-            (function ($) {
-                $(function () {
-                     $('.dropdown-trigger').dropdown({
-                        inDuration: 300,
-                        outDuration: 225,
-                        hover: false, // Activate on hover
-                        belowOrigin: true, // Displays dropdown below the button
-                        alignment: 'right' // Displays dr
-<a href="~/Views/Shared/_Layout.cshtml">~/Views/Shared/_Layout.cshtml</a>opdown with edge aligned to the left of button
-                     });
-                }); // End Document Ready
-            })(jQuery); // End of jQuery name space
+        (function ($) {
+            $(function () {
+                $('.dropdown-trigger').dropdown({
+                    inDuration: 300,
+                    outDuration: 225,
+                    hover: false, // Activate on hover
+                    belowOrigin: true, // Displays dropdown below the button
+                    alignment: 'right' // Displays dropdown with edge aligned to the left of button
+                });
+            }); // End Document Ready
+        })(jQuery); // End of jQuery name space
     </script>
 
     <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
@@ -30,8 +32,26 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--->
 
-</head>
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
 
+        main {
+            flex: 1 0 auto;
+        }
+
+        .page-footer{
+            width: 100%
+
+
+
+        }
+
+    </style>
+</head>
 
 
 <body>
@@ -57,10 +77,17 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2019 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">FeLuises</a>
+            </div>
+        </div>
+    </footer>
+
 
     <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
     <!-- Materialize JavaScript -->
