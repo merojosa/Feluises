@@ -98,3 +98,16 @@ CREATE TABLE WorksIn(
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
+
+CREATE TABLE Credentials(
+	userName VARCHAR(15),
+	password VARCHAR(20),
+	email VARCHAR(30),
+	CONSTRAINT PK_Credentials PRIMARY KEY(userName) 
+	);
+	
+	
+	
+	
+	
+	
