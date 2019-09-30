@@ -1,0 +1,136 @@
+﻿@model FeLuisesScrumDEV.Models.Employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeSecondLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeSecondLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeBirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeBirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeHireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeHireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.developerFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.developerFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.province)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.province)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.canton)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.canton)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.district)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.district)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exactDirection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exactDirection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pricePerHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pricePerHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.availability)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.availability)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,82 @@
+﻿@model FeLuisesScrumDEV.Models.Requeriment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Requeriment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.estimatedDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estimatedDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.realDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.realDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.complexity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.complexity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.employeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.employeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

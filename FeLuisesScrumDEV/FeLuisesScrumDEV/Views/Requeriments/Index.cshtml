@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FeLuisesScrumDEV.Models.Requeriment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.estimatedDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.realDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.complexity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.employeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Module.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.estimatedDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.realDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.complexity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.employeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

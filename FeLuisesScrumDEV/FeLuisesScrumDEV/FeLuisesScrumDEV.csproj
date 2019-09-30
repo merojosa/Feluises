@@ -129,20 +129,60 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\DeveloperKnowledgesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\RequerimentsController.cs" />
+    <Compile Include="Controllers\WorksInsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Credentials.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeveloperKnowledge.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FeLuisesDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FeLuisesDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeLuisesDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FeLuisesDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FeLuisesDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Module.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Requeriment.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorksIn.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -160,6 +200,12 @@
     <Content Include="Models\FeLuisesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FeLuisesDB.Context.cs</LastGenOutput>
+      <DependentUpon>FeLuisesDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\FeLuisesDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FeLuisesDB.edmx</DependentUpon>
+      <LastGenOutput>FeLuisesDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -187,9 +233,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FeLuisesDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\FeLuisesDB.edmx.diagram">
+    <Content Include="Models\FeLuisesDB.edmx.diagram">
       <DependentUpon>FeLuisesDB.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -237,9 +283,41 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\LogIn\login.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Credentials\Create.cshtml" />
+    <Content Include="Views\Credentials\Delete.cshtml" />
+    <Content Include="Views\Credentials\Details.cshtml" />
+    <Content Include="Views\Credentials\Edit.cshtml" />
+    <Content Include="Views\Credentials\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Modules\Create.cshtml" />
+    <Content Include="Views\Modules\Delete.cshtml" />
+    <Content Include="Views\Modules\Details.cshtml" />
+    <Content Include="Views\Modules\Edit.cshtml" />
+    <Content Include="Views\Modules\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Requeriments\Create.cshtml" />
+    <Content Include="Views\Requeriments\Delete.cshtml" />
+    <Content Include="Views\Requeriments\Details.cshtml" />
+    <Content Include="Views\Requeriments\Edit.cshtml" />
+    <Content Include="Views\Requeriments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DeveloperKnowledges\" />
+    <Folder Include="Views\WorksIns\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
