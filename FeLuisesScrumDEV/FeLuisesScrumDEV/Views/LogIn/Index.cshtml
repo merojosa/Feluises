@@ -2,12 +2,18 @@
 @{
     ViewBag.Title = "Index";
 }
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--->
 
+</head>
 
 <style>
     body {
@@ -18,6 +24,7 @@
 
     .card {
         margin-top: 100px;
+          border:5px solid #42a5f5;  
     }
 
     .card {
@@ -33,17 +40,7 @@
         font-size: 20px !important;
         color: #fff;
     }
-
-    .card-content buttom:hover {
-        padding: 0px 40px;
-    }
 </style>
-
-<div>
-    @Html.ActionLink("LogIn", "Index", "loginController")
-
-</div>
-
 
 <body>
     <div class="row">
@@ -52,7 +49,7 @@
             <div class="card">
 
                 <div class="card-action red white-text">
-                    <h3> LogIn</h3>
+                    <h3>FeLuises ScrumDEV</h3>
                 </div>
 
                 <div class="card-content">
@@ -67,11 +64,16 @@
                         <input type="password" id="password" />
                     </div><br>
 
-                          <div class="form-field center-align">
-
-                            <a href="~/Views/Home/Index.cshtml" <buttom class="btn-large red">Login</buttom></a>
-                              <!--<buttom class="btn-large red">Login</buttom>-->
-                          </div><br>
+                    <div class="form-field center-align">
+                        <a href=@Url.Action("Index","Home")
+                            <buttom class="btn-large red waves-effect waves-light red hoverable"
+                                    type="submit"
+                                    name="action">
+                                     Log in
+                                    <i class="material-icons right">check</i>
+                            </buttom>
+                        </a>
+                    </div><br>
 
                 </div>
 
