@@ -1,0 +1,30 @@
+﻿
+/*Color del nav*/
+
+.navbar-styles {
+  background-color: #4B4073;
+}
+
+.navbar-styles a {
+  color: white !important;
+}
+
+
+.navbar-styles .dropdown-menu a {
+    color: black !important;
+}
+
+/*Color de la letra del nombre*/
+
+.navbar-styles .navbar-brand {
+    font-size: 1.4em;
+}
+
+.navbar-styles .navbar-brand:hover {
+    color: #0FF2C9 !important;
+    font-size: 1.5em;
+}
+
+.navbar-styles .nav-link:hover {
+    text-decoration: underline;
+}
