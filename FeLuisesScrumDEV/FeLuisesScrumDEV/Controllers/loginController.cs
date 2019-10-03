@@ -19,7 +19,7 @@ namespace FeLuisesScrumDEV.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckUser(string idUser, string password)
+        public ActionResult action(string idUser, string password)
         {
             Boolean registered = false;
             //Verifica usuario en tabla de credenciales
@@ -49,8 +49,12 @@ namespace FeLuisesScrumDEV.Controllers
                     }
 
                     if (isEmployee){
-                        return View(); //con id y rol de empleado
+                   
+                        ViewBag.role = "Employees";
+                        return View("Index", "Employee");
+                        //return RedirectToAction("Index, Employees"); //con id y rol de empleado
                     }else{
+                        ViewBag.role = "Client";
                         return View(); //con id y rol de cliente
                     }
                    

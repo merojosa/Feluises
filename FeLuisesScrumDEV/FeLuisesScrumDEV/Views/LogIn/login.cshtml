@@ -63,15 +63,22 @@
                         <input type="password" id="password" name="password" />
                     </div><br>
 
+
+                    @{ 
+                        string myController = this.ViewBag.role;
+                    }
+
                     <div class="form-field center-align">
-                        <a href=@Url.Action("Index","Home")>
                             <buttom class="btn-large red waves-effect waves-light red hoverable"
                                     type="submit"
                                     name="action">
-                                     Log in
+
+                                @*<a href=@Url.Action("Index", myController)>*@ 
+                                    Log in
+                                @*</a>*@
                                     <i class="material-icons right">check</i>
                             </buttom>
-                        </a>
+                        
                     </div><br>
 
                 </div>
