@@ -62,6 +62,7 @@ CREATE TABLE Requeriment(
 	idModuleFKPK INT DEFAULT -1,
 	idRequerimentPK INT IDENTITY(1,1),
 	idEmployeeFK CHAR(9) DEFAULT '?????????',
+	objective VARCHAR(30) NOT NULL,
 	estimatedDuration INT,
 	realDuration INT,
 	status SMALLINT DEFAULT 0,
