@@ -11,6 +11,7 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Project
     {
@@ -20,12 +21,14 @@ namespace FeLuisesScrumDEV.Models
             this.Module = new HashSet<Module>();
             this.WorksIn = new HashSet<WorksIn>();
         }
-    
+        
+        [Key]
         public int idProjectPK { get; set; }
         public string projectName { get; set; }
         public string objective { get; set; }
         public Nullable<decimal> estimatedCost { get; set; }
         public Nullable<decimal> realCost { get; set; }
+
         public Nullable<System.DateTime> startingDate { get; set; }
         public Nullable<System.DateTime> finishingDate { get; set; }
         public Nullable<decimal> budget { get; set; }

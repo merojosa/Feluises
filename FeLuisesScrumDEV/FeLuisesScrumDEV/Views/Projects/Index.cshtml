@@ -4,85 +4,112 @@
 }
 
 @model IEnumerable<FeLuisesScrumDEV.Models.Project>
+<div class="container">
+    @{
+        ViewBag.Title = "Index";
+    }
 
-@{
-    ViewBag.Title = "Index";
-}
+    <h2>Index</h2>
 
-<h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-    <table class="table">
+    <div class="card-deck">
+        <div class="card-columns">
+            @foreach (var item in Model)
+            {
+                <div class="card" style="width: 24rem;">
+                    <div class="card-header">
+                        <!--<a href="Details/1" class="card-title">@Html.DisplayFor(modelItem => item.projectName)</a>-->
+                        @Html.ActionLink(item.projectName, "Details", new { id = item.idProjectPK })
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Client name: @item.Client.clientName</p>
+                        <p class="card.text">Objective: @item.objective</p>
+                        <p class="card-text">Actual Cost: @item.realCost</p>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        @Html.DisplayFor(modelItem => item.startingDate)
+                        @if (item.startingDate == null)
+                        {
+                            <p class="card-text">Informacion no disponible</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+        <table class="table">
+            <tr>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.projectName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.objective)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estimatedCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.realCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.startingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.finishingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.budget)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estimatedDuration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Client.clientName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-
-                        @Html.DisplayNameFor(model => model.projectName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.objective)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.estimatedCost)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.realCost)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.startingDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.finishingDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.budget)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.estimatedDuration)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Client.clientName)
-                    </th>
-                    <th></th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.projectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.objective)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimatedCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.realCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.startingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.finishingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.budget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimatedDuration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.clientName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.idProjectPK })
+                        @Html.ActionLink("Details", "Details", new { id = item.idProjectPK })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.idProjectPK })
+                    </td>
                 </tr>
+            }
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.projectName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.objective)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estimatedCost)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.realCost)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.startingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.finishingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.budget)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estimatedDuration)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Client.clientName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.idProjectPK })
-                            @Html.ActionLink("Details", "Details", new { id = item.idProjectPK })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.idProjectPK })
-                        </td>
-                    </tr>
-                }
-
-            </table>
+        </table>
+    </div>
