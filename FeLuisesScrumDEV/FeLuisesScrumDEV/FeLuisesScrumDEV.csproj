@@ -199,7 +199,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.svg" />
     <Content Include="Images\prb.jpg" />
+    <Content Include="Images\usr.svg" />
     <Content Include="Models\FeLuisesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FeLuisesDB.Context.cs</LastGenOutput>
