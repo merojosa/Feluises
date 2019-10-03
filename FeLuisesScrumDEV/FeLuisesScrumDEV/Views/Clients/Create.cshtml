@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
-
 @model FeLuisesScrumDEV.Models.Client
 <head>
 
     @{
         ViewBag.Title = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
 </head>
 
@@ -89,9 +89,7 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+
 </body>
 </html>
 
