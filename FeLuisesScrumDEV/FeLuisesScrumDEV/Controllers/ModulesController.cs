@@ -28,7 +28,7 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(idProjectFKPK,idModulePK);
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -62,13 +62,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Modules/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            Module module = db.Module.Find(idProjectFKPK,idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -95,13 +95,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Modules/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            Module module = db.Module.Find(idProjectFKPK,idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
