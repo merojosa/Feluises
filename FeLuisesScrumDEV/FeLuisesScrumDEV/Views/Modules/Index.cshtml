@@ -7,45 +7,45 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class=" container">
+    <h2>Index</h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.projectName)
-        </th>
-        <th></th>
-    </tr>
-    @{
-        List<int> projectNames = new List<int>();
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @if (!projectNames.Contains(item.idProjectFKPK))
-                    {
-                        projectNames.Add(item.idProjectFKPK);
-                        @Html.DisplayFor(modelItem => item.Project.projectName)
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
-                    @Html.ActionLink("Details", "Details", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
-                    @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK })
-                </td>
-            </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.projectName)
+            </th>
+            <th></th>
+        </tr>
+        @{
+            List<int> projectNames = new List<int>();
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!projectNames.Contains(item.idProjectFKPK))
+                        {
+                            projectNames.Add(item.idProjectFKPK);
+                            @Html.DisplayFor(modelItem => item.Project.projectName)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
+                        @Html.ActionLink("Details", "Details", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
+                        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK })
+                    </td>
+                </tr>
+            }
         }
-    }
 
-</table>
-
+    </table>
+</div>

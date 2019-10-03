@@ -25,6 +25,7 @@ namespace FeLuisesScrumDEV.Models
         public int idProjectFKPK { get; set; }
         [Key]
         public int idModulePK { get; set; }
+        [Required(ErrorMessage = "Name must be specified")]
         public string name { get; set; }
     
         public virtual Project Project { get; set; }
