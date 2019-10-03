@@ -1,63 +1,74 @@
-﻿@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+<head>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+</head>
 
-<h2>Index</h2>
+<body>
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.clientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientSecondLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clientLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clientSecondLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+                @Html.DisplayNameFor(model => model.)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientSecondLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idClientPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idClientPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idClientPK })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clientLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clientSecondLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idClientPK }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idClientPK }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idClientPK })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+</body>
+</html>
