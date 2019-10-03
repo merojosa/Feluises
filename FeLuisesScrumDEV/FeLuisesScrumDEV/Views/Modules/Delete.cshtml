@@ -1,4 +1,8 @@
-﻿@model FeLuisesScrumDEV.Models.Module
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FeLuisesScrumDEV.Models.Module
 
 @{
     ViewBag.Title = "Delete";
@@ -29,7 +33,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

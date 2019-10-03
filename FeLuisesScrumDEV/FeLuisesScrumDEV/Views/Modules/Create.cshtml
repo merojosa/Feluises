@@ -1,4 +1,8 @@
-﻿@model FeLuisesScrumDEV.Models.Module
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FeLuisesScrumDEV.Models.Module
 
 @{
     ViewBag.Title = "Create";
@@ -7,10 +11,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Module</h4>
         <hr />

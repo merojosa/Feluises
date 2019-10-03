@@ -22,13 +22,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Modules/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            Module module = db.Module.Find(idProjectFKPK,idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
