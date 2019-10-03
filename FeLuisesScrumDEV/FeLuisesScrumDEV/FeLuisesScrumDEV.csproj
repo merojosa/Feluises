@@ -194,10 +194,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\feLuisesStyles.css" />
+    <Content Include="Content\StyleSheet1.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.svg" />
     <Content Include="Images\prb.jpg" />
+    <Content Include="Images\usr.svg" />
     <Content Include="Models\FeLuisesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FeLuisesDB.Context.cs</LastGenOutput>

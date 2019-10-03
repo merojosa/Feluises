@@ -8,121 +8,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/materialize")
-    <!--Poner el script luego de esto-->
     @Scripts.Render("~/bundles/jquery")
-    <script>
-        (function ($) {
-            $(function () {
-                $('.dropdown-trigger').dropdown({
-                    inDuration: 300,
-                    outDuration: 225,
-                    hover: false, // Activate on hover
-                    belowOrigin: true, // Displays dropdown below the button
-                    alignment: 'right' // Displays dropdown with edge aligned to the left of button
-                });
-            }); // End Document Ready
-        })(jQuery); // End of jQuery name space
-    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/feLuisesStyles.css")
 
-    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
-    <!-- Materialize css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--->
-
-    <style>
-        body {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
-        main {
-            flex: 1 0 auto;
-        }
-
-        .page-footer {
-            width: 100%
-        }
-    </style>
 </head>
 
 
 <body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light navbar-styles fixed-top">
+            <div class="container">
 
-    <!-- Dropdown Structure -->
-    <ul id="Cuenta" class="dropdown-content">
-        <li><a href="#!">Ajustes de Cuenta</a></li>
-        <li><a href="#!">logout</a></li>
-    </ul>
+                <a class="navbar-brand" href="#">
+                    <img src="~/Images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                FeLuises</a>
+                <!--Para cuando se hace pequeño-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <nav>
-        <div class="nav-wrapper fixed-top">
-            <a href="#!" class="brand-logo">FeLuises</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <!-- Dropdown Trigger -->
-                <li><a class="dropdown-trigger" href="#!" data-target="Cuenta">Mi Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
-            </ul>
-        </div>
-    </nav>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto ">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Clientes</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Empleados</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Requerimientos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Módulos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Progreso</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estimaciones</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Equipos</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="display:none">Disabled</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Información</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">LogOut</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
+    </div>
+    <div>
+        <footer class="page-footer fixed-bottom ">
+            <div class="container">
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">
+                    © 2019 Copyright
+                </div>
+                <!-- Copyright -->
+            </div>
+        </footer>
     </div>
 
-    <footer class="page-footer fixed-bottom">
-        <div class="footer-copyright">
-            <div class="container">
-                © 2019 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">FeLuises</a>
-            </div>
-        </div>
-    </footer>
 
-
-    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
-    <!-- Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
 </body>
 </html>
 
 
 
-<!--<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)-->
