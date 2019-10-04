@@ -1,13 +1,11 @@
-﻿.body {
-    min-height: 100vh;
-    flex-direction: column;
-    padding-top: 0;
-    padding-bottom: 0;
-    
+﻿
+.container-data {
+    margin-top: 25px;
 }
 
-/*NAVBAR*/
 
+
+/*NAVBAR*/
 /*Color del nav*/
 .navbar-styles {
     background-color: #4B4073;
