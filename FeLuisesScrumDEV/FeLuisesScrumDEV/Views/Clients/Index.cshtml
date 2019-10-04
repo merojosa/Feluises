@@ -7,67 +7,87 @@
         ViewBag.Title = "Index";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
+
+    <script>
+
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
 </head>
 
 <body>
-    <h2>Index</h2>
+    <div class="container">
+        <h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.clientName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clientLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clientSecondLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.company)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table id="clientsIndex" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre
+                        @*@Html.DisplayNameFor(model => model.clientName)*@
+                    </th>
+                    <th>
+                        Apellido
+                        @* @Html.DisplayNameFor(model => model.clientLastName) *@
+                    </th>
+                    <th>
+                        Segundo Apellido
+                        @* @Html.DisplayNameFor(model => model.clientSecondLastName) *@
+                    </th>
+                    <th>
+                        Compañía
+                        @*@Html.DisplayNameFor(model => model.company)*@
+                    </th>
+                    <th>
+                        Teléfono
+                        @*@Html.DisplayNameFor(model => model.tel)*@
+                    </th>
+                    <th>
+                        E-Mail
+                        @*@Html.DisplayNameFor(model => model.email)*@
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.clientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.clientLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.clientSecondLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.idClientPK }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.idClientPK }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idClientPK })
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clientLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clientSecondLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.company)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.email)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idClientPK }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.idClientPK }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.idClientPK })
-                </td>
-            </tr>
-        }
+                        </td>
+                    </tr>
 
-    </table>
+                }
+            </tbody>
+         </table>
 
+    </div>
 </body>
 </html>

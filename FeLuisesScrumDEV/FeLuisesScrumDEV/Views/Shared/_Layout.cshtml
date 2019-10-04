@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/feScripts/FeLuisesScripts.js")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
     @Styles.Render("~/Content/css")
-    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet">
+    @Styles.Render("~/Content/feLuisesStyles.css")
+    <!--<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
 
 </head>
 
