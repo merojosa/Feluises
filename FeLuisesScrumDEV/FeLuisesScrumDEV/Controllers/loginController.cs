@@ -50,20 +50,18 @@ namespace FeLuisesScrumDEV.Controllers
 
                     if (isEmployee){
                    
-                        ViewBag.role = "Employees";
-                        return View("Index", "Employee");
-                        //return RedirectToAction("Index, Employees"); //con id y rol de empleado
+                        //ViewBag.role = "Employees";
+                        //return View("Index", "Employee");
+                        return RedirectToAction("Employees"); //con id y rol de empleado
                     }else{
-                        ViewBag.role = "Client";
-                        return View(); //con id y rol de cliente
-                    }
-                   
+                        //ViewBag.role = "Client";
+                        //return View(); //con id y rol de cliente
+                        return RedirectToAction("Clients");
+                    }  
                 }
-
             }
             //Este view debe retornar a la misma pantalla de login pero con un mensaje de error
-            return View();   
-
+            return View("Login");   
         }
 
 
