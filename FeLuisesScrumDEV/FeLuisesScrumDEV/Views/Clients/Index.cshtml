@@ -9,12 +9,11 @@
     }
 
     <script>
-
         $(document).ready(function () {
-            $('#example').DataTable();
+            $('#clientsIndex').DataTable();
         });
     </script>
-
+    <!--#D5CDFF para el morado de las stripes-->
 </head>
 
 <body>
@@ -22,6 +21,7 @@
         <h2>Index</h2>
 
         <p>
+
             @Html.ActionLink("Create New", "Create")
         </p>
         <table id="clientsIndex" class="table table-striped table-bordered">
@@ -36,7 +36,7 @@
                         @* @Html.DisplayNameFor(model => model.clientLastName) *@
                     </th>
                     <th>
-                        Segundo Apellido
+                        Apellido
                         @* @Html.DisplayNameFor(model => model.clientSecondLastName) *@
                     </th>
                     <th>
@@ -83,10 +83,9 @@
 
                         </td>
                     </tr>
-
                 }
             </tbody>
-         </table>
+        </table>
 
     </div>
 </body>
