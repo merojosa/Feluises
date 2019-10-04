@@ -2,54 +2,45 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<FeLuisesScrumDEV.Models.Module>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.IndexViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 <div class=" container">
-    <h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project.projectName)
-            </th>
-            <th></th>
-        </tr>
-        @{
-            List<int> projectNames = new List<int>();
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @if (!projectNames.Contains(item.idProjectFKPK))
+    <table class="table" width="100%">
+         <tr>
+             <th><h2>Index</h2></th>
+             <th>@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })</th>
+         </tr>
+</table>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    @item.Project.projectName
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach (var module in item.AssociatedModules)
                         {
-                            projectNames.Add(item.idProjectFKPK);
-                            @Html.DisplayFor(modelItem => item.Project.projectName)
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Módulo: @module.name</h5>
+                                        <p class="card-text">Requerimientos iran aquí.</p>
+                                        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK }, new { @class = "btn btn-primary btn-large" }) |
+                                        @Html.ActionLink("Details", "Details", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK }) |
+                                        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
-                        @Html.ActionLink("Details", "Details", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK }) |
-                        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = item.idProjectFKPK, idModulePK = item.idModulePK })
-                    </td>
-                </tr>
-            }
-            foreach (var item in projectNames)
-            {
-                <p>@item.ToString()</p>
-            }
+                    </div>
+                </div>
+            </div>
         }
-
-    </table>
 </div>

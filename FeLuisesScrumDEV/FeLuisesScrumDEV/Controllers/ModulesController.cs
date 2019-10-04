@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FeLuisesScrumDEV.Models;
+using FeLuisesScrumDEV.viewModel;
 
 namespace FeLuisesScrumDEV.Controllers
 {
@@ -17,8 +18,29 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Modules
         public ActionResult Index()
         {
+            var arrangedList = new List<IndexViewModel>();
             var module = db.Module.Include(m => m.Project);
-            return View(module.ToList());
+            IndexViewModel dummy = new IndexViewModel();
+            int lastPKchecked = -1;
+            foreach (var item in module)
+            {
+                if (item.idProjectFKPK == lastPKchecked)
+                {
+                    dummy.AssociatedModules.Add(item);
+                }
+                else
+                {
+                    if (lastPKchecked != -1)
+                        arrangedList.Add(dummy);
+                    dummy = new IndexViewModel();
+                    dummy.Project = item.Project;
+                    dummy.AssociatedModules.Add(item);
+                    lastPKchecked = item.idProjectFKPK;
+                }
+            }
+            if (lastPKchecked != -1)
+                arrangedList.Add(dummy); ;
+            return View(arrangedList);
         }
 
         // GET: Modules/Details/5
@@ -68,7 +90,7 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(idProjectFKPK,idModulePK);
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -101,7 +123,7 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(idProjectFKPK,idModulePK);
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
