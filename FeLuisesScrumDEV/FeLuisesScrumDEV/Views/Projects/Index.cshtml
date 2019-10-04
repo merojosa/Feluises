@@ -19,17 +19,16 @@
         <div class="card-columns">
             @foreach (var item in Model)
             {
-                <div class="card" style="width: 24rem;">
-                    <div class="card-header">
-                        <!--<a href="Details/1" class="card-title">@Html.DisplayFor(modelItem => item.projectName)</a>-->
-                        @Html.ActionLink(item.projectName, "Details", new { id = item.idProjectPK })
+                <div class="card border-dark shadow" style="width: 24rem; height: auto;">
+                    <div class="card-header bg-dark">
+                        <p class="card-text text-white">@Html.ActionLink(item.projectName, "Details", new { id = item.idProjectPK })</p>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Client name: @item.Client.clientName</p>
                         <p class="card.text">Objective: @item.objective</p>
                         <p class="card-text">Actual Cost: @item.realCost</p>
                     </div>
-                    <div class="card-footer text-muted text-center">
+                    <div class="card-footer bg-dark text-white-50 text-center">
                         @Html.DisplayFor(modelItem => item.startingDate)
                         @if (item.startingDate == null)
                         {
