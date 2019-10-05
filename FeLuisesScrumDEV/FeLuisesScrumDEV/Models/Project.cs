@@ -29,6 +29,7 @@ namespace FeLuisesScrumDEV.Models
         public Nullable<decimal> estimatedCost { get; set; }
         public Nullable<decimal> realCost { get; set; }
 
+        [Required(ErrorMessage = "Date Format YYYY/MM/DD")]
         public Nullable<System.DateTime> startingDate { get; set; }
         public Nullable<System.DateTime> finishingDate { get; set; }
         public Nullable<decimal> budget { get; set; }

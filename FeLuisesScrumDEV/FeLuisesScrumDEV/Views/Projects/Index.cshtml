@@ -19,7 +19,7 @@
         <div class="card-columns">
             @foreach (var item in Model)
             {
-                <div class="card border-dark shadow" style="width: 24rem; height: auto;">
+                <div class="card border-dark shadow rounded" style="width: 24rem; height: auto;">
                     <div class="card-header bg-dark">
                         <p class="card-text text-white">@Html.ActionLink(item.projectName, "Details", new { id = item.idProjectPK })</p>
                     </div>
