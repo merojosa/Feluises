@@ -12,7 +12,7 @@ namespace FeLuisesScrumDEV.Controllers
 
         private FeLuisesEntities db = new FeLuisesEntities();
         // GET: login
-        public ActionResult Login()
+        public ActionResult Index()
         {
             return View();
         }
@@ -21,6 +21,7 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult action(string idUser, string password)
         {
+            Console.WriteLine("ME cago en gabriela");
             Boolean registered = false;
             //Verifica usuario en tabla de credenciales
             var userCredentials = db.Credentials.Find(idUser);
@@ -36,28 +37,37 @@ namespace FeLuisesScrumDEV.Controllers
                 if (registered)
                 {
                     Boolean isEmployee = false;
+                   // String myController = "";
+
                     //Sea cliente o empleado, hay que sacar su rol e id
                     var Employee = db.Employee.Find(idUser);
-                    if(Employee == null)
+                    if (Employee == null)
                     {
                         //Tiene que ser cliente
                         var Client = db.Client.Find(idUser);
-                    }else{
+                    } else {
                         //Es empleado, entonces tenemos que loguearnos como empleado
                         //Hay que sacar su rol e id
                         isEmployee = true;
                     }
 
-                    if (isEmployee){
-                   
+                    if (isEmployee) {
+
                         //ViewBag.role = "Employees";
                         //return View("Index", "Employee");
-                        return RedirectToAction("Employees"); //con id y rol de empleado
-                    }else{
+                        //myController = "Employees";
+                        ViewData["myControlle"] = "Employees";
+                        //return RedirectToAction("Index", "Employees"); //con id y rol de empleado
+                        return RedirectToAction("Index, Employes");
+                    } else {
                         //ViewBag.role = "Client";
                         //return View(); //con id y rol de cliente
-                        return RedirectToAction("Clients");
-                    }  
+                        ViewData["myController"] = "Clients";
+                        // myController = "Clients";
+                        //return RedirectToAction("Index", "Clients");
+                        return RedirectToAction("Index", "Clients");
+                    }
+                    //return RedirectToAction("Index", myController);
                 }
             }
             //Este view debe retornar a la misma pantalla de login pero con un mensaje de error
