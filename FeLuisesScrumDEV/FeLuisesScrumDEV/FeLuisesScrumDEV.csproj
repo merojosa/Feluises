@@ -201,6 +201,8 @@
     <Content Include="FeStyles\feLuisesStyles.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\add.svg" />
+    <Content Include="Images\edit.svg" />
     <Content Include="Images\logo.svg" />
     <Content Include="Images\prb.jpg" />
     <Content Include="Images\usr.svg" />

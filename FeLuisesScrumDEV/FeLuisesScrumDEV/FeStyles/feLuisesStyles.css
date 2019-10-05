@@ -6,8 +6,19 @@
     
 }
 
-/*NAVBAR*/
+/*
+.container-data {
+    margin-top: 60px;
+}
+    */
 
+.btn-outline {
+    color: #0FF2C9;
+    border-color: #F2937E;
+}
+
+
+/*NAVBAR*/
 /*Color del nav*/
 .navbar-styles {
     background-color: #4B4073;
