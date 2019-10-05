@@ -18,15 +18,15 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         [HttpPost]
-        public ActionResult Autherize(FeLuisesScrumDEV.Models.Credentials userModel)
+        public ActionResult Autherize(FeLuisesScrumDEV.Models.Credentials loginModel)
         {
             using (FeLuisesEntities db = new FeLuisesEntities())
             {
-                var userDetails = db.Credentials.Where(x => x.userName == userModel.userName && x.password == userModel.password).FirstOrDefault();
+                var userDetails = db.Credentials.Where(x => x.userName == loginModel.userName && x.password == loginModel.password).FirstOrDefault();
                 if (userDetails == null)
                 {
                     //userModel.LoginErrorMessage = "Wrong username or password.";
-                    return View("Index", "LogIn");
+                    return View("Index");
                 }
                 else
                 {
@@ -56,15 +56,15 @@ namespace FeLuisesScrumDEV.Controllers
                         //ViewBag.role = "Employees";
                         //return View("Index", "Employee");
                         //myController = "Employees";
-                        ViewData["myControlle"] = "Employees";
+                        //ViewData["myControlle"] = "Employees";
                         //return RedirectToAction("Index", "Employees"); //con id y rol de empleado
-                        return RedirectToAction("Index, Employees");
+                        return RedirectToAction("Index", "Employees");
                     }
                     else
                     {
                         //ViewBag.role = "Client";
                         //return View(); //con id y rol de cliente
-                        ViewData["myController"] = "Clients";
+                        //ViewData["myController"] = "Clients";
                         // myController = "Clients";
                         //return RedirectToAction("Index", "Clients");
                         return RedirectToAction("Index", "Clients");
