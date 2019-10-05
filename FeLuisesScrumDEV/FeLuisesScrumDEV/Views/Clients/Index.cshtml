@@ -2,6 +2,7 @@
 <html>
 @model IEnumerable<FeLuisesScrumDEV.Models.Client>
 <head>
+    <!--Todo el mundo siempre lo quiere todo de mi y aveces no puedo o no quiero darlo y no me gusta sentir que lo tengo que hacer...-->
 
     @{
         ViewBag.Title = "Index";
@@ -21,8 +22,8 @@
         <h2>Index</h2>
 
         <p>
-
-            @Html.ActionLink("Create New", "Create")
+            <a class="btn btn-info" role="button" @Html.ActionLink("Agregar", "Create")></a>
+            
         </p>
         <table id="clientsIndex" class="table table-striped table-bordered">
             <thead>
