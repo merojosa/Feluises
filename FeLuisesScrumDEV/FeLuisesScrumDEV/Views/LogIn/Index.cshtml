@@ -1,48 +1,50 @@
-﻿<!DOCTYPE html>
+﻿@model FeLuisesScrumDEV.Models.Credentials
+<!DOCTYPE html>
 @{
     ViewBag.Title = "Index";
 }
 <html>
-    <head>
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-        <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
-        <!-- Materialize css -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--->
+    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*Agregar en cada View*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-->
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-fin*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--->
 
 
-        <style>
-            body {
-                background-image: url(/Images/prb.jpg);
-                background-size: cover;
-                color: #fff;
-            }
+    <style>
+        body {
+            background-image: url(/Images/prb.jpg);
+            background-size: cover;
+            color: #fff;
+        }
 
-            .card {
-                margin-top: 100px;
-            }
+        .card {
+            margin-top: 100px;
+        }
 
-            .card {
-                background: rgba(0, 0, 0, .6);
-            }
+        .card {
+            background: rgba(0, 0, 0, .6);
+        }
 
-            .card-content label {
-                font-size: 16px;
-                color: #ccc;
-            }
+        .card-content label {
+            font-size: 16px;
+            color: #ccc;
+        }
 
-            .card-content input {
-                font-size: 20px !important;
-                color: #fff;
-            }
-        </style>
-    </head>
+        .card-content input {
+            font-size: 20px !important;
+            color: #fff;
+        }
+    </style>
+</head>
 
-    <body>
+@* <body>
+
         <div class="row">
             <div class="col s4 push-s4">
 
@@ -56,7 +58,7 @@
 
                         <div class="form-field">
                             <label for="idNumber">ID number</label>
-                            <input type="number" id="idNumber" name="idUser" />
+                            <input type="number" id="idNumber" name="userName" />
                         </div><br>
 
                         <div class="form-field">
@@ -71,17 +73,14 @@
 
 
                         <div class="form-field center-align">
-                            <buttom class="btn-large red waves-effect waves-light red hoverable"
-                                    type="submit"
-                                    name="action">
+                            <buttom class="btn-large red waves-effect waves-light red hoverable" type="submit" name="action">
+                                <a href=" @Html.ActionLink("LogIn", "action")">
+                                    Log in <i class="material-icons right">check</i>
+                                </a>
 
-                            
 
-                                Log in
-                                <i class="material-icons right">check</i>
                             </buttom>
-                            @*<input type="button" value="LogIn" name="action" />*@
-                        
+
 
                         </div><br>
 
@@ -91,6 +90,56 @@
             </div>
 
         </div>
-    </body>
+    </body>*@
+
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">App Name</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.userName)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.userName)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.userName)</td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.password)</td>
+                    <td>@Html.EditorFor(model => model.password)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.password)</td>
+                </tr>
+                @*<tr>
+                    <td colspan="2">
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                    </td>
+                </tr>*@
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="name" value="Login" />
+                    </td>
+                </tr>
+            </table>
+        }
+
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
 </html>
 
