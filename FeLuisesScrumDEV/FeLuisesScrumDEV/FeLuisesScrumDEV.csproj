@@ -197,10 +197,18 @@
     <Content Include="Content\feLuisesStyles.css" />
     <Content Include="Content\StyleSheet1.css" />
     <Content Include="favicon.ico" />
+    <Content Include="feScripts\FeLuisesScripts.js" />
+    <Content Include="FeStyles\feLuisesStyles.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\add.svg" />
+    <Content Include="Images\back.svg" />
+    <Content Include="Images\delete.svg" />
+    <Content Include="Images\edit.svg" />
     <Content Include="Images\logo.svg" />
+    <Content Include="Images\logo1.svg" />
     <Content Include="Images\prb.jpg" />
+    <Content Include="Images\save.svg" />
     <Content Include="Images\usr.svg" />
     <Content Include="Models\FeLuisesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -233,6 +241,7 @@
     <Content Include="Models\FeLuisesDB.edmx.diagram">
       <DependentUpon>FeLuisesDB.edmx</DependentUpon>
     </Content>
+    <Content Include="libman.json" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

@@ -11,7 +11,8 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,8 @@ namespace FeLuisesScrumDEV.Models
         {
             this.Project = new HashSet<Project>();
         }
-    
+
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Client id must be 9 digits long.")]
         public string idClientPK { get; set; }
         public string clientName { get; set; }
         public string clientLastName { get; set; }
