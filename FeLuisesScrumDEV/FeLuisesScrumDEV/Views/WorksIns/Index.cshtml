@@ -34,13 +34,16 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.role)
+                Rol
+                @*@Html.DisplayFor(modelItem => item.role)*@
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.employeeName)
+                Nombre empleado
+                @*@Html.DisplayFor(modelItem => item.Employee.employeeName)*@
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Project.projectName)
+                Nombre del proyecto
+                @*@Html.DisplayFor(modelItem => item.Project.projectName)*@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
