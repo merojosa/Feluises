@@ -17,10 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#PrjectsTable").show();
-            $("#ProjectCards").hide();
+            $("#ProjectCards").show();
+            $("#ProjectsTable").hide();
             $("#toggle").click(function () {
-                $("#PrjectsTable").toggle();
+                $("#ProjectsTable").toggle();
                 $("#ProjectCards").toggle();
             });
         });
@@ -36,8 +36,8 @@
             <div class="card-columns">
                 @foreach (var item in Model)
             {
-                <div class="card border-dark mb-3 shadow-lg rounded" style="width: 24rem; height: auto;">
-                    <div class="card-header bg-dark">
+                <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
+                    <div class="card-header" id="back-Fe1">
                         <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
                     </div>
                     <div class="card-body">
@@ -45,7 +45,7 @@
                         <p class="card.text">Objective: @item.objective</p>
                         <p class="card-text">Actual Cost: @item.realCost</p>
                     </div>
-                    <div class="card-footer bg-dark text-white-50 text-center">
+                    <div class="card-footer text-white-50 text-center" id="back-Fe1">
                         @Html.DisplayFor(modelItem => item.startingDate)
                         @if (item.startingDate == null)
                         {
@@ -57,7 +57,7 @@
             </div>
         </div>
     </section>
-    <table id="PrjectsTable" class="table table-striped table-bordered" style="width:100%">
+    <table id="ProjectsTable" class="table table-striped table-bordered" style="width:100%">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.projectName)
