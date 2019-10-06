@@ -17,6 +17,7 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Clients
         public ActionResult Index()
         {
+            //[Display(Name= "Nombre")]
             return View(db.Client.ToList());
         }
 
@@ -48,6 +49,8 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idClientPK,clientName,clientLastName,clientSecondLastName,company,tel,email")] Client client)
         {
+
+
             if (ModelState.IsValid)
             {
                 db.Client.Add(client);
@@ -57,6 +60,7 @@ namespace FeLuisesScrumDEV.Controllers
 
             return View(client);
         }
+
 
         // GET: Clients/Edit/5
         public ActionResult Edit(string id)
