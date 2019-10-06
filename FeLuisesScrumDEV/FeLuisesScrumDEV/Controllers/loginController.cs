@@ -18,7 +18,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         [HttpPost]
-        public ActionResult Autherize(FeLuisesScrumDEV.Models.Credentials loginModel)
+        public ActionResult Authorize(FeLuisesScrumDEV.Models.Credentials loginModel)
         {
             using (FeLuisesEntities db = new FeLuisesEntities())
             {
@@ -27,10 +27,8 @@ namespace FeLuisesScrumDEV.Controllers
                 {
                     //userModel.LoginErrorMessage = "Wrong username or password.";
                     return View("Index");
-                }
-                else
-                {
-                    //Session["userID"] = userDetails.userID;
+                }else{
+                    Session["userID"] = userDetails.userName; // esto pues as'i se llama en tabla
                     //Session["userName"] = userDetails.UserName;
                     Boolean isEmployee = false;
 
