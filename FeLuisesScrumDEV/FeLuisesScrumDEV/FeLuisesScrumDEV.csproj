@@ -203,6 +203,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\add.svg" />
     <Content Include="Images\back.svg" />
+    <Content Include="Images\delete.svg" />
     <Content Include="Images\edit.svg" />
     <Content Include="Images\logo.svg" />
     <Content Include="Images\logo1.svg" />
