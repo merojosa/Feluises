@@ -25,7 +25,8 @@ namespace FeLuisesScrumDEV.Models
         public int idProjectFKPK { get; set; }
         [Key]
         public int idModulePK { get; set; }
-        [Required(ErrorMessage = "Name must be specified")]
+        [MaxLength(30,ErrorMessage ="Module's name cant be longer than 30 characters.")]
+        [Required(ErrorMessage = "Name must be specified.")]
         public string name { get; set; }
     
         public virtual Project Project { get; set; }

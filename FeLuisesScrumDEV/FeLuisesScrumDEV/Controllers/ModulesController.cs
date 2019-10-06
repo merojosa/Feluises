@@ -90,6 +90,8 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if (idModulePK == -1)
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
@@ -119,7 +121,7 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Modules/Delete/5
         public ActionResult Delete(int? idProjectFKPK, int? idModulePK)
         {
-            if (idProjectFKPK == null || idModulePK == null)
+            if (idProjectFKPK == null || idModulePK == null || idModulePK == -1)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -134,9 +136,11 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModulePK)
         {
-            Module module = db.Module.Find(id);
+            if (idModulePK == -1)
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            Module module = db.Module.Find(idProjectFKPK,idModulePK);
             db.Module.Remove(module);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -29,10 +29,14 @@
         <dd>
             @Html.DisplayFor(model => model.Project.projectName)
         </dd>
-
+        }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @if (Model.idModulePK != -1)
+    {
+        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -8,33 +8,47 @@
     ViewBag.Title = "Index";
 }
 <div class=" container">
-    <table class="table" width="100%">
-         <tr>
-             <th><h2>Index</h2></th>
-             <th>@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })</th>
-         </tr>
-</table>
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-        </p>
+    <h2>Index</h2>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#moduletable").show();
+            $("#modulecards").hide();
+            $("#hide").click(function () {
+                $("#moduletable").hide();
+                $("#modulecards").show();
+            });
+            $("#show").click(function () {
+                $("#moduletable").show();
+                $("#modulecards").hide();
+            });
+        });
+    </script>
+
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <section id="modulecards">
         @foreach (var item in Model)
         {
-            <div class="card">
-                <div class="card-header">
-                    @item.Project.projectName
+            <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+
+                <div class="card-header bg-dark">
+                    <p class="card-text text-white">@item.Project.projectName</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         @foreach (var module in item.AssociatedModules)
                         {
                             <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Módulo: @module.name</h5>
-                                        <p class="card-text">Requerimientos iran aquí.</p>
-                                        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK }, new { @class = "btn btn-primary btn-large" }) |
-                                        @Html.ActionLink("Details", "Details", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK }) |
-                                        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })
+                                <div class="card border-dark shadow rounded">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            @Html.ActionLink("Módulo " + module.name, "Details", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">Requerimientos iran aquí.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -42,5 +56,50 @@
                     </div>
                 </div>
             </div>
+            <p></p>
         }
+    </section>
+    <table id="moduletable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Módulo
+                </th>
+                <th>
+                    Proyecto
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                foreach (var module in item.AssociatedModules)
+                {
+                    <tr>
+                        <td>
+                            @module.name
+                        </td>
+                        <td>
+                            @module.Project.projectName
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    Módulo
+                </th>
+                <th>
+                    Proyecto
+                </th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
 </div>
