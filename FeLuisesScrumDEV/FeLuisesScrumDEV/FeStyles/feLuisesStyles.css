@@ -16,7 +16,7 @@
 
 .card, #border-Fe {
     border-color: #F22283;
-    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.3)  !important;
+    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.05)  !important;
 }
 .card, #shadow-Fe{
     box-shadow: 0 0.5rem 1rem #0FF2C9 !important;

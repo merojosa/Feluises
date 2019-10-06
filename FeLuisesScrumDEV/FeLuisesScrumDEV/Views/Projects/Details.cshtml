@@ -9,7 +9,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Project Details</h2>
 
 <div>
     <h4>Project</h4>
@@ -90,6 +90,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idProjectPK }) |
+    <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK } )">
+        <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+    </a>
     @Html.ActionLink("Back to List", "Index")
 </p>
