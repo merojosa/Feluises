@@ -78,14 +78,17 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value= Salvar class="btn btn-default" />
+                    <span></span>
                 </div>
             </div>
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+<div>
+    <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
+        <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    </a>
+</div>
 </body>
 </html>

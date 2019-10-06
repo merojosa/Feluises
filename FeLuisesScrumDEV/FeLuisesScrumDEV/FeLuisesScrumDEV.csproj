@@ -202,9 +202,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\add.svg" />
+    <Content Include="Images\back.svg" />
     <Content Include="Images\edit.svg" />
     <Content Include="Images\logo.svg" />
+    <Content Include="Images\logo1.svg" />
     <Content Include="Images\prb.jpg" />
+    <Content Include="Images\save.svg" />
     <Content Include="Images\usr.svg" />
     <Content Include="Models\FeLuisesDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
