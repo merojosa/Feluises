@@ -91,7 +91,10 @@ namespace FeLuisesScrumDEV.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             if (idModulePK == -1)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
@@ -139,7 +142,10 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModulePK)
         {
             if (idModulePK == -1)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             Module module = db.Module.Find(idProjectFKPK,idModulePK);
             db.Module.Remove(module);
             db.SaveChanges();
