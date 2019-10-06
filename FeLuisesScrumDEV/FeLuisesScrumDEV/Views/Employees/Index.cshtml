@@ -1,111 +1,154 @@
-﻿@model IEnumerable<FeLuisesScrumDEV.Models.Employee>
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<FeLuisesScrumDEV.Models.Employee>
+<head>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h2>Index</h2>
+    <script>
+        $(document).ready(function () {
+            $('#employeeIndex').DataTable();
+        });
+    </script>
+    <!--#D5CDFF para el morado de las stripes-->
+    <!--  <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.employeeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.employeeLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.employeeSecondLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.employeeBirthDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.employeeHireDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.developerFlag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.province)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canton)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.district)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.exactDirection)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pricePerHour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.availability)
-        </th>
-        <th></th>
-    </tr>
+      <p>
+          @*@@Html.ActionLink("Create New", "Create")*@
+      </p>
+      -->
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeSecondLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeBirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeHireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.developerFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.province)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canton)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.district)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.exactDirection)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pricePerHour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.availability)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idEmployeePK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idEmployeePK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idEmployeePK })
-        </td>
-    </tr>
-}
+<body>
+    <div class="container">
+        <h2>Index</h2>
 
-</table>
+        <p>
+            <a class="btn btn-info" role="button" @Html.ActionLink("Agregar", "Create")></a>
+
+        </p>
+        <table id="employeeIndex" class="table table-striped table-bordered">
+            <thead>
+
+                <tr>
+                    <th>
+                        Nombre
+                        @*@Html.DisplayNameFor(model => model.employeeName)*@
+                    </th>
+                    <th>
+                        Apellido
+                        @*@Html.DisplayNameFor(model => model.employeeLastName)*@
+                    </th>
+                    <th>
+                        Apellido
+                        @*@Html.DisplayNameFor(model => model.employeeSecondLastName)*@
+                    </th>
+                    <!--
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.employeeBirthDate)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.employeeHireDate)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.developerFlag)*@
+                    </th>
+                    -->
+                    <th>
+                        Teléfono
+                        @*@Html.DisplayNameFor(model => model.tel)*@
+                    </th>
+                    <th>
+                        E-mail
+                        @*@Html.DisplayNameFor(model => model.email)*@
+                    </th>
+                    <!--
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.province)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.canton)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.district)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.exactDirection)*@
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.pricePerHour)*@
+                    </th>
+                    -->
+                    <th>
+                        Disponibilidad
+                        @*@Html.DisplayNameFor(model => model.availability)*@
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeSecondLastName)
+                        </td>
+                        <!--
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.employeeBirthDate)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.employeeHireDate)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.developerFlag)*@
+                        </td>
+                        -->
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <!--
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.province)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.canton)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.district)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.exactDirection)*@
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.pricePerHour)*@
+                        </td>
+                        -->
+                        <td>
+                            @Html.DisplayFor(modelItem => item.availability)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.idEmployeePK }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.idEmployeePK }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.idEmployeePK })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+
+    </div>
+</body>
+</html>
