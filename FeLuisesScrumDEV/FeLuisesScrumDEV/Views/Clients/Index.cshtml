@@ -1,130 +1,100 @@
-<<<<<<< Updated upstream
-﻿@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+<!DOCTYPE html>
+<html>
+@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+<head>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h2>Index</h2>
+    <script>
+        $(document).ready(function () {
+            $('#clientsIndex').DataTable();
+        });
+    </script>
+    <!--#D5CDFF para el morado de las stripes-->
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.clientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientSecondLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th></th>
-    </tr>
+<body>
+    <div class="container">
+        <h2>Clientes</h2>
+        <br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientSecondLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idClientPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idClientPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idClientPK })
-        </td>
-    </tr>
-}
+        <table id="clientsIndex" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre
+                        @*@Html.DisplayNameFor(model => model.clientName)*@
+                    </th>
+                    <th>
+                        Apellido
+                        @* @Html.DisplayNameFor(model => model.clientLastName) *@
+                    </th>
+                    <th>
+                        Segundo Apellido
+                        @* @Html.DisplayNameFor(model => model.clientSecondLastName) *@
+                    </th>
+                    <th>
+                        Compañía
+                        @*@Html.DisplayNameFor(model => model.company)*@
+                    </th>
+                    <th>
+                        Teléfono
+                        @*@Html.DisplayNameFor(model => model.tel)*@
+                    </th>
+                    <th>
+                        E-Mail
+                        @*@Html.DisplayNameFor(model => model.email)*@
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientName)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientLastName)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientSecondLastName)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )"> @Html.DisplayFor(modelItem => item.company)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.tel)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.email)</a>
+                        </td>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = item.idClientPK } )">
+                                <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
 
-</table>
-=======
-﻿@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+                            @*
+        @Html.ActionLink("Editar", "Edit", new { id = item.idClientPK }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.idClientPK }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.idClientPK })
+                            *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-@{
-    ViewBag.Title = "Index";
-}
+    </div>
+    <p>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.clientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.clientSecondLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.clientSecondLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idClientPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idClientPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idClientPK })
-        </td>
-    </tr>
-}
-
-</table>
->>>>>>> Stashed changes
+        <a class="btn btn-outline" role="button" href= @Url.Action("Create", "Clients" )>
+            <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
+        </a>
+    </p>
+</body>
+</html>

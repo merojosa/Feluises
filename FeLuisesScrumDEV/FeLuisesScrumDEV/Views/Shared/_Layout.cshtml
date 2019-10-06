@@ -6,13 +6,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/feScripts/FeLuisesScripts.js")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/feLuisesStyles.css")
+    <!--<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
 
 </head>
 
@@ -23,7 +28,7 @@
             <div class="container">
 
                 <a class="navbar-brand" href="#">
-                    <img src="~/Images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="~/Images/logo1.svg" width="40" height="40" class="d-inline-block align-top" alt="">
                 FeLuises</a>
                 <!--Para cuando se hace pequeño-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +97,7 @@
         @RenderBody()
     </div>
     <div>
-        <footer class="page-footer fixed-bottom ">
+        <footer class="page-footer fixed-bottom">
             <div class="container">
                 <!-- Copyright -->
                 <div class="footer-copyright text-center py-3">
@@ -106,6 +111,3 @@
 
 </body>
 </html>
-
-
-
