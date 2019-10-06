@@ -8,69 +8,40 @@
     ViewBag.Title = "Details";
 }
 
+<div class=" container">
+    <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
 
-<div class="card border-dark shadow rounded" style="width: auto; height: auto;">
-
-    <div class="card-header bg-dark">
-        <h2><p class="card-text text-white">Module details</p></h2>
-    </div>
-    <div class="card-body">
-        <div>
-            <dl class="dl-horizontal">
-                <dt>
-                    Module name
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.name)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Project.projectName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Project.projectName)
-                </dd>
-            </dl>
+        <div class="card-header bg-dark">
+            <h2 class="card-header text-white">Module details</h2>
         </div>
-        <p>
-            @if (Model.idModulePK != -1)
-            {
-                @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
-            }
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <div class="card-body">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Module name
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
+
+                    <dt>
+                        Belongs to project
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Project.projectName)
+                    </dd>
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Back to List", "Index")
+                @if (Model.idModulePK != -1)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+                }
+            </p>
+        </div>
     </div>
 </div>
-<p></p>
-<h2>Module details</h2>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Module name
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.projectName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Project.projectName)
-        </dd>
-    </dl>
-</div>
-<p>
-    @if (Model.idModulePK != -1)
-    {
-        @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
-    }
-    @Html.ActionLink("Back to List", "Index")
-</p>
