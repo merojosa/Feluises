@@ -1,206 +1,162 @@
 ﻿<!DOCTYPE html>
 <html>
 @model FeLuisesScrumDEV.Models.Employee
-
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+<head>
+    @{
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+</head>
 @*@{
         ViewBag.Title = "Details";
     }*@
 
-<h2>Details</h2>
+<body>
 
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
-        <div class="card-header bg-dark">
-            <h2><p class="card-text text-white">Module details</p></h2>
-        </div>
-        <div class="card-body">
+    <div>
+        <div class="container">
+            <h2>Detalles</h2>
             <div>
-                <dl class="dl-horizontal">
-                    <dt>
-                        Nombre
-                    </dt>
+                <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
+                    <div class="card-header text-white" id="back-Fe">
+                        <h2>Empleado</h2>
+                    </div>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.employeeName)
-                    </dd>
-                    <dt>
-                        Apellido
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.employeeLastName)
-                    </dd>
-                    <dt>
-                        Apellido
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.employeeSecondLastName)
-                    </dd>
-                    <dt>
-                        Fecha de nacimiento
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.employeeBirthDate)
-                    </dd>
-                </dl>
+                    <div class="card-body">
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Nombre
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.employeeName)
+                            </dd>
+                            <dt>
+                                Apellido
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.employeeLastName)
+                            </dd>
+                            <dt>
+                                Apellido
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.employeeSecondLastName)
+                            </dd>
+                            <dt>
+                                Fecha de nacimiento
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.employeeBirthDate)
+                            </dd>
+                            <dt>
+                                <b>Fecha de ingreso</b>
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.employeeHireDate)
+                            </dd>
+
+                            <dt>
+                                <b>Tipo de empleado</b>
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.developerFlag)
+                            </dd>
+
+                            <dt>
+                                Teléfono
+                                @*@Html.DisplayNameFor(model => model.tel)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.tel)
+                            </dd>
+
+                            <dt>
+                                E-mail
+                                @*@Html.DisplayNameFor(model => model.email)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.email)
+                            </dd>
+
+                            <dt>
+                                Provincia
+                                @*@Html.DisplayNameFor(model => model.province)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.province)
+                            </dd>
+
+                            <dt>
+                                Cantón
+                                @*@Html.DisplayNameFor(model => model.canton)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.canton)
+                            </dd>
+
+                            <dt>
+                                Distrito
+                                @*@Html.DisplayNameFor(model => model.district)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.district)
+                            </dd>
+
+                            <dt>
+                                Dirección exacta
+                                @*@Html.DisplayNameFor(model => model.exactDirection)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.exactDirection)
+                            </dd>
+
+                            <dt>
+                                Precio por hora
+                                @*@Html.DisplayNameFor(model => model.pricePerHour)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.pricePerHour)
+                            </dd>
+
+                            <dt>
+                                Disponibilida
+                                @*@Html.DisplayNameFor(model => model.availability)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.availability)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        <a class="btn" role="button" href="@Url.Action("Index", "Employees")">
+                            <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a> |
+                        <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
+                            <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a>
+                    </p>
+                </div>
             </div>
-            <!--
-            <dl class="dl-horizontal">
-            -->
-            <dt>
-                <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
-                <li class="list-group-item active">Nombre</li>
-                @*@Html.DisplayNameFor(model => model.employeeName)*@
-            </dt>
-
-            <dd>
-                <!--<li class="list-group-item d-flex justify-content-between align-items-center">-->
-                <li class="list-group-item">@Html.DisplayFor(model => model.employeeName)</li>
-                @*@Html.DisplayFor(model => model.employeeName)*@
-            </dd>
-
-            <dt>
-                <li class="list-group-item active">Apellido</li>
-                @*@Html.DisplayNameFor(model => model.employeeLastName*@
-            </dt>
-
-            <dd>
-                <li class="list-group-item">@Html.DisplayFor(model => model.employeeLastName)</li>
-            </dd>
-
-
-
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Apellido
-                <span class="badge badge-primary badge-pill">@Html.DisplayFor(model => model.employeeSecondLastName)</span>
-            </li>
-
-
-
-
-
-
-
-            <dt>
-                Apellido
-                @*@Html.DisplayNameFor(model => model.employeeSecondLastName)*@
-            </dt>
-
-            <dd>
-                <li class="list-group-item">@Html.DisplayFor(model => model.employeeSecondLastName)</li>
-            </dd>
-
-            <dt>
-                Fecha de nacimiento
-                @*@Html.DisplayNameFor(model => model.employeeBirthDate)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.employeeBirthDate)
-            </dd>
-
-            <dt>
-                Fecha de ingreso
-                @*@Html.DisplayNameFor(model => model.employeeHireDate)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.employeeHireDate)
-            </dd>
-
-            <dt>
-                Tipo de empleado
-                @*@Html.DisplayNameFor(model => model.developerFlag)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.developerFlag)
-            </dd>
-
-            <dt>
-                Teléfono
-                @*@Html.DisplayNameFor(model => model.tel)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.tel)
-            </dd>
-
-            <dt>
-                E-mail
-                @*@Html.DisplayNameFor(model => model.email)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.email)
-            </dd>
-
-            <dt>
-                Provincia
-                @*@Html.DisplayNameFor(model => model.province)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.province)
-            </dd>
-
-            <dt>
-                Cantón
-                @*@Html.DisplayNameFor(model => model.canton)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.canton)
-            </dd>
-
-            <dt>
-                Distrito
-                @*@Html.DisplayNameFor(model => model.district)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.district)
-            </dd>
-
-            <dt>
-                Dirección
-                @*@Html.DisplayNameFor(model => model.exactDirection)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.exactDirection)
-            </dd>
-
-            <dt>
-                Precio por hora
-                @*@Html.DisplayNameFor(model => model.pricePerHour)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.pricePerHour)
-            </dd>
-
-            <dt>
-                Disponibilida
-                @*@Html.DisplayNameFor(model => model.availability)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.availability)
-            </dd>
         </div>
-        <!--
-        </dl>
-        -->
-        </ul>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.idEmployeePK }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+</body>
+</html>
+
+@*
+@Html.ActionLink("Edit", "Edit", new { id = Model.idEmployeePK }) |
+@Html.ActionLink("Back to List", "Index")
+*@
