@@ -1,0 +1,87 @@
+﻿.body {
+    min-height: 100vh;
+    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+    
+}
+
+.h2, #heading-red {
+    color: #FF001A !important;
+}
+
+.card-header, #back-Fe {
+    background-color: #F22283;
+}
+
+.card, #border-Fe {
+    border-color: #F22283;
+    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.3)  !important;
+}
+.card, #shadow-Fe{
+    box-shadow: 0 0.5rem 1rem #0FF2C9 !important;
+}
+
+
+/*
+.container-data {
+    margin-top: 60px;
+}
+    */
+
+.btn-outline {
+    color: #0FF2C9;
+    border-color: #F2937E;
+}
+
+
+/*NAVBAR*/
+/*Color del nav*/
+.navbar-styles {
+    background-color: #4B4073;
+}
+
+/*Para los Links*/
+.navbar-styles a {
+  color: white !important;
+}
+
+/*Color de la letra del DD*/
+.navbar-styles .dropdown-menu a {
+    color: black !important;
+  
+}
+/*Underline de DD a*/
+    .navbar-styles .dropdown-item:hover { /*Quizá ocupe una a*/
+        text-decoration: underline;
+        background-color: #4B4073; /*Cómo se ve?*/
+    }
+
+/*Color de la letra del nombre*/
+
+.navbar-styles .navbar-brand {
+    font-size: 1.4em;
+}
+
+.navbar-styles .navbar-brand:hover {
+    color: #0FF2C9 !important;
+    font-size: 1.45em;
+}
+
+.navbar-styles .nav-link:hover {
+    text-decoration: underline;
+    
+}
+/*NAVBAR*/
+
+/*FOOTER*/
+.page-footer {
+    background-color: #4B4073;
+}
+
+ .footer-copyright{
+    color: white !important;
+}
+
+
+/*FOOTER*/
