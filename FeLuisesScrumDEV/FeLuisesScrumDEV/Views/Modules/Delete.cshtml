@@ -15,10 +15,10 @@
     <hr />
     <div>
         <div class=" container">
-            <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+            <div class="card rounded" style="width: auto; height: auto;"  id="border-Fe">
 
-                <div class="card-header bg-dark">
-                    <h2 class="card-header text-white">Module details</h2>
+                <div class="card-header text-white"  id="back-Fe">
+                    <h2 class="card-header">Module details</h2>
                 </div>
                 <div class="card-body">
                     <div>
@@ -49,8 +49,16 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
-                <input type="submit" value="Delete" class="btn btn-default" />
+
+                <a class="btn" role="button" href="@Url.Action("Edit", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a> |
+                <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
+
+                @*
+                    @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                *@
             </div>
         }
     </div>

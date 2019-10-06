@@ -9,10 +9,10 @@
 }
 
 <div class=" container">
-    <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+    <div class="card border-dark shadow rounded" style="width: auto; height: auto;" id="border-Fe">
 
-        <div class="card-header bg-dark">
-            <h2 class="card-header text-white">Module details</h2>
+        <div class="card-header" id="back-Fe">
+            <h2 class="card-header" id="back-Fe1">Module details</h2>
         </div>
         <div class="card-body">
             <div>
@@ -35,11 +35,20 @@
                 </dl>
             </div>
             <p>
-                @Html.ActionLink("Back to List", "Index")
+                @*@Html.ActionLink("Back to List", "Index")*@
+                <a class="btn" role="button" href="@Url.Action("Index", "Modules")">
+                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a> |
                 @if (Model.idModulePK != -1)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+                    <a class="btn" role="button" href="@Url.Action("Edit", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                        <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
+                    <!--No se si dejar el eliminar acá-->
+
+                    @*@Html.ActionLink("Edit", "Edit", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Delete", "Delete", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }, new { @class = "btn btn-primary" })
+                    *@
                 }
             </p>
         </div>
