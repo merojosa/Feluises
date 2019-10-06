@@ -80,11 +80,10 @@
                 <div class="form-group">
                     <div class="col-md-offset-5 col-md-20">
                         <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
-                        <span></span>
                     </div>
 
                     <div class="form-group">
-                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients")"> <!--Mandar el id-->
+                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new {id = Model.idClientPK})"> <!--Mandar el id-->
                             <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                         </a>
                     </div>

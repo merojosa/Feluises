@@ -6,6 +6,11 @@
     
 }
 
+.h2, #heading-red {
+    color: #FF2283 !important;
+}
+
+
 /*
 .container-data {
     margin-top: 60px;

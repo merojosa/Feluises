@@ -96,11 +96,14 @@
                         <!--<input type="submit" value="Create" class="btn btn-default" />-->
                     </div>
                 </div>
+
             </div>
         }
 
         <div>
-            @Html.ActionLink("Back to List", "Index")
+            <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
+                <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
         </div>
 
     </div>

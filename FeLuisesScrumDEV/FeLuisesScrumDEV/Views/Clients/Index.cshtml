@@ -33,7 +33,7 @@
                         @* @Html.DisplayNameFor(model => model.clientLastName) *@
                     </th>
                     <th>
-                        Apellido
+                        Segundo Apellido
                         @* @Html.DisplayNameFor(model => model.clientSecondLastName) *@
                     </th>
                     <th>
@@ -56,22 +56,22 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.clientName)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientName)</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.clientLastName)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientLastName)</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.clientSecondLastName)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.clientSecondLastName)</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.company)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )"> @Html.DisplayFor(modelItem => item.company)</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.tel)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.tel)</a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.email)
+                            <a class="btn" role="button" href="@Url.Action("Details", "Clients", new { id = item.idClientPK } )">@Html.DisplayFor(modelItem => item.email)</a>
                         </td>
                         <td>
                             <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = item.idClientPK } )">
