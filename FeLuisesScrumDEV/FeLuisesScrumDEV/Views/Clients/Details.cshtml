@@ -1,66 +1,90 @@
-﻿@model FeLuisesScrumDEV.Models.Client
+﻿<!DOCTYPE html>
+<html>
+@model FeLuisesScrumDEV.Models.Client
+<head>
+    @{
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+</head>
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
+<body>
 
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.clientName)
-        </dt>
+    <div>
+        <div class="container">
+            <h2>Detalles</h2>
+            <div>
+                <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+                    <div class="card-header bg-dark  text-white">
+                        <h2>Cliente</h2>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.clientName)
-        </dd>
+                    <div class="card-body">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.clientLastName)
-        </dt>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                <b>Nombre</b>
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.clientLastName)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.clientName)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.clientSecondLastName)
-        </dt>
+                            <dt>
+                                <b>Apellido</b>
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.clientSecondLastName)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.clientLastName)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.company)
-        </dt>
+                            <dt>
+                                <b>Segundo Apellido</b>
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.company)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.clientSecondLastName)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tel)
-        </dt>
+                            <dt>
+                                <b>Compañía</b>
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tel)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.company)
+                            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                            <dt>
+                                <b>Teléfono</b>
+                            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                            <dd>
+                                @Html.DisplayFor(model => model.tel)
+                            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idClientPK }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                            <dt>
+                                <b>E-Mail</b>
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.email)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
+                            <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a> |
+                        <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
+                            <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
