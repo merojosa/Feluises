@@ -8,6 +8,7 @@
     ViewBag.Title = "Delete";
 }
 
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 
 <div class="container">
     <h2>Module delete</h2>
@@ -15,11 +16,8 @@
     <hr />
     <div>
         <div class=" container">
-            <div class="card rounded" style="width: auto; height: auto;"  id="border-Fe">
-
-                <div class="card-header text-white"  id="back-Fe">
-                    <h2 class="card-header">Module details</h2>
-                </div>
+            <div class="card rounded border-dark" style="width: auto; height: auto;" id="shadow-Fe1">
+                <h2 class="card-header text-white" id="back-Fe1">Module details</h2>
                 <div class="card-body">
                     <div>
                         <dl class="dl-horizontal">
@@ -41,25 +39,26 @@
                         </dl>
                     </div>
                 </div>
+                <div class="card-footer" id="back-Fe1">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+
+                            <a class="btn" role="button" href="@Url.Action("Edit", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                                <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+                            <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
+
+                            @*
+                @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
+                <input type="submit" value="Delete" class="btn btn-default" />
+                            *@
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-
-                <a class="btn" role="button" href="@Url.Action("Edit", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
-                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                </a> |
-                <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
-
-                @*
-                    @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
-                    <input type="submit" value="Delete" class="btn btn-default" />
-                *@
-            </div>
-        }
     </div>
 </div>

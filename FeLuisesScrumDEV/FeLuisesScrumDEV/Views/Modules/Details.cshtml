@@ -12,7 +12,7 @@
 
 <div class=" container">
     <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
-        <h2 class="card-header" id="back-Fe1">Module details</h2>
+        <h2 class="card-header text-white" id="back-Fe1">Module details</h2>
         <div class="card-body">
             <div>
                 <dl class="dl-horizontal">
@@ -33,20 +33,20 @@
                     </dd>
                 </dl>
             </div>
-            <p>
-                <a class="btn" role="button" href="@Url.Action("Index", "Modules")">
-                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                </a> 
-                @if (Model.idModulePK != -1)
-                {
-                    <a class="btn btn-outline-success" role="button" href="@Url.Action("Edit", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
-                        <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </a>
-                    <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
-                        <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </a>
-                }
-            </p>
+        </div>
+        <div class="card-footer" id="back-Fe1">
+            <a class="btn" role="button" href="@Url.Action("Index", "Modules")">
+                <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            @if (Model.idModulePK != -1)
+            {
+                <a class="btn btn-outline-success" role="button" href="@Url.Action("Edit", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                    <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                    <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            }
         </div>
     </div>
 </div>
