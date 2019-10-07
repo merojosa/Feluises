@@ -18,7 +18,7 @@
                 <h2>Detalles</h2>
                 <div>
                     <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
-                        <div class="card-header text-white" id="back-Fe">
+                        <div class="card-header text-white"  id="back-Fe1">
                             <h2>Empleado</h2>
                         </div>
 
@@ -151,14 +151,14 @@
 
                             </dl>
                         </div>
-                        <p>
+                        <div class="card-footer" id="back-Fe1">
                             <a class="btn" role="button" href="@Url.Action("Index", "Employees")">
-                                <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </a> |
+                                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
                             <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
                                 <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                             </a>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,9 @@
-﻿.body {
-
+﻿
+body, #bck {
     background-image: url(/Images/prb.jpg);
     background-size: cover;
 }
+
 
 .card, #border-Fe {
     border-color: #4B4073;
