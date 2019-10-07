@@ -30,7 +30,7 @@ namespace FeLuisesScrumDEV.Models
         [Required(ErrorMessage ="Project's name is obligatory.")]
         [CustomValidation(typeof(ProjectValidation), nameof(ProjectValidation.validateName))]
         public string projectName { get; set; }
-        [MaxLength(256, ErrorMessage = "Module's name cant be longer than 256 characters.")]
+        [MaxLength(256, ErrorMessage = "Project's name cant be longer than 256 characters.")]
         [Required(ErrorMessage = "Project's objective is obligatory.")]
         public string objective { get; set; }
         [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "Budget must contain no more than 18 integers and 2 decimals.")]

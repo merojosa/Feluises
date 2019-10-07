@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -126,6 +127,17 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public class ClientValidation
+        {
+            public static ValidationResult validateName(String id)
+            {
+                FeLuisesEntities db = new FeLuisesEntities();
+                if (db.Client.Any(x => x.idClientPK == id) || db.Employee.Any(x => x.idEmployeePK == id))
+                    return new ValidationResult("A person id must be unique");
+                return ValidationResult.Success;
+            }
         }
     }
 }

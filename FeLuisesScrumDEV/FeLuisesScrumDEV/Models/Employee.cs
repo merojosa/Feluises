@@ -25,39 +25,36 @@ namespace FeLuisesScrumDEV.Models
     
         [Key]
         [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "ID must contain 9 integers.")]
-        [MaxLength(9, ErrorMessage = "Employee's ID cant be longer than 9 characters.")]
+        [MaxLength(9, ErrorMessage = "Employee's ID must be 9 characters long.")]
+        [CustomValidation(typeof(Controllers.EmployeesController.EmployeeValidation), nameof(Controllers.EmployeesController.EmployeeValidation.validateName))]
         public string idEmployeePK { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "Employee name can't be longer than 20 characters.")]
+        [Required(ErrorMessage = "Employee name is obligatory.")]
         public string employeeName { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "Employee last name can't be longer than 20 characters.")]
+        [Required(ErrorMessage = "Employee last name is obligatory.")]
         public string employeeLastName { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "Employee second last name can't be longer than 20 characters.")]
         public string employeeSecondLastName { get; set; }
-        [Required(ErrorMessage = "Must enter a starting date.")]
+        [Required(ErrorMessage = "Must enter employee birth date date.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> employeeBirthDate { get; set; }
-        [Required(ErrorMessage = "Must enter a starting date.")]
+        [Required(ErrorMessage = "Must enter employees hire date.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime employeeHireDate { get; set; }
         public Nullable<short> developerFlag { get; set; }
+        [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Telephone number only accepts 0-9 and '-'.")]
         public string tel { get; set; }
         public string email { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "province name can't be longer than 20 characters.")]
         public string province { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "Canton name can't be longer than 20 characters.")]
         public string canton { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "District name can't be longer than 20 characters.")]
         public string district { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 35 characters.")]
-        [Required(ErrorMessage = "Project's name is obligatory.")]
+        [MaxLength(20, ErrorMessage = "Exact direction name can't be longer than 35 characters.")]
         public string exactDirection { get; set; }
         [RegularExpression(@"^\d{1,20}$", ErrorMessage = "Budget must contain no more than 20 integers and 2 decimals.")]
         [Range(0, 9999999999999999.99)]
