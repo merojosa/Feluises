@@ -12,7 +12,7 @@
 <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 <div class=" container">
     <h2>Detalle de Proyecto</h2>
-
+    <hr />
     <div class="card rounded border-dark" id="shadow-Fe1" style="width: auto; height:auto;">
         <h2 class="card-header text-white" id="back-Fe1">@Model.projectName</h2>
         <div class="card-body">
@@ -130,11 +130,11 @@
         <div class="card-footer" id="back-Fe1">
             <a class="btn" role="button" href="@Url.Action("Index", "Projects", null )">
                 <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            </a> 
+            </a>
             <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK } )">
                 <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
         </div>
     </div>
-    
+
 </div>
