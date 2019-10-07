@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <title>Edit Team</title>
 </head>
 <body>
     @using (Html.BeginForm())
@@ -19,7 +19,7 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>WorksIn</h4>
+            <h4>Edit Team</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.idEmployeeFKPK)

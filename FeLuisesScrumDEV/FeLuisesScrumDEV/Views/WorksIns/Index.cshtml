@@ -8,45 +8,64 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Rol
-                @*@Html.DisplayNameFor(model => model.role)*@
-            </th>
-            <th>
-                Nombre del empleado
-                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
-            </th>
-            <th>
-                Nombre del proyecto
-                @*@Html.DisplayNameFor(model => model.Project.projectName)*@
-            </th>
-            <th></th>
-        </tr>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Index-Teams</title>
+        <style>
+            /*Para resumir texto*/
+            .ellipsis {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    Rol
+                    @*@Html.DisplayNameFor(model => model.role)*@
+                </th>
+                <th>
+                    Nombre
+                    @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Conocimiento
+                    @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                </th>
+                <th>
+                    Nombre del proyecto
+                    @*@Html.DisplayNameFor(model => model.Project.projectName)*@
+                </th>
+                <th></th>
+            </tr>
     
-    @foreach (var item in Model) {
+        @foreach (var item in Model) {
         <tr>
             <td>
-                Rol
-                @*@Html.DisplayFor(modelItem => item.role)*@
+                @Html.DisplayFor(modelItem => item.role)
             </td>
             <td>
-                Nombre empleado
-                @*@Html.DisplayFor(modelItem => item.Employee.employeeName)*@
+                @Html.DisplayFor(modelItem => item.Employee.employeeName)
             </td>
             <td>
-                Nombre del proyecto
-                @*@Html.DisplayFor(modelItem => item.Project.projectName)*@
+                @Html.DisplayFor(modelItem => item.Employee.employeeLastName)
+            </td>
+            <td class="ellipsis">
+                @Html.DisplayFor(modelItem => item.Employee.DeveloperKnowledge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.projectName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -54,8 +73,8 @@
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
-    }
+        }
     
-    </table>
-</body>
+        </table>
+    </body>
 </html>
