@@ -1,8 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
-
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
 
 </head>
-
 
 <body>
     <div>
@@ -40,15 +36,16 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Projects", null)">Proyectos</a>
-                            
+
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Clientes</a>
+                            <a class="nav-link" href="@Url.Action("Index", "Clients", null)">Clientes</a>
                         </li>
 
+
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Empleados</a>
+                            <a class="nav-link" href="@Url.Action("Index", "Employee", null)">Empleados</a>
                         </li>
 
                         <li class="nav-item">
@@ -58,18 +55,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Modules", null)">Módulos</a>
                         </li>
+                        <!--
+    <li class="nav-item">
+        <a class="nav-link" href="#">Progreso</a>
+    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Progreso</a>
-                        </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Estimaciones</a>
+    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Estimaciones</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Equipos</a>
-                        </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Equipos</a>
+    </li>
+        -->
 
                         <li class="nav-item ">
                             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="display:none">Disabled</a>
@@ -85,7 +83,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Información</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">LogOut</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "LogIn", null)">LogOut</a>
                             </div>
                         </li>
                     </ul>
