@@ -1,44 +1,51 @@
-﻿@model FeLuisesScrumDEV.Models.Module
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FeLuisesScrumDEV.Models.Module
 
 @{
     ViewBag.Title = "Edit";
 }
+<div class="container">
+    <h2>Editar Módulo</h2>
+    <hr />
 
-<h2>Edit</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.idProjectFKPK)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Module</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idProjectFKPK)
+            @Html.HiddenFor(model => model.idModulePK)
 
-        @Html.HiddenFor(model => model.idModulePK)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                <label for="staticProject" class="col-md-2 col-form-label">Belongs to</label>
+                <div class="col-md-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticProject" value=@Html.DisplayFor(model => model.Project.projectName)>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group row">
+                @Html.LabelFor(model => model.name, "Module name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+            <div class="form-group">
+                <a class="btn" role="button" href="@Url.Action("Index", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
+                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                    <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            </div>
+
+        </div>
+    }
+
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

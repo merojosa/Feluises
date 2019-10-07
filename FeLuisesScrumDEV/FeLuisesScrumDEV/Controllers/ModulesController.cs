@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FeLuisesScrumDEV.Models;
+using FeLuisesScrumDEV.viewModel;
 
 namespace FeLuisesScrumDEV.Controllers
 {
@@ -17,18 +18,39 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Modules
         public ActionResult Index()
         {
+            var arrangedList = new List<IndexViewModel>();
             var module = db.Module.Include(m => m.Project);
-            return View(module.ToList());
+            IndexViewModel dummy = new IndexViewModel();
+            int lastPKchecked = -1;
+            foreach (var item in module)
+            {
+                if (item.idProjectFKPK == lastPKchecked)
+                {
+                    dummy.AssociatedModules.Add(item);
+                }
+                else
+                {
+                    if (lastPKchecked != -1)
+                        arrangedList.Add(dummy);
+                    dummy = new IndexViewModel();
+                    dummy.Project = item.Project;
+                    dummy.AssociatedModules.Add(item);
+                    lastPKchecked = item.idProjectFKPK;
+                }
+            }
+            if (lastPKchecked != -1)
+                arrangedList.Add(dummy); ;
+            return View(arrangedList);
         }
 
         // GET: Modules/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -62,13 +84,18 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Modules/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            if (idModulePK == -1)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -95,13 +122,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Modules/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idProjectFKPK, int? idModulePK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModulePK == null || idModulePK == -1)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Module.Find(id);
+            Module module = db.Module.Find(idProjectFKPK, idModulePK);
             if (module == null)
             {
                 return HttpNotFound();
@@ -112,9 +139,14 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModulePK)
         {
-            Module module = db.Module.Find(id);
+            if (idModulePK == -1)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            Module module = db.Module.Find(idProjectFKPK,idModulePK);
             db.Module.Remove(module);
             db.SaveChanges();
             return RedirectToAction("Index");

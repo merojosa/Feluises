@@ -1,33 +1,35 @@
-﻿.body {
-    min-height: 100vh;
-    flex-direction: column;
-    padding-top: 0;
-    padding-bottom: 0;
-    
+﻿.card, #border-Fe {
+    border-color: #4B4073;
+    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.03) !important;
 }
 
 .h2, #heading-red {
     color: #FF001A !important;
 }
 
+.card, #shadow-Fe {
+    box-shadow: 0 0.5rem 1rem rgba(1, 21, 120, 0.4) !important;
+}
+
+.card, #shadow-None-Fe{
+    box-shadow: none none none !important;
+}
+
+.card, #shadow-Fe1{
+    box-shadow: 0 0.5rem 1rem rgba(1, 21, 120, 0.4) !important;
+}
+
 .card-header, #back-Fe {
-    background-color: #F22283;
+    background-color: #F28B46;
 }
 
-.card, #border-Fe {
-    border-color: #F22283;
-    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.3)  !important;
-}
-.card, #shadow-Fe{
-    box-shadow: 0 0.5rem 1rem #0FF2C9 !important;
+.card-header, #back-Fe1 {
+    background-color: #3A68AD;
 }
 
-
-/*
-.container-data {
-    margin-top: 60px;
+.card, #border-Fe1 {
+    border-color: #3A68AD
 }
-    */
 
 .btn-outline {
     color: #0FF2C9;

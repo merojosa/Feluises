@@ -1,4 +1,4 @@
-﻿@model FeLuisesScrumDEV.Models.Credentials
+﻿﻿@model FeLuisesScrumDEV.Models.Credentials
 <!DOCTYPE html>
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,6 @@
 }
 <html>
     <head>
-        <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width" />
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -70,7 +69,7 @@
                                 @Html.PasswordFor(model => model.password)
                             </div><br>
 
-
+                            @Html.ValidationSummary()
                             <div class="form-field center-align btn-large red waves-effect waves-light red hoverable">
                                 <input type="submit" name="name" value="Login" />
                             </div><br>

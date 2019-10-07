@@ -1,34 +1,53 @@
-﻿@model FeLuisesScrumDEV.Models.Module
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FeLuisesScrumDEV.Models.Module
 
 @{
     ViewBag.Title = "Details";
 }
+    
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+<div class=" container">
+    <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+        <h2 class="card-header text-white" id="back-Fe1">Detalles de Módulo</h2>
+        <div class="card-body">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Module name
+                    </dt>
 
-<h2>Details</h2>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
 
-<div>
-    <h4>Module</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+                    <dt>
+                        Belongs to project
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Project.projectName)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="card-footer" id="back-Fe1">
+            <a class="btn" role="button" href="@Url.Action("Index", "Modules")">
+                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            @if (Model.idModulePK != -1)
+            {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.projectName)
-        </dt>
+            <a class="btn" role="button" href="@Url.Action("Edit", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            <a class="btn" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.projectName)
-        </dd>
-
-    </dl>
+            }
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

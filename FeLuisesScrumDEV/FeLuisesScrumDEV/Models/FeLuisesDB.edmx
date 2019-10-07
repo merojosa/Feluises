@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Gr02Proy2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Gr02Proy2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="idClientPK" />
@@ -93,6 +93,7 @@
           <Property Name="startingDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
           <Property Name="complexity" Type="smallint" />
+          <Property Name="objective" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -248,8 +249,7 @@
             <End Role="WorksIn" EntitySet="WorksIn" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Gr02Proy2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -353,6 +353,7 @@
           <Property Name="complexity" Type="Int16" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Requeriment_Employee" FromRole="Requeriment" ToRole="Employee" />
           <NavigationProperty Name="Module" Relationship="Self.FK_Requeriment_Project" FromRole="Requeriment" ToRole="Module" />
+          <Property Name="objective" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -595,6 +596,7 @@
           <EntitySetMapping Name="Requeriment">
             <EntityTypeMapping TypeName="Gr02Proy2Model.Requeriment">
               <MappingFragment StoreEntitySet="Requeriment">
+                <ScalarProperty Name="objective" ColumnName="objective" />
                 <ScalarProperty Name="idProjectFKPK" ColumnName="idProjectFKPK" />
                 <ScalarProperty Name="idModuleFKPK" ColumnName="idModuleFKPK" />
                 <ScalarProperty Name="idRequerimentPK" ColumnName="idRequerimentPK" />
