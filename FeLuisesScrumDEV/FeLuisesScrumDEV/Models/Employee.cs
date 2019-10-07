@@ -11,7 +11,8 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,19 +23,44 @@ namespace FeLuisesScrumDEV.Models
             this.WorksIn = new HashSet<WorksIn>();
         }
     
+        [Key]
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "ID must contain 9 integers.")]
+        [MaxLength(9, ErrorMessage = "Employee's ID cant be longer than 9 characters.")]
         public string idEmployeePK { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string employeeName { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string employeeLastName { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string employeeSecondLastName { get; set; }
+        [Required(ErrorMessage = "Must enter a starting date.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> employeeBirthDate { get; set; }
+        [Required(ErrorMessage = "Must enter a starting date.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime employeeHireDate { get; set; }
         public Nullable<short> developerFlag { get; set; }
         public string tel { get; set; }
         public string email { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string province { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string canton { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string district { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 35 characters.")]
+        [Required(ErrorMessage = "Project's name is obligatory.")]
         public string exactDirection { get; set; }
+        [RegularExpression(@"^\d{1,20}$", ErrorMessage = "Budget must contain no more than 20 integers and 2 decimals.")]
+        [Range(0, 9999999999999999.99)]
         public Nullable<decimal> pricePerHour { get; set; }
         public Nullable<short> availability { get; set; }
     
