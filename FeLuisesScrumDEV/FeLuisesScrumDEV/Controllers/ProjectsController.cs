@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -10,6 +11,7 @@ using FeLuisesScrumDEV.Models;
 
 namespace FeLuisesScrumDEV.Controllers
 {
+
     public class ProjectsController : Controller
     {
         private FeLuisesEntities db = new FeLuisesEntities();
@@ -127,6 +129,17 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+    }
+    public class ProjectValidation
+    {
+        public static ValidationResult validateName(String name)
+        {
+            FeLuisesEntities db = new FeLuisesEntities();
+            return db.Project.Any(x => x.projectName == name)
+                ? new ValidationResult("The project name must be unique")
+                : ValidationResult.Success;
+
         }
     }
 }

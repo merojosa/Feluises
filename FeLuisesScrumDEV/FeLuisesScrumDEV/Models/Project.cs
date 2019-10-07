@@ -9,11 +9,13 @@
 
 namespace FeLuisesScrumDEV.Models
 {
+    using FeLuisesScrumDEV.Controllers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +24,11 @@ namespace FeLuisesScrumDEV.Models
             this.Module = new HashSet<Module>();
             this.WorksIn = new HashSet<WorksIn>();
         }
-        
         [Key]
         public int idProjectPK { get; set; }
         [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
         [Required(ErrorMessage ="Project's name is obligatory.")]
+        [CustomValidation(typeof(ProjectValidation), nameof(ProjectValidation.validateName))]
         public string projectName { get; set; }
         [MaxLength(256, ErrorMessage = "Module's name cant be longer than 256 characters.")]
         [Required(ErrorMessage = "Project's objective is obligatory.")]
@@ -60,3 +62,4 @@ namespace FeLuisesScrumDEV.Models
         public virtual ICollection<WorksIn> WorksIn { get; set; }
     }
 }
+
