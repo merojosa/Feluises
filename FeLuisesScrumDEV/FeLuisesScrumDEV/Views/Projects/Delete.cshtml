@@ -11,8 +11,9 @@
 
 <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 <div class="container">
+    <h2 id="heading-red">Desea eliminar este Proyecto?</h2>
     <div class="card border-dark" id="shadow-Fe1">
-        <h2 class="card-header" id="back-Fe1">Are you sure you want to delete the project: @Model.projectName?</h2>
+        <h2 class="card-header text-white" id="back-Fe1"> @Model.projectName?</h2>
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
@@ -93,12 +94,12 @@
             {
                 @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <a class="btn" role="button" href="@Url.Action("Edit", "Projects",  new { id = Model.idProjectPK })">
-                    <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                </a>
-                <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
-            </div>
+                <div class="form-actions no-color">
+                    <a class="btn" role="button" href="@Url.Action("Edit", "Projects",  new { id = Model.idProjectPK })">
+                        <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
+                    <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
+                </div>
             }
         </div>
     </div>

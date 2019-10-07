@@ -1,11 +1,4 @@
-﻿
-body, #bck {
-    background-image: url(/Images/prb.jpg);
-    background-size: cover;
-}
-
-
-.card, #border-Fe {
+﻿.card, #border-Fe {
     border-color: #4B4073;
     box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.03) !important;
 }
