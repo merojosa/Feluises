@@ -212,6 +212,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\add.svg" />
+    <Content Include="Images\b-back.svg" />
+    <Content Include="Images\b-delete.svg" />
+    <Content Include="Images\b-edit.svg" />
     <Content Include="Images\back.svg" />
     <Content Include="Images\delete.svg" />
     <Content Include="Images\details.svg" />
