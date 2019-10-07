@@ -25,7 +25,7 @@ namespace FeLuisesScrumDEV.Controllers
                 var userDetails = db.Credentials.Where(x => x.userName == loginModel.userName && x.password == loginModel.password).FirstOrDefault();
                 if (userDetails == null)
                 {
-                    //userModel.LoginErrorMessage = "Wrong username or password.";
+                    ModelState.AddModelError("", "Invalid username or password");
                     return View("Index");
                 }else{
                     Session["userID"] = userDetails.userName; // esto pues as'i se llama en tabla
