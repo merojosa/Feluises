@@ -6,33 +6,18 @@
     
 }
 
+
 .h2, #heading-red {
     color: #FF001A !important;
 }
 
 .card-header, #back-Fe {
-    background-color: #F22283;
+    background-color: #F28B46;
 }
 
 .card-header, #back-Fe1 {
-    background-color: #F25C78;
+    background-color: #3A68AD;
 }
-
-
-.card, #border-Fe {
-    border-color: #F22283;
-    box-shadow: 0 0.5rem 1rem rgba(242, 92, 120, 0.3)  !important;
-}
-.card, #shadow-Fe{
-    box-shadow: 0 0.5rem 1rem #0FF2C9 !important;
-}
-
-
-/*
-.container-data {
-    margin-top: 60px;
-}
-    */
 
 .btn-outline {
     color: #0FF2C9;
