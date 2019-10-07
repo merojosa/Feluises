@@ -28,32 +28,30 @@
     <div class="float-md-right">
         <button type="button" class="btn btn-info" id="toggle">Toggle view</button>
     </div>
-    <a class="btn" role="button" href=@Url.Action("Create", "Projects")>
-        <img src="~/Images/add.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    </a>
+
     <section id="ProjectCards">
         <div class="card-deck">
             <div class="card-columns">
                 @foreach (var item in Model)
-            {
-                <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
-                    <div class="card-header" id="back-Fe1">
-                        <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
+                {
+                    <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
+                        <div class="card-header" id="back-Fe1">
+                            <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Client name: @item.Client.clientName</p>
+                            <p class="card.text">Objective: @item.objective</p>
+                            <p class="card-text">Actual Cost: @item.realCost</p>
+                        </div>
+                        <div class="card-footer text-white-50 text-center" id="back-Fe1">
+                            @Html.DisplayFor(modelItem => item.startingDate)
+                            @if (item.startingDate == null)
+                            {
+                                <p class="card-text">Informacion no disponible</p>
+                            }
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">Client name: @item.Client.clientName</p>
-                        <p class="card.text">Objective: @item.objective</p>
-                        <p class="card-text">Actual Cost: @item.realCost</p>
-                    </div>
-                    <div class="card-footer text-white-50 text-center" id="back-Fe1">
-                        @Html.DisplayFor(modelItem => item.startingDate)
-                        @if (item.startingDate == null)
-                        {
-                        <p class="card-text">Informacion no disponible</p>
-                        }
-                    </div>
-                </div>
-            }
+                }
             </div>
         </div>
     </section>
@@ -90,48 +88,51 @@
         </tr>
 
         @foreach (var item in Model)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.projectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.objective)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estimatedCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.realCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.startingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.finishingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.budget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estimatedDuration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.clientName)
-            </td>
-            <td>
-                <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = item.idProjectPK } )">
-                    <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                </a>
-                <a class="btn" role="button" href="@Url.Action("Details", "Projects", new { id = item.idProjectPK } )">
-                    <img src="~/Images/details.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                </a>
-                <a class="btn" role="button" href="@Url.Action("Delete", "Projects", new { id = item.idProjectPK } )">
-                    <img src="~/Images/delete.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                </a>
-            </td>
-        </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.projectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.objective)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estimatedCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.realCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.finishingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.budget)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estimatedDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.clientName)
+                </td>
+                <td>
+                    <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = item.idProjectPK } )">
+                        <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                    <a class="btn" role="button" href="@Url.Action("Details", "Projects", new { id = item.idProjectPK } )">
+                        <img src="~/Images/details.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                    <a class="btn" role="button" href="@Url.Action("Delete", "Projects", new { id = item.idProjectPK } )">
+                        <img src="~/Images/delete.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                </td>
+            </tr>
+        }
 
     </table>
+    <a class="btn" role="button" href=@Url.Action("Create", "Projects")>
+        <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
+    </a>
 </div>
