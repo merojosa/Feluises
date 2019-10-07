@@ -11,6 +11,7 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     
     public partial class Project
@@ -24,15 +25,31 @@ namespace FeLuisesScrumDEV.Models
         
         [Key]
         public int idProjectPK { get; set; }
+        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
+        [Required(ErrorMessage ="Project's name is obligatory.")]
         public string projectName { get; set; }
+        [MaxLength(256, ErrorMessage = "Module's name cant be longer than 256 characters.")]
+        [Required(ErrorMessage = "Project's objective is obligatory.")]
         public string objective { get; set; }
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "Budget must contain no more than 18 integers and 2 decimals.")]
+        [Range(0, 9999999999999999.99)]
         public Nullable<decimal> estimatedCost { get; set; }
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "Budget must contain no more than 18 integers and 2 decimals.")]
+        [Range(0, 9999999999999999.99)]
         public Nullable<decimal> realCost { get; set; }
 
-        [Required(ErrorMessage = "Date Format YYYY/MM/DD")]
+        [Required(ErrorMessage = "Must enter a starting date.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> startingDate { get; set; }
+        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> finishingDate { get; set; }
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage ="Budget must contain no more than 18 integers and 2 decimals.")]
+        [Range(0, 9999999999999999.99)]
         public Nullable<decimal> budget { get; set; }
+        [ReadOnly(true)]
+        [Range(0, 9999999999999999)]
         public Nullable<int> estimatedDuration { get; set; }
         public string idClientFK { get; set; }
     
