@@ -1,8 +1,5 @@
-﻿body {
-    min-height: 100vh;
-    flex-direction: column;
-    padding-top: 0;
-    padding-bottom: 0;
+﻿.body {
+
     background-image: url(/Images/prb.jpg);
     background-size: cover;
 }
