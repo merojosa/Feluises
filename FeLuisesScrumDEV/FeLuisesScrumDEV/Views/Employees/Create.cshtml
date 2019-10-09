@@ -2,11 +2,18 @@
 <html>
 @model FeLuisesScrumDEV.Models.Employee
 <head>
-
+    
     @{
         ViewBag.Title = "Create";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
+    
+    <script>
+        $(document).ready(function () {
+            getProvincia();
+        })
+    </script>
+
 </head>
 
 <body>
@@ -110,7 +117,7 @@
                     <b>Provincia</b>
                     @*@Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.province, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "-- Select Name --", new { @class = "form-control", onchange = "getCanton()"  })
                         @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -118,17 +125,17 @@
                 <div class="form-group">
                     <b>Cantón</b>
                     @*@Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "-- Select Name --", new { @class = "form-control",  onchange = "getDistrict()"})
+                    @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
+                </div>
                 </div>
 
                 <div class="form-group">
                     <b>Distrito</b>
                     @*@Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.district, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.district, Enumerable.Empty<SelectListItem>(), "-- Select Name --", new { @class = "form-control"})
                         @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
                     </div>
                 </div>
