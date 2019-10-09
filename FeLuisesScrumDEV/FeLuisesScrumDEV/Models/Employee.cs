@@ -54,7 +54,7 @@ namespace FeLuisesScrumDEV.Models
         public string canton { get; set; }
         [MaxLength(20, ErrorMessage = "District name can't be longer than 20 characters.")]
         public string district { get; set; }
-        [MaxLength(20, ErrorMessage = "Exact direction name can't be longer than 35 characters.")]
+        [MaxLength(35, ErrorMessage = "Exact direction name can't be longer than 35 characters.")]
         public string exactDirection { get; set; }
         [RegularExpression(@"^\d{1,20}$", ErrorMessage = "Budget must contain no more than 20 integers and 2 decimals.")]
         [Range(0, 9999999999999999.99)]

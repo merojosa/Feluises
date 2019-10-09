@@ -39,7 +39,9 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: WorksIns/Create
         public ActionResult Create()
         {
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
+            //var Empleados = db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1));
+            //Empleados.
+            ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             return View();
         }

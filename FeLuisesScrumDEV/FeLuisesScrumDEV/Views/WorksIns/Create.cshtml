@@ -1,64 +1,179 @@
-﻿@model FeLuisesScrumDEV.Models.WorksIn
+﻿@*
+    @model FeLuisesScrumDEV.Models.WorksIn
 
-@{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Create Team</title>
-</head>
-<body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>Equipo</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label>Nombre empleado</label>
-                @*@Html.LabelFor(model => model.idEmployeeFKPK, "idEmployeeFKPK", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-10">
-                    @Html.DropDownList("idEmployeeFKPK", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.idEmployeeFKPK, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-               <label>Nombre proyecto</label>
-               @* @Html.LabelFor(model => model.idProjectFKPK, "idProjectFKPK", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-10">
-                    @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label>Rol</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
+    @{
+        ViewBag.Title = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
-</html>
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Create Team</title>
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Equipo</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Nombre empleado</label>
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("idEmployeeFKPK", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idEmployeeFKPK, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                   <label>Nombre proyecto</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Rol</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>
+    </html>
+*@
+
+
+    @model FeLuisesScrumDEV.Models.WorksIn
+
+    @{
+        ViewBag.Title = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Create Team</title>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <style>
+            #sortable1, #sortable2 {
+                border: 1px solid #eee;
+                width: 360px;
+                min-height: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 5px 0 0 0;
+                float: left;
+                margin-right: 10px;
+                align-content:center;
+            }
+
+                #sortable1 li, #sortable2 li {
+                    margin: 0 5px 5px 5px;
+                    padding: 5px;
+                    font-size: 1.2em;
+                    width: 360px;
+                }
+        </style>
+
+        <script>
+            $(function () {
+                $("#sortable1, #sortable2").sortable({
+                    connectWith: ".connectedSortable"
+                }).disableSelection();
+            });
+        </script>
+    </head>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <body>
+
+                <div class="container">
+                    <h2>Crear Equipo</h2>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <center>
+                                <label>Nombre proyecto: </label>
+                                @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                            </center>
+                        </div>
+                        <div class="col-md-6">
+                            <center>
+                                <label>Lider: </label>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <center>
+                                <b>Buscar por habilidades</b>
+                                <!--Aqui va la barra de busqueda-->
+                            </center>
+                        </div>
+                        <div class="col-md-6">
+                            <center>
+                                <b>Posibles Miembros</b>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <center>
+                               
+                                <!--Aqui van solo empleados disponibles que se filtraron-->
+                                <ul id="sortable1" class="connectedSortable">
+                                    @foreach (var item in ViewBag.idEmployeeFKPK)
+                                    {
+                                        <li class="ui-state-default">@item.Text</li>
+                                    }
+
+                                </ul>
+                            </center>
+                        </div>
+                        <div class="col-md-6">
+                            <center>
+                                <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
+                                <ul id="sortable2" class="connectedSortable">
+                                    @*<li class="ui-state-highlight">Item 1</li>*@
+                                </ul>
+                            </center>
+                        </div>
+                    </div>
+
+                </div>
+
+            </body>
+        }
+    </html>
