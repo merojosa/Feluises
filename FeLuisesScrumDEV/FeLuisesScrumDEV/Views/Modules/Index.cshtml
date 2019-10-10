@@ -19,6 +19,21 @@
 
         });
     </script>
+    <script>
+        $("#idProjectFKPK").change( function (event) {
+            var userId = $(this).val();
+            $.ajax({
+                url: "@Url.Action("GetModules","Modules")",
+                data: { idProjectFKPK : userId },
+                type: "Get",
+                dataType: "html",    
+                success: function (data) {
+                    //Whatever result you have got from your controller with html partial view replace with a specific html.
+                    $("#modulesResult").html( data ); // HTML DOM replace
+                }
+            });
+        });
+    </script>
 
 </head>
 
@@ -119,6 +134,11 @@
                 </tr>
             </tfoot>
         </table>
+        <div class="dropdown">
+            @Html.DropDownList("idProjectFKPK", null, "Select Project")
+        </div>
+        <div id="modulesResult">
+        </div>
     </div>
 </body>
 </html>
