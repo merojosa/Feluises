@@ -23,13 +23,18 @@
 </head>
 
 <body>
+
+    <div class="float-md-right">
+        <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
+        <a class="btn" role="button" href=@Url.Action("Create", "Modules" )>
+            <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+        </a>
+    </div>
     <div class=" container">
         <h2>Módulos</h2>
+        <hr />
 
 
-        <div class="float-md-right">
-            <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
-        </div>
         <p></p>
         <p></p>
         <section id="modulecards">
@@ -114,9 +119,6 @@
                 </tr>
             </tfoot>
         </table>
-        <a class="btn" role="button" href=@Url.Action("Create", "Modules" )>
-            <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
-        </a>
     </div>
 </body>
 </html>

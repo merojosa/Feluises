@@ -43,18 +43,16 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
-                                <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </a>
-                            <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
-
-                            @*
-                @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
-                <input type="submit" value="Delete" class="btn btn-default" />
-                            *@
-                        </div>
+                    <div class="form-actions no-color">
+                        <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Edit", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                            <img src="~/Images/cancel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a>
+                        @*
+        @Html.ActionLink("Cancel", "Details", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK }) |
+        <input type="submit" value="Delete" class="btn btn-default" />
+                        *@
+                    </div>
                     }
                 </div>
             </div>
