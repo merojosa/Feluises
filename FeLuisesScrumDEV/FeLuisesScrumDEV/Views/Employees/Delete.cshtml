@@ -152,20 +152,19 @@
                         </dd>
 
                     </dl>
-                    <div class="card-footer" id="back-Fe1">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+                </div>
+                <div class="card-footer" id="back-Fe1">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
                         <div class="form-actions no-color">
                             <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
-
-                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Employees", new { id = Model.idEmployeePK })">
                                 <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                             </a>
                         </div>
-                        }
-                    </div>
+                    }
                 </div>
             </div>
         </div>

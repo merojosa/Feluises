@@ -159,14 +159,10 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-5 col-md-20">
-
-                        <a class="btn" role="button" href="@Url.Action("Index", "Employees")">
-                            <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                        </a>
                         <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
-                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Employees", new {id = Model.idEmployeePK})">
+                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Employees", new {id = Model.idEmployeePK})">
                             <!--Mandar el id-->
-                            <img src="~/Images/delete.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                         </a>
 
                     </div>
