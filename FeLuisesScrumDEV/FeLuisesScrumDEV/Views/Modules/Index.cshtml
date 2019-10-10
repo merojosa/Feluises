@@ -22,16 +22,19 @@
     <script>
         $("#idProjectFKPK").change( function (event) {
             var userId = $(this).val();
+            console.log(userId);
             $.ajax({
                 url: "@Url.Action("GetModules","Modules")",
                 data: { idProjectFKPK : userId },
                 type: "Get",
                 dataType: "html",    
                 success: function (data) {
-                    //Whatever result you have got from your controller with html partial view replace with a specific html.
+                    //Whatever result you have got from your controller with html partial view replace with a specific html. 
                     $("#modulesResult").html( data ); // HTML DOM replace
                 }
+                
             });
+            console.log(data);
         });
     </script>
 
