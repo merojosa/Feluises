@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FeLuisesScrumDEV.Models.Module>
+@{
+    ViewBag.Title = "DetailsSummary";
+
+}
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+<body>
+    <div class="row">
+        @foreach (var module in Model)
+        {
+            <div class="col-sm-6">
+                <div class="card border-dark rounded shadow-none" id="shadow-None-Fe">
+                    <div class="card-header" id="back-Fe">
+                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK } )">Módulo @module.name</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Requerimientos iran aquí.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>

@@ -40,6 +40,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             if (lastPKchecked != -1)
                 arrangedList.Add(dummy); ;
+            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             return View(arrangedList);
         }
 
@@ -159,6 +160,30 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public List<Module> ModuleList(int? idProjectFKPK)
+        {
+            if (idProjectFKPK == null)
+            {
+                return null;
+            }
+            var modules = db.Module.Where(m => m.idProjectFKPK==idProjectFKPK);
+            if (modules == null)
+            {
+                return null;
+            }
+            return modules.ToList();
+        }
+        public PartialViewResult GetModules(int? idProjectFKPK)
+        {
+            if (idProjectFKPK == null)
+            {
+                idProjectFKPK=6;
+            }
+            var moduleController = new ModulesController();
+            List<Module> modulesAssociated = moduleController.ModuleList(idProjectFKPK);
+            return PartialView("GetModules", modulesAssociated);
         }
     }
 }
