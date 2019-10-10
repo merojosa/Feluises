@@ -126,14 +126,8 @@
                             @Html.DisplayFor(modelItem => item.Client.clientName)
                         </td>
                         <td>
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = item.idProjectPK } )">
-                                <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
                             <a class="btn" role="button" href="@Url.Action("Details", "Projects", new { id = item.idProjectPK } )">
-                                <img src="~/Images/details.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-                            <a class="btn" role="button" href="@Url.Action("Delete", "Projects", new { id = item.idProjectPK } )">
-                                <img src="~/Images/delete.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                             </a>
                         </td>
                     </tr>
