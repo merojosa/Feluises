@@ -149,5 +149,34 @@ namespace FeLuisesScrumDEV.Controllers
         {
             teamMembersResult = teamMembers;
         }
+
+        //public ActionResult UpdateItem(string itemIds)
+        //{
+             
+        //    int count = 1;
+        //    List<int> itemIdList = new List<int>();
+        //    itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+        //    foreach (var itemId in itemIds)
+        //    {
+        //        try
+        //        {
+        //            Employee item = db.Employee.Where(x => x.idEmployeePK == itemId.ToString()).FirstOrDefault();
+        //            db.SaveChanges();
+        //        }
+        //        catch (Exception)
+        //        {
+        //            continue;
+        //        }
+        //        count++;
+        //    }
+        //    return Json(true, JsonRequestBehavior.AllowGet);
+
+
+        //    /*
+        //     List<roles> rol =  new rolesController().UddeRol();
+        //    List<roles> rol =  new rolesController().EraseeRol();
+             
+        //     */
+        //}
     }
 }
