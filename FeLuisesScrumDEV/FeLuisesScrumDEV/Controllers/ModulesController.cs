@@ -177,10 +177,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
         public PartialViewResult GetModules(int? idProjectFKPK)
         {
-            if (idProjectFKPK == null)
-            {
-                idProjectFKPK=6;
-            }
+            if(idProjectFKPK == null)
+                return null;
             var moduleController = new ModulesController();
             List<Module> modulesAssociated = moduleController.ModuleList(idProjectFKPK);
             return PartialView("GetModules", modulesAssociated);
