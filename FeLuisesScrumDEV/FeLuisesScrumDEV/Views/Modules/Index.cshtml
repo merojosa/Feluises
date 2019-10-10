@@ -137,11 +137,22 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="dropdown">
-            @Html.DropDownList("idProjectFKPK", null, "Select Project")
+
+        <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+            <div class="card-header" id="back-Fe1">
+                <p class="card-text text-white">
+                    <div class="dropdown">
+                        @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                    </div>
+                </p>
+            </div>
+            <div class="card-body">
+                <div id="modulesResult">
+                </div>
+            </div>
         </div>
-        <div id="modulesResult">
-        </div>
+        <p></p>
+
     </div>
 </body>
 </html>
