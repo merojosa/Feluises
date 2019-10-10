@@ -92,7 +92,7 @@
                 padding: 5px 0 0 0;
                 float: left;
                 margin-right: 10px;
-                align-content:center;
+                align-content: center;
             }
 
                 #sortable1 li, #sortable2 li {
@@ -110,71 +110,101 @@
                 }).disableSelection();
             });
         </script>
+
     </head>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <body>
+    <body>
 
-                <div class="container">
-                    <h2>Crear Equipo</h2>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                                <label>Nombre proyecto: </label>
-                                @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <b>Lider: </b>
-                            </center>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                                <b>Buscar por habilidades</b>
-                                <!--Aqui va la barra de busqueda-->
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <b>Posibles Miembros</b>
-                            </center>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                               
-                                <!--Aqui van solo empleados disponibles que se filtraron-->
-                                <ul id="sortable1" class="connectedSortable">
-                                    @foreach (var item in ViewBag.idEmployeeFKPK)
-                                    {
-                                        <li class="ui-state-default">@item.Text</li>
-                                    }
-
-                                </ul>
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
-                                <ul id="sortable2" class="connectedSortable">
-                                    @*<li class="ui-state-highlight">Item 1</li>*@
-                                
-                                </ul>
-                            </center>
-                        </div>
-                    </div>
-
+        <div class="container">
+            <h2>Crear Equipo</h2>
+            <hr>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <label>Nombre proyecto: </label>
+                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                    </center>
                 </div>
+                <div class="col-md-6">
+                    <center>
+                        <b>Lider: </b>
+                    </center>
+                </div>
+            </div>
 
-            </body>
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <b>Buscar por habilidades</b>
+                        <!--Aqui va la barra de busqueda-->
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <b>Posibles Miembros</b>
+                    </center>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+
+                        <!--Aqui van solo empleados disponibles que se filtraron-->
+                        <ul id="sortable1" class="connectedSortable">
+                            @foreach (var item in ViewBag.idEmployeeFKPK)
+                            {
+                                <li class="ui-state-default">@item.Text</li>
+                            }
+
+                        </ul>
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
+                        <ul id="sortable2" class="connectedSortable">
+                            @*<li class="ui-state-highlight">Item 1</li>*@
+
+
+                        </ul>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+        </div>
+
+
+            <script>
+                function getMemmbers() {
+                    var myUl = document.getElementById("sortable2");
+                    myMembers = myUl.getElementsByTagName("LI").innerHTML;
+                    //var lis = document.querySelectorAll("#sortable2 li");
+                    console.log(myUl);
+                    console.log(myMembers);
+
+
+                    $.ajax({
+                        url: '/WorksIn/getPossibleMembersOfTeam',
+                        data: {
+                            teamMembers: myMembers
+                        },
+                        type: 'Post',
+                        dataType: 'Json',
+                        async: 'True',
+                    })
+
+                }
+            </script>
+    </body>
         }
-    </html>
+</html>

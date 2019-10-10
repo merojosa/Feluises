@@ -13,6 +13,7 @@ namespace FeLuisesScrumDEV.Controllers
     public class WorksInsController : Controller
     {
         private FeLuisesEntities db = new FeLuisesEntities();
+        private string[] teamMembersResult;
 
         // GET: WorksIns
         public ActionResult Index()
@@ -49,20 +50,28 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: WorksIns/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "idEmployeeFKPK,idProjectFKPK,role")] WorksIn worksIn)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.WorksIn.Add(worksIn);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
+        //    ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
+        //    return View(worksIn);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEmployeeFKPK,idProjectFKPK,role")] WorksIn worksIn)
+        public ActionResult Create(List<string> teamMembers)
         {
-            if (ModelState.IsValid)
-            {
-                db.WorksIn.Add(worksIn);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
-            return View(worksIn);
+            return View();
         }
 
         // GET: WorksIns/Edit/5
@@ -133,6 +142,12 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public void getPossibleMembersOfTeam(string[] teamMembers)
+        {
+            teamMembersResult = teamMembers;
         }
     }
 }
