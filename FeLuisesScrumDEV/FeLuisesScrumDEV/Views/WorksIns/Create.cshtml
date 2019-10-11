@@ -115,8 +115,28 @@
             //$(document.getElementById("sortable2").onchange = function () { myFunction() });
 
             function myFunction() {
-                var lista = document.getElementById("sortable2");
-                console.log(lista);
+                //var lista = document.getElementById("sortable2").;
+                //var li = lista.getElementsByTagName("li");
+                var list = [];
+                document.querySelectorAll("#sortable2 li")
+                    .forEach(function (item) {
+                        var aux = item.textContent.split(" ");
+                        list.push(aux[0]);
+                    });
+
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "WorksIn/Index",
+                    traditional: true,
+                    data: {
+                        idList: list
+                    },
+                    succes: function () {
+                        console.log("succes");
+                    }
+                })
+                
             }
         </script>
 
@@ -141,56 +161,6 @@
                 })
 
             }
-        </script>*@
-
-        @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $("#sortable2").sortable({
-                    connectWith: "#sortable",
-                    update: function (event, ui) {
-                        var itemIds = "";
-                        $("sortable").find(".taskSingleInline").each(function () {
-                            var itemId = $(this).attr("data-taskid");
-                            itemIds = itemIds + itemId + ",";
-                        });
-                        $.ajax({
-                            url: '@Url.Action("UpdateItem", "WorksIn")',
-                            data: { itemIds: itemIds },
-                            type: 'POST',
-                            success: function (data) {
-                            },
-                            error: function (xhr, status, error) {
-                            }
-                        });
-                    }
-                });
-            })
-        </script>
-
-        <script>
-            $(document).ready(function () {
-                $("#sortable").sortable({
-                    connectWith: "#sortable2",
-                    update: function (event, ui) {
-                        var itemIds = "";
-                        $("sortable").find(".taskSingleInline").each(function () {
-                            var itemId = $(this).attr("data-taskid");
-                            itemIds = itemIds + itemId + ",";
-                        });
-                        $.ajax({
-                            url: '@Url.Action("UpdateItem", "WorksIn")',
-                            data: { itemIds: itemIds },
-                            type: 'POST',
-                            success: function (data) {
-                            },
-                            error: function (xhr, status, error) {
-                            }
-                        });
-                    }
-                });
-            })
         </script>*@
 
     </head>
