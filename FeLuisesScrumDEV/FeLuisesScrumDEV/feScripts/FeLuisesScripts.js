@@ -8,9 +8,9 @@ function getProvincia(){
         success: function (data) {
             var html = "";
             for (key in data) {
-              html += "<option value='" + key + "'>" + data[key] + "</option>";
+                html += "<option value='" + key + "'>" + data[key] + "</option>";
             }
-            $("#province").empty();
+            /*$("#province").empty();*/
             $("#province").append(html);
         }
     });
@@ -49,7 +49,6 @@ function getDistrict() {
             for (key in data) {
                 html += "<option value='" + key + "'>" + data[key] + "</option>";
             }
-            console.log(data);
             $("#district").empty();
             $("#district").append(html);
         }
