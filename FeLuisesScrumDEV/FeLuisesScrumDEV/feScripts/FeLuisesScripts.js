@@ -47,7 +47,7 @@ function getDistrict() {
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + key + "'>" + data[key] + "</option>";
+                html += '<option data-name="'+data[key]+'"value="'+key+'">'+data[key]+'</option>';
             }
             $("#district").empty();
             $("#district").append(html);

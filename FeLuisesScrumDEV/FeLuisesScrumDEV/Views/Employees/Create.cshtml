@@ -173,20 +173,20 @@
                             </div><!--Fin de col-->
                         </div> <!--Fin del form-row-->
                     </div><!--Final de form-->
-                }
-            </div>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="card-footer" id="back-Fe1">
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit" />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="card-footer" id="back-Fe1">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit" />
 
-                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Employees")">
-                            <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                        </a>
+                                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Employees")">
+                                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                </a>
 
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
