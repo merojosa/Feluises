@@ -12,6 +12,7 @@
         $(document).ready(function () {
             $("#moduletable").hide();
             $("#modulecards").show();
+            $("#modulecards2").hide();
             $("#toggle").click(function () {
                 $("#moduletable").toggle();
                 $("#modulecards").toggle();
@@ -98,22 +99,65 @@
                 </tr>
             </tfoot>
         </table>
-    <div id="modulecards">
-        <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
-            <div class="card-header" id="back-Fe1">
-                <p class="card-text text-white">
-                    <div class="dropdown">
-                        @Html.DropDownList("idProjectFKPK", null, "Select Project")
+
+        <section id="modulecards">
+            @foreach (var item in Model)
+            {
+                <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+                    <div class="card-header" id="back-Fe1">
+                        <p class="card-text text-white">Proyecto: @item.Project.projectName</p>
                     </div>
-                </p>
-            </div>
-            <div class="card-body">
-                <div id="modulesResult">
+                    <div class="card-body">
+                        @if (item.AssociatedModules.Count() > 0)
+                        {
+                            <div class="row">
+                                @foreach (var module in item.AssociatedModules)
+                                {
+                                    if (module.idModulePK != -1)
+                                    {
+                                        <div class="col-sm-6">
+                                            <div class="card border-dark rounded shadow-none" id="shadow-None-Fe">
+                                                <div class="card-header" id="back-Fe">
+                                                    <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK } )">Módulo @module.name</a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text">Requerimientos iran aquí.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                No hay modulos asociados a dicho proyecto.
+                            </div>
+                        }
+                    </div>
+                </div>
+                <p></p>
+            }
+        </section>
+
+        <div id="modulecards2">
+            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+                <div class="card-header" id="back-Fe1">
+                    <p class="card-text text-white">
+                        <div class="dropdown">
+                            @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                        </div>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div id="modulesResult">
+                    </div>
                 </div>
             </div>
-        </div>
-        <p></p>
+            <p></p>
 
+        </div>
     </div>
 </body>
 </html>

@@ -21,7 +21,7 @@ namespace FeLuisesScrumDEV.Models
         }
 
         [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Client id must be 9 digits long.")]
-        [CustomValidation(typeof(Controllers.ClientsController.ClientValidation), nameof(Controllers.ClientsController.ClientValidation.validateName))]
+        [Key]
         public string idClientPK { get; set; }
         [Required(ErrorMessage ="Must enter the client's name.")]
         [MaxLength(20, ErrorMessage = "Client's name can't be longer than 20 characters.")]

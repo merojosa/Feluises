@@ -24,7 +24,7 @@ namespace FeLuisesScrumDEV.Controllers
             int lastPKchecked = -1;
             foreach (var item in module)
             {
-                if (item.idProjectFKPK == lastPKchecked)
+                if (item.idProjectFKPK == lastPKchecked && item.idModulePK != -1 )
                 {
                     dummy.AssociatedModules.Add(item);
                 }
@@ -34,7 +34,8 @@ namespace FeLuisesScrumDEV.Controllers
                         arrangedList.Add(dummy);
                     dummy = new IndexViewModel();
                     dummy.Project = item.Project;
-                    dummy.AssociatedModules.Add(item);
+                    if(item.idModulePK != -1)
+                        dummy.AssociatedModules.Add(item);
                     lastPKchecked = item.idProjectFKPK;
                 }
             }

@@ -81,6 +81,11 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmployeePK,employeeName,employeeLastName,employeeSecondLastName,employeeBirthDate,employeeHireDate,developerFlag,tel,email,province,canton,district,exactDirection,pricePerHour,availability")] Employee employee)
         {
+            if (db.Client.Any(x => x.idClientPK == employee.idEmployeePK) || db.Employee.Any(x => x.idEmployeePK == employee.idEmployeePK))
+            {
+                ModelState.AddModelError("idEmployeePK", "Ya existe un usuario registrado con dicha cédula");
+                return View(employee);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
@@ -123,16 +128,6 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public class EmployeeValidation
-        {
-            public static ValidationResult validateName(String id)
-            {
-                FeLuisesEntities db = new FeLuisesEntities();
-                if (db.Client.Any(x => x.idClientPK == id) || db.Employee.Any(x => x.idEmployeePK == id))
-                    return new ValidationResult("A person id must be unique");
-                return ValidationResult.Success;
-            }
         }
     }
 }

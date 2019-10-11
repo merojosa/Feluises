@@ -28,7 +28,6 @@ namespace FeLuisesScrumDEV.Models
         public int idProjectPK { get; set; }
         [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
         [Required(ErrorMessage ="Project's name is obligatory.")]
-        [CustomValidation(typeof(ProjectValidation), nameof(ProjectValidation.validateName))]
         public string projectName { get; set; }
         [MaxLength(256, ErrorMessage = "Project's name cant be longer than 256 characters.")]
         [Required(ErrorMessage = "Project's objective is obligatory.")]
