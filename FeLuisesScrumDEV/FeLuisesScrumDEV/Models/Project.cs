@@ -41,10 +41,10 @@ namespace FeLuisesScrumDEV.Models
 
         [Required(ErrorMessage = "Must enter a starting date.")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> startingDate { get; set; }
         [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> finishingDate { get; set; }
         [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage ="Budget must contain no more than 18 integers and 2 decimals.")]
         [Range(0, 9999999999999999.99)]

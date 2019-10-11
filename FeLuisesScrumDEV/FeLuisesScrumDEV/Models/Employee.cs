@@ -37,11 +37,11 @@ namespace FeLuisesScrumDEV.Models
         public string employeeSecondLastName { get; set; }
         [Required(ErrorMessage = "Must enter employee birth date date.")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> employeeBirthDate { get; set; }
         [Required(ErrorMessage = "Must enter employees hire date.")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime employeeHireDate { get; set; }
         public Nullable<short> developerFlag { get; set; }
         [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Telephone number only accepts 0-9 and '-'.")]
