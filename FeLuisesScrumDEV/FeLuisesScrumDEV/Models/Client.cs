@@ -20,25 +20,25 @@ namespace FeLuisesScrumDEV.Models
             this.Project = new HashSet<Project>();
         }
 
-        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Client id must be 9 digits long.")]
-        [CustomValidation(typeof(Controllers.ClientsController.ClientValidation), nameof(Controllers.ClientsController.ClientValidation.validateName))]
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "La cédula debe de contener 9 dígitos")]
+        [Key]
         public string idClientPK { get; set; }
-        [Required(ErrorMessage ="Must enter the client's name.")]
-        [MaxLength(20, ErrorMessage = "Client's name can't be longer than 20 characters.")]
+        [Required(ErrorMessage ="Campo obligatorio, debe ingresar el nombre del cliente*")]
+        [MaxLength(20, ErrorMessage = "El nombre del cliente no debe ser de más de 20 caracteres")]
         public string clientName { get; set; }
-        [Required(ErrorMessage = "Must enter the client's last name.")]
-        [MaxLength(20, ErrorMessage = "Client's last name can't be longer than 20 characters.")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el apellido del cliente*")]
+        [MaxLength(20, ErrorMessage = "El apellido del cliente no debe de ser de más de 20 caracteres")]
         public string clientLastName { get; set; }
-        [MaxLength(20, ErrorMessage = "Client's second last name can't be longer than 20 characters.")]
+        [MaxLength(20, ErrorMessage = "El segundo apellido del cliente no debe de ser de más de 20 caracteres")]
         public string clientSecondLastName { get; set; }
-        [MaxLength(20, ErrorMessage = "Client's company name can't be longer than 20 characters.")]
+        [MaxLength(20, ErrorMessage = "El nombre de la compañía del cliente no debe de ser de más de 20 caracteres")]
         public string company { get; set; }
-        [Required(ErrorMessage ="Must enter client's telephone.")]
-        [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Telephone number only accepts 0-9 and '-'.")]
-        [MaxLength(20, ErrorMessage = "Client's telephone can't be longer than 20 characters.")]
+        [Required(ErrorMessage ="Campo obligatorio, debe de introducir un número de contacto*")]
+        [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Un número de teléfono solo permite números del 0 al 9 y '-'")]
+        [MaxLength(20, ErrorMessage = "El número de teléfono no debe de ser de más de 20 caracteres")]
         public string tel { get; set; }
-        [Required(ErrorMessage = "Must enter client's email.")]
-        [MaxLength(30, ErrorMessage = "Client's email can't be longer than 30 characters.")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de introducir un correo*")]
+        [MaxLength(30, ErrorMessage = "El correo electrónico no debe de ser de más de 30 caracteres")]
         public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

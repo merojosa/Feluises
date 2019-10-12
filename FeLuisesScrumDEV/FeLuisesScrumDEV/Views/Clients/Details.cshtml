@@ -15,6 +15,7 @@
     <div>
         <div class="container">
             <h2>Detalles</h2>
+            <hr />
             <div>
                 <div class="card rounded" style="width: auto; height: auto;" id="shadow-Fe1">
                     <div class="card-header text-white" id="back-Fe1">
@@ -78,9 +79,13 @@
 
                         <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
                             <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                        </a> 
+                        </a>
                         <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
                             <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a>
+
+                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
+                            <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                         </a>
                     </div>
                 </div>

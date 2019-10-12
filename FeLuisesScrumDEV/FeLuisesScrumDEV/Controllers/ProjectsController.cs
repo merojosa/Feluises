@@ -52,7 +52,13 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project)
         {
-            if (ModelState.IsValid)
+            if( db.Project.Any(x => x.projectName == project.projectName))
+            {
+                ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
+                ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
+                return View(project);
+            }
+            if ( ModelState.IsValid )
             {
                 db.Project.Add(project);
                 db.SaveChanges();
@@ -129,17 +135,6 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-    }
-    public class ProjectValidation
-    {
-        public static ValidationResult validateName(String name)
-        {
-            FeLuisesEntities db = new FeLuisesEntities();
-            return db.Project.Any(x => x.projectName == name)
-                ? new ValidationResult("The project name must be unique")
-                : ValidationResult.Success;
-
         }
     }
 }

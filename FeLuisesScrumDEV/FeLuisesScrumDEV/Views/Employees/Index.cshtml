@@ -30,6 +30,7 @@
             <thead>
 
                 <tr>
+                    <th></th>
                     <th>
                         Nombre
                         @*@Html.DisplayNameFor(model => model.employeeName)*@
@@ -61,26 +62,39 @@
                 {
                     <tr>
                         <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">@Html.DisplayFor(modelItem => item.employeeName)</a>
-
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">@Html.DisplayFor(modelItem => item.employeeLastName)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">@Html.DisplayFor(modelItem => item.employeeSecondLastName)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">@Html.DisplayFor(modelItem => item.tel)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">@Html.DisplayFor(modelItem => item.email)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = item.idEmployeePK } )">
+                            <a class="btn" role="button" href="@Url.Action("Details", "Employees", new { id = item.idEmployeePK } )">
                                 @*@Html.DisplayFor(modelItem => item.availability)*@
-                                <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                             </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeSecondLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @if (item.availability == 0)
+                            {
+                                <div class="form-check form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                </div>
+                            }
+                            else if (item.availability == 1)
+                            {
+                                <div class="form-check form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                                </div>
+                            }
                         </td>
                     </tr>
                 }

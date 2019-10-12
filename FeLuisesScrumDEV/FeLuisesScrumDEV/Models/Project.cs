@@ -26,28 +26,27 @@ namespace FeLuisesScrumDEV.Models
         }
         [Key]
         public int idProjectPK { get; set; }
-        [MaxLength(20, ErrorMessage = "Project's name cant be longer than 20 characters.")]
-        [Required(ErrorMessage ="Project's name is obligatory.")]
-        [CustomValidation(typeof(ProjectValidation), nameof(ProjectValidation.validateName))]
+        [MaxLength(20, ErrorMessage = "El nombre del proyecto no debe de contener más de 20 caracteres.")]
+        [Required(ErrorMessage ="Campo obligatorio, debe de ingresar el nombre del proyecto*")]
         public string projectName { get; set; }
-        [MaxLength(256, ErrorMessage = "Project's name cant be longer than 256 characters.")]
-        [Required(ErrorMessage = "Project's objective is obligatory.")]
+        [MaxLength(256, ErrorMessage = "La descripción del proyecto no debe de contener más de 256 caracteres.")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el objetivo del proyecto*.")]
         public string objective { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "Budget must contain no more than 18 integers and 2 decimals.")]
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El costo Estimado no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
         public Nullable<decimal> estimatedCost { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "Budget must contain no more than 18 integers and 2 decimals.")]
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El coste real no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
         public Nullable<decimal> realCost { get; set; }
 
-        [Required(ErrorMessage = "Must enter a starting date.")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de inicio del proyecto*")]
+        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> startingDate { get; set; }
         [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> finishingDate { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage ="Budget must contain no more than 18 integers and 2 decimals.")]
+        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
         public Nullable<decimal> budget { get; set; }
         [ReadOnly(true)]

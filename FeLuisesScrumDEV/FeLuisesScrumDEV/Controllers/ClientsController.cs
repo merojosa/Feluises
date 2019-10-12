@@ -51,7 +51,11 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create([Bind(Include = "idClientPK,clientName,clientLastName,clientSecondLastName,company,tel,email")] Client client)
         {
 
-
+            if ( db.Client.Any(x => x.idClientPK == client.idClientPK) || db.Employee.Any(x => x.idEmployeePK == client.idClientPK) )
+            {
+                ModelState.AddModelError("idClientPK", "Ya existe un usuario registrado con dicha cédula");
+                return View(client);
+            }
             if (ModelState.IsValid)
             {
                 db.Client.Add(client);
@@ -127,17 +131,6 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public class ClientValidation
-        {
-            public static ValidationResult validateName(String id)
-            {
-                FeLuisesEntities db = new FeLuisesEntities();
-                if (db.Client.Any(x => x.idClientPK == id) || db.Employee.Any(x => x.idEmployeePK == id))
-                    return new ValidationResult("A person id must be unique");
-                return ValidationResult.Success;
-            }
         }
     }
 }

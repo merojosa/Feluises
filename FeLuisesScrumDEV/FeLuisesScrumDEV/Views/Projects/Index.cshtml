@@ -65,6 +65,9 @@
             <thead>
                 <tr>
                     <th>
+
+                    </th>
+                    <th>
                         Nombre
                     </th>
                     <th>
@@ -91,13 +94,17 @@
                     <th>
                         Nombre del Cliente
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>
+                            <a class="btn" role="button" href="@Url.Action("Details", "Projects", new { id = item.idProjectPK } )">
+                                <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.projectName)
                         </td>
@@ -124,11 +131,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Client.clientName)
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "Projects", new { id = item.idProjectPK } )">
-                                <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
                         </td>
                     </tr>
                 }
