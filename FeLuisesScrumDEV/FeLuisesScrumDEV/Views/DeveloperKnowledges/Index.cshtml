@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FeLuisesScrumDEV.Models.DeveloperKnowledge>
+    <head>
+        @{
+            ViewBag.Title = "Index";
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+
+        <script>
+            $(document).ready(function () {
+                $('#employeesIndex').DataTable();
+            });
+        </script>
+    </head>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.idEmployeePK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.devKnowledgePK)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.idEmployeePK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.devKnowledgePK)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Employee.idEmployeePK, ability = item.devKnowledgePK }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Employee.idEmployeePK, ability = item.devKnowledgePK })
+            </td>
+        </tr>
+    }
+
+</table>

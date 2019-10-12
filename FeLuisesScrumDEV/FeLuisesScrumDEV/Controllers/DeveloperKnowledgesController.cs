@@ -62,13 +62,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string ability)
         {
-            if (id == null)
+            if (id == null || ability == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             if (developerKnowledge == null)
             {
                 return HttpNotFound();
@@ -95,13 +95,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string ability)
         {
-            if (id == null)
+            if (id == null || ability == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             if (developerKnowledge == null)
             {
                 return HttpNotFound();
@@ -112,12 +112,12 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: DeveloperKnowledges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string ability)
         {
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             db.DeveloperKnowledge.Remove(developerKnowledge);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = developerKnowledge.idEmployeeFKPK });
         }
 
         protected override void Dispose(bool disposing)
