@@ -34,20 +34,23 @@ namespace FeLuisesScrumDEV.Models
         public string objective { get; set; }
         [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El costo Estimado no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> estimatedCost { get; set; }
         [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El coste real no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> realCost { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de inicio del proyecto*")]
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy-MM-dd")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> startingDate { get; set; }
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy/MM/dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy-MM-dd")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> finishingDate { get; set; }
         [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> budget { get; set; }
         [ReadOnly(true)]
         [Range(0, 9999999999999999)]
