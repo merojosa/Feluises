@@ -18,13 +18,14 @@
 
 <body>
     <div class="container">
-        <div class="card border-dark rounded" id="shadow-Fe1" style="width:auto; height:auto;">
-            <h2 class="card-header text-white" id="back-Fe1">Agregar Empleado</h2>
-            <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="card border-dark rounded" id="shadow-Fe1" style="width:auto; height:auto;">
+                <h2 class="card-header text-white" id="back-Fe1">Agregar Empleado</h2>
+                <div class="card-body">
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+
 
                     <div class="form">
                         <div class="form-row">
@@ -174,21 +175,22 @@
                         </div> <!--Fin del form-row-->
                     </div><!--Final de form-->
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="card-footer" id="back-Fe1">
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit" />
 
-                                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Employees")">
-                                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                                </a>
+                </div>
+                <div class="card-footer" id="back-Fe1">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit" />
 
-                            </div>
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Employees")">
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </body>
 </html>

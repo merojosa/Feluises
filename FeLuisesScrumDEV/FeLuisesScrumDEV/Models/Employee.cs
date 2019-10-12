@@ -37,11 +37,11 @@ namespace FeLuisesScrumDEV.Models
         public string employeeSecondLastName { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de nacimiento del empleado*")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> employeeBirthDate { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de contratación del empleado*")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime employeeHireDate { get; set; }
         public Nullable<short> developerFlag { get; set; }
         [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Un número de teléfono solo permite números del 0 al 9 y '-'")]
