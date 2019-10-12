@@ -128,7 +128,7 @@
                 $.ajax({
                     type: "post",
                     dataType: "json",
-                    url: @Url.Action("Index"),//Aquí se me está cayendo
+                    url: '@Url.Action("Create", "WorksIns")',
                     traditional: true,
                     data: {
                         teamMembers: list,
