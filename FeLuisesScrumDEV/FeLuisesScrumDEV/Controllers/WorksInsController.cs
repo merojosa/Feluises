@@ -58,7 +58,7 @@ namespace FeLuisesScrumDEV.Controllers
         //    {
         //        db.WorksIn.Add(worksIn);
         //        db.SaveChanges();
-        //        return RedirectToAction("Index");
+        //       
         //    }
 
         //    ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
@@ -68,14 +68,21 @@ namespace FeLuisesScrumDEV.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string[] teamMembers)
+        public ActionResult Create(string[] teamMembers, string currentProject)
         {
-            foreach(var developer in teamMembers)
-            {
 
+            int idProject = Int32.Parse(currentProject);
+            WorksIn worksIn = new WorksIn();
+            worksIn.idProjectFKPK = idProject;
+
+            foreach (var developer in teamMembers)
+            {
+                worksIn.idEmployeeFKPK = developer;
+                db.WorksIn.Add(worksIn);
+                db.SaveChanges();
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         // GET: WorksIns/Edit/5

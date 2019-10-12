@@ -112,11 +112,9 @@
         </script>
 
         <script type="text/javascript">
-            //$(document.getElementById("sortable2").onchange = function () { myFunction() });
+            
 
             function myFunction() {
-                //var lista = document.getElementById("sortable2").;
-                //var li = lista.getElementsByTagName("li");
                 var list = [];
                 document.querySelectorAll("#sortable2 li")
                     .forEach(function (item) {
@@ -124,44 +122,28 @@
                         list.push(aux[0]);
                     });
 
+                var p = document.getElementById("idProjectFKPK");
+                var project = p.options[p.selectedIndex].getAttribute("value");
+                
                 $.ajax({
                     type: "post",
                     dataType: "json",
-                    url: "WorksIn/Index",
+                    url: @Url.Action("Index"),//Aquí se me está cayendo
                     traditional: true,
                     data: {
-                        idList: list
+                        teamMembers: list,
+                        currentProject: project
                     },
                     succes: function () {
                         console.log("succes");
+                    },
+                    error: function () {
+                        console.log("error");
                     }
                 })
                 
             }
         </script>
-
-        @*<script>
-            function getMemmbers() {
-                var myUl = document.getElementById("sortable2");
-                myMembers = myUl.getElementsByTagName("LI").innerHTML;
-                //var lis = document.querySelectorAll("#sortable2 li");
-                console.log(myUl);
-                console.log(myMembers);
-                console.log('hola');
-
-
-                $.ajax({
-                    url: '/WorksIn/getPossibleMembersOfTeam',
-                    data: {
-                        teamMembers: myMembers
-                    },
-                    type: 'Post',
-                    dataType: 'Json',
-                    async: 'True',
-                })
-
-            }
-        </script>*@
 
     </head>
         @using (Html.BeginForm())
@@ -226,10 +208,10 @@
                                 </ul>
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Create" class="btn btn-default" />
+                                        <input type="button" value="Create" class="btn btn-default" onclick="myFunction();" />
                                     </div>
                                 </div>
-                                <input id="clickMe" type="button" value="clickme" onclick="myFunction();" />
+                                @*<input id="clickMe" type="button" value="clickme" onclick="myFunction();" />*@
                             </center>
                         </div>
                     </div>
