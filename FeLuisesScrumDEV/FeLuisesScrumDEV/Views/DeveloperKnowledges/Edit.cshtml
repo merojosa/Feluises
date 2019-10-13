@@ -10,38 +10,90 @@
 </head>
 
 <body>
+    <div class="container">
+        <h2>Editar Conocimiento</h2>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    <h2>Edit</h2>
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>HABILIDADES</h4>
-            <hr />
+    <div class="form">
+        <div class="form-row">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.idEmployeeFKPK)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.devKnowledgePK, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.devKnowledgePK, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.devKnowledgePK, "", new { @class = "text-danger" })
+            <div class="col">
+
+                <div class="form-group">
+                    <b>Nombre</b>
+                    @*@Html.LabelFor(model => model.employeeName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Employee.employeeName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Employee.employeeName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <b>Apellido</b>
+                    @*@Html.LabelFor(model => model.employeeLastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Employee.employeeLastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Employee.employeeLastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <b>Conocimiento</b>
+                    @*@Html.LabelFor(model => model.devKnowledgePK, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.devKnowledgePK, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.devKnowledgePK, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div> <!--finalde form-row-->
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-20">
+                <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
+                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "DeveloperKnowledges", new {id = Model.idEmployeeFKPK})">
+                    <!--Mandar el id-->
+                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                </a>
+
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
         </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index", new { id = Model.idEmployeeFKPK })
     </div>
-</body>
+                    }
+
+                    <div>
+
+                    </div>
+                </div>
+    </body>
 </html>
+
+
+
+
+
+
+<!--
+
+    @*
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+    </div>
+}
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", new { id = Model.idEmployeeFKPK })
+        </div>
+        </body>
+    </html>
+    *@
+        -->
