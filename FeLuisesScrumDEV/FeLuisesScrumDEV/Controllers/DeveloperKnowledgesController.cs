@@ -50,6 +50,11 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idEmployeeFKPK,devKnowledgePK")] DeveloperKnowledge developerKnowledge)
         {
+            if (db.DeveloperKnowledge.Any(x => x.devKnowledgePK == developerKnowledge.devKnowledgePK) && db.DeveloperKnowledge.Any(x => x.idEmployeeFKPK == developerKnowledge.idEmployeeFKPK))
+            {
+                ModelState.AddModelError("idClientPK", "Este empleado ya posee este conocimiento");
+                return View(developerKnowledge);
+            }
             if (ModelState.IsValid)
             {
                 db.DeveloperKnowledge.Add(developerKnowledge);

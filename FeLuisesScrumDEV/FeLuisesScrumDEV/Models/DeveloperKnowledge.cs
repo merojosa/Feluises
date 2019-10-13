@@ -15,6 +15,7 @@ namespace FeLuisesScrumDEV.Models
 
     public partial class DeveloperKnowledge
     {
+        [Required(ErrorMessage = "Selecciona algun empleado*")]
         public string idEmployeeFKPK { get; set; }
         [MaxLength(30, ErrorMessage = "El conocimiento no debe de poseer más de 30 caracteres")]
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el conocimiento*")]
