@@ -89,7 +89,6 @@ namespace FeLuisesScrumDEV.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
-                Console.WriteLine("Llegue");
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

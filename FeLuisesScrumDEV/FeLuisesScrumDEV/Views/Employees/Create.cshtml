@@ -8,15 +8,11 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-    <script>
-        $(document).ready(function () {
-            getProvincia();
-        })
-    </script>
+
 
 </head>
 
-<body>
+<body onload="getProvincia()">
     <div class="container">
         @using (Html.BeginForm())
         {
@@ -78,7 +74,6 @@
 
                                 <div class="form-group">
                                     <b>Provincia</b>
-                                    @*@Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                     <div class="col-md-10">
                                         @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
                                         @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
