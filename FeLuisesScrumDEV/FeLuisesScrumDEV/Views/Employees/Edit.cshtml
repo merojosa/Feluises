@@ -103,16 +103,15 @@
 
                             <div class="col">
                                 <div class="form-group">
-                                    <b>Provincia:</b> <span id="province"></span>
+                                    <b>Provincia:</b>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.province, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
                                         @*@Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <b>Cantón:</b>  <span id="canton"></span>
+                                    <b>Cantón:</b>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict()" })
@@ -121,7 +120,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Distrito:</b> <span id="district"></span>
+                                    <b>Distrito:</b>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.district, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.district, Enumerable.Empty<SelectListItem>(), "--Distrito--", new { @class = "form-control" })
