@@ -55,6 +55,9 @@
                         Disponibilidad
                         @*@Html.DisplayNameFor(model => model.availability)*@
                     </th>
+                    <th>
+                        Fecha de ingreso
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -98,6 +101,9 @@
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
                                 </div>
                             }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.employeeHireDate)
                         </td>
                     </tr>
                 }

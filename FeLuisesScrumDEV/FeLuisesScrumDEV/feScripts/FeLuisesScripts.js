@@ -8,7 +8,7 @@ function getProvincia(){
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + key + "'>" + data[key] + "</option>";
+                html += '<option data-name="' + data[key] + '"value="' + key + '">' + data[key] + '</option>';
             }
             /*$("#province").empty();*/
             $("#province").append(html);
@@ -27,7 +27,7 @@ function getCanton() {
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + key + "'>" + data[key] + "</option>";
+                html += '<option data-name="' + data[key] + '"value="' + key + '">' + data[key] + '</option>';
             }
             $("#canton").empty();
             $("#canton").append(html);
