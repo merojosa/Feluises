@@ -11,10 +11,13 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class DeveloperKnowledge
     {
         public string idEmployeeFKPK { get; set; }
+        [MaxLength(30, ErrorMessage = "El conocimiento no debe de poseer más de 30 caracteres")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el conocimiento*")]
         public string devKnowledgePK { get; set; }
     
         public virtual Employee Employee { get; set; }
