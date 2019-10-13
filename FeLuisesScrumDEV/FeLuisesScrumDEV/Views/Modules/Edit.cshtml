@@ -9,15 +9,13 @@
 }
 <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 <div class="container">
-    <h2>Editar Módulo</h2>
-    <hr />
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
 <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
-    <h2 class="card-header text-white" id="back-Fe1">Edición de Módulo</h2>
+    <h2 class="card-header text-white" id="back-Fe1">Editar de Módulo</h2>
     <div class="card-body">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })

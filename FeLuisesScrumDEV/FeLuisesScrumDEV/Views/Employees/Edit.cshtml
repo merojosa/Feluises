@@ -13,7 +13,40 @@
             getProvincia();
         });
     </script>
+    <script>
 
+        $(document).ready(function () {
+
+            $.ajax({
+                dataType: "json",
+                data{},
+                url: "https://ubicaciones.paginasweb.cr/provincia/",
+                success: function (data) {
+                    $("#province").html(data[@Html.DisplayFor(model => model.province)]);
+                }
+            });
+
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#district").html(data[@Html.DisplayFor(model => model.district)]);
+                }
+            });
+        });
+
+    </script>
 </head>
 
 <body>
@@ -70,7 +103,7 @@
 
                             <div class="col">
                                 <div class="form-group">
-                                    <b>Provincia</b> 
+                                    <b>Provincia:</b> <span id="province"></span>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.province, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
@@ -79,7 +112,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Cantón</b> 
+                                    <b>Cantón:</b>  <span id="canton"></span>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict()" })
@@ -88,7 +121,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Distrito</b>
+                                    <b>Distrito:</b> <span id="district"></span>
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.district, new { htmlAttributes = new { @class = "form-control" } })*@
                                         @Html.DropDownListFor(model => model.district, Enumerable.Empty<SelectListItem>(), "--Distrito--", new { @class = "form-control" })
@@ -165,6 +198,7 @@
                             </div>
                         </div> <!--finalde form-row-->
                     </div>
+                </div>
                     <div class="card-footer" id="back-Fe1">
                         <div class="form-group">
                             <div class="col-md-offset-5 col-md-20">
@@ -177,10 +211,10 @@
                             </div>
 
                         </div>
-                        </div>
                     </div>
-                </div>
-                 }
-                </div>
-    </body>
+               
+            </div>
+        }
+    </div>
+</body>
 </html>
