@@ -47,11 +47,11 @@ namespace FeLuisesScrumDEV.Models
         [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Un número de teléfono solo permite números del 0 al 9 y '-'")]
         public string tel { get; set; }
         public string email { get; set; }
-        [MaxLength(20, ErrorMessage = "La provincia no debe de poseer más de 20 caracteres")]
+        //[MaxLength(20, ErrorMessage = "La provincia no debe de poseer más de 20 caracteres")]
         public string province { get; set; }
-        [MaxLength(20, ErrorMessage = "El nombre del canton no debe de poseer más de 20 caracteres")]
+        //[MaxLength(20, ErrorMessage = "El nombre del canton no debe de poseer más de 20 caracteres")]
         public string canton { get; set; }
-        [MaxLength(20, ErrorMessage = "El nombre del distrito no debe de poseer más de 20 caracteres")]
+        //[MaxLength(20, ErrorMessage = "El nombre del distrito no debe de poseer más de 20 caracteres")]
         public string district { get; set; }
         [MaxLength(35, ErrorMessage = "La descripción de la dirección exacta no debe de poseer más de 35 caracteres")]
         public string exactDirection { get; set; }
