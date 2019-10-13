@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -67,19 +68,38 @@ namespace FeLuisesScrumDEV.Controllers
         //}
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(string[] teamMembers, string currentProject)
         {
 
             int idProject = Int32.Parse(currentProject);
-            WorksIn worksIn = new WorksIn();
-            worksIn.idProjectFKPK = idProject;
 
             foreach (var developer in teamMembers)
             {
-                worksIn.idEmployeeFKPK = developer;
-                db.WorksIn.Add(worksIn);
-                db.SaveChanges();
+                //WorksIn worksIn = new WorksIn
+                //{
+                //    idProjectFKPK = idProject,
+                //    idEmployeeFKPK = developer
+                //};
+                
+                try
+                {
+                    db.WorksIn.Add(new WorksIn { idEmployeeFKPK = developer, idProjectFKPK = idProject});
+                    db.SaveChanges();
+                }catch (DbEntityValidationException e){
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
+
+                db.Employee.Find(developer).availability = 1;
             }
 
             return RedirectToAction("Index");

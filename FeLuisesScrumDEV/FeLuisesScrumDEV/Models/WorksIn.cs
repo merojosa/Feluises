@@ -11,10 +11,13 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class WorksIn
     {
+        [Required]
         public string idEmployeeFKPK { get; set; }
+        [Required]
         public int idProjectFKPK { get; set; }
         public Nullable<int> role { get; set; }
     

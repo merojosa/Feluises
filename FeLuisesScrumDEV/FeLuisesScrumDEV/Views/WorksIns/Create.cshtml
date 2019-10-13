@@ -137,8 +137,8 @@
                     succes: function () {
                         console.log("succes");
                     },
-                    error: function () {
-                        console.log("error");
+                    error: function (errorList) {
+                        console.log(errorList);
                     }
                 })
                 
@@ -148,7 +148,6 @@
     </head>
         @using (Html.BeginForm())
         {
-            @Html.AntiForgeryToken()
             <body>
 
                 <div class="container">
@@ -211,7 +210,6 @@
                                         <input type="button" value="Create" class="btn btn-default" onclick="myFunction();" />
                                     </div>
                                 </div>
-                                @*<input id="clickMe" type="button" value="clickme" onclick="myFunction();" />*@
                             </center>
                         </div>
                     </div>
