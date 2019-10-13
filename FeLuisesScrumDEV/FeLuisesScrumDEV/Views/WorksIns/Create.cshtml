@@ -64,17 +64,19 @@
 *@
 
 
-    @model FeLuisesScrumDEV.Models.WorksIn
-
-    @{
-        ViewBag.Title = "Create";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+   
 
     <!DOCTYPE html>
 
-    <html>
+ <html>
+    @model FeLuisesScrumDEV.Models.WorksIn
     <head>
+
+        @{
+            ViewBag.Title = "Create";
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>Create Team</title>
@@ -112,7 +114,7 @@
         </script>
 
         <script type="text/javascript">
-            
+
 
             function myFunction() {
                 var list = [];
@@ -124,7 +126,8 @@
 
                 var p = document.getElementById("idProjectFKPK");
                 var project = p.options[p.selectedIndex].getAttribute("value");
-                
+                console.log(project);
+                console.log(list)
                 $.ajax({
                     type: "post",
                     dataType: "json",
@@ -139,83 +142,84 @@
                     },
                     error: function (errorList) {
                         console.log(errorList);
+                        console.log("error");
                     }
                 })
-                
+
             }
         </script>
 
     </head>
-        @using (Html.BeginForm())
-        {
-            <body>
+    @using (Html.BeginForm())
+    {
+        <body>
 
-                <div class="container">
-                    <h2>Crear Equipo</h2>
-                    <hr>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                                <label>Nombre proyecto: </label>
-                                @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <b>Lider: </b>
-                            </center>
-                        </div>
+            <div class="container">
+                <h2>Crear Equipo</h2>
+                <hr>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <label>Nombre proyecto: </label>
+                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                        </center>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                                <b>Buscar por habilidades</b>
-                                <!--Aqui va la barra de busqueda-->
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <b>Posibles Miembros</b>
-                            </center>
-                        </div>
+                    <div class="col-md-6">
+                        <center>
+                            <b>Lider: </b>
+                        </center>
                     </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-
-                                <!--Aqui van solo empleados disponibles que se filtraron-->
-                                <ul id="sortable1" class="connectedSortable">
-                                    @foreach (var item in ViewBag.idEmployeeFKPK)
-                                    {
-                                        <li class="ui-state-default" id="@item.Value">@item.Value @item.Text </li>
-                                    }
-
-                                </ul>
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
-                                <ul id="sortable2" class="connectedSortable" onchange="getMemmbers()">
-                                    @*<li class="ui-state-highlight">Item 1</li>*@
-
-
-                                </ul>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="button" value="Create" class="btn btn-default" onclick="myFunction();" />
-                                    </div>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-
                 </div>
 
-            </body>
-        }
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <b>Buscar por habilidades</b>
+                            <!--Aqui va la barra de busqueda-->
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <b>Posibles Miembros</b>
+                        </center>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+
+                            <!--Aqui van solo empleados disponibles que se filtraron-->
+                            <ul id="sortable1" class="connectedSortable">
+                                @foreach (var item in ViewBag.idEmployeeFKPK)
+                                {
+                                    <li class="ui-state-default" id="@item.Value">@item.Value @item.Text </li>
+                                }
+
+                            </ul>
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
+                            <ul id="sortable2" class="connectedSortable">
+                                @*<li class="ui-state-highlight">Item 1</li>*@
+
+
+                            </ul>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="button" value="Create" class="btn btn-default" onclick="myFunction();" />
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+
+        </body>
+    }
 </html>

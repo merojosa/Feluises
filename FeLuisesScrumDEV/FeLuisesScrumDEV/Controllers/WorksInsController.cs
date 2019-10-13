@@ -75,34 +75,37 @@ namespace FeLuisesScrumDEV.Controllers
 
             foreach (var developer in teamMembers)
             {
-                //WorksIn worksIn = new WorksIn
-                //{
-                //    idProjectFKPK = idProject,
-                //    idEmployeeFKPK = developer
-                //};
-                
                 try
                 {
-                    db.WorksIn.Add(new WorksIn { idEmployeeFKPK = developer, idProjectFKPK = idProject});
+                    db.WorksIn.Add(new WorksIn {
+                        idEmployeeFKPK = developer,
+                        idProjectFKPK = idProject
+                    });
+                    db.Employee.Find(developer).availability = 1;
                     db.SaveChanges();
-                }catch (DbEntityValidationException e){
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
+                }catch(Exception)
+                {
+                    continue;
                 }
-
-                db.Employee.Find(developer).availability = 1;
+                //catch (DbEntityValidationException e)
+                //{
+                //    foreach (var eve in e.EntityValidationErrors)
+                //    {
+                //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //        foreach (var ve in eve.ValidationErrors)
+                //        {
+                //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                //                ve.PropertyName, ve.ErrorMessage);
+                //        }
+                //    }
+                //    throw;
+                //}
             }
 
-            return RedirectToAction("Index");
+            return View("Index");
+            //var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
+            //return View(worksIn.ToList());
         }
 
         // GET: WorksIns/Edit/5
@@ -166,20 +169,13 @@ namespace FeLuisesScrumDEV.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        [HttpPost]
-        public void getPossibleMembersOfTeam(string[] teamMembers)
-        {
-            teamMembersResult = teamMembers;
-        }
-
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
