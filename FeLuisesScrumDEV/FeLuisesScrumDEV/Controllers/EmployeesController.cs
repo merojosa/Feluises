@@ -49,6 +49,11 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idEmployeePK,employeeName,employeeLastName,employeeSecondLastName,employeeBirthDate,employeeHireDate,developerFlag,tel,email,province,canton,district,exactDirection,pricePerHour,availability")] Employee employee)
         {
+            if (db.Client.Any(x => x.idClientPK == employee.idEmployeePK) || db.Employee.Any(x => x.idEmployeePK == employee.idEmployeePK))
+            {
+                ModelState.AddModelError("idEmployeePK", "Ya existe un usuario registrado con dicha cédula");
+                return View(employee);
+            }
             if (ModelState.IsValid)
             {
                 db.Employee.Add(employee);
@@ -81,12 +86,6 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmployeePK,employeeName,employeeLastName,employeeSecondLastName,employeeBirthDate,employeeHireDate,developerFlag,tel,email,province,canton,district,exactDirection,pricePerHour,availability")] Employee employee)
         {
-            /*
-            if (db.Client.Any(x => x.idClientPK == employee.idEmployeePK) || db.Employee.Any(x => x.idEmployeePK == employee.idEmployeePK))
-            {
-                ModelState.AddModelError("idEmployeePK", "Ya existe un usuario registrado con dicha cédula");
-                return View(employee);
-            }*/
             if (ModelState.IsValid)
             {
                 db.Entry(employee).State = EntityState.Modified;
