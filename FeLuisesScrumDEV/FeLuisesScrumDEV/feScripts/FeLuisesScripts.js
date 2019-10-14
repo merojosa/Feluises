@@ -1,4 +1,11 @@
-﻿function getProvincia() { 
+﻿/*
+ * Se esta usando un webservice para proveer a las perosnas de la P-C-D
+ * El problema es que en la base de datos solo se puede guardar un campo y se esta guardando el ID
+ * Abría que modificar o incluso crear una tabla con la información de ubicación y eso rompería el esquema y
+ * estructura de nuestro proyecto
+ */
+
+function getProvincia() { 
     $.ajax({
         dataType: "json",
         url: "https://ubicaciones.paginasweb.cr/provincias.json",
