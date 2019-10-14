@@ -52,7 +52,8 @@ namespace FeLuisesScrumDEV.Controllers
         {
             if (db.DeveloperKnowledge.Any(x => x.devKnowledgePK == developerKnowledge.devKnowledgePK) && db.DeveloperKnowledge.Any(x => x.idEmployeeFKPK == developerKnowledge.idEmployeeFKPK))
             {
-                ModelState.AddModelError("idClientPK", "Este empleado ya posee este conocimiento");
+                ModelState.AddModelError("devKnowledgePK", "Este empleado ya posee este conocimiento");
+                ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
                 return View(developerKnowledge);
             }
             if (ModelState.IsValid)
@@ -61,8 +62,7 @@ namespace FeLuisesScrumDEV.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
+  
             return View(developerKnowledge);
         }
 
@@ -89,14 +89,18 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmployeeFKPK,devKnowledgePK")] DeveloperKnowledge developerKnowledge)
         {
-            if (ModelState.IsValid)
+            if ( !db.DeveloperKnowledge.Any(x => x.idEmployeeFKPK==developerKnowledge.idEmployeeFKPK && x.devKnowledgePK==developerKnowledge.devKnowledgePK) && ModelState.IsValid )
             {
                 db.Entry(developerKnowledge).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
-            return View(developerKnowledge);
+            else
+            {
+                ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
+                ModelState.AddModelError("devKnowledgePK", "Este empleado ya posee este conocimiento");
+                return View(developerKnowledge);
+            }
         }
 
         // GET: DeveloperKnowledges/Delete/5
