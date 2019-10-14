@@ -58,7 +58,7 @@ namespace FeLuisesScrumDEV.Models
 		[MaxLength(35, ErrorMessage = "La descripción de la dirección exacta no debe de poseer más de 35 caracteres")]
 		public string exactDirection { get; set; }
 	//Comentado para que se valide equipo
-		[RegularExpression(@"^\d{1,20}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
+		//[RegularExpression(@"^\d{1,20}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
 		[Range(0, 9999999999999999.99)]
 		public Nullable<decimal> pricePerHour { get; set; }
 		public Nullable<short> availability { get; set; }
