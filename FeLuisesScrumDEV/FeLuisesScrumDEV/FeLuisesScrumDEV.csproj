@@ -211,14 +211,17 @@
     <Content Include="FeStyles\feLuisesStyles.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\accept.svg" />
     <Content Include="Images\add.svg" />
     <Content Include="Images\b-back.svg" />
     <Content Include="Images\b-delete.svg" />
     <Content Include="Images\b-edit.svg" />
     <Content Include="Images\back.svg" />
+    <Content Include="Images\cancel.svg" />
     <Content Include="Images\delete.svg" />
     <Content Include="Images\details.svg" />
     <Content Include="Images\edit.svg" />
+    <Content Include="Images\info.svg" />
     <Content Include="Images\logo.svg" />
     <Content Include="Images\logo1.svg" />
     <Content Include="Images\prb.jpg" />
@@ -353,10 +356,16 @@
     <Content Include="Views\WorksIns\Details.cshtml" />
     <Content Include="Views\WorksIns\Edit.cshtml" />
     <Content Include="Views\WorksIns\Index.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Create.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Details.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Index.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Edit.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DeveloperKnowledges\" />
+    <Folder Include="Views\WorksIns\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

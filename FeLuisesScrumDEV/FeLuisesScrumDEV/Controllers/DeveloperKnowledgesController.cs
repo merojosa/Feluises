@@ -50,25 +50,30 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idEmployeeFKPK,devKnowledgePK")] DeveloperKnowledge developerKnowledge)
         {
+            if (db.DeveloperKnowledge.Any(x => x.devKnowledgePK == developerKnowledge.devKnowledgePK) && db.DeveloperKnowledge.Any(x => x.idEmployeeFKPK == developerKnowledge.idEmployeeFKPK))
+            {
+                ModelState.AddModelError("devKnowledgePK", "Este empleado ya posee este conocimiento");
+                ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
+                return View(developerKnowledge);
+            }
             if (ModelState.IsValid)
             {
                 db.DeveloperKnowledge.Add(developerKnowledge);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
+  
             return View(developerKnowledge);
         }
 
         // GET: DeveloperKnowledges/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string ability)
         {
-            if (id == null)
+            if (id == null || ability == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             if (developerKnowledge == null)
             {
                 return HttpNotFound();
@@ -84,24 +89,28 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmployeeFKPK,devKnowledgePK")] DeveloperKnowledge developerKnowledge)
         {
-            if (ModelState.IsValid)
+            if ( !db.DeveloperKnowledge.Any(x => x.idEmployeeFKPK==developerKnowledge.idEmployeeFKPK && x.devKnowledgePK==developerKnowledge.devKnowledgePK) && ModelState.IsValid )
             {
                 db.Entry(developerKnowledge).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
-            return View(developerKnowledge);
+            else
+            {
+                ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", developerKnowledge.idEmployeeFKPK);
+                ModelState.AddModelError("devKnowledgePK", "Este empleado ya posee este conocimiento");
+                return View(developerKnowledge);
+            }
         }
 
         // GET: DeveloperKnowledges/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id, string ability)
         {
-            if (id == null)
+            if (id == null || ability == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             if (developerKnowledge == null)
             {
                 return HttpNotFound();
@@ -112,12 +121,12 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: DeveloperKnowledges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string ability)
         {
-            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id);
+            DeveloperKnowledge developerKnowledge = db.DeveloperKnowledge.Find(id, ability);
             db.DeveloperKnowledge.Remove(developerKnowledge);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = developerKnowledge.idEmployeeFKPK });
         }
 
         protected override void Dispose(bool disposing)

@@ -16,7 +16,7 @@
             <div>
                 <dl class="dl-horizontal">
                     <dt>
-                        Module name
+                        Nombre del módulo
                     </dt>
 
                     <dd>
@@ -24,7 +24,7 @@
                     </dd>
 
                     <dt>
-                        Belongs to project
+                        Perteneciente al proyecto
                     </dt>
 
                     <dd>
@@ -43,7 +43,7 @@
             <a class="btn" role="button" href="@Url.Action("Edit", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
                 <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
-            <a class="btn" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
                 <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
 

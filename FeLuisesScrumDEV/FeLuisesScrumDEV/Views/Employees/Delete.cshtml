@@ -1,175 +1,175 @@
 ﻿<!DOCTYPE html>
 <html>
-    @model FeLuisesScrumDEV.Models.Employee
+@model FeLuisesScrumDEV.Models.Employee
 
-    <head>
-        @{
-            ViewBag.Title = "Delete";
-            Layout = "~/Views/Shared/_Layout.cshtml";
-        }
-        <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+<head>
+    @{
+        ViewBag.Title = "Delete";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 
-    </head>
+</head>
 
-    <body>
-        <div class="container">
-            <h2 id="heading-red">Desea eliminar este empleado?</h2>
-            <hr />
-            <div>
-                <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
+<body>
+    <div class="container">
+        <h2 id="heading-red">Desea eliminar este empleado?</h2>
+        <hr />
+        <div>
+            <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
 
-                    <div class="card-header  text-white" id="back-Fe1">
-                        <h2>Empleado</h2>
-                    </div>
+                <div class="card-header  text-white" id="back-Fe1">
+                    <h2>Empleado</h2>
+                </div>
 
-                    <div class="card-body">
+                <div class="card-body">
 
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <b>Nombre</b>
-                                @*@Html.DisplayNameFor(model => model.employeeName)*@
-                            </dt>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <b>Nombre</b>
+                            @*@Html.DisplayNameFor(model => model.employeeName)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.employeeName)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.employeeName)
+                        </dd>
 
-                            <dt>
-                                <b>Primer apellido</b>
-                                @*@Html.DisplayNameFor(model => model.employeeLastName)*@
-                            </dt>
+                        <dt>
+                            <b>Primer apellido</b>
+                            @*@Html.DisplayNameFor(model => model.employeeLastName)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.employeeLastName)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.employeeLastName)
+                        </dd>
 
-                            <dt>
-                                <b>Segundo apellido</b>
-                                @*@Html.DisplayNameFor(model => model.employeeSecondLastName)*@
-                            </dt>
+                        <dt>
+                            <b>Segundo apellido</b>
+                            @*@Html.DisplayNameFor(model => model.employeeSecondLastName)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.employeeSecondLastName)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.employeeSecondLastName)
+                        </dd>
 
-                            <dt>
-                                <b>Fecha de nacimiento</b>
-                                @*@Html.DisplayNameFor(model => model.employeeBirthDate)*@
-                            </dt>
+                        <dt>
+                            <b>Fecha de nacimiento</b>
+                            @*@Html.DisplayNameFor(model => model.employeeBirthDate)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.employeeBirthDate)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.employeeBirthDate)
+                        </dd>
 
-                            <dt>
-                                <b>Fecha de ingreso</b>
-                                @*@Html.DisplayNameFor(model => model.employeeHireDate)*@
-                            </dt>
+                        <dt>
+                            <b>Fecha de ingreso</b>
+                            @*@Html.DisplayNameFor(model => model.employeeHireDate)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.employeeHireDate)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.employeeHireDate)
+                        </dd>
 
-                            <dt>
-                                <b>Tipo de empleado</b>
-                                @*@Html.DisplayNameFor(model => model.developerFlag)*@
-                            </dt>
+                        <dt>
+                            <b>Tipo de empleado</b>
+                            @*@Html.DisplayNameFor(model => model.developerFlag)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.developerFlag)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.developerFlag)
+                        </dd>
 
-                            <dt>
-                                <b>Teléfono</b>
-                                @*@Html.DisplayNameFor(model => model.tel)*@
-                            </dt>
+                        <dt>
+                            <b>Teléfono</b>
+                            @*@Html.DisplayNameFor(model => model.tel)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.tel)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.tel)
+                        </dd>
 
-                            <dt>
-                                <b>E-mail</b>
-                                @*@Html.DisplayNameFor(model => model.email)*@
-                            </dt>
+                        <dt>
+                            <b>E-mail</b>
+                            @*@Html.DisplayNameFor(model => model.email)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.email)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
 
-                            <dt>
-                                <b>Provincia</b>
-                                @*@Html.DisplayNameFor(model => model.province)*@
-                            </dt>
+                        <dt>
+                            <b>Provincia</b>
+                            @*@Html.DisplayNameFor(model => model.province)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.province)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.province)
+                        </dd>
 
-                            <dt>
-                                <b>Cantón</b>
-                                @*@Html.DisplayNameFor(model => model.canton)*@
-                            </dt>
+                        <dt>
+                            <b>Cantón</b>
+                            @*@Html.DisplayNameFor(model => model.canton)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.canton)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.canton)
+                        </dd>
 
-                            <dt>
-                                <b>Distrito</b>
-                                @*@Html.DisplayNameFor(model => model.district)*@
-                            </dt>
+                        <dt>
+                            <b>Distrito</b>
+                            @*@Html.DisplayNameFor(model => model.district)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.district)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.district)
+                        </dd>
 
-                            <dt>
-                                <b>Dirección exacta</b>
-                                @*@Html.DisplayNameFor(model => model.exactDirection)*@
-                            </dt>
+                        <dt>
+                            <b>Dirección exacta</b>
+                            @*@Html.DisplayNameFor(model => model.exactDirection)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.exactDirection)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.exactDirection)
+                        </dd>
 
-                            <dt>
-                                <b>Precio por hora</b>
-                                @*@Html.DisplayNameFor(model => model.pricePerHour)*@
-                            </dt>
+                        <dt>
+                            <b>Precio por hora</b>
+                            @*@Html.DisplayNameFor(model => model.pricePerHour)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.pricePerHour)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.pricePerHour)
+                        </dd>
 
-                            <dt>
-                                <b>Disponibilidad</b>
-                                @*@Html.DisplayNameFor(model => model.availability)*@
-                            </dt>
+                        <dt>
+                            <b>Disponibilidad</b>
+                            @*@Html.DisplayNameFor(model => model.availability)*@
+                        </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.availability)
-                            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.availability)
+                        </dd>
 
-                        </dl>
-                        <div class="card-footer" id="back-Fe1">
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
+                    </dl>
+                </div>
+                <div class="card-footer" id="back-Fe1">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-                                <div class="form-actions no-color">
-                                    <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
-                                        <img src="~/Images/back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                                    </a>
-                                    <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
-                                </div>
-                            }
+                        <div class="form-actions no-color">
+                            <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Employees", new { id = Model.idEmployeePK })">
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
 
 

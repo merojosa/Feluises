@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+@model FeLuisesScrumDEV.Models.DeveloperKnowledge
+
+<head>
+    @{
+        ViewBag.Title = "Delete";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <h2 id="heading-red">Desea eliminar este conocimiento?</h2>
+            <hr />
+            <div>
+                <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
+
+                    <div class="card-header  text-white" id="back-Fe1">
+                        <h2>Conocimiento del empleado:</h2>
+                    </div>
+
+                    <div class="card-body">
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                <b>Cedula</b>
+                                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Employee.idEmployeePK)
+                            </dd>
+                            <dt>
+                                <b>Nombre</b>
+                                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Employee.employeeName)
+                            </dd>
+                            <dt>
+                                <b>Apellido</b>
+                                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Employee.employeeLastName)
+                            </dd>
+                            <dt>
+                                <b>Conocimiento</b>
+                                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.devKnowledgePK)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer" id="back-Fe1">
+
+
+                        <div class="form-actions no-color">
+                            <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                            <a class="btn btn-outline-danger" role="button" href=@Url.Action("Index", "DeveloperKnowledges" )>
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

@@ -87,10 +87,10 @@
                         @Html.AntiForgeryToken()
 
                         <div class="form-actions no-color">
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
-                                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Clients", new { id = Model.idClientPK })">
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                             </a>
-                            <input type="image" src="~/Images/delete.svg" class="btn btn-outline-danger" alt="Submit" />
                         </div>
                     }
                 </div>

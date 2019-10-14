@@ -18,7 +18,7 @@
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.projectName)
+                    <b>Nombre del Proyecto</b>
                 </dt>
 
                 <dd>
@@ -30,7 +30,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.objective)
+                    <b>Objetivo</b>
                 </dt>
 
                 <dd>
@@ -42,7 +42,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.estimatedCost)
+                    <b>Costo Estimado</b>
                 </dt>
 
                 <dd>
@@ -54,7 +54,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.realCost)
+                    <b>Costo Real</b>
                 </dt>
 
                 <dd>
@@ -66,7 +66,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.startingDate)
+                    <b>Fecha de Inicio</b>
                 </dt>
 
                 <dd>
@@ -78,7 +78,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.finishingDate)
+                    <b>Fecha de Finalización</b>
                 </dt>
 
                 <dd>
@@ -90,7 +90,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.budget)
+                    <b>Presupuesto</b>
                 </dt>
 
                 <dd>
@@ -102,7 +102,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.estimatedDuration)
+                    <b>Duración Estimada</b>
                 </dt>
 
                 <dd>
@@ -114,7 +114,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Client.clientName)
+                    <b>Cliente</b>
                 </dt>
 
                 <dd>
@@ -134,7 +134,10 @@
             <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK } )">
                 <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
+            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Projects", new { id = Model.idProjectPK })">
+                <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
         </div>
     </div>
-
 </div>
