@@ -133,12 +133,15 @@
                     dataType: "json",
                     url: '@Url.Action("Create", "WorksIns")',
                     traditional: true,
+                    async: false,
                     data: {
                         teamMembers: list,
                         currentProject: project
                     },
-                    succes: function () {
-                        console.log("succes");
+                    success: function (json) {
+                        if (json.isRedirect) {
+                            window.location.href = json.redirectUrl;
+                        }
                     },
                     error: function (errorList) {
                         console.log(errorList);

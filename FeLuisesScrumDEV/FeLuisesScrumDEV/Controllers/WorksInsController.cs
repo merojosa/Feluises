@@ -108,9 +108,16 @@ namespace FeLuisesScrumDEV.Controllers
                 throw;
             };
 
+            return Json(new
+            {
+                redirectUrl = Url.Action("Index", "WorksIns"),
+                isRedirect = true
+            });
+
+            //return RedirectToAction("Index", "WorksIns");
             //return View("Index");
-            var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
-            return View(worksIn.ToList());
+            //var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
+            //return View(worksIn.ToList());
         }
 
         // GET: WorksIns/Edit/5
