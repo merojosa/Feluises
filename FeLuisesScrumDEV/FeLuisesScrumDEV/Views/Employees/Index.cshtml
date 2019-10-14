@@ -21,6 +21,9 @@
         <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Employees" )>
             <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
         </a>
+        <a class="btn btn-outline-success" role="button" href=@Url.Action("Index", "DeveloperKnowledges" )>
+            <img src="~/Images/saveknw.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+        </a>
     </div>
     <div class="container">
         <h2>Empleados</h2>
@@ -91,15 +94,29 @@
                         <td>
                             @if (item.availability == 0)
                             {
-                                <div class="form-check form-check">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
-                                </div>
+                            <div class="form-check form-check">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                <!--
+                                <p>
+                                    <a class="btn btn-outline" role="button" href=@Url.Action("Create", "DeveloperKnowledges", new { id = item.idEmployeePK } )>
+                                        <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
+                                    </a>
+                                </p>
+                                -->
+                            </div>
                             }
                             else if (item.availability == 1)
                             {
-                                <div class="form-check form-check">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
-                                </div>
+                        <div class="form-check form-check">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                            <!--
+                            <p>
+                                <a class="btn btn-outline" role="button" href=@Url.Action("Create", "DeveloperKnowledges", new { id = item.idEmployeePK } )>
+                                    <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
+                                </a>
+                            </p>
+                            -->
+                        </div>
                             }
                         </td>
                         <td>

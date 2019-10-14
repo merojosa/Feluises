@@ -352,11 +352,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Modules\GetModules.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Create.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Details.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Index.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Edit.cshtml" />
+    <Content Include="Views\DeveloperKnowledges\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\DeveloperKnowledges\" />
     <Folder Include="Views\WorksIns\" />
   </ItemGroup>
   <ItemGroup>
