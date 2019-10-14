@@ -14,7 +14,6 @@ namespace FeLuisesScrumDEV.Controllers
     public class WorksInsController : Controller
     {
         private FeLuisesEntities db = new FeLuisesEntities();
-        private string[] teamMembersResult;
 
         // GET: WorksIns
         public ActionResult Index()
@@ -39,10 +38,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: WorksIns/Create
+        /*
+         * Efecto: Genera la vista del Create de equipos.
+         * Requiere: NA
+         * Modifica: La vista del Create de equipos 
+         */
         public ActionResult Create()
         {
-            //var Empleados = db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1));
-            //Empleados.
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             return View();
@@ -67,10 +69,15 @@ namespace FeLuisesScrumDEV.Controllers
         //    return View(worksIn);
         //}
 
+        /*
+         * Efecto: Procesa la informacion recibida por la vista mediante post
+         * Requiere: Los miembros del equipo y el id del proyecto
+         * Modifica: La tabla WorksIn, similar a equipos
+         */
         [HttpPost]
         public ActionResult Create(string[] teamMembers, string currentProject)
         {
-
+            //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
             int idProject = Int32.Parse(currentProject);
 
             foreach (var developer in teamMembers)
@@ -83,7 +90,7 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Employee.Find(developer).availability = 1;
                
             }
-
+            //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
             try{
                 db.SaveChanges();
             }catch (DbEntityValidationException e)
@@ -100,7 +107,6 @@ namespace FeLuisesScrumDEV.Controllers
                 }
                 throw;
             };
-
 
             //return View("Index");
             var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
@@ -168,13 +174,13 @@ namespace FeLuisesScrumDEV.Controllers
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
