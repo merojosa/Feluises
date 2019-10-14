@@ -75,37 +75,36 @@ namespace FeLuisesScrumDEV.Controllers
 
             foreach (var developer in teamMembers)
             {
-                try
+                db.WorksIn.Add(new WorksIn
                 {
-                    db.WorksIn.Add(new WorksIn {
-                        idEmployeeFKPK = developer,
-                        idProjectFKPK = idProject
-                    });
-                    db.Employee.Find(developer).availability = 1;
-                    db.SaveChanges();
-                }catch(Exception)
-                {
-                    continue;
-                }
-                //catch (DbEntityValidationException e)
-                //{
-                //    foreach (var eve in e.EntityValidationErrors)
-                //    {
-                //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                //        foreach (var ve in eve.ValidationErrors)
-                //        {
-                //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                //                ve.PropertyName, ve.ErrorMessage);
-                //        }
-                //    }
-                //    throw;
-                //}
+                    idEmployeeFKPK = developer,
+                    idProjectFKPK = idProject
+                });
+                db.Employee.Find(developer).availability = 1;
+               
             }
 
-            return View("Index");
-            //var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
-            //return View(worksIn.ToList());
+            try{
+                db.SaveChanges();
+            }catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            };
+
+
+            //return View("Index");
+            var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
+            return View(worksIn.ToList());
         }
 
         // GET: WorksIns/Edit/5

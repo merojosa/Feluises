@@ -15,8 +15,10 @@ namespace FeLuisesScrumDEV.Models
 
     public partial class WorksIn
     {
+        [Key]
         [Required]
         public string idEmployeeFKPK { get; set; }
+        [Key]
         [Required]
         public int idProjectFKPK { get; set; }
         public Nullable<int> role { get; set; }
