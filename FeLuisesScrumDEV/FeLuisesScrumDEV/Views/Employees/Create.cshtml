@@ -9,6 +9,39 @@
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 
+    <script>
+        $(document).ready(function () {
+            getProvincia();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                dataType: "json",
+                data{},
+                url: "https://ubicaciones.paginasweb.cr/provincia/",
+                success: function (data) {
+                    $("#province").html(data[@Html.DisplayFor(model => model.province)]);
+                }
+            });
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#district").html(data[@Html.DisplayFor(model => model.district)]);
+                }
+            });
+        });
+    </script>
 
 </head>
 
