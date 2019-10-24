@@ -1,4 +1,4 @@
-/*
+/* -- Cuando se crea un proyecto se agrega un módulo 'No asignado'
 CREATE TRIGGER TR_moduloNoAsignado
 ON Project
 FOR INSERT
@@ -16,6 +16,7 @@ AS
 	SET IDENTITY_INSERT Module OFF
 */
 /*
+-- Falta terminar este.
 CREATE TRIGGER TR_duracionEstimada
 ON Project
 FOR INSERT, UPDATE --SE PRODRÍA CAMBIAR LA DURACIÓN DEL PROYECTO
