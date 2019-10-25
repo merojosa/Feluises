@@ -15,6 +15,39 @@ AS
 					@nombre)
 	SET IDENTITY_INSERT Module OFF
 */
+
+/*	
+CREATE PROC USP_EmployeeRequeriments @employee nvarchar(9), @project int 
+AS
+BEGIN
+	SELECT *
+	FROM Requeriment R
+	WHERE R.idProjectFKPK=@project AND R.idEmployeeFK=@employee;
+END
+*/
+
+/*
+CREATE PROC USP_CloseProject @project int 
+AS
+BEGIN
+	UPDATE Employee 
+	SET availability = 0
+	WHERE idEmployeePK IN
+	(
+		SELECT W.idEmployeeFKPK
+		FROM WorksIn W 
+		WHERE W.idProjectFKPK=@project
+	)
+	DECLARE @closed smallint
+	SELECT @closed = 0
+	UPDATE Project
+	SET status=@closed
+	WHERE idProjectPK=@project
+END
+*/
+
+
+
 /*
 -- Falta terminar este.
 CREATE TRIGGER TR_duracionEstimada
@@ -22,20 +55,11 @@ ON Project
 FOR INSERT, UPDATE --SE PRODRÍA CAMBIAR LA DURACIÓN DEL PROYECTO
 AS --((DATEDIFF(d, E.HireDate, O.OrderDate))/365 = 4)
 	DECLARE @duracion DATE
-	SELECT @duracion = (DATEDIFF(d, I.deadline, I.startingDate)/365 =
+	SELECT @duracion = (DATEDIFF(d, I.finishingDate, I.startingDate))
 	FROM inserted I
 */
 
-SELECT *
-FROM Project P
 
-
-DECLARE @PRB INT
-
-SELECT @PRB = (DATEDIFF(d, P.startingDate, P.finishingDate))
-FROM Project P
-
---ALTER TABLE Project ADD deadline DATE
 
 
 
