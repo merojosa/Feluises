@@ -50,25 +50,6 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-        // POST: WorksIns/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idEmployeeFKPK,idProjectFKPK,role")] WorksIn worksIn)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.WorksIn.Add(worksIn);
-        //        db.SaveChanges();
-        //       
-        //    }
-
-        //    ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
-        //    ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
-        //    return View(worksIn);
-        //}
-
         /*
          * Efecto: Procesa la informacion recibida por la vista mediante post
          * Requiere: Los miembros del equipo y el id del proyecto
