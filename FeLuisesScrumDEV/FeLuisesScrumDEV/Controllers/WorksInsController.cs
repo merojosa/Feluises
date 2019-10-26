@@ -59,41 +59,61 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create(string[] teamMembers, string currentProject)
         {
             //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
-            int idProject = Int32.Parse(currentProject);
-
-            foreach (var developer in teamMembers)
+            
+            if(currentProject != null)
             {
-                db.WorksIn.Add(new WorksIn
+                int idProject = Int32.Parse(currentProject);
+                if (teamMembers != null)
                 {
-                    idEmployeeFKPK = developer,
-                    idProjectFKPK = idProject
-                });
-                db.Employee.Find(developer).availability = 1;
-               
-            }
-            //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
-            try{
-                db.SaveChanges();
-            }catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+                    foreach (var developer in teamMembers)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            };
+                        db.WorksIn.Add(new WorksIn
+                        {
+                            idEmployeeFKPK = developer,
+                            idProjectFKPK = idProject
+                        });
+                        db.Employee.Find(developer).availability = 1;
 
-            return Json(new
-            {
-                redirectUrl = Url.Action("Index", "WorksIns"),
-                isRedirect = true
-            });
+                    }
+                    //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    };
+
+                    return Json(new
+                    {
+                        redirectUrl = Url.Action("Index", "WorksIns"),
+                        isRedirect = true
+                    });
+
+
+                }
+                else{
+                    return RedirectToAction("Index", "WorksIns");
+                }
+
+            }else{
+                return RedirectToAction("Index", "WorksIns");
+            }
+
+
+            
+
 
             //return RedirectToAction("Index", "WorksIns");
             //return View("Index");
