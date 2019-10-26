@@ -16,6 +16,7 @@
           <Property Name="company" Type="varchar" MaxLength="20" />
           <Property Name="tel" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="creationDate" Type="date" />
         </EntityType>
         <EntityType Name="Credentials">
           <Key>
@@ -76,6 +77,8 @@
           <Property Name="budget" Type="numeric" Precision="20" Scale="2" />
           <Property Name="estimatedDuration" Type="int" />
           <Property Name="idClientFK" Type="char" MaxLength="9" />
+          <Property Name="creationDate" Type="date" />
+          <Property Name="status" Type="smallint" />
         </EntityType>
         <EntityType Name="Requeriment">
           <Key>
@@ -265,6 +268,7 @@
           <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="Self.FK_Project_Client" FromRole="Client" ToRole="Project" />
+          <Property Name="creationDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Credentials">
           <Key>
@@ -334,6 +338,8 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Project_Client" FromRole="Project" ToRole="Client" />
           <NavigationProperty Name="Module" Relationship="Self.FK_Module_idProject" FromRole="Project" ToRole="Module" />
           <NavigationProperty Name="WorksIn" Relationship="Self.FK_WorksIn_Project" FromRole="Project" ToRole="WorksIn" />
+          <Property Name="creationDate" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Int16" />
         </EntityType>
         <EntityType Name="Requeriment">
           <Key>
@@ -520,6 +526,7 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="Gr02Proy2Model.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="creationDate" ColumnName="creationDate" />
                 <ScalarProperty Name="idClientPK" ColumnName="idClientPK" />
                 <ScalarProperty Name="clientName" ColumnName="clientName" />
                 <ScalarProperty Name="clientLastName" ColumnName="clientLastName" />
@@ -580,6 +587,8 @@
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="Gr02Proy2Model.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="creationDate" ColumnName="creationDate" />
                 <ScalarProperty Name="idProjectPK" ColumnName="idProjectPK" />
                 <ScalarProperty Name="projectName" ColumnName="projectName" />
                 <ScalarProperty Name="objective" ColumnName="objective" />
