@@ -47,6 +47,7 @@ namespace FeLuisesScrumDEV.Controllers
         {
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+            ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
             return View();
         }
 
@@ -101,7 +102,6 @@ namespace FeLuisesScrumDEV.Controllers
                         isRedirect = true
                     });
 
-
                 }
                 else{
                     return RedirectToAction("Index", "WorksIns");
@@ -110,15 +110,6 @@ namespace FeLuisesScrumDEV.Controllers
             }else{
                 return RedirectToAction("Index", "WorksIns");
             }
-
-
-            
-
-
-            //return RedirectToAction("Index", "WorksIns");
-            //return View("Index");
-            //var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
-            //return View(worksIn.ToList());
         }
 
         // GET: WorksIns/Edit/5
