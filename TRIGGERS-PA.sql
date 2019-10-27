@@ -61,5 +61,20 @@ AS --((DATEDIFF(d, E.HireDate, O.OrderDate))/365 = 4)
 
 
 
+--Trigger para cambiar la disponibilidad de un empleado una vez que este se agregue a un equipo
+/*
+CREATE TRIGGER TR_disponibilidadEmpleado
+ON WorksIn
+FOR INSERT
+AS
+	DECLARE @num INT
+	SELECT @num = (SELECT I.idEmployeeFKPK
+					FROM inserted I)
+	UPDATE Employee
+	SET availability = 1
+	WHERE idEmployeePK = @num ;
+*/
+
+
 
 
