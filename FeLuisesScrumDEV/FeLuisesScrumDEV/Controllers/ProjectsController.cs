@@ -42,6 +42,9 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create()
         {
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
+            var EmployeesController = new EmployeesController();
+            var availableEmployes = EmployeesController.AvailableEmployees();
+            ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName");
             return View();
         }
 
@@ -50,12 +53,15 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project)
+        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeePK")] WorksIn employee)
         {
-            if( db.Project.Any(x => x.projectName == project.projectName))
+            var EmployeesController = new EmployeesController();
+            var availableEmployes = EmployeesController.AvailableEmployees();
+            if ( db.Project.Any(x => x.projectName == project.projectName))
             {
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
                 ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
+                ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName");
                 return View(project);
             }
             if ( ModelState.IsValid )
@@ -66,6 +72,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
 
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
+            ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName", employee);
             return View(project);
         }
 

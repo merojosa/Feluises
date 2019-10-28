@@ -12,69 +12,69 @@
 namespace FeLuisesScrumDEV.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class Employee
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Employee()
+    public partial class Employee
     {
 
-        this.DeveloperKnowledge = new HashSet<DeveloperKnowledge>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
 
-        this.Requeriment = new HashSet<Requeriment>();
+            this.DeveloperKnowledge = new HashSet<DeveloperKnowledge>();
 
-        this.WorksIn = new HashSet<WorksIn>();
+            this.Requeriment = new HashSet<Requeriment>();
+
+            this.WorksIn = new HashSet<WorksIn>();
+
+        }
+
+
+        public string idEmployeePK { get; set; }
+
+        public string employeeName { get; set; }
+
+        public string employeeLastName { get; set; }
+
+        public string employeeSecondLastName { get; set; }
+
+        public Nullable<System.DateTime> employeeBirthDate { get; set; }
+
+        public System.DateTime employeeHireDate { get; set; }
+
+        public Nullable<short> developerFlag { get; set; }
+
+        public string tel { get; set; }
+
+        public string email { get; set; }
+
+        public string province { get; set; }
+
+        public string canton { get; set; }
+
+        public string district { get; set; }
+
+        public string exactDirection { get; set; }
+
+        public Nullable<decimal> pricePerHour { get; set; }
+
+        public Nullable<short> availability { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<DeveloperKnowledge> DeveloperKnowledge { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<Requeriment> Requeriment { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<WorksIn> WorksIn { get; set; }
 
     }
-
-
-    public string idEmployeePK { get; set; }
-
-    public string employeeName { get; set; }
-
-    public string employeeLastName { get; set; }
-
-    public string employeeSecondLastName { get; set; }
-
-    public Nullable<System.DateTime> employeeBirthDate { get; set; }
-
-    public System.DateTime employeeHireDate { get; set; }
-
-    public Nullable<short> developerFlag { get; set; }
-
-    public string tel { get; set; }
-
-    public string email { get; set; }
-
-    public string province { get; set; }
-
-    public string canton { get; set; }
-
-    public string district { get; set; }
-
-    public string exactDirection { get; set; }
-
-    public Nullable<decimal> pricePerHour { get; set; }
-
-    public Nullable<short> availability { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<DeveloperKnowledge> DeveloperKnowledge { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Requeriment> Requeriment { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<WorksIn> WorksIn { get; set; }
-
-}
 
 }
