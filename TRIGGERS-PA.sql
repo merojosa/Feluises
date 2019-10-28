@@ -71,10 +71,6 @@ AS
 	SELECT @num = (SELECT I.idEmployeeFKPK
 					FROM inserted I)
 	UPDATE Employee
-	SET availability = 1
+	SET availability = 1 --Se pone en ocupado
 	WHERE idEmployeePK = @num ;
 */
-
-
-
-
