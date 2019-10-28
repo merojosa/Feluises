@@ -45,6 +45,7 @@ namespace FeLuisesScrumDEV.Controllers
          */
         public ActionResult Create()
         {
+            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");

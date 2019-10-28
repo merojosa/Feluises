@@ -72,10 +72,10 @@
      <script type="text/javascript">
             function myFunction() {
                 var list = [];
-                document.querySelectorAll("#sortable2 li label")
+                document.querySelectorAll("#sortable2 li")
                     .forEach(function (item) {
-                        var aux = item.textContent.split(" ");
-                        list.push(aux[0]);
+                        var aux = item.id;
+                        list.push(aux);
                     });
 
                 var p = document.getElementById("idProjectFKPK");
@@ -151,9 +151,23 @@
                         <center>
                             <!--Aqui van solo empleados disponibles que se filtraron-->
                             <ul id="sortable1" class="connectedSortable">
-                                @{string skills = "";}
+                                @{
+                                    string skills = "";
+                                    string myLastName = "";
+                                }
                                 @foreach (var item in ViewBag.idEmployeeFKPK)
                                 {
+                                    myLastName = "";
+                                    foreach(var lastName in ViewBag.auxLastName)
+                                    {
+                                        if(item.Value == lastName.Value)
+                                        {
+                                            myLastName = lastName.Text;
+                                            break;
+                                        }
+
+                                    }
+
                                     skills = "";
                                     foreach (var skill in ViewBag.knowledges)
                                     {
@@ -164,7 +178,7 @@
                                     }
 
                                     <li class="ui-state-default" id="@item.Value">
-                                        <label>@item.Value @item.Text</label>
+                                        <label>@item.Text @myLastName</label>
                                         <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
                                     </li>
                                 }
