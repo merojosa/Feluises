@@ -11,7 +11,7 @@
     <script>
         $(document).ready(function () {
             $("#moduletable").hide();
-            $("#modulecards").show();
+            $("#modulecards").hide();
             $("#modulecards2").show();
             $("#toggle").click(function () {
                 $("#moduletable").toggle();
@@ -25,6 +25,7 @@
             $("#idProjectFKPK").change(function () {
                 var categoryId = $("#idProjectFKPK").val();
                 $("#modulesResult").load('@(Url.Action("GetModules","Modules",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
+                $("#prueba").prop("href", '@(Url.Action("Create","Modules",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
             });
         });
     </script>
@@ -34,7 +35,7 @@
 
     <div class="float-md-right">
         <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
-        <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Modules" )>
+        <a id="prueba" class="btn btn-outline-success" role="button" href="#">
             <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
         </a>
     </div>
@@ -149,6 +150,11 @@
                             @Html.DropDownList("idProjectFKPK", null, "Select Project")
                         </div>
                     </p>
+                    <div class="float-md-right">
+                        <a id="prueba" class="btn btn-outline-success" role="button" href="#">
+                            <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div id="modulesResult">
