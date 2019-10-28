@@ -80,10 +80,11 @@ namespace FeLuisesScrumDEV.Controllers
 
         // GET: Modules/Create
         // EF: Genera un formulario para la creación de un módulo
-        public ActionResult Create(int? idProjectFKPK)
+        public ActionResult Create(int idProjectFKPK)
         {
-            ViewBag.idProjectFKPK = new SelectList(db.Project.Where(p => p.idProjectPK==idProjectFKPK), "idProjectPK", "projectName");
-            return View();
+            Project project = db.Project.Where(p => p.idProjectPK==idProjectFKPK).ToList().First();
+            Module module = new Module { Project=project, name="u gei"};
+            return View(module);
         }
 
         // POST: Modules/Create
