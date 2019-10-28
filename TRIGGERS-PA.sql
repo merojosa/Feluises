@@ -74,3 +74,23 @@ AS
 	SET availability = 1 --Se pone en ocupado
 	WHERE idEmployeePK = @num ;
 */
+
+
+--Trigger para borrar modulos y poner requerimientos en default, revisar
+/*
+CREATE TRIGGER TR_modificarModuloDelete
+ON Module
+AFTER DELETE
+AS
+BEGIN
+	UPDATE Requeriment
+	SET idProjectFKPK = (SELECT TOP 1 D.idProjectFKPK, 
+						FROM DELETED D),
+						idModuleFKPK = -1
+	WHERE idProjectFKPK = -1
+END
+GO
+*/
+
+
+
