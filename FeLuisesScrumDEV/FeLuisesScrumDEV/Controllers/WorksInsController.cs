@@ -45,29 +45,12 @@ namespace FeLuisesScrumDEV.Controllers
          */
         public ActionResult Create()
         {
+            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+            ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
             return View();
         }
-
-        // POST: WorksIns/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "idEmployeeFKPK,idProjectFKPK,role")] WorksIn worksIn)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.WorksIn.Add(worksIn);
-        //        db.SaveChanges();
-        //       
-        //    }
-
-        //    ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
-        //    ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
-        //    return View(worksIn);
-        //}
 
         /*
          * Efecto: Procesa la informacion recibida por la vista mediante post
@@ -78,46 +61,56 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create(string[] teamMembers, string currentProject)
         {
             //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
-            int idProject = Int32.Parse(currentProject);
-
-            foreach (var developer in teamMembers)
+            
+            if(currentProject != null)
             {
-                db.WorksIn.Add(new WorksIn
+                int idProject = Int32.Parse(currentProject);
+                if (teamMembers != null)
                 {
-                    idEmployeeFKPK = developer,
-                    idProjectFKPK = idProject
-                });
-                db.Employee.Find(developer).availability = 1;
-               
-            }
-            //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
-            try{
-                db.SaveChanges();
-            }catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
+                    foreach (var developer in teamMembers)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        db.WorksIn.Add(new WorksIn
+                        {
+                            idEmployeeFKPK = developer,
+                            idProjectFKPK = idProject
+                        });
+                        db.Employee.Find(developer).availability = 1;
+
                     }
+                    //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    };
+
+                    return Json(new
+                    {
+                        redirectUrl = Url.Action("Index", "WorksIns"),
+                        isRedirect = true
+                    });
+
                 }
-                throw;
-            };
+                else{
+                    return RedirectToAction("Index", "WorksIns");
+                }
 
-            return Json(new
-            {
-                redirectUrl = Url.Action("Index", "WorksIns"),
-                isRedirect = true
-            });
-
-            //return RedirectToAction("Index", "WorksIns");
-            //return View("Index");
-            //var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
-            //return View(worksIn.ToList());
+            }else{
+                return RedirectToAction("Index", "WorksIns");
+            }
         }
 
         // GET: WorksIns/Edit/5
