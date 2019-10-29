@@ -1,49 +1,287 @@
-﻿@model FeLuisesScrumDEV.Models.WorksIn
+﻿@*@model FeLuisesScrumDEV.Models.WorksIn
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewBag.Title = "Edit";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit Team</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>Edit Team</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.idEmployeeFKPK)
-    
-            @Html.HiddenFor(model => model.idProjectFKPK)
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Edit Team</title>
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Edit Team</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.idEmployeeFKPK)
+
+                @Html.HiddenFor(model => model.idProjectFKPK)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>
+    </html>*@
+
+<!DOCTYPE html>
+<html>
+@model FeLuisesScrumDEV.Models.WorksIn
+<head>
+
+    @{
+        ViewBag.Title = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Team</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <style>
+        #sortable1, #sortable2 {
+            border: 1px solid #eee;
+            width: 360px;
+            min-height: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 0 0;
+            float: left;
+            margin-right: 10px;
+            align-content: center;
+        }
+
+            #sortable1 li, #sortable2 li {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 360px;
+            }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+    </style>
+
+    <script>
+         $(function () {
+             $("#sortable1, #sortable2").sortable({
+                 connectWith: ".connectedSortable"
+             }).disableSelection();
+         });
+    </script>
+
+    <script type="text/javascript">
+            function myFunction() {
+                var list = [];
+                document.querySelectorAll("#sortable2 li")
+                    .forEach(function (item) {
+                        var aux = item.id;
+                        list.push(aux);
+                    });
+
+                var p = document.getElementById("idProjectFKPK");
+                var project = p.options[p.selectedIndex].getAttribute("value");
+                console.log(project);
+                console.log(list);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '@Url.Action("Create", "WorksIns")',
+                    traditional: true,
+                    async: false,
+                    data: {
+                        teamMembers: list,
+                        currentProject: project
+                    },
+                    success: function (json) {
+                        if (json.isRedirect) {
+                            window.location.href = json.redirectUrl;
+                        }
+                    },
+                    error: function (errorList) {
+                        console.log(errorList);
+                        console.log("error");
+                    }
+                })
+
+            }
+    </script>
+
+</head>
+@using (Html.BeginForm())
+{
+    <body>
+
+        <div class="container">
+            <h2>Editar Equipo</h2>
+            <hr>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <b>Nombre proyecto: </b>
+                        <br />
+                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <b>Lider: </b>
+                    </center>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <b>Buscar por habilidades</b>
+                        <!--Aqui va la barra de busqueda-->
+                        <br />
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <b>Posibles Miembros</b>
+                    </center>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <!--Aqui van solo empleados disponibles que se filtraron-->
+                        <ul id="sortable1" class="connectedSortable">
+                            @{
+                                string skills = "";
+                                string myLastName = "";
+                            }
+                            @foreach (var item in ViewBag.idEmployeeFKPK)
+                            {
+                                myLastName = "";
+                                foreach (var lastName in ViewBag.auxLastName)
+                                {
+                                    if (item.Value == lastName.Value)
+                                    {
+                                        myLastName = lastName.Text;
+                                        break;
+                                    }
+
+                                }
+
+                                skills = "";
+                                foreach (var skill in ViewBag.knowledges)
+                                {
+                                    if (skill.Value == item.Value)
+                                    {
+                                        skills = skills + skill.Text + "\n";
+                                    }
+                                }
+
+                                <li class="ui-state-default" id="@item.Value">
+                                    <label>@item.Text @myLastName</label>
+                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
+                                </li>
+                            }
+
+                        </ul>
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <!--Aqui van los que ya estarían en un equipo-->
+                        <ul id="sortable2" class="connectedSortable">
+                            @{
+                                string skillsTeam = "";
+                                string myLastNameTeamMembers = "";
+                            }
+                            @foreach (var item in ViewBag.idEmployeeFKPK)
+                            {
+                                myLastNameTeamMembers = "";
+                                foreach (var lastName in ViewBag.auxLastName)
+                                {
+                                    if (item.Value == lastName.Value)
+                                    {
+                                        myLastNameTeamMembers = lastName.Text;
+                                        break;
+                                    }
+                                }
+
+                                skillsTeam = "";
+                                foreach (var skill in ViewBag.knowledges)
+                                {
+                                    if (skill.Value == item.Value)
+                                    {
+                                        skillsTeam = skillsTeam + skill.Text + "\n";
+                                    }
+                                }
+
+                                <li class="ui-state-default" id="@item.Value">
+                                    <label>@item.Text @myLastNameTeamMembers</label>
+                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skillsTeam">
+                                </li>
+                            }
+                        </ul>
+                        <div class="form-group">
+                            <br />
+                            <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Create" class="btn btn btn-outline-success" /></button>
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "WorksIns")">
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+
+                        </div>
+                    </center>
                 </div>
             </div>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
+    </body>
+}
 </html>

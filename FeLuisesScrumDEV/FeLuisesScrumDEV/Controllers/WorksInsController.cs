@@ -45,13 +45,15 @@ namespace FeLuisesScrumDEV.Controllers
          */
         public ActionResult Create()
         {
-            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
+            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeLastName");
+            ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeName");
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
             return View();
         }
 
+
+        // POST: WorksIns/Create
         /*
          * Efecto: Procesa la informacion recibida por la vista mediante post
          * Requiere: Los miembros del equipo y el id del proyecto
@@ -114,21 +116,30 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: WorksIns/Edit/5
-        public ActionResult Edit(string id)
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    WorksIn worksIn = db.WorksIn.Find(id);
+        //    if (worksIn == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
+        //    ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
+        //    return View(worksIn);
+        //}
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WorksIn worksIn = db.WorksIn.Find(id);
-            if (worksIn == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName", worksIn.idEmployeeFKPK);
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
-            return View(worksIn);
+            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeLastName");
+            ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeName");
+            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+            ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
+            return View();
         }
+
 
         // POST: WorksIns/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
