@@ -79,17 +79,21 @@
                         </li>
                     </ul>
 
-                    <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons d-inline-block align-top">person</i>~Nombre~</a> <!--<img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">~Información~</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Index", "LogIn", null)">LogOut</a>
-                            </div>
-                        </li>
-                    </ul>
+                    @if (Session["userName"] != null )
+                    {
+                        <ul class="navbar-nav ml-auto ">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons d-inline-block align-top">person</i>  @Session["userName"].ToString()
+                                </a> <!--<img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">~Información~</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "LogIn", null)">LogOut</a>
+                                </div>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>
