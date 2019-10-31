@@ -208,6 +208,13 @@ namespace FeLuisesScrumDEV.Controllers
             return modules.ToList();
         }
 
+        public SelectList ModuleSelectList(int? idProjectFKPK)
+        {
+            if (idProjectFKPK == null)
+                return null;
+            return new SelectList(db.Module.Where(m => m.idProjectFKPK == idProjectFKPK), "idModulePK", "name");
+        }
+
         // EF: Retorna una vista con los módulos asociados al proyecto que se consulta
         public PartialViewResult GetModules(int? idProjectFKPK)
         {
