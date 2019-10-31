@@ -21,15 +21,15 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Authorize(FeLuisesScrumDEV.Models.Credentials loginModel)
         {
             /*
-             * Developerflag:
-             *                  0 = Jefe Desarrollador
-             *                  1 = Líder 
-             *                  2 = Desarrollador
-             *  Cliente     3
-             * 
+             * userRole:
+             *          0 = Jefe Desarrollador
+             *          1 = Desarrollador 
+             *          2 = Líder
+             *          3 = Cliente
              */
             using (FeLuisesEntities db = new FeLuisesEntities())
             {
+                var masterChiefID = 987654321; // Cambiar si hay otro jefe
                 var userDetails = db.Credentials.Where(x => x.userName == loginModel.userName && x.password == loginModel.password).FirstOrDefault();
                 if (userDetails == null)
                 {
@@ -41,8 +41,14 @@ namespace FeLuisesScrumDEV.Controllers
 
                     //Sea cliente o empleado, hay que sacar su rol e id
                     var Employee = db.Employee.Find(userDetails.userName);
-
-                if (Employee == null)
+                    var masterChief = db.Credentials.Find(userDetails.userName); // solo el id
+                    var chief = false;
+                    if (Convert.ToInt32(masterChief.userName) == masterChiefID) // Si se esta loggueando el Chief
+                    {
+                        Session["userName"] ="Jefe Desaarrollador";
+                        Session["userRole"] = 0;
+                        chief = true;
+                    } else if (Employee == null)                    //if (Employee == null)
                     {
                         //Tiene que ser cliente
                         var Client = db.Client.Find(userDetails.userName);
@@ -52,23 +58,22 @@ namespace FeLuisesScrumDEV.Controllers
                     else
                     {
                         isEmployee = true;
-                        var employeeType = Employee.developerFlag; // 1 = líder 2 = desarrollador
-                        if (employeeType == 1)
+
+                        if (Employee.developerFlag == 1) //Desarrollador
                         {
-                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " Líder";
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " Desarrollador";
                             Session["userRole"] = 1;
-                        } else if ( employeeType == 2)
+                        } 
+                        if (Employee.developerFlag == 2) // Líder CAMBIAR CONSULTA 
                         {
-                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Desarrollador";
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Líder";
                             Session["userRole"] = 2;
-                        } else if(employeeType == 0)
-                        {
-                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Jefe";
-                            Session["userRole"] = 0;
-                        }
+                        } 
                     }
 
                     
+                    if (chief)
+                        return RedirectToAction("Index", "Projects");
                     if (isEmployee)
                     {
                         return RedirectToAction("Index", "Employees");
