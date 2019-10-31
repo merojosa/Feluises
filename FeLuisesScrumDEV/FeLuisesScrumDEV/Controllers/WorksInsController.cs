@@ -133,9 +133,16 @@ namespace FeLuisesScrumDEV.Controllers
         //}
         public ActionResult Edit()
         {
+            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+
+            //Estos son los que ya estan en el equipo
+            ViewBag.lastNameTeam = new SelectList(db.Employee.Where(e => (e.availability == 1 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
+            ViewBag.employeeInTeam = new SelectList(db.Employee.Where(e => (e.availability == 1 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
+            ViewBag.knowledgesTeam = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
+
+            //Estos son los disponibles
             ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeLastName");
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeName");
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
             ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
             return View();
         }

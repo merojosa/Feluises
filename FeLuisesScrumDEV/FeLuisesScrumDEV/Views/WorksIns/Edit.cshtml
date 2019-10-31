@@ -155,6 +155,14 @@
             }
     </script>
 
+    <script type="text/javascript">
+        function getIdProject() {
+            //var id = $(this).children(":selected").attr("id");
+            var idProject = document.getElementById("projectSelect").value;
+            console.log(idProject);
+        }
+    </script>
+
 </head>
 @using (Html.BeginForm())
 {
@@ -169,7 +177,7 @@
                     <center>
                         <b>Nombre proyecto: </b>
                         <br />
-                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getIdProject()" })
                         @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
                     </center>
                 </div>
@@ -243,10 +251,10 @@
                                 string skillsTeam = "";
                                 string myLastNameTeamMembers = "";
                             }
-                            @foreach (var item in ViewBag.idEmployeeFKPK)
+                            @foreach (var item in ViewBag.employeeInTeam)
                             {
                                 myLastNameTeamMembers = "";
-                                foreach (var lastName in ViewBag.auxLastName)
+                                foreach (var lastName in ViewBag.lastNameTeam)
                                 {
                                     if (item.Value == lastName.Value)
                                     {
@@ -256,7 +264,7 @@
                                 }
 
                                 skillsTeam = "";
-                                foreach (var skill in ViewBag.knowledges)
+                                foreach (var skill in ViewBag.knowledgesTeam)
                                 {
                                     if (skill.Value == item.Value)
                                     {
