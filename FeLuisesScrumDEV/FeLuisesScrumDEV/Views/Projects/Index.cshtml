@@ -24,9 +24,13 @@
 <body>
     <div class="float-md-right">
         <button type="button" class="btn btn-info" id="toggle">Cambiar vista</button>
+
+        @if(Convert.ToInt32(Session["userRole"]) == 0) { // Si masterchef
         <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Projects")>
             <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
         </a>
+        }
+
     </div>
     <div class="container">
         <h2>Proyectos</h2>

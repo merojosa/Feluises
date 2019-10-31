@@ -20,6 +20,16 @@
 
 </head>
 
+<!--
+/*
+    * userRole:
+    *          0 = Jefe Desarrollador
+    *          1 = Desarrollador
+    *          2 = Líder
+    *          3 = Cliente
+    */
+-->
+
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light navbar-styles fixed-top">
@@ -58,22 +68,18 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                                <a class="nav-link" href="#">Requerimientos</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
                             </li>
-
-                            <li class="nav-item ">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="display:none">Disabled</a>
-                            </li>
                         </ul>
                     }
 
-                    @if (Convert.ToInt32(Session["userRole"]) == 1)
+                    @if (Convert.ToInt32(Session["userRole"]) == 2)
                     { //Líder
-                        <ul class="navbar-nav mr-auto ">
+                        <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
                             </li>
@@ -83,7 +89,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                                <a class="nav-link" href="#">Requerimientos</a>
                             </li>
 
                             <li class="nav-item">
@@ -93,7 +99,7 @@
                     }
 
 
-                    @if (Convert.ToInt32(Session["userRole"]) == 2)
+                    @if (Convert.ToInt32(Session["userRole"]) == 1)
                     {  //Desarrollador
                         <ul class="navbar-nav mr-auto ">
                             <li class="nav-item">
@@ -105,28 +111,10 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                                <a class="nav-link" href="#">Requerimientos</a>
                             </li>
                         </ul>
                     }
-
-                    @if (Convert.ToInt32(Session["userRole"]) == 2)
-                    {  //Desarrollador
-                        <ul class="navbar-nav mr-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
-                            </li>
-                        </ul>
-                    }
-
 
                     @if (Convert.ToInt32(Session["userRole"]) == 3)
                     {  //Cliente
