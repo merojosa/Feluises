@@ -25,7 +25,7 @@ namespace FeLuisesScrumDEV.Controllers
              *                  0 = Jefe Desarrollador
              *                  1 = Líder 
              *                  2 = Desarrollador
-             *  Cliente     4
+             *  Cliente     3
              * 
              */
             using (FeLuisesEntities db = new FeLuisesEntities())

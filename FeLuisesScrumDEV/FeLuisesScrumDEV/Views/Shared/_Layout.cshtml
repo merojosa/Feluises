@@ -35,40 +35,113 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto ">
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
-                        </li>
 
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
-                        </li>
+                    @if (Convert.ToInt32(Session["userRole"]) == 0)
+                    {  //Jefe desarrollador
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="display:none">Requerimientos</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
+                            </li>
 
-                        <li class="nav-item ">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="display:none">Disabled</a>
-                        </li>
-                    </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                            </li>
 
-                    @if (Session["userName"] != null )
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="display:none">Disabled</a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Convert.ToInt32(Session["userRole"]) == 1)
+                    { //Líder
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipo</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Convert.ToInt32(Session["userRole"]) == 2)
+                    {  //Desarrollador
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Convert.ToInt32(Session["userRole"]) == 2)
+                    {  //Desarrollador
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="display:none">Requerimientos</a>
+                            </li>
+                        </ul>
+                    }
+
+
+                    @if (Convert.ToInt32(Session["userRole"]) == 3)
+                    {  //Cliente
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Requerimientos</a>
+                            </li>
+                        </ul>
+                    }
+
+                    @if (Session["userName"] != null)
                     {
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item dropdown">
