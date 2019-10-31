@@ -38,7 +38,7 @@ namespace FeLuisesScrumDEV.Models
 
         [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "ID must contain 9 integers.")]
         [MaxLength(9, ErrorMessage = "Employee's ID must be 9 characters long.")]
-        [CustomValidation(typeof(Controllers.RequerimentsController.RequerimentValidation), nameof(Controllers.RequerimentsController.RequerimentValidation.validateName))]
+        //[CustomValidation(typeof(Controllers.RequerimentsController.RequerimentValidation), nameof(Controllers.RequerimentsController.RequerimentValidation.validateName))]
         public string idEmployeeFK { get; set; }
 
         [ReadOnly(true)]
