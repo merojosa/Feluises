@@ -23,9 +23,9 @@ namespace FeLuisesScrumDEV.Controllers
             /*
              * Developerflag:
              *                  0 = Jefe Desarrollador
-             *                  1 = Líder
+             *                  1 = Líder 
              *                  2 = Desarrollador
-             *  Cliente 4
+             *  Cliente     4
              * 
              */
             using (FeLuisesEntities db = new FeLuisesEntities())
@@ -46,25 +46,29 @@ namespace FeLuisesScrumDEV.Controllers
                     {
                         //Tiene que ser cliente
                         var Client = db.Client.Find(userDetails.userName);
-                        Session["userName"] = Client.clientName + " " + Client.clientLastName + " " + Client.clientSecondLastName;
-                        Session["userRole"] = 4; // Es cliente
+                        Session["userName"] = Client.clientName + " " + Client.clientLastName + " Cliente" ;
+                        Session["userRole"] = 3; // Es cliente
                     }
                     else
                     {
                         isEmployee = true;
-                        Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " " + Employee.employeeSecondLastName;
-
-                        if ()
+                        var employeeType = Employee.developerFlag; // 1 = líder 2 = desarrollador
+                        if (employeeType == 1)
                         {
-
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " Líder";
+                            Session["userRole"] = 1;
+                        } else if ( employeeType == 2)
+                        {
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Desarrollador";
+                            Session["userRole"] = 2;
+                        } else if(employeeType == 0)
+                        {
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Jefe";
+                            Session["userRole"] = 0;
                         }
-                         
-                        // Paso 1: Ir a empleado y revisar el developer flag. Si es no es desarrollador jefe entonces paso 2
-                        // Paso 2: Ir a la tabla works  works in y revisar si devuelve algo preguntando si es lider de desarrrollo. Si devuelve una cantidad de tuplas mayor a 1, es lider desarrollador. Sino paso 3
-                        // Paso 3: Ir a la tabla works  works in y revisar si devuelve algo preguntando si es desarrrollador. Si devuelve una cantidad de tuplas mayor a 1, es desarrollador. Sino, llorar amargamente y pasar al paso 4.
-                        // Paso 4: Usuario sin rol. Sacarlo de sesióln y devolver a la pantalla inicial.
                     }
 
+                    
                     if (isEmployee)
                     {
                         return RedirectToAction("Index", "Employees");
