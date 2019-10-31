@@ -12,35 +12,35 @@
 namespace FeLuisesScrumDEV.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class Module
-{
+    using System.ComponentModel.DataAnnotations;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Module()
+    public partial class Module
     {
 
-        this.Requeriment = new HashSet<Requeriment>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Module()
+        {
+
+            this.Requeriment = new HashSet<Requeriment>();
+
+        }
+
+        [Key]
+        public int idProjectFKPK { get; set; }
+        [Key]
+        public int idModulePK { get; set; }
+        [MaxLength(30, ErrorMessage = "El nombre de un módulo no debe de ser de más de 30 caracteres.")]
+        [Required(ErrorMessage = "Debe de especificar un nombre.")]
+        public string name { get; set; }
+
+        public virtual Project Project { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<Requeriment> Requeriment { get; set; }
 
     }
-
-
-    public int idProjectFKPK { get; set; }
-
-    public int idModulePK { get; set; }
-
-    public string name { get; set; }
-
-
-
-    public virtual Project Project { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Requeriment> Requeriment { get; set; }
-
-}
 
 }

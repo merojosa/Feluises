@@ -35,9 +35,6 @@
 
     <div class="float-md-right">
         <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
-        <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-            <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-        </a>
     </div>
     <div class=" container">
         <h2>Módulos</h2>
@@ -148,13 +145,13 @@
                     <p class="card-text text-white">
                         <div class="dropdown">
                             @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                            <div class="float-md-right">
+                                <a id="prueba" class="btn btn-outline-success" role="button" href="#">
+                                    <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                                </a>
+                            </div>
                         </div>
                     </p>
-                    <div class="float-md-right">
-                        <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-                            <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-                        </a>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div id="modulesResult">
