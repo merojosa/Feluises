@@ -27,6 +27,8 @@ namespace FeLuisesScrumDEV.Controllers
              *          2 = Líder
              *          3 = Cliente
              */
+             //EFE: Auntentica al usuario y le asigna su respectivo roll
+             //REQ: Una usr y pass válido
             using (FeLuisesEntities db = new FeLuisesEntities())
             {
                 var masterChiefID = 987654321; // Cambiar si hay otro jefe
@@ -55,7 +57,7 @@ namespace FeLuisesScrumDEV.Controllers
                         Session["userName"] = Client.clientName + " " + Client.clientLastName + " Cliente" ;
                         Session["userRole"] = 3; // Es cliente
                     }
-                    else
+                    else if(Employee != null)
                     {
                         isEmployee = true;
 
@@ -71,7 +73,7 @@ namespace FeLuisesScrumDEV.Controllers
                         } 
                     }
 
-                    
+                    // para que lo lleve al index que le corresponde
                     if (chief)
                         return RedirectToAction("Index", "Projects");
                     if (isEmployee)
@@ -85,6 +87,15 @@ namespace FeLuisesScrumDEV.Controllers
 
                 }
             }
+        }
+
+        //EFE: Resetea las variables de session
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session["userName"] = null;
+            Session["userRole"] = null;
+            return RedirectToAction("Index", "LogIn");
         }
     }
 }

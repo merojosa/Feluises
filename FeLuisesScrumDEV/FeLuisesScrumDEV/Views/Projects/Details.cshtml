@@ -131,13 +131,16 @@
             <a class="btn" role="button" href="@Url.Action("Index", "Projects", null )">
                 <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
-            <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK } )">
+
+            @if (Convert.ToInt32(Session["userRole"]) == 0) // Solo si es jefe desarrollador
+            {
+            <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK })">
                 <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
             <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Projects", new { id = Model.idProjectPK })">
                 <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             </a>
-
+            }
         </div>
     </div>
 </div>
