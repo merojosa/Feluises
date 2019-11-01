@@ -53,12 +53,12 @@ namespace FeLuisesScrumDEV.Models
 
         [Required(ErrorMessage = "Must enter a starting date.")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime startingDate { get; set; }
 
         [Required(ErrorMessage = "Must enter a starting date.")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> endDate { get; set; }
 
         public Nullable<short> complexity { get; set; }
