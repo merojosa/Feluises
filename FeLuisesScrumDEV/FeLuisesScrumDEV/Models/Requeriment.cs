@@ -63,7 +63,8 @@ namespace FeLuisesScrumDEV.Models
 
         public Nullable<short> complexity { get; set; }
 
-        [Required(ErrorMessage = "Requeriment's objective is obligatory.")]
+        [MaxLength(30, ErrorMessage = "El objetivo no debe ser de más de 30 caracteres")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el objetivo del requerimiento*")]
         public string objective { get; set; }
 
 

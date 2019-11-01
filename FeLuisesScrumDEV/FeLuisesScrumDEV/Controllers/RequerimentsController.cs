@@ -89,7 +89,7 @@ namespace FeLuisesScrumDEV.Controllers
     // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
+        public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,objective,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
         {
             if (ModelState.IsValid)
             {
