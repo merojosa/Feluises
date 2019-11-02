@@ -1,5 +1,5 @@
 ﻿<html>
-@model IEnumerable<FeLuisesScrumDEV.Models.Requeriment>
+@model FeLuisesScrumDEV.viewModel.SelectModuleViewModel
 <head>
     @{
         ViewBag.Title = "Index";
@@ -9,10 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#idProjectFKPK").change(function () {
-                var categoryId = $("#idProjectFKPK").val();
-                $("#modulescard").load('@(Url.Action("SelectModule","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
-                $("#prueba").prop("href", '@(Url.Action("Create","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
+            $("#idModuleFKPK").change(function () {
+                var categoryId = $("#idModuleFKPK").val();
+                $("#requerimentscard").load('/Requeriments/GetRequeriments?idProjectFKPK='+@Html.Raw(Json.Encode(Model.idProjectFKPK))+'&idModuleFKPK='+categoryId);
             });
         });
     </script>
@@ -20,18 +19,13 @@
 
 
 <body>
-    <h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-
-    <div id="projectcard">
+    <div id="modulecard">
         <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
             <div class="card-header" id="back-Fe1">
                 <p class="card-text text-white">
                     <div class="dropdown">
-                        @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                        @Html.DropDownList("idModuleFKPK", null, "Select Module")
                         <div class="float-md-right">
                             <a id="prueba" class="btn btn-outline-success" role="button" href="#">
                                 <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
@@ -41,7 +35,7 @@
                 </p>
             </div>
             <div class="card-body">
-                <div id="modulescard">
+                <div id="requerimentscard">
                 </div>
             </div>
         </div>

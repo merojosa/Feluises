@@ -12,40 +12,66 @@
 namespace FeLuisesScrumDEV.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class Requeriment
-{
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using FeLuisesScrumDEV.Controllers;
+    using System.ComponentModel;
+    public partial class Requeriment
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Requeriment()
+        {
+            {
+                /*this.Projects = new HashSet<Projects>(); 
+                this.Module = new HashSet<Module>(); 
+                this.Requeriments = new HashSet<Requeriments>();*/
+            }
+        }
+        [Key]
+        public int idProjectFKPK { get; set; }
+        [Key]
+        public int idModuleFKPK { get; set; }
+        [Key]
+        public int idRequerimentPK { get; set; }
 
-    public int idProjectFKPK { get; set; }
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "ID must contain 9 integers.")]
+        [MaxLength(9, ErrorMessage = "Employee's ID must be 9 characters long.")]
+        //[CustomValidation(typeof(Controllers.RequerimentsController.RequerimentValidation), nameof(Controllers.RequerimentsController.RequerimentValidation.validateName))]
+        public string idEmployeeFK { get; set; }
 
-    public int idModuleFKPK { get; set; }
+        [ReadOnly(true)]
+        [Range(0, 9999999999999999)]
+        public Nullable<int> estimatedDuration { get; set; }
 
-    public int idRequerimentPK { get; set; }
+        [ReadOnly(true)]
+        [Range(0, 9999999999999999)]
+        public Nullable<int> realDuration { get; set; }
 
-    public string idEmployeeFK { get; set; }
+        public Nullable<short> status { get; set; }
 
-    public Nullable<int> estimatedDuration { get; set; }
+        [Required(ErrorMessage = "Must enter a starting date.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public System.DateTime startingDate { get; set; }
 
-    public Nullable<int> realDuration { get; set; }
+        [Required(ErrorMessage = "Must enter a starting date.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public Nullable<System.DateTime> endDate { get; set; }
 
-    public Nullable<short> status { get; set; }
+        public Nullable<short> complexity { get; set; }
 
-    public System.DateTime startingDate { get; set; }
-
-    public Nullable<System.DateTime> endDate { get; set; }
-
-    public Nullable<short> complexity { get; set; }
-
-    public string objective { get; set; }
+        [Required(ErrorMessage = "Requeriment's objective is obligatory.")]
+        public string objective { get; set; }
 
 
 
-    public virtual Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
-    public virtual Module Module { get; set; }
+        public virtual Module Module { get; set; }
 
-}
+    }
 
 }

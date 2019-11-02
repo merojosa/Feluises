@@ -109,7 +109,17 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return View(employee);
         }
-
+        // EF: Retorna una lista con los módulos asociados a dicho proyecto
+        // REQ: Que exista dicho proyecto
+        public List<Employee> AvailableEmployees()
+        {
+            var availableEmployees = db.Employee.Where(m => m.availability == 0);
+            if (availableEmployees == null)
+            {
+                return null;
+            }
+            return availableEmployees.ToList();
+        }
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
