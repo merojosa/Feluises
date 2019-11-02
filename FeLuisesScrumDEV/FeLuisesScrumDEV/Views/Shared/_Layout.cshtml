@@ -31,140 +31,142 @@
 -->
 
 <body>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-styles fixed-top">
-            <div class="container">
+    @if (Session["userName"] != null)
+    {
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light navbar-styles fixed-top">
+                <div class="container">
 
-                <a class="navbar-brand" href="@Url.Action("", "Home", null)">
-                    <img src="~/Images/logo1.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-                    FeLuises
-                </a>
-                <!--Para cuando se hace pequeño-->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <a class="navbar-brand" href="@Url.Action("", "Home", null)">
+                        <img src="~/Images/logo1.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                        FeLuises
+                    </a>
+                    <!--Para cuando se hace pequeño-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-                    @if (Convert.ToInt32(Session["userRole"]) == 0)
-                    {  //Jefe desarrollador
-                        <ul class="navbar-nav mr-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
-                            </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
-                            </li>
+                        @if (Convert.ToInt32(Session["userRole"]) == 0)
+                        {  //Jefe desarrollador
+                            <ul class="navbar-nav mr-auto ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Requerimientos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
-                            </li>
-                        </ul>
-                    }
-
-                    @if (Convert.ToInt32(Session["userRole"]) == 2)
-                    { //Líder
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipo</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Requerimientos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
-                            </li>
-                        </ul>
-                    }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
+                                </li>
 
 
-                    @if (Convert.ToInt32(Session["userRole"]) == 1)
-                    {  //Desarrollador
-                        <ul class="navbar-nav mr-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Requerimientos</a>
-                            </li>
-                        </ul>
-                    }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Requerimientos</a>
+                                </li>
 
-                    @if (Convert.ToInt32(Session["userRole"]) == 3)
-                    {  //Cliente
-                        <ul class="navbar-nav mr-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                                </li>
+                            </ul>
+                        }
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Requerimientos</a>
-                            </li>
-                        </ul>
-                    }
+                        @if (Convert.ToInt32(Session["userRole"]) == 2)
+                        { //Líder
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                                </li>
 
-                     @if (Session["userName"] != null)
-                    {
-                    <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons d-inline-block align-top">person</i>  @Session["userName"].ToString()
-                            </a> <!--<img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">~Información~</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Logout", "LogIn", null)">LogOut</a>
-                            </div>
-                        </li>
-                    </ul>
-                    }
+                                <li class="nav-item">
+                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipo</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Requerimientos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                                </li>
+                            </ul>
+                        }
+
+
+                        @if (Convert.ToInt32(Session["userRole"]) == 1)
+                        {  //Desarrollador
+                            <ul class="navbar-nav mr-auto ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Requerimientos</a>
+                                </li>
+                            </ul>
+                        }
+
+                        @if (Convert.ToInt32(Session["userRole"]) == 3)
+                        {  //Cliente
+                            <ul class="navbar-nav mr-auto ">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Requerimientos</a>
+                                </li>
+                            </ul>
+                        }
+
+                        @if (Session["userName"] != null)
+                        {
+                            <ul class="navbar-nav ml-auto ">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons d-inline-block align-top">person</i>  @Session["userName"].ToString()
+                                    </a> <!--<img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">~Información~</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="@Url.Action("Logout", "LogIn", null)">LogOut</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        }
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
+         }
+        <div class="container body-content container-data">
+            @RenderBody()
+        </div>
 
-    <div class="container body-content container-data">
-        @RenderBody()
-    </div>
-
-    <div>
-        <footer class="page-footer fixed-bottom">
-            <div class="container">
-                <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">
-                    © 2019 Copyright
+        <div>
+            <footer class="page-footer fixed-bottom">
+                <div class="container">
+                    <!-- Copyright -->
+                    <div class="footer-copyright text-center py-3">
+                        © 2019 Copyright
+                    </div>
+                    <!-- Copyright -->
                 </div>
-                <!-- Copyright -->
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
 
-
+   
 </body>
 </html>

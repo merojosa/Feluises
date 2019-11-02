@@ -9,49 +9,67 @@
 }
 
 <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+@if (Session["userName"] == null)
+{
 
-<div class="container">
-    <h2 id="heading-red">Desea eliminar este Módulo?</h2>
-    <hr />
-    <div>
-        <div class=" container">
-            <div class="card rounded border-dark" style="width: auto; height: auto;" id="shadow-Fe1">
-                <h2 class="card-header text-white" id="back-Fe1">Modulo</h2>
-                <div class="card-body">
-                    <div>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                Nombre del módulo
-                            </dt>
+    <div class="container">
 
-                            <dd>
-                                @Html.DisplayFor(model => model.name)
-                            </dd>
+        <div class="card">
+            <div class="card-header">
+                <h2 id="heading-red">No se vale hackear!</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2 id="heading-red">Desea eliminar este Módulo?</h2>
+        <hr />
+        <div>
+            <div class=" container">
+                <div class="card rounded border-dark" style="width: auto; height: auto;" id="shadow-Fe1">
+                    <h2 class="card-header text-white" id="back-Fe1">Modulo</h2>
+                    <div class="card-body">
+                        <div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Nombre del módulo
+                                </dt>
 
-                            <dt>
-                                Perteneciente al proyecto
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.name)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.Project.projectName)
-                            </dd>
-                        </dl>
+                                <dt>
+                                    Perteneciente al proyecto
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Project.projectName)
+                                </dd>
+                            </dl>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer" id="back-Fe1">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
+                    <div class="card-footer" id="back-Fe1">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-                    <div class="form-actions no-color">
-                        <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
-                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Modules",  new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
-                            <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                        </a>
+                            <div class="form-actions no-color">
+                                <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = Model.idProjectFKPK, idModulePK = Model.idModulePK })">
+                                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                </a>
+                            </div>
+                        }
                     </div>
-                    }
                 </div>
             </div>
         </div>
     </div>
-</div>
+}

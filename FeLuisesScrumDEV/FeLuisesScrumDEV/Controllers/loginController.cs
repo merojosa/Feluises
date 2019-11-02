@@ -60,16 +60,15 @@ namespace FeLuisesScrumDEV.Controllers
                     else if(Employee != null)
                     {
                         isEmployee = true;
-
-                        if (Employee.developerFlag == 1) //Desarrollador
-                        {
-                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " Desarrollador";
-                            Session["userRole"] = 1;
-                        } 
                         if (Employee.developerFlag == 2) // Líder CAMBIAR CONSULTA 
                         {
                             Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + "  Líder";
                             Session["userRole"] = 2;
+                        }
+                        if (Employee.developerFlag == 1) //Desarrollador
+                        {
+                            Session["userName"] = Employee.employeeName + " " + Employee.employeeLastName + " Desarrollador";
+                            Session["userRole"] = 1;
                         } 
                     }
 

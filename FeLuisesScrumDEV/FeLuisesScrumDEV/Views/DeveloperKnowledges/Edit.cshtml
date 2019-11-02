@@ -10,68 +10,87 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Editar Conocimiento</h2>
-        <hr />
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+    @if (Session["userName"] == null)
+    {
 
-    <div class="form">
-        <div class="form-row">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.idEmployeeFKPK)
+        <div class="container">
 
-            <div class="col">
-
-                <div class="form-group">
-                    <b>Nombre</b>
-                    @*@Html.LabelFor(model => model.employeeName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Employee.employeeName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Employee.employeeName, "", new { @class = "text-danger" })
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
                 </div>
-
-                <div class="form-group">
-                    <b>Apellido</b>
-                    @*@Html.LabelFor(model => model.employeeLastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Employee.employeeLastName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Employee.employeeLastName, "", new { @class = "text-danger" })
-                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
                 </div>
-
-                <div class="form-group">
-                    <b>Conocimiento</b>
-                    @*@Html.LabelFor(model => model.devKnowledgePK, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.devKnowledgePK, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.devKnowledgePK, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
             </div>
-        </div> <!--finalde form-row-->
-        <div class="form-group">
-            <div class="col-md-offset-5 col-md-20">
-                <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
-                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "DeveloperKnowledges", new {id = Model.idEmployeeFKPK})">
-                    <!--Mandar el id-->
-                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                </a>
-
-            </div>
-
         </div>
-    </div>
-                    }
+    }
+    else
+    {
+        <div class="container">
+            <h2>Editar Conocimiento</h2>
+            <hr />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-                    <div>
+                <div class="form">
+                    <div class="form-row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.idEmployeeFKPK)
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <b>Nombre</b>
+                                @*@Html.LabelFor(model => model.employeeName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Employee.employeeName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Employee.employeeName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <b>Apellido</b>
+                                @*@Html.LabelFor(model => model.employeeLastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Employee.employeeLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Employee.employeeLastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <b>Conocimiento</b>
+                                @*@Html.LabelFor(model => model.devKnowledgePK, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.devKnowledgePK, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.devKnowledgePK, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!--finalde form-row-->
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-20">
+                            <input type="image" src="~/Images/save.svg" class="btn btn btn-outline-success" alt="Submit">
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "DeveloperKnowledges", new { id = Model.idEmployeeFKPK })">
+                                <!--Mandar el id-->
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+
+                        </div>
 
                     </div>
                 </div>
-    </body>
+            }
+
+            <div>
+
+            </div>
+        </div>
+    }
+</body>
 </html>
 
 
