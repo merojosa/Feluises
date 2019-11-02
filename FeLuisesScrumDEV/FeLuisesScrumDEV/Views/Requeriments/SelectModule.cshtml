@@ -11,7 +11,8 @@
         $(document).ready(function () {
             $("#idModuleFKPK").change(function () {
                 var categoryId = $("#idModuleFKPK").val();
-                $("#requerimentscard").load('/Requeriments/GetRequeriments?idProjectFKPK='+@Html.Raw(Json.Encode(Model.idProjectFKPK))+'&idModuleFKPK='+categoryId);
+                $("#requerimentscard").load('/Requeriments/GetRequeriments?idProjectFKPK=' +@Html.Raw(Json.Encode(Model.idProjectFKPK))+'&idModuleFKPK=' + categoryId);
+                $("#prueba").prop("href", '@(Url.Action("Create","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + @Html.Raw(Json.Encode(Model.idProjectFKPK)) + '&idModuleFKPK='  + categoryId);
             });
         });
     </script>

@@ -41,12 +41,10 @@ namespace FeLuisesScrumDEV.Models
         //[CustomValidation(typeof(Controllers.RequerimentsController.RequerimentValidation), nameof(Controllers.RequerimentsController.RequerimentValidation.validateName))]
         public string idEmployeeFK { get; set; }
 
-        //[ReadOnly(true)]
-        //[Range(0, 9999999999999999)]
+        [Range(0, 9999999999999999)]
         public Nullable<int> estimatedDuration { get; set; }
 
-        //[ReadOnly(true)]
-        //[Range(0, 9999999999999999)]
+        [Range(0, 9999999999999999)]
         public Nullable<int> realDuration { get; set; }
 
         public Nullable<short> status { get; set; }

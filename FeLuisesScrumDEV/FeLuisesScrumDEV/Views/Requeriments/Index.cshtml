@@ -12,7 +12,6 @@
             $("#idProjectFKPK").change(function () {
                 var categoryId = $("#idProjectFKPK").val();
                 $("#modulescard").load('@(Url.Action("SelectModule","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
-                $("#prueba").prop("href", '@(Url.Action("Create","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
             });
         });
     </script>
@@ -20,11 +19,7 @@
 
 
 <body>
-    <h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    <h2>Requerimientos</h2>
 
     <div id="projectcard">
         <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
@@ -32,11 +27,6 @@
                 <p class="card-text text-white">
                     <div class="dropdown">
                         @Html.DropDownList("idProjectFKPK", null, "Select Project")
-                        <div class="float-md-right">
-                            <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-                                <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-                            </a>
-                        </div>
                     </div>
                 </p>
             </div>

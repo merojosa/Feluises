@@ -40,11 +40,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idProjectFKPK, int? idModuleFKPK)
         {
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name");
-            return View();
+            var moduleController = new ModulesController();
+            Module module = moduleController.GetModule(idProjectFKPK, idModuleFKPK);
+            Requeriment requeriment = new Requeriment { Module = module };
+            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");//crear metodo para pregunta
+            return View(requeriment);
         }
 
         // POST: Requeriments/Create
@@ -52,7 +54,7 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
+        public ActionResult Create([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity,objective")] Requeriment requeriment)
         {
             if (ModelState.IsValid)
             {
@@ -61,8 +63,7 @@ namespace FeLuisesScrumDEV.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
             return View(requeriment);
         }
 
@@ -135,19 +136,6 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public class RequerimentValidation
-        {
-            public static ValidationResult validateName(String id)
-            {
-                {
-                    FeLuisesEntities db = new FeLuisesEntities();
-                    if (db.Client.Any(x => x.idClientPK == id) || db.Employee.Any(x => x.idEmployeePK == id))
-                        return new ValidationResult("A person id must be unique");
-                    return ValidationResult.Success;
-                }
-            }
         }
 
         // EF: Retorna una lista con los requerimientos asociados a dicho proyecto que se encuentran dentro de cierto modulo
