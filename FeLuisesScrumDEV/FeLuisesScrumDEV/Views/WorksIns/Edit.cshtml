@@ -10,7 +10,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Create Team</title>
+    <title>Editar equipo</title>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -119,16 +119,36 @@
                         currentProject: idProject
                     },
                     success: function (json) {
-                        if (json.isRedirect) {
-                            window.location.href = json.redirectUrl;
-							//Aqui insertamos los usuarios del equipo
+                        var ids = json.ids;
+                        var names = json.names;
+                        var knowledges = json.knowledges;
+                        var skills = "";
+                        var pathImage = "~/Images/info.svg";
+                        var num = 25;
+                        console.log(ids);
+                        console.log(names);
+                        console.log(knowledges);
+                        document.getElementById("sortable2").innerHTML = "";
+                        var ul = document.getElementById("sortable2");                   
+                        for (var cont = 0; cont < ids.length; cont++){
+                            for (var i = 0; i < knowledges.length; i++) {
+                                skills = skills + knowledges[cont][i] + "\n";
+                            }
+                            var li = document.createElement("li");
+                            //li.appendChild(document.createTextNode(names[cont]));
+                            li.setAttribute("id", ids[cont]);
+                            li.setAttribute("class", "ui-state-default");
+                            ul.appendChild(li);
+                            document.getElementById(ids[cont])
+                                .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
+                            skills = "";
                         }
                     },
                     error: function (errorList) {
                         console.log(errorList);
                         console.log("error");
                     }
-                })			
+            })			
         }
     </script>
 
@@ -216,45 +236,6 @@
                     <center>
                         <!--Aqui van los que ya estarían en un equipo-->
                         <ul id="sortable2" class="connectedSortable">
-                            @{
-                                string skillsTeam = "";
-                                string myLastNameTeamMembers = "";
-                            }
-                            @foreach (var item in ViewBag.employeeInTeam)
-							{
-								myLastNameTeamMembers = "";
-								foreach (var lastName in ViewBag.lastNameTeam)
-								{
-									if (item.Value == lastName.Value)
-									{
-										myLastNameTeamMembers = lastName.Text;
-										break;
-									}
-								}
-
-								skillsTeam = "";
-								foreach (var skill in ViewBag.knowledgesTeam)
-								{
-									if (skill.Value == item.Value)
-									{
-										skillsTeam = skillsTeam + skill.Text + "\n";
-									}
-								}
-
-
-								foreach (var currentTeamMember in ViewBag.currentTeam)
-								{
-									if (currentTeamMember.Value == item.Value)
-									{
-										<li class="ui-state-default" id="@item.Value">
-											<label>@item.Text @myLastNameTeamMembers</label>
-											<img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skillsTeam">
-										</li>
-									}
-								}
-
-                                
-                            }
                         </ul>
                         <div class="form-group">
                             <br />
