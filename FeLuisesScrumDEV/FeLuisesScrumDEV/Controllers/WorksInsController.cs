@@ -182,5 +182,18 @@ namespace FeLuisesScrumDEV.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // EF: Consulta si existe un usuario dentro de cierto proyecto y cual es su rol en el
+        // REQ: Que se introduzca las llaves de la tupla a consultar
+        public int isEmployee(string idEmployeeFKPK, int idProjectFKPK )
+        {
+            var employee = db.WorksIn.Where(e => e.idEmployeeFKPK == idEmployeeFKPK && e.idProjectFKPK == idProjectFKPK);
+            if (employee.Any() == false)
+                return -1; // en caso de que no se encuentre una tupla tal, retorna -1 diciendo que no existe ninguna coincidencia
+            else if (employee.Any(e => e.role == 0))
+                return 0; // en caso de que se encuentra y el rol dice que es un desarrollador
+            else
+                return 1; // en caso de que se encuentra y el rol dice que es un lider
+        }
     }
 }
