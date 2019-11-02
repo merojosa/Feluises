@@ -1,254 +1,255 @@
 ﻿<!DOCTYPE html>
 <html>
-@model FeLuisesScrumDEV.Models.WorksIn
-<head>
+    @model FeLuisesScrumDEV.Models.WorksIn
+    <head>
 
-    @{
-		ViewBag.Title = "Editar";
-		Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Editar equipo</title>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-    <style>
-        #sortable1, #sortable2 {
-            border: 1px solid #eee;
-            width: 360px;
-            min-height: 20px;
-            list-style-type: none;
-            margin: 0;
-            padding: 5px 0 0 0;
-            float: left;
-            margin-right: 10px;
-            align-content: center;
+        @{
+		    ViewBag.Title = "Editar";
+		    Layout = "~/Views/Shared/_Layout.cshtml";
         }
 
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 1.2em;
-            width: 360px;
-        }
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Editar equipo</title>
 
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted black;
-        }
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-            .tooltip .tooltiptext {
-                visibility: hidden;
-                width: 120px;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                border-radius: 6px;
-                padding: 5px 0;
-                /* Position the tooltip */
-                position: absolute;
-                z-index: 1;
+
+        <style>
+            #sortable1, #sortable2 {
+                border: 1px solid #eee;
+                width: 360px;
+                min-height: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 5px 0 0 0;
+                float: left;
+                margin-right: 10px;
+                align-content: center;
             }
 
-            .tooltip:hover .tooltiptext {
-                visibility: visible;
+            #sortable1 li, #sortable2 li {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 360px;
             }
-    </style>
 
-    <script>
-         $(function () {
-             $("#sortable1, #sortable2").sortable({
-                 connectWith: ".connectedSortable"
-             }).disableSelection();
-         });
-    </script>
-
-    <script type="text/javascript">
-            function myFunction() {
-                var list = [];
-                document.querySelectorAll("#sortable2 li")
-                    .forEach(function (item) {
-                        var aux = item.id;
-                        list.push(aux);
-                    });
-
-                var p = document.getElementById("idProjectFKPK");
-                var project = p.options[p.selectedIndex].getAttribute("value");
-                console.log(project);
-                console.log(list);
-                $.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url: '@Url.Action("Create", "WorksIns")',
-                    traditional: true,
-                    async: false,
-                    data: {
-                        teamMembers: list,
-                        currentProject: project
-                    },
-                    success: function (json) {
-                        if (json.isRedirect) {
-                            window.location.href = json.redirectUrl;
-                        }
-                    },
-                    error: function (errorList) {
-                        console.log(errorList);
-                        console.log("error");
-                    }
-                })
-
+            .tooltip {
+                position: relative;
+                display: inline-block;
+                border-bottom: 1px dotted black;
             }
-    </script>
 
-    <script type="text/javascript">
-        function getIdProject() {
-            var idProject = document.getElementById("projectSelect").value;
-			console.log(idProject);
-			$.ajax({
-                    type: "post",
-                    dataType: "json",
-                    url: '@Url.Action("bringTeam", "WorksIns")',
-                    traditional: true,
-                    async: false,
-                    data: {
-                        currentProject: idProject
-                    },
-                    success: function (json) {
-                        var ids = json.ids;
-                        var names = json.names;
-                        var knowledges = json.knowledges;
-                        var skills = "";
-                        var pathImage = "~/Images/info.svg";
-                        var num = 25;
-                        console.log(ids);
-                        console.log(names);
-                        console.log(knowledges);
-                        document.getElementById("sortable2").innerHTML = "";
-                        var ul = document.getElementById("sortable2");                   
-                        for (var cont = 0; cont < ids.length; cont++){
-                            for (var i = 0; i < knowledges.length; i++) {
-                                skills = skills + knowledges[cont][i] + "\n";
+                .tooltip .tooltiptext {
+                    visibility: hidden;
+                    width: 120px;
+                    background-color: black;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 5px 0;
+                    /* Position the tooltip */
+                    position: absolute;
+                    z-index: 1;
+                }
+
+                .tooltip:hover .tooltiptext {
+                    visibility: visible;
+                }
+        </style>
+
+        <script>
+             $(function () {
+                 $("#sortable1, #sortable2").sortable({
+                     connectWith: ".connectedSortable"
+                 }).disableSelection();
+             });
+        </script>
+
+        <script type="text/javascript">
+                function myFunction() {
+                    console.log("Estoy aquí");
+                    var list = [];
+                    document.querySelectorAll("#sortable2 li")
+                        .forEach(function (item) {
+                            var aux = item.id;
+                            list.push(aux);
+                        });
+
+                    var p = document.getElementById("projectSelect");
+                    var project = p.options[p.selectedIndex].getAttribute("value");
+                    console.log(project);
+                    console.log(list);
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '@Url.Action("Edit", "WorksIns")',
+                        traditional: true,
+                        async: false,
+                        data: {
+                            teamMembers: list,
+                            currentProject: project
+                        },
+                        success: function (json) {
+                            if (json.isRedirect) {
+                                window.location.href = json.redirectUrl;
                             }
-                            var li = document.createElement("li");
-                            //li.appendChild(document.createTextNode(names[cont]));
-                            li.setAttribute("id", ids[cont]);
-                            li.setAttribute("class", "ui-state-default");
-                            ul.appendChild(li);
-                            document.getElementById(ids[cont])
-                                .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
-                            skills = "";
+                        },
+                        error: function (errorList) {
+                            console.log(errorList);
+                            console.log("error");
                         }
-                    },
-                    error: function (errorList) {
-                        console.log(errorList);
-                        console.log("error");
-                    }
-            })			
-        }
-    </script>
+                    })
 
-</head>
-@using (Html.BeginForm())
-{
-    <body>
+                }
+        </script>
 
-        <div class="container">
-            <h2>Editar Equipo</h2>
-            <hr>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
-                    <center>
-                        <b>Nombre proyecto: </b>
-                        <br />
-                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getIdProject()" })
-                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <b>Lider: </b>
-                    </center>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <center>
-                        <b>Buscar por habilidades</b>
-                        <!--Aqui va la barra de busqueda-->
-                        <br />
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <b>Posibles Miembros</b>
-                    </center>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
-                    <center>
-                        <!--Aqui van solo empleados disponibles que se filtraron-->
-                        <ul id="sortable1" class="connectedSortable">
-                            @{
-                                string skills = "";
-                                string myLastName = "";
-                            }
-                            @foreach (var item in ViewBag.idEmployeeFKPK)
-                            {
-                                myLastName = "";
-                                foreach (var lastName in ViewBag.auxLastName)
-                                {
-                                    if (item.Value == lastName.Value)
-                                    {
-                                        myLastName = lastName.Text;
-                                        break;
-                                    }
-
+        <script type="text/javascript">
+            function getIdProject() {
+                var idProject = document.getElementById("projectSelect").value;
+			    console.log(idProject);
+			    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '@Url.Action("bringTeam", "WorksIns")',
+                        traditional: true,
+                        async: false,
+                        data: {
+                            currentProject: idProject
+                        },
+                        success: function (json) {
+                            var ids = json.ids;
+                            var names = json.names;
+                            var knowledges = json.knowledges;
+                            var skills = "";
+                            var pathImage = "../../Images/info.svg";
+                            var num = 25;
+                            console.log(ids);
+                            console.log(names);
+                            console.log(knowledges);
+                            document.getElementById("sortable2").innerHTML = "";
+                            var ul = document.getElementById("sortable2");                   
+                            for (var cont = 0; cont < ids.length; cont++){
+                                for (var i = 0; i < knowledges.length; i++) {
+                                    skills = skills + knowledges[cont][i] + "\n";
                                 }
-
+                                var li = document.createElement("li");
+                                //li.appendChild(document.createTextNode(names[cont]));
+                                li.setAttribute("id", ids[cont]);
+                                li.setAttribute("class", "ui-state-default ui-sortable-handle");
+                                ul.appendChild(li);
+                                document.getElementById(ids[cont])
+                                    .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
                                 skills = "";
-                                foreach (var skill in ViewBag.knowledges)
+                            }
+                        },
+                        error: function (errorList) {
+                            console.log(errorList);
+                            console.log("error");
+                        }
+                })			
+            }
+        </script>
+
+    </head>
+    @using (Html.BeginForm())
+    {
+        <body>
+
+            <div class="container">
+                <h2>Editar Equipo</h2>
+                <hr>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <b>Nombre proyecto: </b>
+                            <br />
+                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getIdProject()" })
+                            @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <b>Lider: </b>
+                        </center>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <b>Buscar por habilidades</b>
+                            <!--Aqui va la barra de busqueda-->
+                            <br />
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <b>Posibles Miembros</b>
+                        </center>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <!--Aqui van solo empleados disponibles que se filtraron-->
+                            <ul id="sortable1" class="connectedSortable">
+                                @{
+                                    string skills = "";
+                                    string myLastName = "";
+                                }
+                                @foreach (var item in ViewBag.idEmployeeFKPK)
                                 {
-                                    if (skill.Value == item.Value)
+                                    myLastName = "";
+                                    foreach (var lastName in ViewBag.auxLastName)
                                     {
-                                        skills = skills + skill.Text + "\n";
+                                        if (item.Value == lastName.Value)
+                                        {
+                                            myLastName = lastName.Text;
+                                            break;
+                                        }
+
                                     }
+
+                                    skills = "";
+                                    foreach (var skill in ViewBag.knowledges)
+                                    {
+                                        if (skill.Value == item.Value)
+                                        {
+                                            skills = skills + skill.Text + "\n";
+                                        }
+                                    }
+
+                                    <li class="ui-state-default" id="@item.Value">
+                                        <label>@item.Text @myLastName</label>
+                                        <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
+                                    </li>
                                 }
 
-                                <li class="ui-state-default" id="@item.Value">
-                                    <label>@item.Text @myLastName</label>
-                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
-                                </li>
-                            }
+                            </ul>
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <!--Aqui van los que ya estarían en un equipo-->
+                            <ul id="sortable2" class="connectedSortable">
+                            </ul>
+                            <div class="form-group">
+                                <br />
+                                <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
+                                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "WorksIns")">
+                                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                </a>
 
-                        </ul>
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <!--Aqui van los que ya estarían en un equipo-->
-                        <ul id="sortable2" class="connectedSortable">
-                        </ul>
-                        <div class="form-group">
-                            <br />
-                            <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Create" class="btn btn btn-outline-success" /></button>
-                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "WorksIns")">
-                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-
-                        </div>
-                    </center>
+                            </div>
+                        </center>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
-}
+        </body>
+    }
 </html>
