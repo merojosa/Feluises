@@ -42,22 +42,22 @@
                 border-bottom: 1px dotted black;
             }
 
-                .tooltip .tooltiptext {
-                    visibility: hidden;
-                    width: 120px;
-                    background-color: black;
-                    color: #fff;
-                    text-align: center;
-                    border-radius: 6px;
-                    padding: 5px 0;
-                    /* Position the tooltip */
-                    position: absolute;
-                    z-index: 1;
-                }
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+            }
 
-                .tooltip:hover .tooltiptext {
-                    visibility: visible;
-                }
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
         </style>
 
         <script>
@@ -125,10 +125,7 @@
                             var knowledges = json.knowledges;
                             var skills = "";
                             var pathImage = "../../Images/info.svg";
-                            var num = 25;
-                            console.log(ids);
-                            console.log(names);
-                            console.log(knowledges);
+                            var num = 25; //Para las dimensiones de la imagen
                             document.getElementById("sortable2").innerHTML = "";
                             var ul = document.getElementById("sortable2");                   
                             for (var cont = 0; cont < ids.length; cont++){
@@ -138,7 +135,6 @@
                                     }
                                 }
                                 var li = document.createElement("li");
-                                //li.appendChild(document.createTextNode(names[cont]));
                                 li.setAttribute("id", ids[cont]);
                                 li.setAttribute("class", "ui-state-default ui-sortable-handle");
                                 ul.appendChild(li);
@@ -154,6 +150,24 @@
                 })			
             }
         </script>
+
+         <script type="text/javascript">
+             function filter() {
+                  var input, filter, ul, li, imgSkills, i;
+                  input = document.getElementById('myInput');
+                  textInFilter = input.value;
+                  ul = document.getElementById("sortable1");
+                  li = ul.getElementsByTagName('li');
+                  for (i = 0; i < li.length; i++) {
+                      imgSkills = li[i].getElementsByTagName("img")[0].getAttribute("title");
+                      if (imgSkills.indexOf(textInFilter) > -1) {
+                          li[i].style.display = "";
+                      } else {
+                          li[i].style.display = "none";
+                      }
+                  }
+             }
+         </script>
 
     </head>
     @using (Html.BeginForm())
@@ -181,15 +195,16 @@
                 </div>
 
                 <div class="row">
+                    
                     <div class="col-md-6">
                         <center>
-                            <b>Buscar por habilidades</b>
-                            <!--Aqui va la barra de busqueda-->
                             <br />
+                            <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por habilidades">
                         </center>
                     </div>
                     <div class="col-md-6">
                         <center>
+                            <br />
                             <b>Posibles Miembros</b>
                         </center>
                     </div>
@@ -240,13 +255,13 @@
                             <!--Aqui van los que ya estarían en un equipo-->
                             <ul id="sortable2" class="connectedSortable">
                             </ul>
+                            <br/>
                             <div class="form-group">
                                 <br />
                                 <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
                                 <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "WorksIns")">
                                     <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                                 </a>
-
                             </div>
                         </center>
                     </div>

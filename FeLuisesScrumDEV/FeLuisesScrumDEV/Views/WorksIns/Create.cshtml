@@ -15,7 +15,7 @@
      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-     
+
      <style>
          #sortable1, #sortable2 {
              border: 1px solid #eee;
@@ -29,36 +29,35 @@
              align-content: center;
          }
 
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 1.2em;
-            width: 360px;
-        }
+             #sortable1 li, #sortable2 li {
+                 margin: 0 5px 5px 5px;
+                 padding: 5px;
+                 font-size: 1.2em;
+                 width: 360px;
+             }
 
-        .tooltip {
+         .tooltip {
              position: relative;
              display: inline-block;
              border-bottom: 1px dotted black;
          }
 
-         .tooltip .tooltiptext {
-             visibility: hidden;
-             width: 120px;
-             background-color: black;
-             color: #fff;
-             text-align: center;
-             border-radius: 6px;
-             padding: 5px 0;
+             .tooltip .tooltiptext {
+                 visibility: hidden;
+                 width: 120px;
+                 background-color: black;
+                 color: #fff;
+                 text-align: center;
+                 border-radius: 6px;
+                 padding: 5px 0;
+                 /* Position the tooltip */
+                 position: absolute;
+                 z-index: 1;
+             }
 
-             /* Position the tooltip */
-             position: absolute;
-             z-index: 1;
-         }
-
-         .tooltip:hover .tooltiptext {
-            visibility: visible;
-         }
+             .tooltip:hover .tooltiptext {
+                 visibility: visible;
+             }
      </style>
 
      <script>
@@ -106,6 +105,24 @@
             }
      </script>
 
+     <script type="text/javascript">
+         function filter() {
+             var input, filter, ul, li, imgSkills, i;
+             input = document.getElementById('myInput');
+             textInFilter = input.value;
+             ul = document.getElementById("sortable1");
+             li = ul.getElementsByTagName('li');
+             for (i = 0; i < li.length; i++) {
+                 imgSkills = li[i].getElementsByTagName("img")[0].getAttribute("title");
+                 if (imgSkills.indexOf(textInFilter) > -1) {
+                     li[i].style.display = "";
+                 } else {
+                     li[i].style.display = "none";
+                 }
+             }
+         }
+     </script>
+
  </head>
     @using (Html.BeginForm())
     {
@@ -134,13 +151,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <center>
-                            <b>Buscar por habilidades</b>
-                            <!--Aqui va la barra de busqueda-->
                             <br />
+                            <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por habilidades">
                         </center>
                     </div>
                     <div class="col-md-6">
                         <center>
+                            <br/>
                             <b>Posibles Miembros</b>
                         </center>
                     </div>
@@ -190,9 +207,8 @@
                         <center>
                             <!--Aqui van los que arrastre que serian los  que voy  a agregar-->
                             <ul id="sortable2" class="connectedSortable">
-                                @*<li class="ui-state-highlight">Item 1</li>*@
-
                             </ul>
+                            <br />
                             <div class="form-group">
                                 <br />
                                 <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Create" class="btn btn btn-outline-success"  /></button>
