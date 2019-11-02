@@ -139,15 +139,21 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
                 int idProject = Int32.Parse(currentProject);
+                int auxOldProject;
 
+                //Acá borramos los empleados anteriores para evitar los conflictos
+                WorksIn worksInEntity;
+                ViewBag.oldEmployees = new SelectList(db.WorksIn.Where(t => t.idProjectFKPK == idProject), "idEmployeeFKPK", "idProjectFKPK");
+                foreach(var oldEmployee in ViewBag.oldEmployees)
+                {
+                    auxOldProject = Int32.Parse(oldEmployee.Text);
+                    worksInEntity = db.WorksIn.Find(oldEmployee.Value, auxOldProject);
+                    db.WorksIn.Remove(worksInEntity);
+                    var auxEmployee = db.Employee.Find(oldEmployee.Value);
+                    auxEmployee.availability = 0;
+                }
+                
 
-                //SelectList toDelete = new SelectList(db.WorksIn.Where(e => (e.idProjectFKPK == idProject)));
-                //foreach(var item in toDelete)
-                //{
-                //    db.WorksIn.Remove(item);
-                //}
-                
-                
                 if (teamMembers != null)
                 {
                     foreach (var developer in teamMembers)

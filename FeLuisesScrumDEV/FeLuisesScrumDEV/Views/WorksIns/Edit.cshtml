@@ -132,8 +132,10 @@
                             document.getElementById("sortable2").innerHTML = "";
                             var ul = document.getElementById("sortable2");                   
                             for (var cont = 0; cont < ids.length; cont++){
-                                for (var i = 0; i < knowledges.length; i++) {
-                                    skills = skills + knowledges[cont][i] + "\n";
+                                for (var i = 0; i < knowledges[cont].length; i++) {
+                                    if (knowledges[cont][i] != null) {
+                                        skills = skills + knowledges[cont][i] + "\n";
+                                    }
                                 }
                                 var li = document.createElement("li");
                                 //li.appendChild(document.createTextNode(names[cont]));
@@ -156,7 +158,7 @@
     </head>
     @using (Html.BeginForm())
     {
-        <body>
+        <body onload="getIdProject()">
 
             <div class="container">
                 <h2>Editar Equipo</h2>
