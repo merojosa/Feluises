@@ -1,61 +1,11 @@
-﻿@*@model FeLuisesScrumDEV.Models.WorksIn
-
-    @{
-        ViewBag.Title = "Edit";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-
-    <!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>Edit Team</title>
-    </head>
-    <body>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h4>Edit Team</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.idEmployeeFKPK)
-
-                @Html.HiddenFor(model => model.idProjectFKPK)
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        }
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    </body>
-    </html>*@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 @model FeLuisesScrumDEV.Models.WorksIn
 <head>
 
     @{
-        ViewBag.Title = "Create";
-        Layout = "~/Views/Shared/_Layout.cshtml";
+		ViewBag.Title = "Editar";
+		Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
     <meta charset="utf-8" />
@@ -79,12 +29,12 @@
             align-content: center;
         }
 
-            #sortable1 li, #sortable2 li {
-                margin: 0 5px 5px 5px;
-                padding: 5px;
-                font-size: 1.2em;
-                width: 360px;
-            }
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 360px;
+        }
 
         .tooltip {
             position: relative;
@@ -157,9 +107,28 @@
 
     <script type="text/javascript">
         function getIdProject() {
-            //var id = $(this).children(":selected").attr("id");
             var idProject = document.getElementById("projectSelect").value;
-            console.log(idProject);
+			console.log(idProject);
+			$.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '@Url.Action("bringTeam", "WorksIns")',
+                    traditional: true,
+                    async: false,
+                    data: {
+                        currentProject: idProject
+                    },
+                    success: function (json) {
+                        if (json.isRedirect) {
+                            window.location.href = json.redirectUrl;
+							//Aqui insertamos los usuarios del equipo
+                        }
+                    },
+                    error: function (errorList) {
+                        console.log(errorList);
+                        console.log("error");
+                    }
+                })			
         }
     </script>
 
@@ -252,30 +221,39 @@
                                 string myLastNameTeamMembers = "";
                             }
                             @foreach (var item in ViewBag.employeeInTeam)
-                            {
-                                myLastNameTeamMembers = "";
-                                foreach (var lastName in ViewBag.lastNameTeam)
-                                {
-                                    if (item.Value == lastName.Value)
-                                    {
-                                        myLastNameTeamMembers = lastName.Text;
-                                        break;
-                                    }
-                                }
+							{
+								myLastNameTeamMembers = "";
+								foreach (var lastName in ViewBag.lastNameTeam)
+								{
+									if (item.Value == lastName.Value)
+									{
+										myLastNameTeamMembers = lastName.Text;
+										break;
+									}
+								}
 
-                                skillsTeam = "";
-                                foreach (var skill in ViewBag.knowledgesTeam)
-                                {
-                                    if (skill.Value == item.Value)
-                                    {
-                                        skillsTeam = skillsTeam + skill.Text + "\n";
-                                    }
-                                }
+								skillsTeam = "";
+								foreach (var skill in ViewBag.knowledgesTeam)
+								{
+									if (skill.Value == item.Value)
+									{
+										skillsTeam = skillsTeam + skill.Text + "\n";
+									}
+								}
 
-                                <li class="ui-state-default" id="@item.Value">
-                                    <label>@item.Text @myLastNameTeamMembers</label>
-                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skillsTeam">
-                                </li>
+
+								foreach (var currentTeamMember in ViewBag.currentTeam)
+								{
+									if (currentTeamMember.Value == item.Value)
+									{
+										<li class="ui-state-default" id="@item.Value">
+											<label>@item.Text @myLastNameTeamMembers</label>
+											<img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skillsTeam">
+										</li>
+									}
+								}
+
+                                
                             }
                         </ul>
                         <div class="form-group">

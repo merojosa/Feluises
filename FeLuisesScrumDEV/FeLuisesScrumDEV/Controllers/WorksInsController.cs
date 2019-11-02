@@ -131,12 +131,20 @@ namespace FeLuisesScrumDEV.Controllers
         //    ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName", worksIn.idProjectFKPK);
         //    return View(worksIn);
         //}
-        public ActionResult Edit()
+        public ActionResult Edit(string currentProject)
         {
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+			int actualPJ;
+			if (currentProject == null) {
+				actualPJ = 35;
+			} else {
+				actualPJ = Int32.Parse(currentProject);
+			}
 
-            //Estos son los que ya estan en el equipo
-            ViewBag.lastNameTeam = new SelectList(db.Employee.Where(e => (e.availability == 1 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
+			ViewBag.currentTeam = new SelectList(db.WorksIn.Where(e => (e.idProjectFKPK == actualPJ)), "idEmployeeFKPK", "idProjectFKPK");
+
+			//Estos son los que ya estan en el equipo
+			ViewBag.lastNameTeam = new SelectList(db.Employee.Where(e => (e.availability == 1 && e.developerFlag == 1)), "idEmployeePK", "employeeLastName");
             ViewBag.employeeInTeam = new SelectList(db.Employee.Where(e => (e.availability == 1 && e.developerFlag == 1)), "idEmployeePK", "employeeName");
             ViewBag.knowledgesTeam = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
 
@@ -200,5 +208,17 @@ namespace FeLuisesScrumDEV.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+
+		public ActionResult bringTeam(string currentProject)
+		{
+			ViewBag.currentTeam = new SelectList(db.WorksIn.Where(e => (e.idProjectFKPK == Int32.Parse(currentProject))), "idEmployeeFKPK", "idProjectFKPK");
+
+			return Json(new
+			{
+				redirectUrl = Url.Action("Edit", "WorksIns", new { id = currentProject }),
+				isRedirect = true
+			});
+		}
+	}
 }
+		 
