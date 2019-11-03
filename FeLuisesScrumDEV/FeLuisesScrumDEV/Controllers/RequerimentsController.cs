@@ -76,20 +76,23 @@ namespace FeLuisesScrumDEV.Controllers
 
 
         // GET: Requeriments/Edit/5
-        public ActionResult Edit(int? ProjectId, int? ModuleId, int? RequerimentId)
+        public ActionResult Edit(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
     {
-        if (ProjectId == null || ModuleId == null || RequerimentId == null)
+        if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-        Requeriment requeriment = db.Requeriment.Find(ProjectId, ModuleId, RequerimentId);
+        Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
         if (requeriment == null)
         {
             return HttpNotFound();
         }
         ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
         ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
-        return View(requeriment);
+        //ViewBag.complexityEdit = new SelectList(db.Requeriment, "idRequerimentPK", "idProjectFKPK", requeriment.complexity);
+        ViewBag.complexity = selectListComplexity();
+        ViewBag.status = selectListStatus();
+            return View(requeriment);
     }
 
     // POST: Requeriments/Edit/5
