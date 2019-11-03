@@ -49,8 +49,8 @@ namespace FeLuisesScrumDEV.Controllers
             Module module = moduleController.GetModule(idProjectFKPK, idModuleFKPK);
             Requeriment requeriment = new Requeriment { Module = module };
             ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList((int)idProjectFKPK);
-            ViewBag.complexity = selectListComplexity();
-            ViewBag.status = selectListStatus();
+            ViewBag.complexity = SelectListComplexity(null);
+            ViewBag.status = SelectListStatus(null);
             return View(requeriment);
         }
 
@@ -69,6 +69,8 @@ namespace FeLuisesScrumDEV.Controllers
             }
 
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
+            ViewBag.complexity = SelectListComplexity(requeriment.complexity);
+            ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
         }
 
@@ -180,7 +182,7 @@ namespace FeLuisesScrumDEV.Controllers
             return PartialView("GetRequeriments", requerimentsAssociated);
         }
 
-        private SelectList selectListComplexity()
+        private SelectList SelectListComplexity(int? defaultValue)
         {
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Value = "0", Text = "No asignado" });
@@ -188,17 +190,23 @@ namespace FeLuisesScrumDEV.Controllers
             list.Add(new SelectListItem { Value = "2", Text = "Mediano" });
             list.Add(new SelectListItem { Value = "3", Text = "Complejo" });
             list.Add(new SelectListItem { Value = "4", Text = "Muy complejo" });
-            return new SelectList(list, "Value", "Text");
+            if (defaultValue == null)
+                return new SelectList(list, "Value", "Text");
+            else
+                return new SelectList(list, "Value", "Text", defaultValue);
         }
 
-        private SelectList selectListStatus()
+        public SelectList SelectListStatus(int? defaultValue)
         {
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem { Value = "0", Text = "No iniciado" });
             list.Add(new SelectListItem { Value = "1", Text = "En proceso" });
             list.Add(new SelectListItem { Value = "2", Text = "Interrumpido" });
             list.Add(new SelectListItem { Value = "3", Text = "Completado" });
-            return new SelectList(list, "Value", "Text");
+            if(defaultValue == null)
+                return new SelectList(list, "Value", "Text");
+            else
+                return new SelectList(list, "Value", "Text", defaultValue);
         }
     }
 }
