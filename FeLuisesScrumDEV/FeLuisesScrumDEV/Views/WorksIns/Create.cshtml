@@ -106,8 +106,33 @@
      </script>
 
      <script type="text/javascript">
+         function bringLeadersName() {
+             var idProject = document.getElementById("projectSelect").value;
+             $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '@Url.Action("bringLeader", "WorksIns")',
+                traditional: true,
+                async: false,
+                data: {
+                    currentProject: idProject
+                 },
+                 success: function (json) {
+                     console.log(json.leadersName);
+                    document.getElementById("leadersName").innerHTML = json.leadersName;
+                 },
+                 error: function (errorList) {
+                    console.log(errorList);
+                    console.log("error");
+                 }
+
+             })
+         }
+     </script>
+
+     <script type="text/javascript">
          function filter() {
-             var input, filter, ul, li, imgSkills, i;
+             var input, ul, li, imgSkills, i;
              input = document.getElementById('myInput');
              textInFilter = input.value;
              ul = document.getElementById("sortable1");
@@ -126,7 +151,7 @@
  </head>
     @using (Html.BeginForm())
     {
-        <body>
+        <body onload="bringLeadersName()">
 
             <div class="container">
                 <h2>Crear Equipo</h2>
@@ -137,13 +162,14 @@
                         <center>
                             <b>Nombre proyecto: </b>
                             <br />
-                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "bringLeadersName()" })
                             @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
                         </center>
                     </div>
                     <div class="col-md-6">
                         <center>
-                            <b>Lider: </b>
+                            <b>Lider: </b><br />
+                            <label id="leadersName"></label>
                         </center>
                     </div>
                 </div>

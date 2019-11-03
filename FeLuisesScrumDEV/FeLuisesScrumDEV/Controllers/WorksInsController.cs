@@ -268,6 +268,7 @@ namespace FeLuisesScrumDEV.Controllers
             List<string> nameMembers = new List<string>();
             List<string[]> skillsMembers = new List<string[]>();
             string auxName;
+            string auxLeaderName = "";
             List<string> auxSkill = new List<string>();
             int thisProject = Int32.Parse(currentProject);
             ViewBag.currentTeam = new SelectList(db.WorksIn.Where(e => (e.idProjectFKPK == thisProject)), "idEmployeeFKPK", "idProjectFKPK");
@@ -275,27 +276,61 @@ namespace FeLuisesScrumDEV.Controllers
             foreach (var member in ViewBag.currentTeam) //Para cada miembro del equipo
             {
                 var Employee = db.Employee.Find(member.Value);
-                idMembers.Add(member.Value);
                 auxName = Employee.employeeName + " " + Employee.employeeLastName;
-                nameMembers.Add(auxName);
-                foreach(var skill in ViewBag.skillsTeam) //busque sus habilidades
+                var auxLeader = db.WorksIn.Find(member.Value, thisProject);
+                if(auxLeader.role == 1)
                 {
-                    if(member.Value == skill.Value && skill.Text != null)
-                    {
-                        auxSkill.Add(skill.Text);
-                    }
+                    auxLeaderName = auxName;
                 }
-                skillsMembers.Add(auxSkill.ToArray());
-                auxSkill.Clear();
+                else{
+                    idMembers.Add(member.Value);
+
+                    nameMembers.Add(auxName);
+                    foreach (var skill in ViewBag.skillsTeam) //busque sus habilidades
+                    {
+                        if (member.Value == skill.Value && skill.Text != null)
+                        {
+                            auxSkill.Add(skill.Text);
+                        }
+                    }
+                    skillsMembers.Add(auxSkill.ToArray());
+                    auxSkill.Clear();
+                }  
             }
             //Retonamos un JSON con los valores que necesitamos para poder mostrar el equipo en la vista para un equipo
-			return Json(new
-			{
-				ids = idMembers.ToArray(),
+            return Json(new
+            {
+                ids = idMembers.ToArray(),
                 names = nameMembers.ToArray(),
-                knowledges = skillsMembers.ToArray()
-            });
+                knowledges = skillsMembers.ToArray(),
+                leaderName = auxLeaderName
+            }); 
 		}
+
+        public ActionResult bringLeader(string currentProject)
+        {
+            int thisProject = Int32.Parse(currentProject);
+            string auxLeader = "";
+            var leaders = new SelectList(db.WorksIn.Where(e => (e.idProjectFKPK == thisProject && e.role == 1)), "idEmployeeFKPK", "idProjectFKPK");
+            foreach(var myLeader in leaders)
+            {
+                if(myLeader.Text == currentProject)
+                {
+                    var leaderEntity = db.Employee.Find(myLeader.Value);
+                    if(leaderEntity != null)
+                    {
+                        auxLeader = leaderEntity.employeeName + " " + leaderEntity.employeeLastName;
+                    }
+                    
+                    break;
+                }
+            }
+
+            return Json(new
+            {
+                leadersName = auxLeader
+            });
+        }
 	}
 }
 		 
