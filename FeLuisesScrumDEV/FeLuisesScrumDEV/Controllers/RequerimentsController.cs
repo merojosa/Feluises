@@ -42,10 +42,15 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Requeriments/Create
         public ActionResult Create(int? idProjectFKPK, int? idModuleFKPK)
         {
+            if (idProjectFKPK == null || idModuleFKPK == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var moduleController = new ModulesController();
+            var employeeController = new EmployeesController();
             Module module = moduleController.GetModule(idProjectFKPK, idModuleFKPK);
             Requeriment requeriment = new Requeriment { Module = module };
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");//crear metodo para pregunta
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList((int)idProjectFKPK);
+            ViewBag.complexity = selectListComplexity();
+            ViewBag.status = selectListStatus();
             return View(requeriment);
         }
 
@@ -173,6 +178,27 @@ namespace FeLuisesScrumDEV.Controllers
             }
             List<Requeriment> requerimentsAssociated = RequerimentList(idProjectFKPK,idModuleFKPK);
             return PartialView("GetRequeriments", requerimentsAssociated);
+        }
+
+        private SelectList selectListComplexity()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "0", Text = "No asignado" });
+            list.Add(new SelectListItem { Value = "1", Text = "Simple" });
+            list.Add(new SelectListItem { Value = "2", Text = "Mediano" });
+            list.Add(new SelectListItem { Value = "3", Text = "Complejo" });
+            list.Add(new SelectListItem { Value = "4", Text = "Muy complejo" });
+            return new SelectList(list, "Value", "Text");
+        }
+
+        private SelectList selectListStatus()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "0", Text = "No iniciado" });
+            list.Add(new SelectListItem { Value = "1", Text = "En proceso" });
+            list.Add(new SelectListItem { Value = "2", Text = "Interrumpido" });
+            list.Add(new SelectListItem { Value = "3", Text = "Completado" });
+            return new SelectList(list, "Value", "Text");
         }
     }
 }

@@ -182,5 +182,10 @@ namespace FeLuisesScrumDEV.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public List<WorksIn> GetMembers(int idProjectFKPK)
+        {
+            return db.WorksIn.Where(w => w.idProjectFKPK == idProjectFKPK).ToList();
+        }
     }
 }
