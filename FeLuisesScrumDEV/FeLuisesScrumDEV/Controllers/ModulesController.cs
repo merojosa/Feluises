@@ -19,9 +19,20 @@ namespace FeLuisesScrumDEV.Controllers
         //EF: Genera y devuelve la vista de Modules/Index donde muestra todos los proyectos con sus respectivos modulos
         public ActionResult Index()
         {
-            List<IndexViewModel> arrangedList = GetProjectsModules();
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
-            return View(arrangedList);
+            if (Convert.ToInt32(Session["userRole"]) == 0)
+            {
+                List<IndexViewModel> arrangedList = GetProjectsModules();
+                ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+                return View(arrangedList);
+            } else if (Convert.ToInt32(Session["userRole"]) == 2)
+            {
+                var usr = Session["userName"].ToString();
+                var participacion = db.WorksIn.Where(w => w.idEmployeeFKPK == usr);
+                List<IndexViewModel> arrangedList = GetProjectsModules();
+                ViewBag.idProjectFKPK = new SelectList(db.Project.Where(p => participacion.Any(w => w.idProjectFKPK == p.idProjectPK)), "idProjectPK", "projectName");
+                return View(arrangedList);
+            }
+            return null;
         }
 
         //EF: Produce una lista con objetos que agrupan los modulos segun su proyecto para mejor visualización

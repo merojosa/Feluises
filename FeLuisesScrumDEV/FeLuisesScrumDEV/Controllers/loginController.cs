@@ -45,6 +45,7 @@ namespace FeLuisesScrumDEV.Controllers
                         db.WorksIn.Where(e => e.idEmployeeFKPK == loginModel.userName && 
                         db.WorksIn.Any(w => w.idEmployeeFKPK == e.idEmployeeFKPK && w.idProjectFKPK == e.idProjectFKPK && e.role == 1)).FirstOrDefault();
                     Session["userID"] = userDetails.userName; // esto pues as'i se llama en tabla
+
                     Boolean isEmployee = false;
                     Boolean isChief = false;
 

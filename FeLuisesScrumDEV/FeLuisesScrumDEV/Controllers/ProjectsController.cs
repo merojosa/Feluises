@@ -19,17 +19,30 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Projects
         public ActionResult Index()
         {
+            
             if (Convert.ToInt32(Session["userRole"]) == 0) //si es jefe
             {
                 var projectChief = db.Project.Include(p => p.Client);
+                return View(projectChief.ToList());
             }
             else if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2) // si es dev o leader
             {
-                //var project = db.Project.Include(p => p.Client).Where(db.WorksIn.Any(w => w.idEmployeeFKPK == p.));
+
+                var user = Session["userID"].ToString();
+
+                var participacion = db.WorksIn.Where(w => w.idEmployeeFKPK == user);
+                var proyectos = db.Project.Where(p => participacion.Any(w => w.idProjectFKPK == p.idProjectPK));
+                return View(proyectos.ToList());
             }
+            else if (Convert.ToInt32(Session["userRole"]) == 3) // si es cliente
+            {
+                var user = Session["userID"].ToString();
+                var proyectos = db.Project.Where(p => p.idClientFK == user);
+                return View(proyectos.ToList());
+            }
+            return null;
             
-            
-            return View(project.ToList());
+           
         }
 
         // GET: Projects/Details/5
