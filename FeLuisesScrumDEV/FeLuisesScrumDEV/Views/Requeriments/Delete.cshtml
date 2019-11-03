@@ -22,6 +22,16 @@
                 <div class="card-body">
 
                     <dl class="dl-horizontal">
+
+                        <dt>
+                            <b>Perteneciente al módulo</b>
+                            @*@Html.DisplayNameFor(model => model.Module.name)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Module.name)
+                        </dd>
+
                         <dt>
                             <b>Duracion estimada</b>
                             @*@Html.DisplayNameFor(model => model.estimatedDuration)*@
@@ -83,15 +93,6 @@
 
                         <dd>
                             @Html.DisplayFor(model => model.Employee.employeeName)
-                        </dd>
-
-                        <dt>
-                            <b>Nombre</b>
-                            @*@Html.DisplayNameFor(model => model.Module.name)*@
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Module.name)
                         </dd>
 
                     </dl>
