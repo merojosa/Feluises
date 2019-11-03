@@ -76,6 +76,8 @@ namespace FeLuisesScrumDEV.Controllers
 
 
         // GET: Requeriments/Edit/5
+        // EF: Genera un formulario para la edición de un requerimiento
+        // REQ: Que se introduzca las llaves del proyecto, modulo y requerimiento a editar
         public ActionResult Edit(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
@@ -97,6 +99,8 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Requeriments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // EF: Genera un cambio a un requerimiento en la base de datos con la información brindada
+        // REQ: Que se haya llenado el formulario respectivo, que la información sea valida y que exista dicho requerimiento a modificar.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,objective,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
@@ -113,6 +117,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Delete/5
+        // EF: Genera una vista para eliminar un requerimiento
+        // REQ: Que exista dicho requerimiento a eliminar y que se introduzca las llaves del proyecto, modulo y requerimiento a eliminar
         public ActionResult Delete(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
@@ -128,6 +134,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Requeriments/Delete/5
+        // EF: Realiza la acción de eliminación de dicho requerimiento
+        // REQ: Que exista dicho requerimiento a eliminar y que se introduzca las llaves del proyecto, modulo y requerimiento a eliminar
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
