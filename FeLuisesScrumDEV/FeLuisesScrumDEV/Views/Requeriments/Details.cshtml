@@ -14,105 +14,124 @@
 }
 
 <body>
-    <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
-        <h2 class="card-header text-white" id="back-Fe1">Detalles de Requerimiento</h2>
-        <div class="card-body">
-            <dl class="dl-horizontal">
+    @if (Session["userName"] == null)
+    {
 
-                <dt>
-                    Perteneciente al proyecto
-                </dt>
+        <div class="container">
 
-                <dd>
-                    @Html.DisplayFor(model => model.Module.Project.projectName)
-                </dd>
-
-                <dt>
-                    Perteneciente al módulo
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Module.name)
-                </dd>
-
-                <dt>
-                    Objetivo
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.objective)
-                </dd>
-
-                <dt>
-                    Complejidad
-                </dt>
-
-                <dd>
-                    @complexity[(int)Model.complexity]
-                </dd>
-
-                <dt>
-                    Duración estimada
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.estimatedDuration)
-                </dd>
-
-                <dt>
-                    Duración real
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.realDuration)
-                </dd>
-
-                <dt>
-                    Estado
-                </dt>
-
-                <dd>
-                    @states[(int)Model.status]
-                </dd>
-
-                <dt>
-                    Fecha de inicio de trabajo
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.startingDate)
-                </dd>
-
-                <dt>
-                    Fecha de fin de trabajo
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.endDate)
-                </dd>
-
-                <dt>
-                    Empleado asignado
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Employee.employeeName)
-                </dd>
-
-            </dl>
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
         </div>
-        <div class="card-footer" id="back-Fe1">
-            <a class="btn" role="button" href="@Url.Action("Index", "Requeriments")">
-                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            </a>
+    }
+    else
+    {
+        <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+            <h2 class="card-header text-white" id="back-Fe1">Detalles de Requerimiento</h2>
+            <div class="card-body">
+                <dl class="dl-horizontal">
 
-            <a class="btn" role="button" href="@Url.Action("Edit", "Requeriments", new { idProjectFKPK=Model.idProjectFKPK, idModuleFKPK=Model.idModuleFKPK, idRequerimentPK=Model.idRequerimentPK })">
-                <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            </a>
-            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Requeriments", new { idProjectFKPK=Model.idProjectFKPK, idModuleFKPK=Model.idModuleFKPK, idRequerimentPK=Model.idRequerimentPK })">
-                <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            </a>
+                    <dt>
+                        Perteneciente al proyecto
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Module.Project.projectName)
+                    </dd>
+
+                    <dt>
+                        Perteneciente al módulo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Module.name)
+                    </dd>
+
+                    <dt>
+                        Objetivo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.objective)
+                    </dd>
+
+                    <dt>
+                        Complejidad
+                    </dt>
+
+                    <dd>
+                        @complexity[(int)Model.complexity]
+                    </dd>
+
+                    <dt>
+                        Duración estimada
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.estimatedDuration)
+                    </dd>
+
+                    <dt>
+                        Duración real
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.realDuration)
+                    </dd>
+
+                    <dt>
+                        Estado
+                    </dt>
+
+                    <dd>
+                        @states[(int)Model.status]
+                    </dd>
+
+                    <dt>
+                        Fecha de inicio de trabajo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.startingDate)
+                    </dd>
+
+                    <dt>
+                        Fecha de fin de trabajo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.endDate)
+                    </dd>
+
+                    <dt>
+                        Empleado asignado
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Employee.employeeName)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="card-footer" id="back-Fe1">
+                <a class="btn" role="button" href="@Url.Action("Index", "Requeriments")">
+                    <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+
+                <a class="btn" role="button" href="@Url.Action("Edit", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
+                    <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
+                    <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+            </div>
         </div>
-    </div>
+    }
 </body>
 </html>

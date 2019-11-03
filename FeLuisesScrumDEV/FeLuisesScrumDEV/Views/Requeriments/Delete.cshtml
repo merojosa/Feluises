@@ -9,103 +9,122 @@
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h2>Eliminar</h2>
+    @if (Session["userName"] == null)
+    {
 
-    <h3>Desea eliminar este requerimiento?</h3>
-    <div>
-        <!--h4>Requeriment</h4>-->
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                <b>Duracion estimada</b>
-                @*@Html.DisplayNameFor(model => model.estimatedDuration)*@
-            </dt>
+        <div class="container">
 
-            <dd>
-                @Html.DisplayFor(model => model.estimatedDuration)
-            </dd>
-
-            <dt>
-                <b>Duracion real</b>
-                @*@Html.DisplayNameFor(model => model.realDuration)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.realDuration)
-            </dd>
-
-            <dt>
-                <b>Estado</b>
-                @*@Html.DisplayNameFor(model => model.status)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.status)
-            </dd>
-
-            <dt>
-                <b>Fecha de inicio</b>
-                @*@Html.DisplayNameFor(model => model.startingDate)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.startingDate)
-            </dd>
-
-            <dt>
-                <b>Fecha de finalizacion</b>
-                @*@Html.DisplayNameFor(model => model.endDate)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.endDate)
-            </dd>
-
-            <dt>
-                <b>Complejidad</b>
-                @*@Html.DisplayNameFor(model => model.complexity)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.complexity)
-            </dd>
-
-            <dt>
-                <b>Nombre del empleado</b>
-                @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Employee.employeeName)
-            </dd>
-
-            <dt>
-                <b>Nombre</b>
-                @*@Html.DisplayNameFor(model => model.Module.name)*@
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Module.name)
-            </dd>
-
-        </dl>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-<!--
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @*@Html.ActionLink("Back to List", "Index")*@
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
             </div>
--->
-            <div class="form-actions no-color">
-                <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
-                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Requeriments", new { idProjectFKPK=Model.idProjectFKPK, idModuleFKPK=Model.idModuleFKPK, idRequerimentPK=Model.idRequerimentPK  })">
-                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                </a>
-            </div>
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <h2>Eliminar</h2>
+
+        <h3>Desea eliminar este requerimiento?</h3>
+        <div>
+            <!--h4>Requeriment</h4>-->
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <b>Duracion estimada</b>
+                    @*@Html.DisplayNameFor(model => model.estimatedDuration)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.estimatedDuration)
+                </dd>
+
+                <dt>
+                    <b>Duracion real</b>
+                    @*@Html.DisplayNameFor(model => model.realDuration)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.realDuration)
+                </dd>
+
+                <dt>
+                    <b>Estado</b>
+                    @*@Html.DisplayNameFor(model => model.status)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.status)
+                </dd>
+
+                <dt>
+                    <b>Fecha de inicio</b>
+                    @*@Html.DisplayNameFor(model => model.startingDate)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.startingDate)
+                </dd>
+
+                <dt>
+                    <b>Fecha de finalizacion</b>
+                    @*@Html.DisplayNameFor(model => model.endDate)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.endDate)
+                </dd>
+
+                <dt>
+                    <b>Complejidad</b>
+                    @*@Html.DisplayNameFor(model => model.complexity)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.complexity)
+                </dd>
+
+                <dt>
+                    <b>Nombre del empleado</b>
+                    @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Employee.employeeName)
+                </dd>
+
+                <dt>
+                    <b>Nombre</b>
+                    @*@Html.DisplayNameFor(model => model.Module.name)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Module.name)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <!--
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @*@Html.ActionLink("Back to List", "Index")*@
+                            </div>
+                -->
+                <div class="form-actions no-color">
+                    <input type="image" src="~/Images/accept.svg" class="btn btn-outline-success" alt="Submit" />
+                    <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
+                        <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                </div>
+            }
+        </div>
+    }
 </body>
 </html>

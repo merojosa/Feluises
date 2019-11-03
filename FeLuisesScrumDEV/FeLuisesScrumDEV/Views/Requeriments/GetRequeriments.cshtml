@@ -19,13 +19,13 @@
             foreach (var requeriment in Model)
             {
                 <div class="col-sm-6">
-                    <div class="card border-dark rounded shadow-none" id="shadow-None-Fe">
+                    <div class="card"style="margin-top: 15px">
                         <div class="card-header" id="back-Fe">
-                            <a class="btn text-white" role="button" href="@Url.Action("Details", "Requeriments", new { idProjectFKPK=requeriment.idProjectFKPK, idModuleFKPK=requeriment.idModuleFKPK, idRequerimentPK=requeriment.idRequerimentPK } )">Req. @requeriment.objective</a>
+                            <a class="btn text-white" role="button" href="@Url.Action("Details", "Requeriments", new { idProjectFKPK=requeriment.idProjectFKPK, idModuleFKPK=requeriment.idModuleFKPK, idRequerimentPK=requeriment.idRequerimentPK } )"><b>Req. @requeriment.objective</b></a>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Desarrollador asignado: @requeriment.Employee.employeeName @requeriment.Employee.employeeLastName</p>
-                            <p class="card-text">Estado: @states[(int)requeriment.status]</p>
+                            <p class="card-text"><b>Desarrollador asignado:</b> @requeriment.Employee.employeeName @requeriment.Employee.employeeLastName</p>
+                            <p class="card-text"><b>Estado:</b> @states[(int)requeriment.status]</p>
                         </div>
                     </div>
                 </div>

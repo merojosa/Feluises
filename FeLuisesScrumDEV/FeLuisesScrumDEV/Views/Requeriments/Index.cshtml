@@ -19,24 +19,43 @@
 
 
 <body>
-    <h2>Requerimientos</h2>
+    @if (Session["userName"] == null)
+    {
 
-    <div id="projectcard">
-        <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
-            <div class="card-header" id="back-Fe1">
-                <p class="card-text text-white">
-                    <div class="dropdown">
-                        @Html.DropDownList("idProjectFKPK", null, "Select Project")
-                    </div>
-                </p>
-            </div>
-            <div class="card-body">
-                <div id="modulescard">
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
                 </div>
             </div>
         </div>
-        <p></p>
+    }
+    else
+    {
+        <h2>Requerimientos</h2>
+        <hr />
+        <div id="projectcard">
+            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+                <div class="card-header" id="back-Fe1">
+                    <p class="card-text text-white">
+                        <div class="dropdown">
+                            @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control" })
+                        </div>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div id="modulescard">
+                    </div>
+                </div>
+            </div>
+            <p></p>
 
-    </div>
-</body>
+        </div>
+    }
+    </body>
 </html>

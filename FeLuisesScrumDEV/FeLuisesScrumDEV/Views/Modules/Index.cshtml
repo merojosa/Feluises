@@ -52,9 +52,6 @@
     {
         <div class="float-md-right">
             <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
-            <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-                <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-            </a>
         </div>
         <div class=" container">
             <h2>Módulos</h2>
@@ -121,7 +118,7 @@
                 {
                     <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
                         <div class="card-header" id="back-Fe1">
-                            <p class="card-text text-white">Proyecto: @item.Project.projectName</p>
+                            <p class="card-text text-white"><b>Proyecto:</b> @item.Project.projectName</p>
                         </div>
                         <div class="card-body">
                             @if (item.AssociatedModules.Count() > 0)
@@ -132,9 +129,9 @@
                                         if (module.idModulePK != -1)
                                         {
                                             <div class="col-sm-6">
-                                                <div class="card border-dark rounded shadow-none" id="shadow-None-Fe">
+                                                <div class="card border-dark rounded shadow-none" id="shadow-None-Fe" style="margin-top: 15px">
                                                     <div class="card-header" id="back-Fe">
-                                                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })">Módulo @module.name</a>
+                                                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })"><b>Módulo</b> @module.name</a>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="card-text">Requerimientos iran aquí.</p>
@@ -158,14 +155,14 @@
             </section>
 
         <div id="modulecards2">
-            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+            <div class="card border-dark rounded" id="shadow-Fe" style="width: auto; height:auto; margin-top: 15px">
                 <div class="card-header" id="back-Fe1">
                     <p class="card-text text-white">
                         <div class="dropdown">
-                            @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                            @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control"})
                             <div class="float-md-right">
-                                <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-                                    <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                                <a id="prueba" class="btn btn-outline-success d-inline-block align-top" role="button" href="#">
+                                    <img src="~/Images/add.svg" width="40" height="40">
                                 </a>
                             </div>
                         </div>

@@ -22,11 +22,11 @@
 <body>
 
     <div id="modulecard">
-        <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+        <div class="card border-dark"  style="margin-top: 15px">
             <div class="card-header" id="back-Fe1">
                 <p class="card-text text-white">
                     <div class="dropdown">
-                        @Html.DropDownList("idModuleFKPK", null, "Select Module")
+                        @Html.DropDownList("idModuleFKPK", null, "Módulo", new { @class = "form-control"})
                         <div class="float-md-right">
                             <a id="prueba" class="btn btn-outline-success" role="button" href="#">
                                 <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
