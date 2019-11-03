@@ -27,7 +27,7 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Requeriments/Details/5
         public ActionResult Details(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            if ( idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -67,8 +67,8 @@ namespace FeLuisesScrumDEV.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
+            var employeeController = new EmployeesController();
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList(requeriment.idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(requeriment.complexity);
             ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
@@ -77,27 +77,27 @@ namespace FeLuisesScrumDEV.Controllers
 
         // GET: Requeriments/Edit/5
         public ActionResult Edit(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
-    {
-        if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
-        if (requeriment == null)
-        {
-            return HttpNotFound();
-        }
-        ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-        ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
-        ViewBag.complexity = SelectListComplexity(null);
-        ViewBag.status = SelectListStatus(null);
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
+            if (requeriment == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
+            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.complexity = SelectListComplexity(null);
+            ViewBag.status = SelectListStatus(null);
             return View(requeriment);
-    }
+        }
 
-    // POST: Requeriments/Edit/5
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        // POST: Requeriments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,objective,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
         {
@@ -180,18 +180,20 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return null;
             }
-            List<Requeriment> requerimentsAssociated = RequerimentList(idProjectFKPK,idModuleFKPK);
+            List<Requeriment> requerimentsAssociated = RequerimentList(idProjectFKPK, idModuleFKPK);
             return PartialView("GetRequeriments", requerimentsAssociated);
         }
 
         private SelectList SelectListComplexity(int? defaultValue)
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Value = "0", Text = "No asignado" });
-            list.Add(new SelectListItem { Value = "1", Text = "Simple" });
-            list.Add(new SelectListItem { Value = "2", Text = "Mediano" });
-            list.Add(new SelectListItem { Value = "3", Text = "Complejo" });
-            list.Add(new SelectListItem { Value = "4", Text = "Muy complejo" });
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No asignado" },
+                new SelectListItem { Value = "1", Text = "Simple" },
+                new SelectListItem { Value = "2", Text = "Mediano" },
+                new SelectListItem { Value = "3", Text = "Complejo" },
+                new SelectListItem { Value = "4", Text = "Muy complejo" }
+            };
             if (defaultValue == null)
                 return new SelectList(list, "Value", "Text");
             else
@@ -200,12 +202,14 @@ namespace FeLuisesScrumDEV.Controllers
 
         public SelectList SelectListStatus(int? defaultValue)
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Value = "0", Text = "No iniciado" });
-            list.Add(new SelectListItem { Value = "1", Text = "En proceso" });
-            list.Add(new SelectListItem { Value = "2", Text = "Interrumpido" });
-            list.Add(new SelectListItem { Value = "3", Text = "Completado" });
-            if(defaultValue == null)
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No iniciado" },
+                new SelectListItem { Value = "1", Text = "En proceso" },
+                new SelectListItem { Value = "2", Text = "Interrumpido" },
+                new SelectListItem { Value = "3", Text = "Completado" }
+            };
+            if (defaultValue == null)
                 return new SelectList(list, "Value", "Text");
             else
                 return new SelectList(list, "Value", "Text", defaultValue);
