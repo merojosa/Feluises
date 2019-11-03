@@ -1,88 +1,274 @@
 ﻿<!DOCTYPE html>
-
 <html>
-@model IEnumerable<FeLuisesScrumDEV.Models.WorksIn>
+@model FeLuisesScrumDEV.Models.WorksIn
 <head>
+
     @{
-        ViewBag.Title = "Index";
+        ViewBag.Title = "Editar";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Index-Teams</title>
+    <title>Administrar equipo</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
     <style>
-        /*Para resumir texto*/
-        .ellipsis {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            max-width: 150px;
+        #sortable1, #sortable2 {
+            border: 1px solid #eee;
+            width: 360px;
+            min-height: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 0 0;
+            float: left;
+            margin-right: 10px;
+            align-content: center;
+        }
+
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 360px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
         }
     </style>
+
     <script>
-        $(document).ready(function () {
-            $('#WorksInsIndex').DataTable();
+        $(function () {
+            $("#sortable1, #sortable2").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
         });
     </script>
-</head>
 
+    <script type="text/javascript">
+                function myFunction() {
+                    var list = [];
+                    document.querySelectorAll("#sortable2 li")
+                        .forEach(function (item) {
+                            var aux = item.id;
+                            list.push(aux);
+                        });
 
-<body>
+                    var p = document.getElementById("projectSelect");
+                    var project = p.options[p.selectedIndex].getAttribute("value");
+                    console.log(project);
+                    console.log(list);
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '@Url.Action("Index", "WorksIns")',
+                        traditional: true,
+                        async: false,
+                        data: {
+                            teamMembers: list,
+                            currentProject: project
+                        },
+                        success: function (json) {
+                            if (json.isRedirect) {
+                                window.location.href = json.redirectUrl;
+                            }
+                        },
+                        error: function (errorList) {
+                            console.log(errorList);
+                            console.log("error");
+                        }
+                    })
 
-    <div class="container">
-        <table id="WorksInsIndex" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        Rol
-                        @*@Html.DisplayNameFor(model => model.role)*@
-                    </th>
-                    <th>
-                        Nombre
-                        @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
-                    </th>
-                    <th>
-                        Apellido
-                    </th>
-                    <th>
-                        Conocimiento
-                        @*@Html.DisplayNameFor(model => model.Employee.employeeName)*@
-                    </th>
-                    <th>
-                        Nombre del proyecto
-                        @*@Html.DisplayNameFor(model => model.Project.projectName)*@
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "WorksIns", new { idEmployeeFKPK = item.idEmployeeFKPK, idProjectFKPK = item.idProjectFKPK } )">@Html.DisplayFor(modelItem => item.role)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "WorksIn", new { idEmployeeFKPK = item.idEmployeeFKPK, idProjectFKPK = item.idProjectFKPK } )">@Html.DisplayFor(modelItem => item.Employee.employeeName)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "WorksIns", new { idEmployeeFKPK = item.idEmployeeFKPK, idProjectFKPK = item.idProjectFKPK } )">@Html.DisplayFor(modelItem => item.Employee.employeeLastName)</a>
-                        </td>
-                        <td class="ellipsis">
-                            <a class="btn" role="button" href="@Url.Action("Details", "WorksIns", new { idEmployeeFKPK = item.idEmployeeFKPK, idProjectFKPK = item.idProjectFKPK } )">@Html.DisplayFor(modelItem => item.Employee.DeveloperKnowledge)</a>
-                        </td>
-                        <td>
-                            <a class="btn" role="button" href="@Url.Action("Details", "WorksIns", new { idEmployeeFKPK = item.idEmployeeFKPK, idProjectFKPK = item.idProjectFKPK } )">@Html.DisplayFor(modelItem => item.Project.projectName)</a>
-                        </td>
-                    </tr>
                 }
-            </tbody>
-        </table>
-        <p>
-            <a class="btn btn-outline" role="button" href=@Url.Action("Create", "WorksIns" )>
-                <img src="~/Images/add.svg" width="60" height="60" class="d-inline-block align-top" alt="">
-            </a>
-        </p>
-    </div>
-</body>
+    </script>
+
+    <script type="text/javascript">
+            function getMembers() {
+                var idProject = document.getElementById("projectSelect").value;
+			    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: '@Url.Action("bringTeam", "WorksIns")',
+                        traditional: true,
+                        async: false,
+                        data: {
+                            currentProject: idProject
+                        },
+                        success: function (json) {
+                            var ids = json.ids;
+                            var names = json.names;
+                            var knowledges = json.knowledges;
+                            var leaderName = json.leaderName;
+                            var skills = "";
+                            var pathImage = "../../Images/info.svg";
+                            var num = 25; //Para las dimensiones de la imagen
+                            document.getElementById("leaderName").innerHTML = leaderName;
+                            document.getElementById("sortable2").innerHTML = "";
+                            var ul = document.getElementById("sortable2");
+                            for (var cont = 0; cont < ids.length; cont++){
+                                for (var i = 0; i < knowledges[cont].length; i++) {
+                                    if (knowledges[cont][i] != null) {
+                                        skills = skills + knowledges[cont][i] + "\n";
+                                    }
+                                }
+                                var li = document.createElement("li");
+                                li.setAttribute("id", ids[cont]);
+                                li.setAttribute("class", "ui-state-default ui-sortable-handle");
+                                ul.appendChild(li);
+                                document.getElementById(ids[cont])
+                                    .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
+                                skills = "";
+                            }
+
+                        },
+                        error: function (errorList) {
+                            console.log(errorList);
+                            console.log("error");
+                        }
+                })
+            }
+    </script>
+
+    <script type="text/javascript">
+        function filter() {
+            var input, ul, li, imgSkills, i;
+            input = document.getElementById('myInput');
+            textInFilter = input.value;
+            ul = document.getElementById("sortable1");
+            li = ul.getElementsByTagName('li');
+            for (i = 0; i < li.length; i++) {
+                imgSkills = li[i].getElementsByTagName("img")[0].getAttribute("title");
+                if (imgSkills.indexOf(textInFilter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</head>
+@using (Html.BeginForm())
+{
+    <body onload="getMembers()">
+
+        <div class="container">
+            <h2>Administrar Equipo</h2>
+            <hr>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <b>Nombre proyecto: </b>
+                        <br />
+                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getMembers()" })
+                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <b>Lider: </b><br />
+                        <label id="leaderName"></label>
+                    </center>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <center>
+                        <br />
+                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por habilidades">
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <br />
+                        <b>Posibles Miembros</b>
+                    </center>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <!--Aqui van solo empleados disponibles que se filtraron-->
+                        <ul id="sortable1" class="connectedSortable">
+                            @{
+                                string skills = "";
+                                string myLastName = "";
+                            }
+                            @foreach (var item in ViewBag.idEmployeeFKPK)
+                            {
+                                myLastName = "";
+                                foreach (var lastName in ViewBag.auxLastName)
+                                {
+                                    if (item.Value == lastName.Value)
+                                    {
+                                        myLastName = lastName.Text;
+                                        break;
+                                    }
+
+                                }
+
+                                skills = "";
+                                foreach (var skill in ViewBag.knowledges)
+                                {
+                                    if (skill.Value == item.Value)
+                                    {
+                                        skills = skills + skill.Text + "\n";
+                                    }
+                                }
+
+                                <li class="ui-state-default" id="@item.Value">
+                                    <label>@item.Text @myLastName</label>
+                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
+                                </li>
+                            }
+
+                        </ul>
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <!--Aqui van los que ya estarían en un equipo-->
+                        <ul id="sortable2" class="connectedSortable">
+                        </ul>
+                        <br />
+                        <div class="form-group">
+                            <br />
+                            <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Projects")">
+                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                            </a>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </body>
+}
 </html>

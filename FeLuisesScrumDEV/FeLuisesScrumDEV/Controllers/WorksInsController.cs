@@ -16,36 +16,6 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         /*
-         * Efecto: Carga el índice de Equipo.
-         * Requiere: NA.
-         * Modifica: NA.
-         */
-        public ActionResult Index()
-        {
-            var worksIn = db.WorksIn.Include(w => w.Employee).Include(w => w.Project);
-            return View(worksIn.ToList());
-        }
-
-        /*
-         * Efecto: Carga la vista de detalles de un equipo.
-         * Requiere: El id de un equipo para mostrar la vista.
-         * Modifica: NA.
-         */
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WorksIn worksIn = db.WorksIn.Find(id);
-            if (worksIn == null)
-            {
-                return HttpNotFound();
-            }
-            return View(worksIn);
-        }
-
-        /*
          * Efecto: Genera la vista del Create de equipos, en la cual se pueden asociar empleados a un proyecto.
          * Requiere: NA
          * Modifica: La vista del Create de equipos.
@@ -124,7 +94,7 @@ namespace FeLuisesScrumDEV.Controllers
          * Requiere: NA
          * Modifica: La vista del Create de equipos.
          */
-        public ActionResult Edit()
+        public ActionResult Index()
         {
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
 			
@@ -143,7 +113,7 @@ namespace FeLuisesScrumDEV.Controllers
          * Modifica: La tabla WorksIn, que es nuestra tabla de equipos
          */
         [HttpPost]
-        public ActionResult Edit(string[] teamMembers, string currentProject)
+        public ActionResult Index(string[] teamMembers, string currentProject)
         {
             if (currentProject != null)
             {
@@ -232,21 +202,6 @@ namespace FeLuisesScrumDEV.Controllers
             return View(worksIn);
         }
 
-        /*
-        * Efecto: Elimina un empleado dentro de un equipo
-        * Requiere: El id del empleado
-        * Modifica: La tabla WorksIn, que es nuestra tabla de equipos
-        */
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            WorksIn worksIn = db.WorksIn.Find(id);
-            db.WorksIn.Remove(worksIn);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -259,7 +214,7 @@ namespace FeLuisesScrumDEV.Controllers
         /*
         * Efecto: Selecciona los empleados dentro de un equipo y los despliega en la vista de editar
         * Requiere: El id del proyecto(Lo pasa la vista mediante AJAX)
-        * Modifica: La vista de editar equipos
+        * Modifica: La vista de index equipos
         */
         public ActionResult bringTeam(string currentProject)
 		{
@@ -307,6 +262,11 @@ namespace FeLuisesScrumDEV.Controllers
             }); 
 		}
 
+        /*
+       * Efecto: Selecciona el nombre del lider de equipo y lo despliega en la vista de crear
+       * Requiere: El id del proyecto(Lo pasa la vista mediante AJAX)
+       * Modifica: La vista de crear equipos
+       */
         public ActionResult bringLeader(string currentProject)
         {
             int thisProject = Int32.Parse(currentProject);
