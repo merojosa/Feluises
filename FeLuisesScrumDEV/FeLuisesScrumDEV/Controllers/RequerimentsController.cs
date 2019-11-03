@@ -113,13 +113,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requeriment requeriment = db.Requeriment.Find(id);
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             if (requeriment == null)
             {
                 return HttpNotFound();
@@ -130,9 +130,9 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Requeriments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            Requeriment requeriment = db.Requeriment.Find(id);
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             db.Requeriment.Remove(requeriment);
             db.SaveChanges();
             return RedirectToAction("Index");
