@@ -157,28 +157,26 @@
                 }
             </section>
 
-            <div id="modulecards2">
-                <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
-                    <div class="card-header" id="back-Fe1">
-                        <p class="card-text text-white">
-                            <div class="dropdown">
-                                @Html.DropDownList("idProjectFKPK", null, "Select Project", new { @class = "form-control" })
+        <div id="modulecards2">
+            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+                <div class="card-header" id="back-Fe1">
+                    <p class="card-text text-white">
+                        <div class="dropdown">
+                            @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                            <div class="float-md-right">
+                                <a id="prueba" class="btn btn-outline-success" role="button" href="#">
+                                    <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                                </a>
                             </div>
-                        </p>
-                        <div class="float-md-right">
-
-                            <a id="prueba" class="btn btn-outline-success" role="button" href="#">
-                                <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-                            </a>
-
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="modulesResult">
-                        </div>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div id="modulesResult">
                     </div>
                 </div>
-                <p></p>
+            </div>
+            <p></p>
 
             </div>
         </div>

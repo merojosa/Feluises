@@ -6,79 +6,37 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#idProjectFKPK").change(function () {
+                var categoryId = $("#idProjectFKPK").val();
+                $("#modulescard").load('@(Url.Action("SelectModule","Requeriments",null, Request.Url.Scheme))?idProjectFKPK=' + categoryId);
+            });
+        });
+    </script>
 </head>
 
 
 <body>
-    <h2>Index</h2>
+    <h2>Requerimientos</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.estimatedDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.realDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.startingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.endDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.complexity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.employeeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Module.name)
-            </th>
-            <th></th>
-        </tr>
+    <div id="projectcard">
+        <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+            <div class="card-header" id="back-Fe1">
+                <p class="card-text text-white">
+                    <div class="dropdown">
+                        @Html.DropDownList("idProjectFKPK", null, "Select Project")
+                    </div>
+                </p>
+            </div>
+            <div class="card-body">
+                <div id="modulescard">
+                </div>
+            </div>
+        </div>
+        <p></p>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estimatedDuration)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.realDuration)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.startingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.endDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.complexity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.employeeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Module.name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-
-    </table>
+    </div>
 </body>
 </html>

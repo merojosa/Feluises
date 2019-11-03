@@ -96,7 +96,7 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create(int idProjectFKPK)
         {
             Project project = db.Project.Where(p => p.idProjectPK==idProjectFKPK).ToList().First();
-            Module module = new Module { Project=project, name="u gei"};
+            Module module = new Module { Project = project, name = "" };
             return View(module);
         }
 
@@ -219,6 +219,23 @@ namespace FeLuisesScrumDEV.Controllers
                 return null;
             }
             return modules.ToList();
+        }
+
+        public SelectList ModuleSelectList(int? idProjectFKPK)
+        {
+            if (idProjectFKPK == null)
+                return null;
+            return new SelectList(db.Module.Where(m => m.idProjectFKPK == idProjectFKPK), "idModulePK", "name");
+        }
+
+        public Module GetModule(int? idProjectFKPK, int? idModulePK)
+        {
+            if (idProjectFKPK == null || idModulePK == null)
+            {
+                return null;
+            }
+            var module = db.Module.Where(m => m.idProjectFKPK == idProjectFKPK && m.idModulePK == idModulePK).First();
+            return module;
         }
 
         // EF: Retorna una vista con los módulos asociados al proyecto que se consulta

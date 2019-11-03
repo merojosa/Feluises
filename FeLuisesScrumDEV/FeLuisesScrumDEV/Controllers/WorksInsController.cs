@@ -195,5 +195,10 @@ namespace FeLuisesScrumDEV.Controllers
             else
                 return 1; // en caso de que se encuentra y el rol dice que es un lider
         }
+
+        public List<WorksIn> GetMembers(int idProjectFKPK)
+        {
+            return db.WorksIn.Where(w => w.idProjectFKPK == idProjectFKPK).ToList();
+        }
     }
 }
