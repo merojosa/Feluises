@@ -7,7 +7,7 @@
         ViewBag.Title = "Editar";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
-
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Administrar equipo</title>
@@ -29,12 +29,12 @@
             align-content: center;
         }
 
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 1.2em;
-            width: 360px;
-        }
+            #sortable1 li, #sortable2 li {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 360px;
+            }
 
         .tooltip {
             position: relative;
@@ -42,22 +42,22 @@
             border-bottom: 1px dotted black;
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            /* Position the tooltip */
-            position: absolute;
-            z-index: 1;
-        }
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+            }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
     </style>
 
     <script>
@@ -171,104 +171,128 @@
     </script>
 
 </head>
-@using (Html.BeginForm())
-{
-    <body onload="getMembers()">
 
-        <div class="container">
-            <h2>Administrar Equipo</h2>
-            <hr>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
-                    <center>
-                        <b>Nombre proyecto: </b>
-                        <br />
-                        @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getMembers()" })
-                        @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <b>Lider: </b><br />
-                        <label id="leaderName"></label>
-                    </center>
+<body onload="getMembers()">
+    @using (Html.BeginForm())
+    {
+        if (Session["userName"] == null)
+        {
+
+            <div class="container">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 id="heading-red">No se vale hackear!</h2>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                        <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                    </div>
                 </div>
             </div>
+        }
+        else
+        {
 
-            <div class="row">
+            <div class="container">
 
-                <div class="col-md-6">
-                    <center>
-                        <br />
-                        <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por habilidades">
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <br />
-                        <b>Posibles Miembros</b>
-                    </center>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
-                    <center>
-                        <!--Aqui van solo empleados disponibles que se filtraron-->
-                        <ul id="sortable1" class="connectedSortable">
-                            @{
-                                string skills = "";
-                                string myLastName = "";
-                            }
-                            @foreach (var item in ViewBag.idEmployeeFKPK)
-                            {
-                                myLastName = "";
-                                foreach (var lastName in ViewBag.auxLastName)
-                                {
-                                    if (item.Value == lastName.Value)
-                                    {
-                                        myLastName = lastName.Text;
-                                        break;
-                                    }
-
-                                }
-
-                                skills = "";
-                                foreach (var skill in ViewBag.knowledges)
-                                {
-                                    if (skill.Value == item.Value)
-                                    {
-                                        skills = skills + skill.Text + "\n";
-                                    }
-                                }
-
-                                <li class="ui-state-default" id="@item.Value">
-                                    <label>@item.Text @myLastName</label>
-                                    <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
-                                </li>
-                            }
-
-                        </ul>
-                    </center>
-                </div>
-                <div class="col-md-6">
-                    <center>
-                        <!--Aqui van los que ya estarían en un equipo-->
-                        <ul id="sortable2" class="connectedSortable">
-                        </ul>
-                        <br />
-                        <div class="form-group">
-                            <br />
-                            <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
-                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Projects")">
-                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
+                <div class="card border-dark rounded" id="shadow-Fe1" style="width:auto; height:auto;">
+                    <h2 class="card-header text-white" id="back-Fe1">Administrar Equipo</h2>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <center>
+                                    <b>Nombre proyecto: </b>
+                                    <br />
+                                    @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getMembers()" })
+                                    @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
+                                </center>
+                            </div>
+                            <div class="col-md-6">
+                                <center>
+                                    <b>Lider: </b><br />
+                                    <label id="leaderName"></label>
+                                </center>
+                            </div>
                         </div>
-                    </center>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <center>
+                                    <br />
+                                    <input type="text" id="myInput" onkeyup="filter()" placeholder="Buscar por habilidades">
+                                </center>
+                            </div>
+                            <div class="col-md-6">
+                                <center>
+                                    <br />
+                                    <b>Posibles Miembros</b>
+                                </center>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <center>
+                                    <!--Aqui van solo empleados disponibles que se filtraron-->
+                                    <ul id="sortable1" class="connectedSortable">
+                                        @{
+                                            string skills = "";
+                                            string myLastName = "";
+                                        }
+                                        @foreach (var item in ViewBag.idEmployeeFKPK)
+                                        {
+                                            myLastName = "";
+                                            foreach (var lastName in ViewBag.auxLastName)
+                                            {
+                                                if (item.Value == lastName.Value)
+                                                {
+                                                    myLastName = lastName.Text;
+                                                    break;
+                                                }
+
+                                            }
+
+                                            skills = "";
+                                            foreach (var skill in ViewBag.knowledges)
+                                            {
+                                                if (skill.Value == item.Value)
+                                                {
+                                                    skills = skills + skill.Text + "\n";
+                                                }
+                                            }
+
+                                            <li class="ui-state-default" id="@item.Value">
+                                                <label>@item.Text @myLastName</label>
+                                                <img src="~/Images/info.svg" width="25" height="25" class="d-inline-block align-top" title="@skills">
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </center>
+                            </div>
+                            <div class="col-md-6">
+                                <center>
+                                    <!--Aqui van los que ya estarían en un equipo-->
+                                    <ul id="sortable2" class="connectedSortable">
+                                    </ul>
+                                    <br />
+                                    <div class="form-group">
+                                        <br />
+                                        <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
+                                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Projects")">
+                                            <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                        </a>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
-}
+        }
+    }
+</body>
+
 </html>
