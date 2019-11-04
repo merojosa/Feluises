@@ -109,8 +109,9 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return View(employee);
         }
-        // EF: Retorna una lista con los módulos asociados a dicho proyecto
-        // REQ: Que exista dicho proyecto
+        // EF: Retorna una lista con los empleados disponibles.
+        // REQ: NA
+        // MOD: NA
         public List<Employee> AvailableEmployees()
         {
             var availableEmployees = db.Employee.Where(m => m.availability == 0);
@@ -130,7 +131,9 @@ namespace FeLuisesScrumDEV.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        // EF: Retorna el nombre del empleado con el id pasado por parámetro
+        // REQ: Que exista el id
+        // MOD: NA
         public string getEmployeeName(string id)
         {
             Employee employee = db.Employee.Find(id);
@@ -143,7 +146,9 @@ namespace FeLuisesScrumDEV.Controllers
                 return employee.employeeName;
             }
         }
-
+        // EF: Retorna una lista con los empleados disponibles y el lider actual de un proyecto específico.
+        // REQ: Que exista el proyecto
+        // MOD: NA
         public List<Employee> AvailableEmployeesAndLider(int? id)
         {
             var availableEmployees = db.Employee.Where(m => m.availability == 0);

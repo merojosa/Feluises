@@ -311,13 +311,15 @@ namespace FeLuisesScrumDEV.Controllers
             else
                 return 1; // en caso de que se encuentra y el rol dice que es un lider
         }
-
+        // EF: Retorna los miembros de un equipo para un proyecto específico.
+        // REQ: Que exista el proyecto.
         public List<WorksIn> GetMembers(int idProjectFKPK)
         {
             return db.WorksIn.Where(w => w.idProjectFKPK == idProjectFKPK).ToList();
         }
 
-
+        // EF: Retorna el id del líder de un proyecto (especialmente usado para dropdowns)
+        // REQ: Que exista el proyecto.
         public string GetLiderID(int? IdProjectPK)
         {
             if (IdProjectPK == null)
@@ -337,7 +339,8 @@ namespace FeLuisesScrumDEV.Controllers
                 }
             }
         }
-
+        // EF: Retorna el nombre del líder de un proyecto (especialmente usado para displays)
+        // REQ: Que exista el proyecto.
         public string GetLiderName(int? IdProjectPK)
         {
             if (IdProjectPK == null)

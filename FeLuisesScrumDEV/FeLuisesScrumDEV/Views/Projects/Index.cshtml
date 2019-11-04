@@ -42,20 +42,17 @@
     {
         <div class="float-md-right">
             <button type="button" class="btn btn-info" id="toggle">Cambiar vista</button>
-
             @if (Convert.ToInt32(Session["userRole"]) == 0)
             { // Si masterchef
                 <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Projects")>
                     <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
                 </a>
             }
-
         </div>
         <div class="container">
             <h2>Proyectos</h2>
             <hr />
-
-        <section id="ProjectCards">
+        <section id="ProjectCards"><!--Id para hacer el toggle de una vista a otra (Cards)-->
             <div class="card-deck">
                 <div class="card-columns">
                     @foreach (var item in Model)
@@ -63,26 +60,25 @@
                         <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
                             <div class="card-header" id="back-Fe1">
                                 <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
-                            </div>
+                            </div><!--Fin del card-header-->
                             <div class="card-body">
                                 <p class="card-text">Cliente: @item.Client.clientName</p>
                                 <p class="card-text">Objectivo: @item.objective</p>
                                 <p class="card-text">Costo Actual: @item.realCost</p>
-                            </div>
+                            </div><!--Fin del card-body-->
                             <div class="card-footer text-white-50 text-center" id="back-Fe1">
                                 @Html.DisplayFor(modelItem => item.startingDate)
                                 @if (item.startingDate == null)
                                 {
                                     <p class="card-text">Informacion no disponible</p>
                                 }
-                            </div>
-                        </div>
+                            </div><!--Fin del card-footer-->
+                        </div><!--Fin del card-->
                     }
-                </div>
+                </div><!--Fin del card-columns-->
             </div>
         </section>
-
-            <section id="ProjectsTable">
+            <section id="ProjectsTable"> <!--Id para hacer el toggle de una vista a otra (tablas)-->
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>

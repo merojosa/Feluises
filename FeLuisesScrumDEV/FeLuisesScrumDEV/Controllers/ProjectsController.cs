@@ -105,6 +105,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Projects/Edit/5
+        // MOD: el proyecto con el id especificado.
         public ActionResult Edit(int? id)
         {
             var EmployeesController = new EmployeesController();

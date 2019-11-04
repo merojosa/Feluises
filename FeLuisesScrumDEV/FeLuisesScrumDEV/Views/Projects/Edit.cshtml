@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div><!--Fin de columna-->
 
                             <div class="col">
 
@@ -134,22 +134,22 @@
                                         @Html.ValidationMessageFor(model => model.estimatedDuration, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer" id="back-Fe1">
-                    <div class="form-group">
+                            </div><!--Fin de columna-->
+                        </div><!--Fin del form-->
+                    </div><!--Fin del card-body-->
 
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="image" src="~/Images/save.svg" class="btn btn-outline-success" alt="Submit">
-                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Projects", new { id = Model.idProjectPK })">
-                                <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <div class="card-footer" id="back-Fe1">
+                        <div class="form-group">
 
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="image" src="~/Images/save.svg" class="btn btn-outline-success" alt="Submit">
+                                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Details", "Projects", new { id = Model.idProjectPK })">
+                                    <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                                </a>
+                            </div><!--Fin del col-->
+                        </div><!--Fin del form-group-->
+                    </div><!--Fin del card-footer-->
+                </div><!--Fin del card-->
             }
         </div>
     }
