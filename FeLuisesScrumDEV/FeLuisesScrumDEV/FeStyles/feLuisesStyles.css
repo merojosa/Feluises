@@ -19,9 +19,6 @@
 
 .card, #shadow-None-Fe{
     box-shadow: none none none !important;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px !important;
 }
 
 .card, #shadow-Fe1{

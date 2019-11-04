@@ -15,7 +15,7 @@
             $("#modulecards2").show();
             $("#toggle").click(function () {
                 $("#moduletable").toggle();
-                $("#modulecards").toggle();
+                $("#modulecards2").toggle();
             });
 
         });
@@ -50,9 +50,10 @@
     }
     else
     {
-        <div class="float-md-right">
-            <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
-        </div>
+<div class="float-md-right">
+    <button type="button" class="btn btn-info" id="toggle">Cambiar Vista</button>
+    @Html.DropDownList("debug", null, "Debug", new { @class = "form-control" })
+</div>
         <div class=" container">
             <h2>Módulos</h2>
             <hr />
@@ -76,7 +77,6 @@
                         {
                             <tr>
                                 <td>
-
                                     <a class="btn" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })">@module.name</a>
                                 </td>
                                 <td>
@@ -131,7 +131,7 @@
                                             <div class="col-sm-6">
                                                 <div class="card border-dark rounded shadow-none" id="shadow-None-Fe" style="margin-top: 15px">
                                                     <div class="card-header" id="back-Fe">
-                                                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })"><b>Módulo</b> @module.name</a>
+                                                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK })"><b>Módulo:</b> @module.name</a>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="card-text">Requerimientos iran aquí.</p>

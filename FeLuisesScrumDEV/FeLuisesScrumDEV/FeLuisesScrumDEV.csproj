@@ -364,6 +364,7 @@
     <Content Include="Views\Requeriments\GetRequeriments.cshtml" />
     <Content Include="Views\Requeriments\SelectModule.cshtml" />
     <Content Include="Views\Requeriments\Edit.cshtml" />
+    <Content Include="Views\Modules\GetModules.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

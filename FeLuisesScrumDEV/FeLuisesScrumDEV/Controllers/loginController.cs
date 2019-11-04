@@ -101,8 +101,10 @@ namespace FeLuisesScrumDEV.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            Session["userName"] = null;
-            Session["userRole"] = null;
+            Session.Remove("userName");
+            Session.Remove("userRole");
+
+            Session.Abandon();
             return RedirectToAction("Index", "LogIn");
         }
     }
