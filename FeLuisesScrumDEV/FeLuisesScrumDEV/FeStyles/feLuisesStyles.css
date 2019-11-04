@@ -39,13 +39,7 @@
 .card, #border-Fe1 {
     border-color: #3A68AD
 }
-.card, #little-cards {
-    padding-top: 15px !important;
-    padding-left: 15px;
-    padding-right: 15px;
-    width: 100%;
-    position: relative;
-}
+
 .btn-outline {
     color: #0FF2C9;
     border-color: #F2937E;
