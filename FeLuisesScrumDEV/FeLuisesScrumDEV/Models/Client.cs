@@ -27,25 +27,25 @@ namespace FeLuisesScrumDEV.Models
 
         }
 
-        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "La cédula debe de contener 9 dígitos")]
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "La cÃ©dula debe de contener 9 dÃ­gitos")]
         [Key]
         public string idClientPK { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe ingresar el nombre del cliente*")]
-        [MaxLength(20, ErrorMessage = "El nombre del cliente no debe ser de más de 20 caracteres")]
+        [MaxLength(20, ErrorMessage = "El nombre del cliente no debe ser de mÃ¡s de 20 caracteres")]
         public string clientName { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el apellido del cliente*")]
-        [MaxLength(20, ErrorMessage = "El apellido del cliente no debe de ser de más de 20 caracteres")]
+        [MaxLength(20, ErrorMessage = "El apellido del cliente no debe de ser de mÃ¡s de 20 caracteres")]
         public string clientLastName { get; set; }
-        [MaxLength(20, ErrorMessage = "El segundo apellido del cliente no debe de ser de más de 20 caracteres")]
+        [MaxLength(20, ErrorMessage = "El segundo apellido del cliente no debe de ser de mÃ¡s de 20 caracteres")]
         public string clientSecondLastName { get; set; }
-        [MaxLength(20, ErrorMessage = "El nombre de la compañía del cliente no debe de ser de más de 20 caracteres")]
+        [MaxLength(20, ErrorMessage = "El nombre de la compaÃ±Ã­a del cliente no debe de ser de mÃ¡s de 20 caracteres")]
         public string company { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio, debe de introducir un número de contacto*")]
-        [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Un número de teléfono solo permite números del 0 al 9 y '-'")]
-        [MaxLength(20, ErrorMessage = "El número de teléfono no debe de ser de más de 20 caracteres")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de introducir un nÃºmero de contacto*")]
+        [RegularExpression(@"^[0-9-]{8,20}$", ErrorMessage = "Un nÃºmero de telÃ©fono solo permite nÃºmeros del 0 al 9 y '-'")]
+        [MaxLength(20, ErrorMessage = "El nÃºmero de telÃ©fono no debe de ser de mÃ¡s de 20 caracteres")]
         public string tel { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe de introducir un correo*")]
-        [MaxLength(30, ErrorMessage = "El correo electrónico no debe de ser de más de 30 caracteres")]
+        [MaxLength(30, ErrorMessage = "El correo electrÃ³nico no debe de ser de mÃ¡s de 30 caracteres")]
         public string email { get; set; }
 
         public Nullable<System.DateTime> creationDate { get; set; }

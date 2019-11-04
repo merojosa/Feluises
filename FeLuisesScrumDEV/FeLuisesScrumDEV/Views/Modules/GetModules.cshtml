@@ -9,9 +9,9 @@
         @foreach (var module in Model)
         {
             <div class="col-sm-6">
-                <div class="card border-dark rounded shadow-none" id="shadow-None-Fe">
+                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                     <div class="card-header" id="back-Fe">
-                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK } )">Módulo @module.name</a>
+                        <a class="btn text-white" role="button" href="@Url.Action("Details", "Modules", new { idProjectFKPK = module.idProjectFKPK, idModulePK = module.idModulePK } )"><b>Módulo </b>@module.name</a>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Requerimientos iran aquí.</p>

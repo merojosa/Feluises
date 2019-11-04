@@ -31,7 +31,7 @@ namespace FeLuisesScrumDEV.Models
         public int idProjectFKPK { get; set; }
         [Key]
         public int idModulePK { get; set; }
-        [MaxLength(30, ErrorMessage = "El nombre de un mÛdulo no debe de ser de m·s de 30 caracteres.")]
+        [MaxLength(30, ErrorMessage = "El nombre de un m√≥dulo no debe de ser de m√°s de 30 caracteres.")]
         [Required(ErrorMessage = "Debe de especificar un nombre.")]
         public string name { get; set; }
 

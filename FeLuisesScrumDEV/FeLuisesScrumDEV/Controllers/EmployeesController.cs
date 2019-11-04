@@ -167,5 +167,16 @@ namespace FeLuisesScrumDEV.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public SelectList EmployeeFromTeamSelectList(int? idProject)
+        {
+
+            //var worksInController = new WorksInsController();
+            //List<WorksIn> worksInRegisters = worksInController.GetMembers((int)idProject);
+            //IEnumerable<Employee> team = db.Employee.Where(e => worksInRegisters.Exists(x => x.idEmployeeFKPK == e.idEmployeePK));
+            IQueryable<WorksIn> test = db.WorksIn.Where(w => w.idProjectFKPK == idProject);
+            IQueryable<Employee> team = db.Employee.Where(e => test.Any(t => t.idEmployeeFKPK == e.idEmployeePK) == true);
+            return new SelectList(team, "idEmployeePK", "employeeName");
+        }
     }
 }

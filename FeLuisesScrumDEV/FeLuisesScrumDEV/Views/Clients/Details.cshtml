@@ -11,86 +11,104 @@
 
 
 <body>
+    @if (Session["userName"] == null)
+    {
 
-    <div>
         <div class="container">
-            <h2>Detalles</h2>
-            <hr />
-            <div>
-                <div class="card rounded" style="width: auto; height: auto;" id="shadow-Fe1">
-                    <div class="card-header text-white" id="back-Fe1">
-                        <h2>Cliente</h2>
-                    </div>
 
-                    <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <div class="container">
+                <h2>Detalles</h2>
+                <hr />
+                <div>
+                    <div class="card rounded" style="width: auto; height: auto;" id="shadow-Fe1">
+                        <div class="card-header text-white" id="back-Fe1">
+                            <h2>Cliente</h2>
+                        </div>
 
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <b>Nombre</b>
-                            </dt>
+                        <div class="card-body">
 
-                            <dd>
-                                @Html.DisplayFor(model => model.clientName)
-                            </dd>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    <b>Nombre</b>
+                                </dt>
 
-                            <dt>
-                                <b>Apellido</b>
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.clientName)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.clientLastName)
-                            </dd>
+                                <dt>
+                                    <b>Apellido</b>
+                                </dt>
 
-                            <dt>
-                                <b>Segundo Apellido</b>
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.clientLastName)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.clientSecondLastName)
-                            </dd>
+                                <dt>
+                                    <b>Segundo Apellido</b>
+                                </dt>
 
-                            <dt>
-                                <b>Compañía</b>
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.clientSecondLastName)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.company)
-                            </dd>
+                                <dt>
+                                    <b>Compañía</b>
+                                </dt>
 
-                            <dt>
-                                <b>Teléfono</b>
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.company)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.tel)
-                            </dd>
+                                <dt>
+                                    <b>Teléfono</b>
+                                </dt>
 
-                            <dt>
-                                <b>E-Mail</b>
-                            </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tel)
+                                </dd>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.email)
-                            </dd>
+                                <dt>
+                                    <b>E-Mail</b>
+                                </dt>
 
-                        </dl>
-                    </div>
-                    <div class="card-footer" id="back-Fe1">
+                                <dd>
+                                    @Html.DisplayFor(model => model.email)
+                                </dd>
 
-                        <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
-                            <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                        </a>
-                        <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
-                            <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                        </a>
+                            </dl>
+                        </div>
+                        <div class="card-footer" id="back-Fe1">
 
-                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
-                            <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                        </a>
+                            <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
+                                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+                            <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
+                                <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+
+                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
+                                <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    }
+    </body>
 </html>

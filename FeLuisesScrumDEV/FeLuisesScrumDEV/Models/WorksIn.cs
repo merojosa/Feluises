@@ -15,21 +15,13 @@ namespace FeLuisesScrumDEV.Models
 using System;
     using System.Collections.Generic;
     
-public partial class WorksIn
-{
-
-    public string idEmployeeFKPK { get; set; }
-
-    public int idProjectFKPK { get; set; }
-
-    public Nullable<int> role { get; set; }
-
-
-
-    public virtual Employee Employee { get; set; }
-
-    public virtual Project Project { get; set; }
-
-}
-
+    public partial class WorksIn
+    {
+        public string idEmployeeFKPK { get; set; }
+        public int idProjectFKPK { get; set; }
+        public Nullable<int> role { get; set; }
+    
+        public virtual Employee Employee { get; set; }
+        public virtual Project Project { get; set; }
+    }
 }

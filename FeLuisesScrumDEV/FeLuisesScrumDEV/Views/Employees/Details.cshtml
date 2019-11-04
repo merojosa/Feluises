@@ -26,7 +26,7 @@
             } else if(@Html.DisplayFor(model => model.province) == 7){
                 $("#province").html("Limón");
             }
-            
+
             $.ajax({
                 dataType: "json",
                 url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/cantones.json",
@@ -51,6 +51,24 @@
     }*@
 
 <body>
+    @if (Session["userName"] == null)
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
         <div>
             <div class="container">
                 <h2>Detalles</h2>
@@ -195,10 +213,11 @@
                 </div>
             </div>
         </div>
-    </body>
+    }
+</body>
 </html>
 
 @*
-@Html.ActionLink("Edit", "Edit", new { id = Model.idEmployeePK }) |
-@Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEmployeePK }) |
+    @Html.ActionLink("Back to List", "Index")
 *@

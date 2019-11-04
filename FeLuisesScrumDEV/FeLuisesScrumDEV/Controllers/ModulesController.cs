@@ -19,9 +19,22 @@ namespace FeLuisesScrumDEV.Controllers
         //EF: Genera y devuelve la vista de Modules/Index donde muestra todos los proyectos con sus respectivos modulos
         public ActionResult Index()
         {
-            List<IndexViewModel> arrangedList = GetProjectsModules();
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
-            return View(arrangedList);
+           //if (Convert.ToInt32(Session["userRole"]) == 0)
+            //{
+                List<IndexViewModel> arrangedList = GetProjectsModules();
+                ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+                return View(arrangedList);
+            //} else if (Convert.ToInt32(Session["userRole"]) == 2)
+           // {
+            /*
+            var usr = Session["userName"].ToString();
+                var participacion = db.WorksIn.Where(w => w.idEmployeeFKPK == usr);
+                List <IndexViewModel> arrangedList = GetProjectsModules();
+                ViewBag.idProjectFKPK = new SelectList(db.Project.Where(p => participacion.Any(w => w.idProjectFKPK == p.idProjectPK)), "idProjectPK", "projectName");
+                return View(arrangedList);
+            }
+            return null;
+            */
         }
 
         //EF: Produce una lista con objetos que agrupan los modulos segun su proyecto para mejor visualización
@@ -83,7 +96,7 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create(int idProjectFKPK)
         {
             Project project = db.Project.Where(p => p.idProjectPK==idProjectFKPK).ToList().First();
-            Module module = new Module { Project=project, name="u gei"};
+            Module module = new Module { Project = project, name = "" };
             return View(module);
         }
 
@@ -213,6 +226,16 @@ namespace FeLuisesScrumDEV.Controllers
             if (idProjectFKPK == null)
                 return null;
             return new SelectList(db.Module.Where(m => m.idProjectFKPK == idProjectFKPK), "idModulePK", "name");
+        }
+
+        public Module GetModule(int? idProjectFKPK, int? idModulePK)
+        {
+            if (idProjectFKPK == null || idModulePK == null)
+            {
+                return null;
+            }
+            var module = db.Module.Where(m => m.idProjectFKPK == idProjectFKPK && m.idModulePK == idModulePK).First();
+            return module;
         }
 
         // EF: Retorna una vista con los módulos asociados al proyecto que se consulta

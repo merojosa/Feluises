@@ -27,7 +27,7 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Requeriments/Details/5
         public ActionResult Details(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            if ( idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -40,11 +40,18 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idProjectFKPK, int? idModuleFKPK)
         {
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name");
-            return View();
+            if (idProjectFKPK == null || idModuleFKPK == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var moduleController = new ModulesController();
+            var employeeController = new EmployeesController();
+            Module module = moduleController.GetModule(idProjectFKPK, idModuleFKPK);
+            Requeriment requeriment = new Requeriment { Module = module };
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList((int)idProjectFKPK);
+            ViewBag.complexity = SelectListComplexity(null);
+            ViewBag.status = SelectListStatus(null);
+            return View(requeriment);
         }
 
         // POST: Requeriments/Create
@@ -52,7 +59,7 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
+        public ActionResult Create([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity,objective")] Requeriment requeriment)
         {
             if (ModelState.IsValid)
             {
@@ -60,36 +67,39 @@ namespace FeLuisesScrumDEV.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            var employeeController = new EmployeesController();
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList(requeriment.idProjectFKPK);
+            ViewBag.complexity = SelectListComplexity(requeriment.complexity);
+            ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
         }
 
 
         // GET: Requeriments/Edit/5
-        public ActionResult Edit(int? ProjectId, int? ModuleId, int? RequerimentId)
-    {
-        if (ProjectId == null || ModuleId == null || RequerimentId == null)
+        public ActionResult Edit(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
+            if (requeriment == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
+            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.complexity = SelectListComplexity(null);
+            ViewBag.status = SelectListStatus(null);
+            return View(requeriment);
         }
-        Requeriment requeriment = db.Requeriment.Find(ProjectId, ModuleId, RequerimentId);
-        if (requeriment == null)
-        {
-            return HttpNotFound();
-        }
-        ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-        ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
-        return View(requeriment);
-    }
 
-    // POST: Requeriments/Edit/5
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        // POST: Requeriments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
+        public ActionResult Edit([Bind(Include = "idProjectFKPK,idModuleFKPK,idRequerimentPK,idEmployeeFK,objective,estimatedDuration,realDuration,status,startingDate,endDate,complexity")] Requeriment requeriment)
         {
             if (ModelState.IsValid)
             {
@@ -103,13 +113,13 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            if (id == null)
+            if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Requeriment requeriment = db.Requeriment.Find(id);
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             if (requeriment == null)
             {
                 return HttpNotFound();
@@ -120,9 +130,9 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Requeriments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
-            Requeriment requeriment = db.Requeriment.Find(id);
+            Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             db.Requeriment.Remove(requeriment);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -135,19 +145,6 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public class RequerimentValidation
-        {
-            public static ValidationResult validateName(String id)
-            {
-                {
-                    FeLuisesEntities db = new FeLuisesEntities();
-                    if (db.Client.Any(x => x.idClientPK == id) || db.Employee.Any(x => x.idEmployeePK == id))
-                        return new ValidationResult("A person id must be unique");
-                    return ValidationResult.Success;
-                }
-            }
         }
 
         // EF: Retorna una lista con los requerimientos asociados a dicho proyecto que se encuentran dentro de cierto modulo
@@ -183,8 +180,39 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return null;
             }
-            List<Requeriment> requerimentsAssociated = RequerimentList(idProjectFKPK,idModuleFKPK);
+            List<Requeriment> requerimentsAssociated = RequerimentList(idProjectFKPK, idModuleFKPK);
             return PartialView("GetRequeriments", requerimentsAssociated);
+        }
+
+        private SelectList SelectListComplexity(int? defaultValue)
+        {
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No asignado" },
+                new SelectListItem { Value = "1", Text = "Simple" },
+                new SelectListItem { Value = "2", Text = "Mediano" },
+                new SelectListItem { Value = "3", Text = "Complejo" },
+                new SelectListItem { Value = "4", Text = "Muy complejo" }
+            };
+            if (defaultValue == null)
+                return new SelectList(list, "Value", "Text");
+            else
+                return new SelectList(list, "Value", "Text", defaultValue);
+        }
+
+        public SelectList SelectListStatus(int? defaultValue)
+        {
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No iniciado" },
+                new SelectListItem { Value = "1", Text = "En proceso" },
+                new SelectListItem { Value = "2", Text = "Interrumpido" },
+                new SelectListItem { Value = "3", Text = "Completado" }
+            };
+            if (defaultValue == null)
+                return new SelectList(list, "Value", "Text");
+            else
+                return new SelectList(list, "Value", "Text", defaultValue);
         }
     }
 }

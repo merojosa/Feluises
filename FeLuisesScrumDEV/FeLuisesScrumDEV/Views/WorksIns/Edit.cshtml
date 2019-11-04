@@ -10,7 +10,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>Editar equipo</title>
+        <title>Administrar equipo</title>
 
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -107,9 +107,8 @@
         </script>
 
         <script type="text/javascript">
-            function getIdProject() {
+            function getMembers() {
                 var idProject = document.getElementById("projectSelect").value;
-			    console.log(idProject);
 			    $.ajax({
                         type: "post",
                         dataType: "json",
@@ -123,9 +122,11 @@
                             var ids = json.ids;
                             var names = json.names;
                             var knowledges = json.knowledges;
+                            var leaderName = json.leaderName;
                             var skills = "";
                             var pathImage = "../../Images/info.svg";
                             var num = 25; //Para las dimensiones de la imagen
+                            document.getElementById("leaderName").innerHTML = leaderName;
                             document.getElementById("sortable2").innerHTML = "";
                             var ul = document.getElementById("sortable2");                   
                             for (var cont = 0; cont < ids.length; cont++){
@@ -142,6 +143,7 @@
                                     .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
                                 skills = "";
                             }
+
                         },
                         error: function (errorList) {
                             console.log(errorList);
@@ -172,10 +174,10 @@
     </head>
     @using (Html.BeginForm())
     {
-        <body onload="getIdProject()">
+        <body onload="getMembers()">
 
             <div class="container">
-                <h2>Editar Equipo</h2>
+                <h2>Administrar Equipo</h2>
                 <hr>
                 <br />
                 <div class="row">
@@ -183,13 +185,14 @@
                         <center>
                             <b>Nombre proyecto: </b>
                             <br />
-                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getIdProject()" })
+                            @Html.DropDownList("idProjectFKPK", null, htmlAttributes: new { @class = "form-control", @id = "projectSelect", @onchange = "getMembers()" })
                             @Html.ValidationMessageFor(model => model.idProjectFKPK, "", new { @class = "text-danger" })
                         </center>
                     </div>
                     <div class="col-md-6">
                         <center>
-                            <b>Lider: </b>
+                            <b>Lider: </b><br/>
+                            <label id="leaderName"></label>
                         </center>
                     </div>
                 </div>

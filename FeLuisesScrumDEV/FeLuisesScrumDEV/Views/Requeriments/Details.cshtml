@@ -7,83 +7,136 @@
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 </head>
+
+@{
+    string[] states = { "No iniciado", "En proceso", "Interrumpido", "Completado" };
+    string[] complexity = { "No asignado", "Simple", "Mediano", "Complejo", "Muy complejo" };
+}
+
 <body>
-    <h2>Details</h2>
+    @if (Session["userName"] == null)
+    {
 
-    <div>
-        <h4>Requeriment</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.estimatedDuration)
-            </dt>
+        <div class="container">
 
-            <dd>
-                @Html.DisplayFor(model => model.estimatedDuration)
-            </dd>
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
+            <h2 class="card-header text-white" id="back-Fe1">Detalles de Requerimiento</h2>
+            <div class="card-body">
+                <dl class="dl-horizontal">
 
-            <dt>
-                @Html.DisplayNameFor(model => model.realDuration)
-            </dt>
+                    <dt>
+                        Perteneciente al proyecto
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.realDuration)
-            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Module.Project.projectName)
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.status)
-            </dt>
+                    <dt>
+                        Perteneciente al módulo
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.status)
-            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Module.name)
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.startingDate)
-            </dt>
+                    <dt>
+                        Objetivo
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.startingDate)
-            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.objective)
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.endDate)
-            </dt>
+                    <dt>
+                        Complejidad
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.endDate)
-            </dd>
+                    <dd>
+                        @complexity[(int)Model.complexity]
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.complexity)
-            </dt>
+                    <dt>
+                        Duración estimada
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.complexity)
-            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.estimatedDuration)
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Employee.employeeName)
-            </dt>
+                    <dt>
+                        Duración real
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Employee.employeeName)
-            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.realDuration)
+                    </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Module.name)
-            </dt>
+                    <dt>
+                        Estado
+                    </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Module.name)
-            </dd>
+                    <dd>
+                        @states[(int)Model.status]
+                    </dd>
 
-        </dl>
-    </div>
-    <p>
-        @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
-        @Html.ActionLink("Edit", "Edit", new { ProjectId = Model.idProjectFKPK, ModuleId = Model.idModuleFKPK, RequerimentId = Model.idRequerimentPK }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+                    <dt>
+                        Fecha de inicio de trabajo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.startingDate)
+                    </dd>
+
+                    <dt>
+                        Fecha de fin de trabajo
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.endDate)
+                    </dd>
+
+                    <dt>
+                        Empleado asignado
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Employee.employeeName)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="card-footer" id="back-Fe1">
+                <a class="btn" role="button" href="@Url.Action("Index", "Requeriments")">
+                    <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                @if (Convert.ToInt32(Session["userRole"]) == 0 || Convert.ToInt32(Session["userRole"]) == 1)
+                {
+                    <a class="btn" role="button" href="@Url.Action("Edit", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
+                        <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
+                }
+                @if (Convert.ToInt32(Session["userRole"]) == 0)
+                {
+                <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
+                    <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                }
+            </div>
+        </div>
+    }
 </body>
 </html>
