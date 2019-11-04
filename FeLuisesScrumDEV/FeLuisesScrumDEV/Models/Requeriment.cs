@@ -36,8 +36,8 @@ namespace FeLuisesScrumDEV.Models
         [Key]
         public int idRequerimentPK { get; set; }
 
-        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "ID must contain 9 integers.")]
-        [MaxLength(9, ErrorMessage = "Employee's ID must be 9 characters long.")]
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "La cédula debe de contener 9 dígitos.")]
+        [MaxLength(9, ErrorMessage = "La cédula debe de contener 9 dígitos.")]
         //[CustomValidation(typeof(Controllers.RequerimentsController.RequerimentValidation), nameof(Controllers.RequerimentsController.RequerimentValidation.validateName))]
         public string idEmployeeFK { get; set; }
 
@@ -49,12 +49,12 @@ namespace FeLuisesScrumDEV.Models
 
         public Nullable<short> status { get; set; }
 
-        [Required(ErrorMessage = "Must enter a starting date.")]
+        [Required(ErrorMessage = "Debe de ingresar una fecha de inicio.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime startingDate { get; set; }
 
-        [Required(ErrorMessage = "Must enter a starting date.")]
+        [Required(ErrorMessage = "Debe de ingresar una fecha de finalizacion.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> endDate { get; set; }

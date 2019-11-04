@@ -58,7 +58,7 @@ namespace FeLuisesScrumDEV.Models
         //Comentado para que se valide equipo
         //[RegularExpression(@"^\d{1,20}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
         [Range(0, 9999999999999999.99)]
-        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N0}")]
         public Nullable<decimal> pricePerHour { get; set; }
         public Nullable<short> availability { get; set; }
     
