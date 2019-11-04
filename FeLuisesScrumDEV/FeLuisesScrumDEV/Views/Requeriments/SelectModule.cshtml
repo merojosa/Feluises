@@ -28,9 +28,12 @@
                     <div class="dropdown">
                         @Html.DropDownList("idModuleFKPK", null, "Módulo", new { @class = "form-control"})
                         <div class="float-md-right">
+                            @if (Convert.ToInt32(Session["userRole"]) == 0)
+                            {
                             <a id="prueba" class="btn btn-outline-success" role="button" href="#">
                                 <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
                             </a>
+                            }
                         </div>
                     </div>
                 </p>
