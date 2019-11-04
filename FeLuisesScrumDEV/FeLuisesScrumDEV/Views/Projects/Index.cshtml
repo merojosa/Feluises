@@ -42,9 +42,9 @@
                                 <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">Client name: @item.Client.clientName</p>
-                                <p class="card.text">Objective: @item.objective</p>
-                                <p class="card-text">Actual Cost: @item.realCost</p>
+                                <p class="card-text">Cliente: @item.Client.clientName</p>
+                                <p class="card-text">Objectivo: @item.objective</p>
+                                <p class="card-text">Costo Actual: @item.realCost</p>
                             </div>
                             <div class="card-footer text-white-50 text-center" id="back-Fe1">
                                 @Html.DisplayFor(modelItem => item.startingDate)

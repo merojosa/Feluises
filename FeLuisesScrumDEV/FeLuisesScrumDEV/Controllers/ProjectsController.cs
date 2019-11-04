@@ -26,6 +26,9 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
+            var WorksInController = new WorksInsController();
+            var lider = WorksInController.GetLiderName(id);
+            ViewBag.idLiderFK = lider;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,8 +46,8 @@ namespace FeLuisesScrumDEV.Controllers
         {
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
             var EmployeesController = new EmployeesController();
-            var availableEmployes = EmployeesController.AvailableEmployees();
-            ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName");
+            var availableEmployees = EmployeesController.AvailableEmployees();
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName");
             return View();
         }
 
@@ -53,32 +56,39 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeePK")] WorksIn employee)
+        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
             var EmployeesController = new EmployeesController();
-            var availableEmployes = EmployeesController.AvailableEmployees();
+            var availableEmployees = EmployeesController.AvailableEmployees();
             if ( db.Project.Any(x => x.projectName == project.projectName))
             {
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
                 ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
-                ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName");
+                ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName");
                 return View(project);
             }
             if ( ModelState.IsValid )
             {
                 db.Project.Add(project);
+                employee.idProjectFKPK = project.idProjectPK;
+                employee.role = 1;
+                db.WorksIn.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
-            ViewBag.idEmployeePK = new SelectList(availableEmployes, "idEmployeePK", "employeeName", employee);
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", employee);
             return View(project);
         }
 
         // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
+            var EmployeesController = new EmployeesController();
+            var availableEmployees = EmployeesController.AvailableEmployeesAndLider(id);
+            var WorksInController = new WorksInsController();
+            var lider = WorksInController.GetLiderID(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +99,7 @@ namespace FeLuisesScrumDEV.Controllers
                 return HttpNotFound();
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider);
             return View(project);
         }
 
@@ -97,15 +108,23 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project)
+        public ActionResult Edit([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
+            var EmployeesController = new EmployeesController();
+            var availableEmployees = EmployeesController.AvailableEmployeesAndLider(project.idProjectPK);
+            var WorksInController = new WorksInsController();
+            var lider = WorksInController.GetLiderID(project.idProjectPK);
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
+                employee.idProjectFKPK = project.idProjectPK;
+                employee.role = 1;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider);
             return View(project);
         }
 

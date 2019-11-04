@@ -174,6 +174,47 @@ namespace FeLuisesScrumDEV.Controllers
             return RedirectToAction("Index");
         }
 
+        public string GetLiderID(int? IdProjectPK)
+        {
+            if (IdProjectPK == null)
+            {
+                return null;
+            }
+            else
+            {
+                WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
+                if(worksIn == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return worksIn.idEmployeeFKPK;
+                }
+            }
+        }
+
+        public string GetLiderName(int? IdProjectPK)
+        {
+            if (IdProjectPK == null)
+            {
+                return null;
+            }
+            else
+            {
+                WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
+                if (worksIn == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    var EmployeesController = new EmployeesController();
+                    return EmployeesController.getEmployeeName(worksIn.idEmployeeFKPK);
+                }
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
