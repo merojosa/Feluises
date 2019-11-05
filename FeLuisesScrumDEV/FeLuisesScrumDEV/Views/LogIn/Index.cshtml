@@ -60,18 +60,20 @@
                         <div class="card-content">
 
                             <div class="form-field">
-                                @Html.LabelFor(model => model.userName)
+                                <label>Cédula</label>
+                                @*@Html.LabelFor(model => model.userName)*@
                                 @Html.EditorFor(model => model.userName)
                             </div><br>
 
                             <div class="form-field">
-                                @Html.LabelFor(model => model.password)
+                                <label>Contraseña</label>
+                                @*@Html.LabelFor(model => model.password)*@
                                 @Html.PasswordFor(model => model.password)
                             </div><br>
 
                             @Html.ValidationSummary()
                             <div class="form-field center-align btn-large red waves-effect waves-light red hoverable">
-                                <input type="submit" name="name" value="Login" />
+                                <input type="submit" name="name" value="Iniciar Sesión" />
                             </div><br>
 
                         </div>

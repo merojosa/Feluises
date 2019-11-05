@@ -69,7 +69,8 @@
     </script>
 
     <script type="text/javascript">
-                function myFunction() {
+        function myFunction() {
+                    var projectIndex = document.getElementById("projectSelect").selectedIndex;
                     var list = [];
                     document.querySelectorAll("#sortable2 li")
                         .forEach(function (item) {
@@ -94,6 +95,7 @@
                         success: function (json) {
                             if (json.isRedirect) {
                                 window.location.href = json.redirectUrl;
+                                document.getElementById("projectSelect").selectedIndex = projectIndex;
                             }
                         },
                         error: function (errorList) {
@@ -190,9 +192,7 @@
                     </div>
                 </div>
             </div>
-        }
-        else
-        {
+        }else{
 
             <div class="container">
 

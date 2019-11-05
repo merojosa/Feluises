@@ -16,83 +16,6 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         /*
-         * Efecto: Genera la vista del Create de equipos, en la cual se pueden asociar empleados a un proyecto.
-         * Requiere: NA
-         * Modifica: La vista del Create de equipos.
-         */
-        public ActionResult Create()
-        {
-            //Viebags para acceder a información dentro de la vista
-            ViewBag.auxLastName = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeLastName");
-            ViewBag.idEmployeeFKPK = new SelectList(db.Employee.Where(e => (e.availability == 0 && e.developerFlag == 1 && e.idEmployeePK != "000000000")), "idEmployeePK", "employeeName");
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
-            ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
-            return View();
-        }
-
-        /*
-         * Efecto: Procesa la informacion recibida por la vista mediante post, agregando los empleados al proyecto
-         * Requiere: Los miembros del equipo y el id del proyecto (Lo pasa la vista mediante AJAX)
-         * Modifica: La tabla WorksIn, que es nuestra tabla de equipos
-         */
-        [HttpPost]
-        public ActionResult Create(string[] teamMembers, string currentProject)
-        {
-            if (currentProject != null)
-            {
-                //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
-                int idProject = Int32.Parse(currentProject);
-                if (teamMembers != null)
-                {
-                    foreach (var developer in teamMembers)
-                    {
-                        db.WorksIn.Add(new WorksIn
-                        {
-                            idEmployeeFKPK = developer,
-                            idProjectFKPK = idProject,
-                            role = 0 //Se especifica el rol del empleado, en este caso desarrollador
-                        });
-                        db.Employee.Find(developer).availability = 1;
-                    }
-
-                    try
-                    {
-                        db.SaveChanges();
-                    }//Permite atrapar errores de validacion en el modelo antes de guardar los cambios en la bd.
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    };
-                    //Retorna un JSON que es recibido por el success de la vista
-                    return Json(new
-                    {
-                        redirectUrl = Url.Action("Index", "WorksIns"),
-                        isRedirect = true
-                    });
-                }
-                else
-                {
-                    return RedirectToAction("Index", "WorksIns"); //En caso de nulos redirecciona al indice
-                }
-
-            }
-            else
-            {
-                return RedirectToAction("Index", "WorksIns"); //En caso de nulos redirecciona al indice
-            }
-        }
-
-        /*
          * Efecto: Genera la vista del Edit de equipos, en la cual se pueden asociar y desasociar empleados de un proyecto.
          * Requiere: NA
          * Modifica: La vista del Create de equipos.
@@ -107,7 +30,6 @@ namespace FeLuisesScrumDEV.Controllers
             ViewBag.knowledges = new SelectList(db.DeveloperKnowledge, "idEmployeeFKPK", "devKnowledgePK");
             return View();
         }
-
 
         /*
          * Efecto: Procesa la informacion recibida por la vista mediante post, quitando los empleados anteriores 
@@ -135,7 +57,6 @@ namespace FeLuisesScrumDEV.Controllers
                     var auxEmployee = db.Employee.Find(oldEmployee.Value);
                     auxEmployee.availability = 0;
                 }
-
 
                 if (teamMembers != null)
                 {
@@ -176,36 +97,13 @@ namespace FeLuisesScrumDEV.Controllers
                         isRedirect = true
                     });
 
-                }
-                else
-                {
+                }else{
                     return RedirectToAction("Index", "WorksIns");//En caso de nulos redirecciona al indice
                 }
 
-            }
-            else
-            {
+            }else{
                 return RedirectToAction("Index", "WorksIns");//En caso de nulos redirecciona al indice
             }
-        }
-
-        /*
-         * Efecto: Retorna la vista para eliminar un empleado dentro de un equipo
-         * Requiere: El id del empleado
-         * Modifica: NA
-         */
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WorksIn worksIn = db.WorksIn.Find(id);
-            if (worksIn == null)
-            {
-                return HttpNotFound();
-            }
-            return View(worksIn);
         }
 
         protected override void Dispose(bool disposing)
@@ -325,16 +223,12 @@ namespace FeLuisesScrumDEV.Controllers
             if (IdProjectPK == null)
             {
                 return null;
-            }
-            else
-            {
+            }else{
                 WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
                 if (worksIn == null)
                 {
                     return null;
-                }
-                else
-                {
+                }else{
                     return worksIn.idEmployeeFKPK;
                 }
             }
@@ -346,16 +240,12 @@ namespace FeLuisesScrumDEV.Controllers
             if (IdProjectPK == null)
             {
                 return null;
-            }
-            else
-            {
+            }else{
                 WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
                 if (worksIn == null)
                 {
                     return null;
-                }
-                else
-                {
+                }else{
                     var EmployeesController = new EmployeesController();
                     return EmployeesController.getEmployeeName(worksIn.idEmployeeFKPK);
                 }

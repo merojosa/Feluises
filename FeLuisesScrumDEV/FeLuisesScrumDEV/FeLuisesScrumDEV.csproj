@@ -351,10 +351,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\WorksIns\Create.cshtml" />
-    <Content Include="Views\WorksIns\Delete.cshtml" />
-    <Content Include="Views\WorksIns\Details.cshtml" />
-    <Content Include="Views\WorksIns\Edit.cshtml" />
     <Content Include="Views\WorksIns\Index.cshtml" />
     <Content Include="Views\DeveloperKnowledges\Create.cshtml" />
     <Content Include="Views\DeveloperKnowledges\Details.cshtml" />
