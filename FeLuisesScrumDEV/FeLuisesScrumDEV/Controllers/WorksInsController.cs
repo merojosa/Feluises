@@ -46,16 +46,23 @@ namespace FeLuisesScrumDEV.Controllers
                 int idProject = Int32.Parse(currentProject);
                 int auxOldProject;
 
-                //Acá borramos los empleados anteriores para evitar los conflictos que puedan generar con los que vienen de la vista.
+                //Acá borramos los empleados anteriores para evitar los conflictos que puedan generar con los que vienen de la vista, sin borrar el líder.
                 WorksIn worksInEntity;
-                ViewBag.oldEmployees = new SelectList(db.WorksIn.Where(t => t.idProjectFKPK == idProject), "idEmployeeFKPK", "idProjectFKPK");
+                ViewBag.oldEmployees = new SelectList(db.WorksIn.Where(t => t.idProjectFKPK == idProject ), "idEmployeeFKPK", "idProjectFKPK");
+                
                 foreach (var oldEmployee in ViewBag.oldEmployees)
                 {
+                    //var auxLeader = db.WorksIn.Find(oldEmployee.Value, idProject);
+
                     auxOldProject = Int32.Parse(oldEmployee.Text);
                     worksInEntity = db.WorksIn.Find(oldEmployee.Value, auxOldProject);
-                    db.WorksIn.Remove(worksInEntity);
-                    var auxEmployee = db.Employee.Find(oldEmployee.Value);
-                    auxEmployee.availability = 0;
+                    if(worksInEntity.role != 1)
+                    {
+                        db.WorksIn.Remove(worksInEntity);
+                        var auxEmployee = db.Employee.Find(oldEmployee.Value);
+                        auxEmployee.availability = 0;
+                    }
+ 
                 }
 
                 if (teamMembers != null)
@@ -70,38 +77,36 @@ namespace FeLuisesScrumDEV.Controllers
                         });
                         db.Employee.Find(developer).availability = 1;
 
-                    }
-                    //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
-                    try
-                    {
-                        db.SaveChanges();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    };
-                    //Retorna un JSON que es recibido por el success de la vista
-                    return Json(new
-                    {
-                        redirectUrl = Url.Action("Index", "WorksIns"),
-                        isRedirect = true
-                    });
-
-                }else{
-                    return RedirectToAction("Index", "WorksIns");//En caso de nulos redirecciona al indice
+                    }  
                 }
-
-            }else{
+                //Permite encontrar errores de validacion en el modelo antes de guardar los cambios en la bd.
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                };
+                //Retorna un JSON que es recibido por el success de la vista
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "WorksIns"),
+                    isRedirect = true
+                });
+            }
+            else
+            {
                 return RedirectToAction("Index", "WorksIns");//En caso de nulos redirecciona al indice
             }
         }
