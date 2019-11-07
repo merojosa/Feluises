@@ -114,7 +114,7 @@ namespace FeLuisesScrumDEV.Controllers
         // MOD: NA
         public List<Employee> AvailableEmployees()
         {
-            var availableEmployees = db.Employee.Where(m => m.availability == 0);
+            var availableEmployees = db.Employee.Where(m => m.availability == 0 && m.developerFlag == 1);
             if (availableEmployees == null)
             {
                 return null;
@@ -151,7 +151,7 @@ namespace FeLuisesScrumDEV.Controllers
         // MOD: NA
         public List<Employee> AvailableEmployeesAndLider(int? id)
         {
-            var availableEmployees = db.Employee.Where(m => m.availability == 0);
+            var availableEmployees = db.Employee.Where(m => m.availability == 0 && m.developerFlag == 1);
             if (availableEmployees == null)
             {
                 return null;
