@@ -224,12 +224,14 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return null;
             }else{
-                WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
-                if (worksIn == null)
+                var worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList();
+                WorksIn element;
+                if (worksIn.Count() <= 0)
                 {
                     return null;
                 }else{
-                    return worksIn.idEmployeeFKPK;
+                    element = worksIn.First();
+                    return element.idEmployeeFKPK;
                 }
             }
         }
@@ -241,13 +243,15 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return null;
             }else{
-                WorksIn worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList().First();
-                if (worksIn == null)
+                var worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList();
+                WorksIn element;
+                if (worksIn.Count() <= 0)
                 {
                     return null;
                 }else{
+                    element = worksIn.First();
                     var EmployeesController = new EmployeesController();
-                    return EmployeesController.getEmployeeName(worksIn.idEmployeeFKPK);
+                    return EmployeesController.getEmployeeName(element.idEmployeeFKPK);
                 }
             }
         }

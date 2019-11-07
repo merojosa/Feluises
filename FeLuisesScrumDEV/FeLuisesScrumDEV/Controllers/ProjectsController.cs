@@ -137,12 +137,33 @@ namespace FeLuisesScrumDEV.Controllers
             var availableEmployees = EmployeesController.AvailableEmployeesAndLider(project.idProjectPK);
             var WorksInController = new WorksInsController();
             var lider = WorksInController.GetLiderID(project.idProjectPK);
+            var aux = employee.idEmployeeFKPK;
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                employee.idProjectFKPK = project.idProjectPK;
-                employee.role = 1;
+                if (employee.idEmployeeFKPK == lider)
+                {
+                    //Si el nuevo id es igual al ya asignado, entonces no hace nada.
+                }
+                else
+                {   //en caso contrario cambia los datos.
+                    if(lider == null)
+                    {
+                        employee.idProjectFKPK = project.idProjectPK;
+                        employee.role = 1;
+                        db.WorksIn.Add(employee);
+                    } else
+                    {
+                        
+                        var exLider = db.Employee.Find(lider);
+                        exLider.availability = 0;
+                        var modificating = db.WorksIn.Find(lider, project.idProjectPK);
+                        db.WorksIn.Remove(modificating);
+                        employee.idProjectFKPK = project.idProjectPK;
+                        employee.role = 1;
+                        db.WorksIn.Add(employee);
+                    }
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -160,7 +160,14 @@ namespace FeLuisesScrumDEV.Controllers
             var WorksInController = new WorksInsController();
             var lider = WorksInController.GetLiderID(id);
             var liderEmployee = db.Employee.Where(m => m.idEmployeePK == lider);
-            list.Add(liderEmployee.ToList().First());
+            if (liderEmployee.ToList().Count() <= 0)
+            {
+
+            }
+            else
+            {
+                list.Add(liderEmployee.ToList().First());
+            }
             return list;
         }
 
