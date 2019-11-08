@@ -16,12 +16,14 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         // GET: Employees
+        //EFE: Lista todos los empleados que hayan
         public ActionResult Index()
         {
             return View(db.Employee.ToList());
         }
 
         // GET: Employees/Details/5
+        //EFE: muestra los detalles del empleado seleccionado.
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,12 +39,15 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Employees/Create
+        // EFE: Crea un nuevo empleado
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Employees/Create
+        //EFE: Valida los campos de creación
+        //REQ: Campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,6 +70,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Employees/Edit/5
+        //EFE: Detalles del empleado seleccionado.
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -80,6 +86,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Employees/Edit/5
+        //EFE: Valida los compos de edición.
+        //REQ: Campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -96,6 +104,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Employees/Delete/5
+        //EFE: Elimia un empleado
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -122,6 +131,7 @@ namespace FeLuisesScrumDEV.Controllers
             return availableEmployees.ToList();
         }
         // POST: Employees/Delete/5
+        //EFE: Verifica si se guardó la acción
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
@@ -170,7 +180,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return list;
         }
-
+        //falta
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -179,7 +189,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             base.Dispose(disposing);
         }
-
+        //falta
         public SelectList EmployeeFromTeamSelectList(int? idProject)
         {
 

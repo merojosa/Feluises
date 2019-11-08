@@ -17,6 +17,8 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         // GET: Requeriments
+        //EFE: Lista todos los requerimientos de un proyecto y un m{odulo dado. Filta según el usuario
+        //REQ: Proyecto y módulo existente
         public ActionResult Index()
         {
             var requeriment = db.Requeriment.Include(r => r.Employee).Include(r => r.Module);
@@ -25,6 +27,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Details/5
+        //EFE: Detalles del Requerimiento seleccionado.
         public ActionResult Details(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
@@ -40,6 +43,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Create
+        //EFE: Crea un requerimieno ya asociado a un módulo y proyecto
         public ActionResult Create(int? idProjectFKPK, int? idModuleFKPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null)
@@ -55,6 +59,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Requeriments/Create
+        //EFE: Valida los campos de creación
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -76,6 +81,7 @@ namespace FeLuisesScrumDEV.Controllers
 
 
         // GET: Requeriments/Edit/5
+        //EFE: Edita un requerimiento seleccionado
         public ActionResult Edit(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
@@ -95,6 +101,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Requeriments/Edit/5
+        //EFE: Valida los campos de edición de un requesimiento
+        //REQ: Campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -113,6 +121,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Requeriments/Delete/5
+        //EFE: Elimina el requerimiento seleccionado.
         public ActionResult Delete(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
@@ -128,6 +137,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Requeriments/Delete/5
+        //EFE: Valida que se haya dado.
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)

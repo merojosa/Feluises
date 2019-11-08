@@ -195,7 +195,7 @@ namespace FeLuisesScrumDEV.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //falta*-*-*-*-*
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -220,7 +220,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return modules.ToList();
         }
-
+        //falta-*-*-*-*-*-*
         public SelectList ModuleSelectList(int? idProjectFKPK)
         {
             if (idProjectFKPK == null)

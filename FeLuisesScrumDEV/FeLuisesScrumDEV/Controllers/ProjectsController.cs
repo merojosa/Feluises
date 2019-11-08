@@ -17,6 +17,8 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         // GET: Projects
+        //EFE: Lista los proyectos mostrando algunos atributos. Filtra según el empleado o cliente
+        //REQ: Un usuario loggueado
         public ActionResult Index()
         {
             
@@ -46,6 +48,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Projects/Details/5
+        //EFE: Detalles del proyecto seleccionado
         public ActionResult Details(int? id)
         {
             var WorksInController = new WorksInsController();
@@ -64,6 +67,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Projects/Create
+        //EFE: Crea un nuevo proyecto.
         public ActionResult Create()
         {
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
@@ -74,6 +78,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Projects/Create
+        //EFE: Valida los campos de creación de un proyecto
+        //REQ: Campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -105,6 +111,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Projects/Edit/5
+        //EFE: Edita el proyecto seleccionado
         // MOD: el proyecto con el id especificado.
         public ActionResult Edit(int? id)
         {
@@ -127,6 +134,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Projects/Edit/5
+        //EFE: Verifica y valida todos los campos de edición
+        //REQ; Campos obligatorios.
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -173,6 +182,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Projects/Delete/5
+        //EFE: Elimina el proyecto seleccionado
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -188,6 +198,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Projects/Delete/5
+        //EFE: Verifica si se elimió el proyecto seleccionado.
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
