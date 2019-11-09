@@ -11,7 +11,7 @@
 
     <script>
         $(document).ready(function () {
-            getProvincia();
+            getProvincia(null);
         });
     </script>
     <script>
@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <b>Provincia</b>
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
+                                            @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton(null,null)" })
                                             @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                         <b>Cantón</b>
                                         @*@Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                         <div class="col-md-10">
-                                            @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict()" })
+                                            @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict(null, null, null)" })
                                             @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
