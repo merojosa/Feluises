@@ -9,12 +9,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
+    //Script para esconder los tipos de menú
         $(document).ready(function () {
-            $("#ProjectCards").show();
-            $("#ProjectsTable").hide();
+            $("#ProjectCards").show(); //Inicia mostrando las cards.
+            $("#ProjectsTable").hide(); //Y escondiendo la vista de tablas.
             $("#toggle").click(function () {
-                $("#ProjectsTable").toggle();
-                $("#ProjectCards").toggle();
+                $("#ProjectsTable").toggle(); //Cada vez que se presione el toggle, muestra o esconde alternadamente
+                $("#ProjectCards").toggle(); //ProjectsTable o ProjectCards según corresponda.
             });
         });
     </script>
@@ -25,18 +26,18 @@
     @if (Session["userName"] == null)
     {
 
-    <div class="container">
+        <div class="container">
 
-        <div class="card">
-            <div class="card-header">
-                <h2 id="heading-red">No se vale hackear!</h2>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
-                <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
             </div>
         </div>
-    </div>
     }
     else
     {
@@ -52,33 +53,35 @@
         <div class="container">
             <h2>Proyectos</h2>
             <hr />
-        <section id="ProjectCards"><!--Id para hacer el toggle de una vista a otra (Cards)-->
-            <div class="card-deck">
-                <div class="card-columns">
-                    @foreach (var item in Model)
-                    {
-                        <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
-                            <div class="card-header" id="back-Fe1">
-                                <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
-                            </div><!--Fin del card-header-->
-                            <div class="card-body">
-                                <p class="card-text">Cliente: @item.Client.clientName</p>
-                                <p class="card-text">Objectivo: @item.objective</p>
-                                <p class="card-text">Costo Actual: @item.realCost</p>
-                            </div><!--Fin del card-body-->
-                            <div class="card-footer text-white-50 text-center" id="back-Fe1">
-                                @Html.DisplayFor(modelItem => item.startingDate)
-                                @if (item.startingDate == null)
-                                {
-                                    <p class="card-text">Informacion no disponible</p>
-                                }
-                            </div><!--Fin del card-footer-->
-                        </div><!--Fin del card-->
-                    }
-                </div><!--Fin del card-columns-->
-            </div>
-        </section>
-            <section id="ProjectsTable"> <!--Id para hacer el toggle de una vista a otra (tablas)-->
+            <section id="ProjectCards">
+                <!--Id para hacer el toggle de una vista a otra (Cards)-->
+                <div class="card-deck">
+                    <div class="card-columns">
+                        @foreach (var item in Model)
+                        {
+                            <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
+                                <div class="card-header" id="back-Fe1"><!--Inicio de card-headers-->
+                                    <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
+                                </div><!--Fin del card-header-->
+                                <div class="card-body"><!--Inicio del card-body-->
+                                    <p class="card-text">Cliente: @item.Client.clientName</p>
+                                    <p class="card-text">Objectivo: @item.objective</p>
+                                    <p class="card-text">Costo Actual: @item.realCost</p>
+                                </div><!--Fin del card-body-->
+                                <div class="card-footer text-white-50 text-center" id="back-Fe1"><!--Inicio del card-footer-->
+                                    @Html.DisplayFor(modelItem => item.startingDate)
+                                    @if (item.startingDate == null)
+                                    {
+                                        <p class="card-text">Informacion no disponible</p>
+                                    }
+                                </div><!--Fin del card-footer-->
+                            </div><!--Fin del card-->
+                        }
+                    </div><!--Fin del card-columns-->
+                </div>
+            </section>
+            <section id="ProjectsTable">
+                <!--Id para hacer el toggle de una vista a otra (tablas)-->
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>

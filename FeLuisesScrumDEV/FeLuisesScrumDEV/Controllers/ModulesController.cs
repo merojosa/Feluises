@@ -195,7 +195,7 @@ namespace FeLuisesScrumDEV.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        // EF: libera todos los recursos no manejados de esta clase, en este caso cierra la entidad que representa la base de datos
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -221,6 +221,9 @@ namespace FeLuisesScrumDEV.Controllers
             return modules.ToList();
         }
 
+        // EF: Retorna una lista para seleccionar los distintos modulos que hay dado un proyecto, util para la comunicación entre componentes  y evitar
+        //      entren a la base de datos directamente
+        // REQ: Que exista dicho proyecto
         public SelectList ModuleSelectList(int? idProjectFKPK)
         {
             if (idProjectFKPK == null)
@@ -228,6 +231,8 @@ namespace FeLuisesScrumDEV.Controllers
             return new SelectList(db.Module.Where(m => m.idProjectFKPK == idProjectFKPK), "idModulePK", "name");
         }
 
+
+        // EF: Retorna un modulo consultado
         public Module GetModule(int? idProjectFKPK, int? idModulePK)
         {
             if (idProjectFKPK == null || idModulePK == null)

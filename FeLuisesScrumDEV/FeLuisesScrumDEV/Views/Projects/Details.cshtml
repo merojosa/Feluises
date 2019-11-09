@@ -33,11 +33,11 @@ else
         <h2>Detalle de Proyecto</h2>
         <hr />
         <div class="card rounded border-dark" id="shadow-Fe1" style="width: auto; height:auto;">
-            <h2 class="card-header text-white" id="back-Fe1">@Model.projectName</h2>
-            <div class="card-body">
-                <div class="form">
-                    <div class="form-row">
-                        <div class="col">
+            <h2 class="card-header text-white" id="back-Fe1">@Model.projectName</h2><!--Inicio y fin de encabezado de la card (título)-->
+            <div class="card-body"> <!--inicio del cuerpo de la card (sección del medio)-->
+                        <div class="form"> <!--Inicio de vista en "formulario"-->
+                            <div class="form-row"> <!--Inicio de fila-->
+                                <div class="col"><!--Inicio de columna-->
                             <div class="form-group">
                                 <b>Nombre del Proyecto</b>
                                 <div class="col-md-10">
@@ -77,7 +77,7 @@ else
                                 </div>
                             </div>
                         </div><!--Fin de columna-->
-                        <div class="col">
+                        <div class="col"><!--Inicio de columna-->
                             <div class="form-group">
                                 <b>Costo Estimado</b>
                                 <div class="col-md-10">
@@ -109,7 +109,7 @@ else
                                 </div>
                             </div>
                         </div><!--Fin de columna-->
-                        <div class="col">
+                        <div class="col"><!--Inicio de columna-->
                             <div class="form-group">
                                 <b>Fecha de Inicio</b>
                                 <div class="col-md-10">
@@ -145,7 +145,7 @@ else
                     </div><!--Fin de form-row-->
                 </div><!--Fin de class form-->
             </div><!--Fin de card-body-->
-            <div class="card-footer" id="back-Fe1">
+            <div class="card-footer" id="back-Fe1"> <!--Inicio del footer-->
                 <a class="btn" role="button" href="@Url.Action("Index", "Projects", null)">
                     <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                 </a>
@@ -154,10 +154,10 @@ else
                 {
                     <a class="btn" role="button" href="@Url.Action("Edit", "Projects", new { id = Model.idProjectPK })">
                         <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </a>
+                    </a><!--Botón para entrar a editar el proyecto.-->
                     <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Projects", new { id = Model.idProjectPK })">
                         <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </a>
+                    </a><!--Botón para entrar a borrar el proyecto.-->
                 }
             </div><!--Fin de card-footer-->
         </div><!--Fin de card-->
