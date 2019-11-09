@@ -148,6 +148,7 @@ namespace FeLuisesScrumDEV.Controllers
             return RedirectToAction("Index");
         }
 
+        //EF: Libera los recursos no manejados de manera automatica por esta entidad, en este caso libera la instancia que representa la base de datos
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -173,7 +174,8 @@ namespace FeLuisesScrumDEV.Controllers
             return requeriments.ToList();
         }
 
-        // EF: Retorna una vista con los requerimientos asociados al proyecto y modulo que se consulta
+        // EF: Retorna una vista con los modulos asociados al proyecto y permite una seleccion de los modulos disponibles
+        // REQ: que existan proyectos en la base de datos
         public PartialViewResult SelectModule(int? idProjectFKPK)
         {
             if (idProjectFKPK == null)
@@ -184,6 +186,9 @@ namespace FeLuisesScrumDEV.Controllers
             model.idProjectFKPK = (int)idProjectFKPK;
             return PartialView("SelectModule", model);
         }
+
+        // EF: Retorna una vista con los requerimiento asociados a un proyecto y un modulo
+        // REQ: que existan proyectos con modulos en la base de datos
         public PartialViewResult GetRequeriments(int? idProjectFKPK, int? idModuleFKPK)
         {
             if (idProjectFKPK == null || idModuleFKPK == null)
@@ -194,6 +199,7 @@ namespace FeLuisesScrumDEV.Controllers
             return PartialView("GetRequeriments", requerimentsAssociated);
         }
 
+        // EF: Retorna una select list con los distintos estados de dificultad que puede tener un requerimiento
         private SelectList SelectListComplexity(int? defaultValue)
         {
             List<SelectListItem> list = new List<SelectListItem>
@@ -210,6 +216,7 @@ namespace FeLuisesScrumDEV.Controllers
                 return new SelectList(list, "Value", "Text", defaultValue);
         }
 
+        // EF: Retorna una select list con los distintos estados que puede tener un requerimiento
         public SelectList SelectListStatus(int? defaultValue)
         {
             List<SelectListItem> list = new List<SelectListItem>
