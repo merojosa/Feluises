@@ -146,12 +146,12 @@ namespace FeLuisesScrumDEV.Controllers
         // MOD: NA
         public string getEmployeeName(string id)
         {
-            Employee employee = db.Employee.Find(id);
-            if (employee == null)
+            Employee employee = db.Employee.Find(id); //método simple que busca el id en la tabla
+            if (employee == null) //si no existe retorna null
             {
                 return null;
             }
-            else
+            else //si existe entonces retorna el nombre del empleado.
             {
                 return employee.employeeName;
             }

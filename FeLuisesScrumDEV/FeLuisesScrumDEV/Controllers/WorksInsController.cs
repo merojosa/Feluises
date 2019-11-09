@@ -225,24 +225,24 @@ namespace FeLuisesScrumDEV.Controllers
         // REQ: Que exista el proyecto.
         public string GetLiderID(int? IdProjectPK)
         {
-            if (IdProjectPK == null)
+            if (IdProjectPK == null) //Si el proyecto no existe entonces retorna nulo
             {
                 return null;
-            }else{
-                var worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList();
+            }else{ //si existe
+                var worksIn = db.WorksIn.Where(p => p.idProjectFKPK == IdProjectPK && p.role == 1).ToList(); //Busca crear una lista de un único elemento con el líder (por motivos de facilidad en la consulta)
                 WorksIn element;
-                if (worksIn.Count() <= 0)
+                if (worksIn.Count() <= 0) //si la lista está vacía retorna nulo
                 {
                     return null;
-                }else{
-                    element = worksIn.First();
+                }else{ //si no está vacía
+                    element = worksIn.First(); //obtiene el id del lider
                     return element.idEmployeeFKPK;
                 }
             }
         }
         // EF: Retorna el nombre del líder de un proyecto (especialmente usado para displays)
         // REQ: Que exista el proyecto.
-        public string GetLiderName(int? IdProjectPK)
+        public string GetLiderName(int? IdProjectPK) //similar al alterior con una excepción:
         {
             if (IdProjectPK == null)
             {
@@ -255,8 +255,8 @@ namespace FeLuisesScrumDEV.Controllers
                     return null;
                 }else{
                     element = worksIn.First();
-                    var EmployeesController = new EmployeesController();
-                    return EmployeesController.getEmployeeName(element.idEmployeeFKPK);
+                    var EmployeesController = new EmployeesController(); //la excepción está en que utiliza el controlador de empleados
+                    return EmployeesController.getEmployeeName(element.idEmployeeFKPK); //para retornar el nombre del desarrollador en lugar del id.
                 }
             }
         }
