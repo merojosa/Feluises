@@ -51,9 +51,9 @@ namespace FeLuisesScrumDEV.Controllers
         //EFE: Detalles del proyecto seleccionado
         public ActionResult Details(int? id)
         {
-            var WorksInController = new WorksInsController();
-            var lider = WorksInController.GetLiderName(id);
-            ViewBag.idLiderFK = lider;
+            var WorksInController = new WorksInsController(); //controlador para obtener el líder del proyecto
+            var lider = WorksInController.GetLiderName(id); //método que botiene líder
+            ViewBag.idLiderFK = lider; //viewbag que es llamado para desplegar el lider obtenido
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,9 +71,9 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create()
         {
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
-            var EmployeesController = new EmployeesController();
-            var availableEmployees = EmployeesController.AvailableEmployees();
-            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName");
+            var EmployeesController = new EmployeesController(); //Controlador de empleados
+            var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName"); //viewbag para desplegar el dropdown
             return View();
         }
 
@@ -86,25 +86,25 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
-            var EmployeesController = new EmployeesController();
-            var availableEmployees = EmployeesController.AvailableEmployees();
-            if ( db.Project.Any(x => x.projectName == project.projectName))
+            var EmployeesController = new EmployeesController(); //Controlador de empleados
+            var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
+            if ( db.Project.Any(x => x.projectName == project.projectName)) //si el nombre del proyecto ya existe
             {
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
-                ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName");
-                ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName");
-                return View(project);
+                ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName"); //viewbag para desplegar el dropdown de clientes
+                ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName"); //viewbag para desplegar el dropdown
+                return View(project); //no guarda cambios y actualiza la vista.
             }
-            if ( ModelState.IsValid )
+            if ( ModelState.IsValid ) //si el modelo es válido
             {
-                db.Project.Add(project);
+                db.Project.Add(project); //agrega el proyecto a la tabla
                 employee.idProjectFKPK = project.idProjectPK;
                 employee.role = 1;
-                db.WorksIn.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                db.WorksIn.Add(employee); //agrega la relación de lider a la tabla worksIn
+                db.SaveChanges(); //guarda cambios
+                return RedirectToAction("Index"); //vuelve al index.
             }
-
+            //Si no entra en ninguno de los 2 ifs entonces actualiza la vista con los mismos viewbags.
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", employee);
             return View(project);
@@ -115,10 +115,10 @@ namespace FeLuisesScrumDEV.Controllers
         // MOD: el proyecto con el id especificado.
         public ActionResult Edit(int? id)
         {
-            var EmployeesController = new EmployeesController();
-            var availableEmployees = EmployeesController.AvailableEmployeesAndLider(id);
-            var WorksInController = new WorksInsController();
-            var lider = WorksInController.GetLiderID(id);
+            var EmployeesController = new EmployeesController(); //Controlador de empleados
+            var availableEmployees = EmployeesController.AvailableEmployeesAndLider(id); //retorna la lista de desarrolladores disponibles incluyendo al líder actual del proyecto
+            var WorksInController = new WorksInsController(); //Controlador de relaciones desarrollador/proyecto.
+            var lider = WorksInController.GetLiderID(id); //Retorna el id del líder el proyecto actual para ponerlo como default en el dropdown
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -129,7 +129,7 @@ namespace FeLuisesScrumDEV.Controllers
                 return HttpNotFound();
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
-            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider);
+            ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider); //dropdown con lider por defecto
             return View(project);
         }
 
@@ -156,21 +156,21 @@ namespace FeLuisesScrumDEV.Controllers
                 }
                 else
                 {   //en caso contrario cambia los datos.
-                    if(lider == null)
+                    if(lider == null) //si no hay lider asignado, crea una nueva relación con el líder elegido
                     {
                         employee.idProjectFKPK = project.idProjectPK;
                         employee.role = 1;
                         db.WorksIn.Add(employee);
                     } else
-                    {
+                    { //si ya hay uno asignado
                         
                         var exLider = db.Employee.Find(lider);
-                        exLider.availability = 0;
+                        exLider.availability = 0; //cambia la disponibilidad del antiguo a disponible.
                         var modificating = db.WorksIn.Find(lider, project.idProjectPK);
-                        db.WorksIn.Remove(modificating);
+                        db.WorksIn.Remove(modificating); //remueve la relación del líder anterior (dado que no es modificable)
                         employee.idProjectFKPK = project.idProjectPK;
                         employee.role = 1;
-                        db.WorksIn.Add(employee);
+                        db.WorksIn.Add(employee); //y crea una nueva con el nuevo líder.
                     }
                 }
                 db.SaveChanges();
@@ -185,6 +185,9 @@ namespace FeLuisesScrumDEV.Controllers
         //EFE: Elimina el proyecto seleccionado
         public ActionResult Delete(int? id)
         {
+            var WorksInController = new WorksInsController();
+            var lider = WorksInController.GetLiderName(id);
+            ViewBag.idLiderFK = lider;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
