@@ -35,89 +35,91 @@
         <div class="card border-dark shadow rounded" style="width: auto; height: auto;">
             <h2 class="card-header text-white" id="back-Fe1">Detalles de Requerimiento</h2>
             <div class="card-body">
-                <dl class="dl-horizontal">
 
-                    <dt>
-                        Perteneciente al proyecto
-                    </dt>
+                <div class="form">
+                    <div class="form-row">
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Module.Project.projectName)
-                    </dd>
+                        <div class="col">
+                            <div class="form-group">
+                                <b>Proyecto</b>
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(model => model.Module.Project.projectName)
+                                </div>
+                            </div>
 
-                    <dt>
-                        Perteneciente al módulo
-                    </dt>
+                            <div class="form-group">
+                                <b>Módulo</b>
+                                <div class="col-md-6">
+                                    @Html.DisplayFor(model => model.objective)
+                                </div>
+                            </div>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Module.name)
-                    </dd>
+                            <div class="form-group">
+                                <b>Objetivo</b>
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.estimatedDuration, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
 
-                    <dt>
-                        Objetivo
-                    </dt>
+                            <div class="col">
 
-                    <dd>
-                        @Html.DisplayFor(model => model.objective)
-                    </dd>
+                                <div class="form-group">
+                                    <b>Complejidad</b>
+                                    <div class="col-md-6">
+                                        @complexity[(int)Model.complexity]
+                                    </div>
+                                </div>
 
-                    <dt>
-                        Complejidad
-                    </dt>
+                                <div class="form-group">
+                                    <b>Estado</b>
+                                    <div class="col-md-6">
+                                        @states[(int)Model.status]
+                                    </div>
+                                </div>
 
-                    <dd>
-                        @complexity[(int)Model.complexity]
-                    </dd>
+                                <div class="form-group">
+                                    <b>Empleado a Cargo</b>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(model => model.Employee.employeeName)
+                                    </div>
+                                </div>
+                            </div>
 
-                    <dt>
-                        Duración estimada
-                    </dt>
+                            <div class="col">
+                                <div class="form-group">
+                                    <b>Duración Estimada</b>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(model => model.estimatedDuration)
+                                    </div>
+                                </div>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.estimatedDuration)
-                    </dd>
+                                <div class="form-group">
+                                    <b>Duración Real</b>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(model => model.realDuration)
+                                    </div>
+                                </div>
 
-                    <dt>
-                        Duración real
-                    </dt>
+                                <div class="form-group">
+                                    <b>Fecha de Inicio</b>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(model => model.startingDate)
+                                    </div>
+                                </div>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.realDuration)
-                    </dd>
+                                <div class="form-group">
+                                    <b>Fecha de Finalización</b>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(model => model.endDate)
+                                    </div>
+                                </div>
 
-                    <dt>
-                        Estado
-                    </dt>
+                            </div>
 
-                    <dd>
-                        @states[(int)Model.status]
-                    </dd>
+                        </div>
 
-                    <dt>
-                        Fecha de inicio de trabajo
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.startingDate)
-                    </dd>
-
-                    <dt>
-                        Fecha de fin de trabajo
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.endDate)
-                    </dd>
-
-                    <dt>
-                        Empleado asignado
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Employee.employeeName)
-                    </dd>
-
-                </dl>
+                    </div>
+                </div><!--Final form-->
             </div>
             <div class="card-footer" id="back-Fe1">
                 <a class="btn" role="button" href="@Url.Action("Index", "Requeriments")">

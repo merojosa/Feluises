@@ -78,138 +78,139 @@
                         <div class="card-header text-white" id="back-Fe1">
                             <h2>Empleado</h2>
                         </div>
-
                         <div class="card-body">
 
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    Nombre
-                                </dt>
+                            <div class="form">
+                                <div class="from-row">
+                                    <div class="col">
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeName)
-                                </dd>
-                                <dt>
-                                    Apellido
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeLastName)
-                                </dd>
-                                <dt>
-                                    Apellido
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeSecondLastName)
-                                </dd>
-                                <dt>
-                                    Fecha de nacimiento
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeBirthDate)
-                                </dd>
-                                <dt>
-                                    <b>Fecha de ingreso</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeHireDate)
-                                </dd>
-
-                                <dt>
-                                    <b>Tipo de empleado</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.developerFlag)
-                                </dd>
-
-                                <dt>
-                                    Teléfono
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.tel)
-                                </dd>
-
-                                <dt>
-                                    E-mail
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.email)
-                                </dd>
-
-                                <dt>
-                                    Provincia
-                                </dt>
-                                <dd>
-                                    <span id="province"></span>
-                                    @*Html.DisplayFor(model => model.province)*@
-                                </dd>
-                                <dt>
-                                    Cantón
-                                </dt>
-                                <dd>
-                                    <span id="canton"></span>
-                                    @*Html.DisplayFor(model => model.canton)*@
-                                </dd>
-                                <dt>
-                                    Distrito
-                                </dt>
-                                <dd>
-                                    <span id="district"></span>
-                                    @*Html.DisplayFor(model => model.district)*@
-                                </dd>
-
-                                <dt>
-                                    Dirección exacta
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.exactDirection)
-                                </dd>
-
-                                <dt>
-                                    Precio por hora
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.pricePerHour)
-                                </dd>
-
-                                <dt>
-                                    Disponibilidad
-                                </dt>
-
-                                <dd>
-                                    @if (Model.availability == 0)
-                                    {
-                                        <div class="form-check form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                        <div class="form-group">
+                                            <b>Nombre del Empleado</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.employeeName)
+                                            </div>
                                         </div>
-                                    }
-                                    else if (Model.availability == 1)
-                                    {
-                                        <div class="form-check form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+
+                                        <div class="form-group">
+                                            <b>Apellido del Empleado</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.employeeLastName)
+                                            </div>
                                         </div>
-                                    }
+
+                                        <div class="form-group">
+                                            <b>Segundo Apellido del Empleado</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.employeeSecondLastName)
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Fecha de Nacimiento</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.employeeBirthDate)
+                                            </div>
+                                        </div>
+
+                                    </div> <!--Final de col-->
+
+                                    <div class="col">
+
+                                        <div class="form-group">
+                                            <b>Provincia</b>
+                                            <div class="col-md-10">
+                                                <span id="province"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Cantón</b>
+                                            <div class="col-md-10">
+                                                <span id="canton"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Distrito</b>
+                                            <div class="col-md-10">
+                                                <span id="district"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Dirección Exacta</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.exactDirection)
+                                            </div>
+                                        </div>
+
+                                    </div><!--Final de col-->
+
+                                    <div class="col">
+
+                                        <div class="form-group">
+                                            <b>Teléfono</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.tel)
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Email</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.email)
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Fecha de Ingreso</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.employeeHireDate)
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Tipo de Empleado</b>
+                                            <div class="col-md-10">
+                                                @if (Model.developerFlag == 1)
+                                                {
+                                                    <b>Desarrollador</b>
+                                                }
+                                                else
+                                                {
+                                                    <b>Empleado</b>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Precio por Hora</b>
+                                            <div class="col-md-10">
+                                                @Html.DisplayFor(model => model.pricePerHour)
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <b>Disponible</b>
+                                            @if (Model.availability == 0)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                                </div>
+                                            }
+                                            else if (Model.availability == 1)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
 
 
-                                </dd>
-
-                                <dt>
-                                    Conocimiento desarrollador
-                                </dt>
-
-                                <dd>
-                                    @foreach (var item in Model.DeveloperKnowledge)
-                                    {
-                                        @item.devKnowledgePK
-                                    }
-                                </dd>
-
-                            </dl>
+                                </div><!--final de form-row-->
+                            </div> <!--final de form-->
+                            
                         </div>
                         <div class="card-footer" id="back-Fe1">
                             <a class="btn" role="button" href="@Url.Action("Index", "Employees")">
