@@ -38,7 +38,7 @@ namespace FeLuisesScrumDEV.Controllers
          * Modifica: La tabla WorksIn, que es nuestra tabla de equipos
          */
         [HttpPost]
-        public ActionResult Index(string[] teamMembers, string currentProject)
+        public ActionResult Save(string[] teamMembers, string currentProject)
         {
             if (currentProject != null)
             {
@@ -101,12 +101,9 @@ namespace FeLuisesScrumDEV.Controllers
                 //Retorna un JSON que es recibido por el success de la vista
                 return Json(new
                 {
-                    redirectUrl = Url.Action("Index", "WorksIns"),
-                    isRedirect = true
+                    isRedirect = false
                 });
-            }
-            else
-            {
+            }else{
                 return RedirectToAction("Index", "WorksIns");//En caso de nulos redirecciona al indice
             }
         }
@@ -162,7 +159,7 @@ namespace FeLuisesScrumDEV.Controllers
                     auxSkill.Clear();
                 }
             }
-            //Retonamos un JSON con los valores que necesitamos para poder mostrar el equipo en la vista para un equipo
+            //Retonamos un JSON con los valores que necesitamos para poder mostrar el equipo en la vista de equipo
             return Json(new
             {
                 ids = idMembers.ToArray(),

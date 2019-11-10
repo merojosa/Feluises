@@ -19,7 +19,6 @@
           rel="stylesheet">
 
 </head>
-
 <!--
 /*
     * userRole:
@@ -131,6 +130,17 @@
                             </ul>
                         }
 
+                        @{ 
+                            string typeOfProfile = "";
+                            if(Convert.ToInt32(Session["userRole"]) != 3)
+                            {
+                                typeOfProfile = "EmployeeProfile";
+                            }else{
+                                typeOfProfile = "ClientProfile";
+                            }
+                        }
+
+
                         @if (Session["userName"] != null)
                         {
                             <ul class="navbar-nav ml-auto ">
@@ -139,7 +149,7 @@
                                         <i class="material-icons d-inline-block align-top">person</i>  @Session["userName"].ToString()
                                     </a> <!--<img src="~/Images/usr.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">~Información~</a>
+                                        <a class="dropdown-item" href="@Url.Action(typeOfProfile, "LogIn")">~Mi perfil~</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="@Url.Action("Logout", "LogIn", null)">LogOut</a>
                                     </div>

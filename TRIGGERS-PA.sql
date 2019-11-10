@@ -92,5 +92,50 @@ END
 GO
 */
 
+/*
+CREATE PROC USP_EmployeeRequerimentsComplete @employee nvarchar(9), @project int 
+AS
+BEGIN
+	SELECT *
+	FROM Project P 
+	JOIN Module M
+	ON P.idProjectPK = M.idProjectFKPK
+	JOIN Requeriment R
+	ON M.idModulePK = R.idModuleFKPK AND M.idProjectFKPK = R.idProjectFKPK
+	WHERE R.idProjectFKPK=@project AND R.idEmployeeFK=@employee;
+END
+*/
 
-
+/*
+CREATE TRIGGER TR_interrumpirProyecto
+ON Project
+AFTER UPDATE
+AS
+BEGIN
+	IF( UPDATE(status) )
+	BEGIN
+		DECLARE @status smallint
+		SELECT @status = (SELECT TOP 1 I.status FROM INSERTED I)
+		IF( @status = 2 OR @status = 4) --caso de que fue interrumpido
+		BEGIN
+			UPDATE Requeriment
+			SET status = @status
+			WHERE idProjectFKPK = (SELECT TOP 1 I.idProjectPK FROM INSERTED I)
+			AND status = 1 
+		END
+		IF( @status = 4 )
+		BEGIN
+			DECLARE @project int
+			SELECT @project = (SELECT TOP 1 I.idProjectPK FROM INSERTED I)
+			UPDATE Employee 
+			SET availability = 0
+			WHERE idEmployeePK IN
+			(
+				SELECT W.idEmployeeFKPK
+				FROM WorksIn W 
+				WHERE W.idProjectFKPK=@project
+			)
+		END
+	END
+END
+*/
