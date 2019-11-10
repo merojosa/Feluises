@@ -94,7 +94,7 @@ namespace FeLuisesScrumDEV.Controllers
                 return HttpNotFound();
             }
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.idModuleFKPK = new SelectList(db.Module.Where(x => x.idProjectFKPK == idProjectFKPK), "idModulePK", "name", requeriment.idModuleFKPK);
             ViewBag.complexity = SelectListComplexity(null);
             ViewBag.status = SelectListStatus(null);
             return View(requeriment);
