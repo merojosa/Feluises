@@ -30,10 +30,23 @@ namespace FeLuisesScrumDEV.Controllers
         //EFE: Detalles del Requerimiento seleccionado.
         public ActionResult Details(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
+
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            ViewBag.isLogged = false;
+            var employeeController = new EmployeesController();
+            foreach (var employee in employeeController.EmployeeFromTeamSelectList(idProjectFKPK)) //Obtenemos a los miembros del equipo
+            {
+                if (employee.Value == Session["userID"].ToString()) //Si un miembro del equipo esta logueado
+                {
+                    ViewBag.isLogged = true;
+                    break;
+                }
+            }
+
             Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             if (requeriment == null)
             {
@@ -41,6 +54,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return View(requeriment);
         }
+
 
         // GET: Requeriments/Create
         //EFE: Crea un requerimieno ya asociado a un módulo y proyecto

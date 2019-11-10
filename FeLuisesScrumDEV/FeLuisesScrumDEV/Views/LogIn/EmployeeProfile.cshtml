@@ -28,7 +28,6 @@
             } else if(@Html.DisplayFor(model => model.province) == 7){
                 $("#province").html("Limón");
             }
-
             $.ajax({
                 dataType: "json",
                 url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/cantones.json",
@@ -48,11 +47,8 @@
         });
     </script>
 </head>
-@*@{
-        ViewBag.Title = "Details";
-    }*@
-
 <body>
+
     @if (Session["userName"] == null)
     {
 
@@ -71,118 +67,115 @@
     }
     else
     {
-        <div>
-            <div class="container">
-                <hr />
-                <div>
-                    <div class="card rounded" style="width: auto; height: auto;" id="border-Fe">
-                        <div class="card-header text-white" id="back-Fe1">
-                            <h2>Perfil</h2>
-                        </div>
+        <div class=" container">
+            <h2>Perfil</h2>
+            <hr />
+            <div class="card rounded border-dark" id="shadow-Fe1" style="width: auto; height:auto;">
+                <h2 class="card-header text-white" id="back-Fe1">@Model.employeeName</h2><!--Inicio y fin de encabezado de la card (título)-->
+                <div class="card-body">
+                    <!--inicio del cuerpo de la card (sección del medio)-->
+                    <div class="form">
+                        <!--Inicio de vista en "formulario"-->
+                        <div class="form-row">
+                            <!--Inicio de fila-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
+                                    <b>Nombre del Empleado</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.employeeName)
+                                        @if (Model.employeeName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                        <div class="card-body">
+                                <div class="form-group">
+                                    <b>Fecha de nacimiento</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.employeeBirthDate)
+                                        @if (Model.employeeBirthDate == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    Nombre
-                                </dt>
+                                <div class="form-group">
+                                    <b>Provincia</b>
+                                    <div class="col-md-10">
+                                        <span id="province"></span>
+                                    </div>
+                                </div>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeName)
-                                </dd>
-                                <dt>
-                                    Apellido
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeLastName)
-                                </dd>
-                                <dt>
-                                    Apellido
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeSecondLastName)
-                                </dd>
-                                <dt>
-                                    Fecha de nacimiento
-                                </dt>
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeBirthDate)
-                                </dd>
-                                <dt>
+                                <div class="form-group">
+                                    <b>Direccion exacta</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.exactDirection)
+                                        @if (Model.exactDirection == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <b>Precio por hora</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.pricePerHour)
+                                        @if (Model.pricePerHour == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div><!--Fin de columna-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
+                                    <b>Apellido</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.employeeLastName)
+                                        @if (Model.employeeLastName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <b>Telefono</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.tel)
+                                        @if (Model.tel == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <b>Cantón</b>
+                                    <div class="col-md-10">
+                                        <span id="canton"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <b>Fecha de ingreso</b>
-                                </dt>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.employeeHireDate)
+                                        @if (Model.employeeHireDate == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.employeeHireDate)
-                                </dd>
-
-                                <dt>
-                                    <b>Tipo de empleado</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.developerFlag)
-                                </dd>
-
-                                <dt>
-                                    Teléfono
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.tel)
-                                </dd>
-
-                                <dt>
-                                    E-mail
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.email)
-                                </dd>
-
-                                <dt>
-                                    Provincia
-                                </dt>
-                                <dd>
-                                    <span id="province"></span>
-                                    @*Html.DisplayFor(model => model.province)*@
-                                </dd>
-                                <dt>
-                                    Cantón
-                                </dt>
-                                <dd>
-                                    <span id="canton"></span>
-                                    @*Html.DisplayFor(model => model.canton)*@
-                                </dd>
-                                <dt>
-                                    Distrito
-                                </dt>
-                                <dd>
-                                    <span id="district"></span>
-                                    @*Html.DisplayFor(model => model.district)*@
-                                </dd>
-
-                                <dt>
-                                    Dirección exacta
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.exactDirection)
-                                </dd>
-
-                                <dt>
-                                    Precio por hora
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.pricePerHour)
-                                </dd>
-
-                                <dt>
-                                    Disponibilidad
-                                </dt>
-
-                                <dd>
+                                <div class="form-group">
+                                    <b>Disponible</b>
                                     @if (Model.availability == 0)
                                     {
                                         <div class="form-check form-check">
@@ -195,41 +188,69 @@
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
                                         </div>
                                     }
-                                </dd>
+                                </div>
 
-                                <dt>
-                                    Conocimiento desarrollador
-                                </dt>
+                            </div><!--Fin de columna-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
+                                    <b>Segundo Apellido</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.employeeSecondLastName)
+                                        @if (Model.employeeSecondLastName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <b>E-mail</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.email)
+                                        @if (Model.email == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                                <dd>
-                                    @foreach (var item in Model.DeveloperKnowledge)
-                                    {
-                                        @item.devKnowledgePK
-                                    }
-                                </dd>
+                                <div class="form-group">
+                                    <b>Distrito</b>
+                                    <div class="col-md-10">
+                                        <span id="district"></span>
+                                    </div>
+                                </div>
 
-                            </dl>
-                        </div>
-                        <div class="card-footer" id="back-Fe1">
-                            <a class="btn" role="button" href="@Url.Action("Index", "Projects")">
-                                <img src="~/Images/b-back.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
-                                <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-                            <a class="btn" role="button" href="@Url.Action("ChangePassword", "LogIn")">
-                                <img src="~/Images/key.svg" width="25" height="25" class="d-inline-block align-top" alt="">
-                            </a>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    <b>Tipo de Empleado</b>
+                                    <div class="col-md-10">
+                                        @if (Model.developerFlag == 1)
+                                        {
+                                            <b>Desarrollador</b>
+                                        }
+                                        else
+                                        {
+                                            <b>Empleado</b>
+                                        }
+                                    </div>
+                                </div>
+                            </div><!--Fin de columna-->
+                        </div><!--Fin de form-row-->
+                    </div><!--Fin de class form-->
+                </div><!--Fin de card-body-->
+                <div class="card-footer" id="back-Fe1">
+                    <a class="btn" role="button" href="@Url.Action("Index", "Projects")">
+                        <img src="~/Images/b-back.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                    <a class="btn" role="button" href="@Url.Action("Edit", "Employees", new { id = Model.idEmployeePK })">
+                        <img src="~/Images/edit.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
+                    <a class="btn" role="button" href="@Url.Action("ChangePassword", "LogIn")">
+                        <img src="~/Images/key.svg" width="25" height="25" class="d-inline-block align-top" alt="">
+                    </a>
                 </div>
-            </div>
-        </div>
+            </div><!--Fin de card-->
+        </div><!--Fin del container-->
     }
 </body>
 </html>
-
-@*
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idEmployeePK }) |
-    @Html.ActionLink("Back to List", "Index")
-*@
