@@ -1,16 +1,17 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @model FeLuisesScrumDEV.Models.Client
-<head>
-    @{
-        ViewBag.Title = "Details";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-</head>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 
 
-<body>
     @if (Session["userName"] == null)
     {
 
@@ -29,86 +30,112 @@
     }
     else
     {
-        <div>
-            <div class="container">
-                <h2>Detalles</h2>
-                <hr />
-                <div>
-                    <div class="card rounded" style="width: auto; height: auto;" id="shadow-Fe1">
-                        <div class="card-header text-white" id="back-Fe1">
-                            <h2>Cliente</h2>
-                        </div>
+        <div class=" container">
+            <h2>Detalle de Proyecto</h2>
+            <hr />
+            <div class="card rounded border-dark" id="shadow-Fe1" style="width: auto; height:auto;">
+                <h2 class="card-header text-white" id="back-Fe1">@Model.clientName</h2><!--Inicio y fin de encabezado de la card (título)-->
+                <div class="card-body">
+                    <!--inicio del cuerpo de la card (sección del medio)-->
+                    <div class="form">
+                        <!--Inicio de vista en "formulario"-->
+                        <div class="form-row">
+                            <!--Inicio de fila-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
+                                    <b>Nombre del Cliente</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.clientName)
+                                        @if (Model.clientName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                        <div class="card-body">
+                                <div class="form-group">
+                                    <b>Compañia</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.company)
+                                        @if (Model.company == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    <b>Nombre</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.clientName)
-                                </dd>
-
-                                <dt>
+                            </div><!--Fin de columna-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
                                     <b>Apellido</b>
-                                </dt>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.clientLastName)
+                                        @if (Model.clientLastName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.clientLastName)
-                                </dd>
-
-                                <dt>
-                                    <b>Segundo Apellido</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.clientSecondLastName)
-                                </dd>
-
-                                <dt>
-                                    <b>Compañía</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.company)
-                                </dd>
-
-                                <dt>
-                                    <b>Teléfono</b>
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.tel)
-                                </dd>
-
-                                <dt>
+                                <div class="form-group">
                                     <b>E-Mail</b>
-                                </dt>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.email)
+                                        @if (Model.email == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div><!--Fin de columna-->
+                            <div class="col">
+                                <!--Inicio de columna-->
+                                <div class="form-group">
+                                    <b>Segundo Apellido</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.clientSecondLastName)
+                                        @if (Model.clientSecondLastName == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <b>Teléfono</b>
+                                    <div class="col-md-10">
+                                        @Html.DisplayFor(model => model.tel)
+                                        @if (Model.tel == null)
+                                        {
+                                            <p class="card-text text-info">Informacion no disponible</p>
+                                        }
+                                    </div>
+                                </div>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.email)
-                                </dd>
+                            </div><!--Fin de columna-->
+                        </div><!--Fin de form-row-->
+                    </div><!--Fin de class form-->
+                </div><!--Fin de card-body-->
+                <div class="card-footer" id="back-Fe1">
+                    <!--Inicio del footer-->
+                    <a class="btn" role="button" href="@Url.Action("Index", "Clients", null)">
+                        <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </a>
 
-                            </dl>
-                        </div>
-                        <div class="card-footer" id="back-Fe1">
-
-                            <a class="btn" role="button" href="@Url.Action("Index", "Clients")">
-                                <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </a>
-                            <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
-                                <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </a>
-
-                            <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
-                                <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    @if (Convert.ToInt32(Session["userRole"]) == 0) // Solo si es jefe desarrollador
+                    {
+                        <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
+                            <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a><!--Botón para entrar a editar el proyecto.-->
+                        <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
+                            <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a><!--Botón para entrar a borrar el proyecto.-->
+                    }
+                </div><!--Fin de card-footer-->
+            </div><!--Fin de card-->
+        </div><!--Fin del container-->
     }
-    </body>
-</html>
+
+
+
