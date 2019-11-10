@@ -176,7 +176,19 @@
                                         <b>Disponibilidad</b>
                                         @*@Html.LabelFor(model => model.availability, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.availability, new { htmlAttributes = new { @class = "form-control" } })
+                                            @if (Model.availability == 0)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                                </div>
+                                            }
+                                            else if (Model.availability == 1)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                                                </div>
+                                            }
+                                            @*@Html.EditorFor(model => model.availability, new { htmlAttributes = new { @class = "form-control" } })*@
                                             @Html.ValidationMessageFor(model => model.availability, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
