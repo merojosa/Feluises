@@ -10,7 +10,6 @@
     <script>
         // Era neceario traducir lo que estaba en la BD por lo que se vuelve ha usar el webservice
         $(document).ready(function () {
-            //@Html.DisplayFor(model => model.province)
             if (@Html.DisplayFor(model => model.province) == 1) {
                 $("#province").html("San José");
             } else if(@Html.DisplayFor(model => model.province) == 2){
@@ -82,7 +81,7 @@
 
                             <div class="form">
                                 <div class="from-row">
-                                    <div class="col">
+                                    <div class="col-10">
 
                                         <div class="form-group">
                                             <b>Nombre del Empleado</b>
