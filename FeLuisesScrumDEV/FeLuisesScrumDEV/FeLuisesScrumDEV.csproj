@@ -364,7 +364,6 @@
     <Content Include="Views\Modules\GetModules.cshtml" />
     <Content Include="Views\LogIn\EmployeeProfile.cshtml" />
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
-    <Content Include="Views\LogIn\Profile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>

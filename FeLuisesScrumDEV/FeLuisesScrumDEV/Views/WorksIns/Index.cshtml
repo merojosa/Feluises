@@ -4,7 +4,6 @@
 <head>
 
     @{
-        ViewBag.Title = "Editar";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
@@ -29,12 +28,12 @@
             align-content: center;
         }
 
-            #sortable1 li, #sortable2 li {
-                margin: 0 5px 5px 5px;
-                padding: 5px;
-                font-size: 1.2em;
-                width: 360px;
-            }
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 360px;
+        }
 
         .tooltip {
             position: relative;
@@ -42,22 +41,22 @@
             border-bottom: 1px dotted black;
         }
 
-            .tooltip .tooltiptext {
-                visibility: hidden;
-                width: 120px;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                border-radius: 6px;
-                padding: 5px 0;
-                /* Position the tooltip */
-                position: absolute;
-                z-index: 1;
-            }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
 
-            .tooltip:hover .tooltiptext {
-                visibility: visible;
-            }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
     </style>
 
     <script>
@@ -86,7 +85,7 @@
                 $.ajax({
                     type: "post",
                     dataType: "json",
-                    url: '@Url.Action("Index", "WorksIns")',
+                    url: '@Url.Action("Save", "WorksIns")',
                     traditional: true,
                     async: false,
                     data: {
@@ -94,11 +93,13 @@
                         currentProject: project
                     },
                     success: function (json) {
-                        if (json.isRedirect) {
-                            window.location.href = json.redirectUrl;
-                            document.getElementById("projectSelect").selectedIndex = projectIndex;
+                        if (!json.isRedirect) {
+                            //window.location.href = json.redirectUrl;
+                            //document.getElementById("projectSelect").selectedIndex = projectIndex;
+                            console.log('Exito');
                         }
-                        console.log('Holaaaaaaaaaaaa');
+                        //document.getElementById("projectSelect").selectedIndex = projectIndex;
+                        window.stop();
                     },
                     error: function (errorList) {
                         console.log(errorList);
@@ -284,7 +285,7 @@
                                     <br />
                                     <div class="form-group">
                                         <br />
-                                        <button style="background:transparent; border:none; color:transparent;" onclick="myFunction();"><input type="image" src="~/Images/save.svg" value="Edit" class="btn btn btn-outline-success" /></button>
+                                        <img onclick="myFunction();" src="~/Images/save.svg" class="btn btn btn-outline-success" />
                                         <a class="btn btn-outline-danger" role="button" href="@Url.Action("Index", "Projects")">
                                             <img src="~/Images/cancel.svg" width="25" height="25" class="d-inline-block align-top" alt="">
                                         </a>

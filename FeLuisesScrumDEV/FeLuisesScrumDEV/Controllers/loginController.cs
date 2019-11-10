@@ -90,12 +90,12 @@ namespace FeLuisesScrumDEV.Controllers
                 if (isEmployee)
                 {
                     ViewBag.profile = "EmployeeProfile";
-                    return RedirectToAction("Index", "Employees");
+                    return RedirectToAction("Index", "Projects");
                 }
                 else
                 {
                     ViewBag.profile = "ClientProfile";
-                    return RedirectToAction("Index", "Clients");
+                    return RedirectToAction("Index", "Projects");
                 }
 
             }
