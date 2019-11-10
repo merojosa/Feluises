@@ -3,7 +3,7 @@
 @model FeLuisesScrumDEV.Models.WorksIn
 <head>
 
-    @{
+    @{ 
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
@@ -94,12 +94,8 @@
                     },
                     success: function (json) {
                         if (!json.isRedirect) {
-                            //window.location.href = json.redirectUrl;
-                            //document.getElementById("projectSelect").selectedIndex = projectIndex;
                             console.log('Exito');
                         }
-                        //document.getElementById("projectSelect").selectedIndex = projectIndex;
-                        window.stop();
                     },
                     error: function (errorList) {
                         console.log(errorList);
