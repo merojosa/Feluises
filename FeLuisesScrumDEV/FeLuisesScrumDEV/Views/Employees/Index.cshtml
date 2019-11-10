@@ -17,9 +17,8 @@
 </head>
 
 <body>
-    @if (Session["userName"] == null)
+    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
     {
-
         <div class="container">
 
             <div class="card">
@@ -35,14 +34,17 @@
     }
     else
     {
-        <div class="float-md-right">
-            <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Employees")>
-                <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-            </a>
-            <a class="btn btn-outline-success" role="button" href=@Url.Action("Index", "DeveloperKnowledges")>
-                <img src="~/Images/saveknw.svg" width="40" height="40" class="d-inline-block align-top" alt="">
-            </a>
-        </div>
+        if (Convert.ToInt32(Session["userRole"]) == 0)
+        {
+            <div class="float-md-right">
+                <a class="btn btn-outline-success" role="button" href=@Url.Action("Create", "Employees")>
+                    <img src="~/Images/add.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                </a>
+                <a class="btn btn-outline-success" role="button" href=@Url.Action("Index", "DeveloperKnowledges")>
+                    <img src="~/Images/saveknw.svg" width="40" height="40" class="d-inline-block align-top" alt="">
+                </a>
+            </div>
+        }
         <div class="container">
             <h2>Empleados</h2>
             <hr />

@@ -9,7 +9,7 @@
 }
 
 <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-@if (Session["userName"] == null)
+@if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
 {
 
     <div class="container">

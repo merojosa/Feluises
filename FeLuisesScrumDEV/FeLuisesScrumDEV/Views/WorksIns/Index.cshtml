@@ -178,7 +178,7 @@
 <body onload="getMembers()">
     @using (Html.BeginForm())
     {
-        if (Session["userName"] == null)
+        if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2 ) )
         {
 
             <div class="container">
