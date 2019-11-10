@@ -162,7 +162,7 @@ namespace FeLuisesScrumDEV.Controllers
                     auxSkill.Clear();
                 }
             }
-            //Retonamos un JSON con los valores que necesitamos para poder mostrar el equipo en la vista para un equipo
+            //Retonamos un JSON con los valores que necesitamos para poder mostrar el equipo en la vista de equipo
             return Json(new
             {
                 ids = idMembers.ToArray(),
