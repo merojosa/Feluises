@@ -12,6 +12,7 @@ namespace FeLuisesScrumDEV.Controllers
 
         //private FeLuisesEntities db = new FeLuisesEntities();
         // GET: login
+        //EFE: nada
         public ActionResult Index()
         {
             return View();
@@ -98,6 +99,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //EFE: Resetea las variables de session
+        //REQ: Variables de session inicializadas
         [HttpGet]
         public ActionResult Logout()
         {
