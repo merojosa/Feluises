@@ -10,37 +10,12 @@
 
     <script>
         $(document).ready(function () {
-            getProvincia();
+            getProvincia(@Html.DisplayFor(model => model.province));
+            getCanton(@Html.DisplayFor(model => model.province), @Html.DisplayFor(model => model.canton));
+            getDistrict(@Html.DisplayFor(model => model.province), @Html.DisplayFor(model => model.canton), @Html.DisplayFor(model => model.district));
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                dataType: "json",
-                data{},
-                url: "https://ubicaciones.paginasweb.cr/provincia/",
-                success: function (data) {
-                    $("#province").html(data[@Html.DisplayFor(model => model.province)]);
-                }
-            });
-            $.ajax({
-                dataType: "json",
-                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/cantones.json",
-                data: {},
-                success: function (data) {
-                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
-                }
-            });
-            $.ajax({
-                dataType: "json",
-                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.province) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
-                data: {},
-                success: function (data) {
-                    $("#district").html(data[@Html.DisplayFor(model => model.district)]);
-                }
-            });
-        });
-    </script>
+
 </head>
 
 <body>
@@ -118,7 +93,7 @@
                                         <b>Provincia:</b>
                                         <div class="col-md-10">
                                             @*@Html.EditorFor(model => model.province, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
+                                            @Html.DropDownListFor(model => model.province, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton(null, null)" })
                                             @*@Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })*@
                                         </div>
                                     </div>
@@ -126,7 +101,7 @@
                                         <b>Cantón:</b>
                                         <div class="col-md-10">
                                             @*@Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict()" })
+                                            @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict(null, null, null)" })
                                             @*@Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })*@
                                         </div>
                                     </div>
@@ -201,7 +176,19 @@
                                         <b>Disponibilidad</b>
                                         @*@Html.LabelFor(model => model.availability, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.availability, new { htmlAttributes = new { @class = "form-control" } })
+                                            @if (Model.availability == 0)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                                </div>
+                                            }
+                                            else if (Model.availability == 1)
+                                            {
+                                                <div class="form-check form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                                                </div>
+                                            }
+                                            @*@Html.EditorFor(model => model.availability, new { htmlAttributes = new { @class = "form-control" } })*@
                                             @Html.ValidationMessageFor(model => model.availability, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

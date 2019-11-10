@@ -182,7 +182,20 @@
                                 </dt>
 
                                 <dd>
-                                    @Html.DisplayFor(model => model.availability)
+                                    @if (Model.availability == 0)
+                                    {
+                                        <div class="form-check form-check">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" checked value="" disabled>
+                                        </div>
+                                    }
+                                    else if (Model.availability == 1)
+                                    {
+                                        <div class="form-check form-check">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="" disabled>
+                                        </div>
+                                    }
+
+
                                 </dd>
 
                                 <dt>

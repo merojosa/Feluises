@@ -15,6 +15,7 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         // GET: DeveloperKnowledges
+        // EFE: Lista todos los conocimientos
         public ActionResult Index()
         {
             var developerKnowledge = db.DeveloperKnowledge.Include(d => d.Employee);
@@ -22,6 +23,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Details/5
+        // no se usa
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Create
+        //EFE: Crea un nuevo conocimiento
         public ActionResult Create()
         {
             ViewBag.idEmployeeFKPK = new SelectList(db.Employee, "idEmployeePK", "employeeName");
@@ -44,6 +47,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: DeveloperKnowledges/Create
+        //EFE: Valida todos los campos
+        //REQ: campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,6 +72,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Edit/5
+        //EFE: Edita el conocimiento requerido
         public ActionResult Edit(string id, string ability)
         {
             if (id == null || ability == null)
@@ -83,6 +89,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: DeveloperKnowledges/Edit/5
+        //EFE: VAlida los campos
+        //REQ: Campos obligatorios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -104,6 +112,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: DeveloperKnowledges/Delete/5
+        //EFE: Elimina el conocimiento seleccionado.
         public ActionResult Delete(string id, string ability)
         {
             if (id == null || ability == null)
@@ -119,6 +128,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: DeveloperKnowledges/Delete/5
+        //EFE: Valida que se hayan guardado los campos
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id, string ability)

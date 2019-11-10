@@ -69,46 +69,48 @@
     </script>
 
     <script type="text/javascript">
+        //Script para guardar un equipo
         function myFunction() {
-                    var projectIndex = document.getElementById("projectSelect").selectedIndex;
-                    var list = [];
-                    document.querySelectorAll("#sortable2 li")
-                        .forEach(function (item) {
-                            var aux = item.id;
-                            list.push(aux);
-                        });
+                var projectIndex = document.getElementById("projectSelect").selectedIndex;
+                var list = [];
+                document.querySelectorAll("#sortable2 li")
+                    .forEach(function (item) {
+                        var aux = item.id;
+                        list.push(aux);
+                    });
 
-                    var p = document.getElementById("projectSelect");
-                    var project = p.options[p.selectedIndex].getAttribute("value");
-                    console.log(project);
-                    console.log(list);
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: '@Url.Action("Index", "WorksIns")',
-                        traditional: true,
-                        async: false,
-                        data: {
-                            teamMembers: list,
-                            currentProject: project
-                        },
-                        success: function (json) {
-                            if (json.isRedirect) {
-                                window.location.href = json.redirectUrl;
-                                document.getElementById("projectSelect").selectedIndex = projectIndex;
-                            }
-                            console.log('Holaaaaaaaaaaaa');
-                        },
-                        error: function (errorList) {
-                            console.log(errorList);
-                            console.log("error");
+                var p = document.getElementById("projectSelect");
+                var project = p.options[p.selectedIndex].getAttribute("value");
+                console.log(project);
+                console.log(list);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '@Url.Action("Index", "WorksIns")',
+                    traditional: true,
+                    async: false,
+                    data: {
+                        teamMembers: list,
+                        currentProject: project
+                    },
+                    success: function (json) {
+                        if (json.isRedirect) {
+                            window.location.href = json.redirectUrl;
+                            document.getElementById("projectSelect").selectedIndex = projectIndex;
                         }
-                    })
+                        console.log('Holaaaaaaaaaaaa');
+                    },
+                    error: function (errorList) {
+                        console.log(errorList);
+                        console.log("error");
+                    }
+                })
 
-                }
+            }
     </script>
 
     <script type="text/javascript">
+            //Script para cambiar los miembros del equipo segun el proyecto seleccionado en el select
             function getMembers() {
                 var idProject = document.getElementById("projectSelect").value;
 			    $.ajax({
@@ -156,6 +158,7 @@
     </script>
 
     <script type="text/javascript">
+        //Script para filtrar los empleados por sus conocimientos
         function filter() {
             var input, ul, li, imgSkills, i;
             input = document.getElementById('myInput');

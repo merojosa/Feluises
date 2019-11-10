@@ -16,6 +16,7 @@ namespace FeLuisesScrumDEV.Controllers
         private FeLuisesEntities db = new FeLuisesEntities();
 
         // GET: Clients
+        //EFE: Muestra todos los clientes disponibles
         public ActionResult Index()
         {
             //[Display(Name= "Nombre")]
@@ -23,6 +24,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Clients/Details/5
+        // EFE: Detalle del cliente seleccionado
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Clients/Create
+        //EFE: Crea un nuevo cliente con sus respectivos a atributos.
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,8 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Clients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // EFE: Verifica que los campos llenados sean válidos y que se puedan guardar en la base de datos.
+        //REQ: Campos obligatorios llenos
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idClientPK,clientName,clientLastName,clientSecondLastName,company,tel,email")] Client client)
@@ -68,6 +73,7 @@ namespace FeLuisesScrumDEV.Controllers
 
 
         // GET: Clients/Edit/5
+        // EFE: Edita la información del cliente seleccionado.
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -85,6 +91,8 @@ namespace FeLuisesScrumDEV.Controllers
         // POST: Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //EFE: Valida la información intoducida. (No cambia cédula
+        //REQ: Campos obligatorios
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idClientPK,clientName,clientLastName,clientSecondLastName,company,tel,email")] Client client)
@@ -99,6 +107,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // GET: Clients/Delete/5
+        // EFE: Muestra información del cliente seleccionado para eliminar
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -114,6 +123,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         // POST: Clients/Delete/5
+        //EFE: Confirma si la acción se realizó con éxito
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

@@ -5,7 +5,7 @@
  * estructura de nuestro proyecto
  */
 
-function getProvincia() { 
+function getProvincia(id) { 
     $.ajax({
         dataType: "json",
         url: "https://ubicaciones.paginasweb.cr/provincias.json",
@@ -16,13 +16,18 @@ function getProvincia() {
                 html += '<option data-name="' + data[key] + '"value="' + key + '">' + data[key] + '</option>';
             }
             $("#province").append(html);
+
+            if (id != null) {
+                $("#province").val(id);
+            }
         }
     });
 }
 
-function getCanton() {
 
-    var id_province = $("#province").val();
+function getCanton(id_province, id_canton) {
+
+    id_province = (id_province == null) ? $("#province").val() : id_province;
 
     $.ajax({
         dataType: "json",
@@ -35,14 +40,18 @@ function getCanton() {
             }
             $("#canton").empty();
             $("#canton").append(html);
+
+            if (id_canton != null) {
+                $("#canton").val(id_canton);
+            }
         }
     });
 }
 
-function getDistrict() {
+function getDistrict(id_province, id_canton, id_district) {
 
-    var id_province = $("#province").val();
-    var id_canton = $("#canton").val();
+    id_province = (id_province == null) ? $("#province").val() : id_province;
+    id_canton = (id_canton == null) ? $("#canton").val() : id_canton;
 
     $.ajax({
         dataType: "json",
@@ -55,6 +64,9 @@ function getDistrict() {
             }
             $("#district").empty();
             $("#district").append(html);
+            if (id_district != null) {
+                $("district").val(id_district);
+            }
         }
     });
 }
