@@ -61,9 +61,16 @@ namespace FeLuisesScrumDEV.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Employee.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (employee.employeeBirthDate < employee.employeeHireDate)
+                {
+                    db.Employee.Add(employee);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("employeeBirthDate", "La fecha de nacimiento no puede ser despues de la fecha de contratación.");
+                }
             }
 
             return View(employee);
@@ -94,11 +101,19 @@ namespace FeLuisesScrumDEV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEmployeePK,employeeName,employeeLastName,employeeSecondLastName,employeeBirthDate,employeeHireDate,developerFlag,tel,email,province,canton,district,exactDirection,pricePerHour,availability")] Employee employee)
         {
+
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (employee.employeeBirthDate < employee.employeeHireDate)
+                {
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("employeeBirthDate", "La fecha de nacimiento no puede ser despues de la fecha de contratación.");
+                }
             }
             return View(employee);
         }
