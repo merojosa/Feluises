@@ -72,6 +72,9 @@
                             E-Mail
                             @*@Html.DisplayNameFor(model => model.email)*@
                         </th>
+                        <th>
+                            Fecha de Ingreso
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,6 +103,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.creationDate)
                             </td>
                         </tr>
                     }
