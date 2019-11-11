@@ -40,7 +40,7 @@ namespace FeLuisesScrumDEV.Controllers
 
             if (userDetails == null)
             {
-                ModelState.AddModelError("", "Invalid username or password");
+                ModelState.AddModelError("", "Cédula o contraseña inválidas");
                 return View("Index");
             }else{
                 var leaderID1 = 

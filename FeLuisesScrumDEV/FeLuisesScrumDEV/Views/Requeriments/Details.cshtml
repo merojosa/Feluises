@@ -123,7 +123,7 @@
                     <a class="btn" role="button" href="@Url.Action("Index", "Requeriments")">
                         <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                     </a>
-                    @if (Convert.ToInt32(Session["userRole"]) == 0 || Convert.ToInt32(Session["userRole"]) == 1)
+                    @if (Convert.ToInt32(Session["userRole"]) == 0 || (Convert.ToInt32(Session["userRole"]) != 3 && ViewBag.isLogged))
                     {
                         <a class="btn" role="button" href="@Url.Action("Edit", "Requeriments", new { idProjectFKPK = Model.idProjectFKPK, idModuleFKPK = Model.idModuleFKPK, idRequerimentPK = Model.idRequerimentPK })">
                             <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">

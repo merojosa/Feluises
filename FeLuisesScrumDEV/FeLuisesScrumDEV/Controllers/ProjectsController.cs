@@ -21,7 +21,7 @@ namespace FeLuisesScrumDEV.Controllers
         //REQ: Un usuario loggueado
         public ActionResult Index()
         {
-            
+
             if (Convert.ToInt32(Session["userRole"]) == 0) //si es jefe
             {
                 var projectChief = db.Project.Include(p => p.Client);
@@ -43,8 +43,8 @@ namespace FeLuisesScrumDEV.Controllers
                 return View(proyectos.ToList());
             }
             return null;
-            
-           
+
+
         }
 
         // GET: Projects/Details/5
@@ -89,7 +89,7 @@ namespace FeLuisesScrumDEV.Controllers
         {
             var EmployeesController = new EmployeesController(); //Controlador de empleados
             var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
-            if ( db.Project.Any(x => x.projectName == project.projectName)) //si el nombre del proyecto ya existe
+            if (db.Project.Any(x => x.projectName == project.projectName)) //si el nombre del proyecto ya existe
             {
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
                 ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName"); //viewbag para desplegar el dropdown de clientes
@@ -97,14 +97,21 @@ namespace FeLuisesScrumDEV.Controllers
                 ViewBag.status = SelectListStatus(null);
                 return View(project); //no guarda cambios y actualiza la vista.
             }
-            if ( ModelState.IsValid ) //si el modelo es válido
+            if (ModelState.IsValid) //si el modelo es válido
             {
-                db.Project.Add(project); //agrega el proyecto a la tabla
-                employee.idProjectFKPK = project.idProjectPK;
-                employee.role = 1;
-                db.WorksIn.Add(employee); //agrega la relación de lider a la tabla worksIn
-                db.SaveChanges(); //guarda cambios
-                return RedirectToAction("Index"); //vuelve al index.
+                if (project.startingDate < project.finishingDate)
+                {
+                    db.Project.Add(project); //agrega el proyecto a la tabla
+                    employee.idProjectFKPK = project.idProjectPK;
+                    employee.role = 1;
+                    db.WorksIn.Add(employee); //agrega la relación de lider a la tabla worksIn
+                    db.SaveChanges(); //guarda cambios
+                    return RedirectToAction("Index"); //vuelve al index.
+                }
+                else
+                {
+                    ModelState.AddModelError("startingDate", "La fecha de inicio no puede ser despues de la fecha de finalización.");
+                }
             }
             //Si no entra en ninguno de los 2 ifs entonces actualiza la vista con los mismos viewbags.
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
@@ -153,32 +160,40 @@ namespace FeLuisesScrumDEV.Controllers
             var aux = employee.idEmployeeFKPK;
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
-                if (employee.idEmployeeFKPK == lider)
+                if (project.startingDate < project.finishingDate)
                 {
-                    //Si el nuevo id es igual al ya asignado, entonces no hace nada.
+                    db.Entry(project).State = EntityState.Modified;
+                    if (employee.idEmployeeFKPK == lider)
+                    {
+                        //Si el nuevo id es igual al ya asignado, entonces no hace nada.
+                    }
+                    else
+                    {   //en caso contrario cambia los datos.
+                        if (lider == null) //si no hay lider asignado, crea una nueva relación con el líder elegido
+                        {
+                            employee.idProjectFKPK = project.idProjectPK;
+                            employee.role = 1;
+                            db.WorksIn.Add(employee);
+                        }
+                        else
+                        { //si ya hay uno asignado
+
+                            var exLider = db.Employee.Find(lider);
+                            exLider.availability = 0; //cambia la disponibilidad del antiguo a disponible.
+                            var modificating = db.WorksIn.Find(lider, project.idProjectPK);
+                            db.WorksIn.Remove(modificating); //remueve la relación del líder anterior (dado que no es modificable)
+                            employee.idProjectFKPK = project.idProjectPK;
+                            employee.role = 1;
+                            db.WorksIn.Add(employee); //y crea una nueva con el nuevo líder.
+                        }
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
                 else
-                {   //en caso contrario cambia los datos.
-                    if(lider == null) //si no hay lider asignado, crea una nueva relación con el líder elegido
-                    {
-                        employee.idProjectFKPK = project.idProjectPK;
-                        employee.role = 1;
-                        db.WorksIn.Add(employee);
-                    } else
-                    { //si ya hay uno asignado
-                        
-                        var exLider = db.Employee.Find(lider);
-                        exLider.availability = 0; //cambia la disponibilidad del antiguo a disponible.
-                        var modificating = db.WorksIn.Find(lider, project.idProjectPK);
-                        db.WorksIn.Remove(modificating); //remueve la relación del líder anterior (dado que no es modificable)
-                        employee.idProjectFKPK = project.idProjectPK;
-                        employee.role = 1;
-                        db.WorksIn.Add(employee); //y crea una nueva con el nuevo líder.
-                    }
+                {
+                    ModelState.AddModelError("startingDate", "La fecha de inicio no puede ser despues de la fecha de finalización.");
                 }
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider);

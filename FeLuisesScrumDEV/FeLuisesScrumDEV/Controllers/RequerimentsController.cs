@@ -30,10 +30,23 @@ namespace FeLuisesScrumDEV.Controllers
         //EFE: Detalles del Requerimiento seleccionado.
         public ActionResult Details(int? idProjectFKPK, int? idModuleFKPK, int? idRequerimentPK)
         {
+
             if (idProjectFKPK == null || idModuleFKPK == null || idRequerimentPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            ViewBag.isLogged = false;
+            var employeeController = new EmployeesController();
+            foreach (var employee in employeeController.EmployeeFromTeamSelectList(idProjectFKPK)) //Obtenemos a los miembros del equipo
+            {
+                if (employee.Value == Session["userID"].ToString()) //Si un miembro del equipo esta logueado
+                {
+                    ViewBag.isLogged = true;
+                    break;
+                }
+            }
+
             Requeriment requeriment = db.Requeriment.Find(idProjectFKPK, idModuleFKPK, idRequerimentPK);
             if (requeriment == null)
             {
@@ -41,6 +54,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             return View(requeriment);
         }
+
 
         // GET: Requeriments/Create
         //EFE: Crea un requerimieno ya asociado a un módulo y proyecto
@@ -120,7 +134,17 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 if (requeriment.startingDate < requeriment.endDate)
                 {
-                    db.Entry(requeriment).State = EntityState.Modified;
+                    int OidModuleFKPK = Convert.ToInt32(Request["idModuleFKPK"]);
+                    if (OidModuleFKPK != requeriment.idModuleFKPK)
+                    {
+                        var reqToDelete = db.Requeriment.Where(r => r.idModuleFKPK == OidModuleFKPK && r.idProjectFKPK == requeriment.idProjectFKPK && r.idRequerimentPK == requeriment.idRequerimentPK).FirstOrDefault();
+                        db.Requeriment.Remove(reqToDelete);
+                        db.Requeriment.Add(requeriment);
+                    }
+                    else
+                    {
+                        db.Entry(requeriment).State = EntityState.Modified;
+                    }
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -130,7 +154,7 @@ namespace FeLuisesScrumDEV.Controllers
                 }
             }
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.idModuleFKPK = new SelectList(db.Module, "idModulePK", "name", requeriment.idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(requeriment.complexity);
             ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
