@@ -68,9 +68,16 @@ namespace FeLuisesScrumDEV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Requeriment.Add(requeriment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (requeriment.startingDate < requeriment.endDate)
+                {
+                    db.Requeriment.Add(requeriment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else 
+                {
+                    ModelState.AddModelError("startingDate", "La fecha de inicio no puede ser despues de la fecha de finalización.");
+                }
             }
             var employeeController = new EmployeesController();
             ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList(requeriment.idProjectFKPK);
@@ -111,12 +118,21 @@ namespace FeLuisesScrumDEV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(requeriment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (requeriment.startingDate < requeriment.endDate)
+                {
+                    db.Entry(requeriment).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("startingDate","La fecha de inicio no puede ser despues de la fecha de finalización.");
+                }
             }
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
             ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.complexity = SelectListComplexity(requeriment.complexity);
+            ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
         }
 
