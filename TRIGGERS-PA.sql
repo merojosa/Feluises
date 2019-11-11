@@ -139,3 +139,61 @@ BEGIN
 	END
 END
 */
+
+
+
+/*
+Trigger de integridad referencial al borrar modulos.
+CREATE TRIGGER TR_Default_Module
+ON Module
+AFTER DELETE
+AS
+BEGIN
+	DECLARE @idAnterior INT
+	DECLARE @projectId INT
+	DECLARE @CantidadModulos INT
+	SELECT @idAnterior = (SELECT idModulePK FROM Deleted) --Obtiene el id del modulo eliminado
+	SELECT @projectId = (SELECT idProjectFKPK FROM Deleted) --Obtiene el id del proyecto al que pertenecía el módulo eliminado
+	SELECT @CantidadModulos = (	SELECT COUNT(Module.idProjectFKPK) AS cantidad --Obtiene la cantidad de módulos que actualmente pertenecen a ese proyecto
+								FROM Module JOIN Project
+								ON Project.idProjectPK = Module.idProjectFKPK
+								WHERE @projectId = Project.idProjectPK
+								GROUP BY Module.idProjectFKPK)
+	IF(@idAnterior != -1) --Si no era el módulo no asignado entonces asigna los requerimientos al no asignado
+	BEGIN
+		UPDATE Requeriment
+		SET idModuleFKPK = -1
+		WHERE idModuleFKPK = @idAnterior
+	END
+	IF(@idAnterior = -1 AND @CantidadModulos = 0) --Si era el no asignado y era el único módulo que queda entonces elimina los requerimientos.
+	BEGIN
+		DELETE FROM Requeriment
+		WHERE idModuleFKPK = @idAnterior
+	END
+	ELSE --Si era el no asignado pero no era el único que queda hace un rollback (no permite borrarlo)
+	BEGIN
+		ROLLBACK
+	END
+END;
+*/
+
+/*
+CREATE TRIGGER TR_Requeriment_is_alive
+ON Requeriment
+AFTER DELETE
+AS
+BEGIN
+	DECLARE @idProjectFKPK INT, @idModuleFKPK INT, @idRequerimentPK INT, @idEmployee VARCHAR(9)
+	DECLARE @estimatedDuration INT, @realduration INT, @status SMALLINT, @startingDate Date
+	DECLARE @endDate Date, @complexity INT, @objective VARCHAR(50)
+	SELECT  @idProjectFKPK = idProjectFKPK, @idModuleFKPK = idModuleFKPK, @idRequerimentPK = idRequerimentPK, @idEmployee = idEmployeeFK,
+			@estimatedDuration = estimatedDuration, @realduration = realDuration, @status = status, @startingDate = startingDate, @endDate = endDate,
+			@complexity = complexity, @objective = objective
+	FROM deleted
+	IF(@idModuleFKPK != -1)
+	BEGIN
+		INSERT INTO Requeriment(idProjectFKPK, idModuleFKPK, idEmployeeFK, estimatedDuration, realDuration, status, startingDate, endDate, complexity,objective)
+		VALUES(@idProjectFKPK, -1, @idEmployee, @estimatedDuration, @realduration, @status, @startingDate, @endDate, @complexity, @objective)
+	END
+END
+*/
