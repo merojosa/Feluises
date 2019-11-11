@@ -113,7 +113,7 @@
                         <div class="form-group">
                             <b>Fecha de Finalización*</b>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { @class = "form-control", type = "date", min = @Html.DisplayFor(model => model.startingDate) } })
+                                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                                 @Html.ValidationMessageFor(model => model.endDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
