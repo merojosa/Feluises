@@ -120,7 +120,17 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 if (requeriment.startingDate < requeriment.endDate)
                 {
-                    db.Entry(requeriment).State = EntityState.Modified;
+                    int OidModuleFKPK = Convert.ToInt32(Request["idModuleFKPK"]);
+                    if (OidModuleFKPK != requeriment.idModuleFKPK)
+                    {
+                        var reqToDelete = db.Requeriment.Where(r => r.idModuleFKPK == OidModuleFKPK && r.idProjectFKPK == requeriment.idProjectFKPK && r.idRequerimentPK == requeriment.idRequerimentPK).FirstOrDefault();
+                        db.Requeriment.Remove(reqToDelete);
+                        db.Requeriment.Add(requeriment);
+                    }
+                    else
+                    {
+                        db.Entry(requeriment).State = EntityState.Modified;
+                    }
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -130,7 +140,7 @@ namespace FeLuisesScrumDEV.Controllers
                 }
             }
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idProjectFKPK = new SelectList(db.Module, "idProjectFKPK", "name", requeriment.idProjectFKPK);
+            ViewBag.idModuleFKPK = new SelectList(db.Module, "idModulePK", "name", requeriment.idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(requeriment.complexity);
             ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
