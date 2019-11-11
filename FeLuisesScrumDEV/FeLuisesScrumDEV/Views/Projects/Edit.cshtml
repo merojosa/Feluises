@@ -94,7 +94,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col"> <!--Inicio de columna-->
+                                <div class="col"><!--Inicio de columna-->
                                     <div class="form-group">
                                         <b>Duración Estimada</b>
                                         <div class="col-md-10">
@@ -116,11 +116,17 @@
                                     <div class="form-group">
                                         <b>Fecha de Finalización</b>
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.finishingDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                            @Html.EditorFor(model => model.finishingDate, new { htmlAttributes = new { @class = "form-control", type = "date", min = @Html.DisplayFor(model => model.startingDate) } })
                                             @Html.ValidationMessageFor(model => model.finishingDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <b>Estado</b>
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
                                 </div><!--Fin de columna-->
                             </div><!--Fin de la fila-->
                         </div><!--Fin del form-->

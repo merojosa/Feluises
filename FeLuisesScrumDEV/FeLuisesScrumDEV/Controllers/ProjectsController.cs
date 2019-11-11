@@ -74,6 +74,7 @@ namespace FeLuisesScrumDEV.Controllers
             var EmployeesController = new EmployeesController(); //Controlador de empleados
             var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName"); //viewbag para desplegar el dropdown
+            ViewBag.status = SelectListStatus(null);
             return View();
         }
 
@@ -84,7 +85,7 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
+        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK,status")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
             var EmployeesController = new EmployeesController(); //Controlador de empleados
             var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
@@ -93,6 +94,7 @@ namespace FeLuisesScrumDEV.Controllers
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
                 ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName"); //viewbag para desplegar el dropdown de clientes
                 ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName"); //viewbag para desplegar el dropdown
+                ViewBag.status = SelectListStatus(null);
                 return View(project); //no guarda cambios y actualiza la vista.
             }
             if ( ModelState.IsValid ) //si el modelo es válido
@@ -107,6 +109,7 @@ namespace FeLuisesScrumDEV.Controllers
             //Si no entra en ninguno de los 2 ifs entonces actualiza la vista con los mismos viewbags.
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", employee);
+            ViewBag.status = SelectListStatus(null);
             return View(project);
         }
 
@@ -130,6 +133,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider); //dropdown con lider por defecto
+            ViewBag.status = SelectListStatus(null);
             return View(project);
         }
 
@@ -140,7 +144,7 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
+        public ActionResult Edit([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK, status")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
             var EmployeesController = new EmployeesController();
             var availableEmployees = EmployeesController.AvailableEmployeesAndLider(project.idProjectPK);
@@ -178,6 +182,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             ViewBag.idClientFK = new SelectList(db.Client, "idClientPK", "clientName", project.idClientFK);
             ViewBag.idEmployeeFKPK = new SelectList(availableEmployees, "idEmployeePK", "employeeName", lider);
+            ViewBag.status = SelectListStatus(null);
             return View(project);
         }
 
@@ -219,6 +224,21 @@ namespace FeLuisesScrumDEV.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public SelectList SelectListStatus(int? defaultValue)
+        {
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No iniciado" },
+                new SelectListItem { Value = "1", Text = "En proceso" },
+                new SelectListItem { Value = "2", Text = "Interrumpido" },
+                new SelectListItem { Value = "3", Text = "Completado" }
+            };
+            if (defaultValue == null)
+                return new SelectList(list, "Value", "Text");
+            else
+                return new SelectList(list, "Value", "Text", defaultValue);
         }
     }
 }
