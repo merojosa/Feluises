@@ -219,6 +219,7 @@
     <Content Include="Images\b-edit.svg" />
     <Content Include="Images\back.svg" />
     <Content Include="Images\cancel.svg" />
+    <Content Include="Images\clean.svg" />
     <Content Include="Images\delete.svg" />
     <Content Include="Images\details.svg" />
     <Content Include="Images\edit.svg" />
