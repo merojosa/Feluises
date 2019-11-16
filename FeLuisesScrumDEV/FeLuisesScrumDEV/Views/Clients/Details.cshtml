@@ -126,10 +126,10 @@
                     @if (Convert.ToInt32(Session["userRole"]) == 0) // Solo si es jefe desarrollador
                     {
                         <a class="btn" role="button" href="@Url.Action("Edit", "Clients", new { id = Model.idClientPK })">
-                            <img src="~/Images/edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            <img src="~/Images/b-edit.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                         </a><!--Botón para entrar a editar el proyecto.-->
                         <a class="btn btn-outline-danger" role="button" href="@Url.Action("Delete", "Clients", new { id = Model.idClientPK })">
-                            <img src="~/Images/delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                            <img src="~/Images/b-delete.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                         </a><!--Botón para entrar a borrar el proyecto.-->
                     }
                 </div><!--Fin de card-footer-->

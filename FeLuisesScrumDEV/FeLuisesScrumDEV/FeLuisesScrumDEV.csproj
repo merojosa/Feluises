@@ -214,9 +214,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\accept.svg" />
     <Content Include="Images\add.svg" />
+    <Content Include="Images\b-accept.svg" />
+    <Content Include="Images\b-add.svg" />
     <Content Include="Images\b-back.svg" />
+    <Content Include="Images\b-cancel.svg" />
     <Content Include="Images\b-delete.svg" />
     <Content Include="Images\b-edit.svg" />
+    <Content Include="Images\b-save.svg" />
     <Content Include="Images\back.svg" />
     <Content Include="Images\cancel.svg" />
     <Content Include="Images\clean.svg" />

@@ -96,7 +96,7 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult Create(int idProjectFKPK)
         {
             Project project = db.Project.Where(p => p.idProjectPK==idProjectFKPK).ToList().First();
-            Module module = new Module { Project = project, name = "" };
+            Module module = new Module { Project = project, name = "", idProjectFKPK = project.idProjectPK };
             return View(module);
         }
 
