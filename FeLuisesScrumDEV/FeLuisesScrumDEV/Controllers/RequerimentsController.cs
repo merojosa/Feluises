@@ -65,7 +65,7 @@ namespace FeLuisesScrumDEV.Controllers
             var moduleController = new ModulesController();
             var employeeController = new EmployeesController();
             Module module = moduleController.GetModule(idProjectFKPK, idModuleFKPK);
-            Requeriment requeriment = new Requeriment { Module = module };
+            Requeriment requeriment = new Requeriment { Module = module, idModuleFKPK = module.idModulePK, idProjectFKPK = module.idProjectFKPK };
             ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList((int)idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(null);
             ViewBag.status = SelectListStatus(null);
