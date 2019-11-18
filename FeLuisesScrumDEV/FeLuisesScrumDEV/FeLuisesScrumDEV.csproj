@@ -371,10 +371,10 @@
     <Content Include="Views\LogIn\EmployeeProfile.cshtml" />
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
