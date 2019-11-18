@@ -147,6 +147,7 @@
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RequerimentsController.cs" />
     <Compile Include="Controllers\WorksInsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -373,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
