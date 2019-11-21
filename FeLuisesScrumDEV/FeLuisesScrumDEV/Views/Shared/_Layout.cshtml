@@ -50,84 +50,100 @@
 
                         @if (Convert.ToInt32(Session["userRole"]) == 0)
                         {  //Jefe desarrollador
-                            <ul class="navbar-nav mr-auto ">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                                </li>
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Clients")">Clientes</a>
+                            </li>
 
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Employees")">Empleados</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
-                                </li>
-                            </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
+                            </li>
+                        </ul>
                         }
 
                         @if (Convert.ToInt32(Session["userRole"]) == 2)
                         { //Líder
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                                </li>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipo</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipo</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
-                                </li>
-                            </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Modules")">Módulos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
+                            </li>
+                        </ul>
                         }
 
 
                         @if (Convert.ToInt32(Session["userRole"]) == 1)
                         {  //Desarrollador
-                            <ul class="navbar-nav mr-auto ">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                                </li>
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "WorksIns")>Equipos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
-                                </li>
-                            </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
+                            </li>
+                        </ul>
                         }
 
                         @if (Convert.ToInt32(Session["userRole"]) == 3)
                         {  //Cliente
-                            <ul class="navbar-nav mr-auto ">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                                </li>
+                        <ul class="navbar-nav mr-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
-                                </li>
-                            </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
+                            </li>
+                        </ul>
                         }
 
                         @{ 

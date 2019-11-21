@@ -1,64 +1,116 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        @{
-            Layout = "~/Views/Shared/_Layout.cshtml";
-        }
-        <title>Reportes</title>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+</head>
 
-    <body>
-        @if (Session["userName"] == null)
-        {
+<body>
+    @if (Session["userName"] == null)
+    {
+        <div class="container">
 
-            <div class="container">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h2 id="heading-red">No se vale hackear!</h2>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
-                        <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
                 </div>
             </div>
-        }else{
-            <section id="ProjectCards">
-                <!--Id para hacer el toggle de una vista a otra (Cards)-->
-                <div class="card-deck">
-                    <div class="card-columns">
-                        @*@foreach (var item in Model)
-                        {
-                            string[] states = { "No iniciado", "En proceso", "Interrumpido", "Completado" };
-                            int index;
-                            if (item.status != null)
-                            {
-                                index = (int)item.status;
-                            }
-                            else
-                            {
-                                index = 0;
-                            }*@
-                            <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
-                                <div class="card-header" id="back-Fe1"><!--Inicio de card-headers-->
-                                    @*<a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>*@
-                                </div><!--Fin del card-header-->
-                                <div class="card-body"><!--Inicio del card-body-->
-                                    
-                                </div><!--Fin del card-body-->
-                                <div class="card-footer text-white-50 text-center" id="back-Fe1"><!--Inicio del card-footer-->
-                                    
-                                </div><!--Fin del card-footer-->
-                            </div><!--Fin del card-->
-                        @* } *@
-                    </div><!--Fin del card-columns-->
-                </div>
-            </section>
-        }
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+                <h2 class="card-header text-white" id="back-Fe1">Reportes disponibles</h2>
+                <div class="card-body">
+                    <div class="row">
 
-        </body>
+                        <div class="col-sm-4">
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 1</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 2</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-4">
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 3</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 4</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 5</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href="">Consulta 6</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Escriban aquí sus consultas</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div><!--row-->
+
+
+                </div><!--CardBody-->
+                <div class="card-footer" id="back-Fe1">
+
+                </div>
+            </div> <!--card-->
+
+        </div>
+    }
+</body>
 </html>
+
 
 
