@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FeLuisesScrumDEV.Models;
 
 namespace FeLuisesScrumDEV.Controllers
 {
     public class ReportsController : Controller
     {
+        private FeLuisesEntities db = new FeLuisesEntities();
+
         //La pantalla en la que estan todos los accesos a los reportes
         public ActionResult Index()
         {
@@ -32,9 +35,12 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-        //Cantidad de requerimientos por desarrollador para un proyecto específico
-        public ActionResult numRequirmnetsPerDev()
+        //Cantidad de requerimientos por desarrollador para un proyecto específico  (LuisC)
+        public ActionResult numReqPerDev()
         {
+            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+
+
             return View();
         }
 

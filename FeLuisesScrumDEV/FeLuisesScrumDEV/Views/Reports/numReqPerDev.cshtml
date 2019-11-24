@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>numReqPerDev</title>
+</head>
+
+<body>
+    @if (Session["userName"] == null && Convert.ToInt32(Session["userRole"]) != 0)
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h2>Requerimientos por Proyectos</h2>
+            <hr />
+        </div>
+    }
+</body>
+
+</html>
