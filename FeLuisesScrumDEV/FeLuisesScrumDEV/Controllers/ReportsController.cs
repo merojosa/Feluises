@@ -35,13 +35,29 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
+
+        public IEnumerable<Project> GetProjectsbyClient(string client)
+        {
+            
+            return db.Project.Where(p => p.idClientFK == client).AsEnumerable<Project>();
+        }
+
         //Cantidad de requerimientos por desarrollador para un proyecto específico  (LuisC)
         public ActionResult numReqPerDev()
         {
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+            var actualUsr = Session["userName"].ToString(); 
+            var proyectos = db.Project.Where(p => p.idClientFK== actualUsr);
+            var prb = db.Project;
+            List<Project> results = db.Project.Where(p => p.idClientFK == actualUsr).ToList();
+            //ViewBag.idProjectFKPK = new SelectList(db.Project.Where(p => p.idClientFK == actualUsr), "idProjectPK", "projectName").FirstOrDefault();
+            //ViewData["idProjectFKPK"] = new SelectList(db.Project.Where(p => p.idClientFK == actualUsr), "idProjectPK", "projectName").FirstOrDefault();
+
+            var projects = GetProjectsbyClient(actualUsr);
+            var caca = new SelectList(projects, "idProjectPK", "projectName");
+            ViewBag.idProjectFKPK = caca;
 
 
-            return View();
+            return View(projects.ToList());
         }
 
         //Comparar la duración estimada y real para requerimiento de un desarrollador.

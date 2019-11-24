@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 
 <html>
-
+@* @model IEnumerable<FeLuisesScrumDEV.Models.Client>*@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" charset="utf-8" />
     <title>numReqPerDev</title>
+
+
 </head>
 
 <body>
@@ -30,9 +32,24 @@
     }
     else
     {
-        <div>
-            <h2>Requerimientos por Proyectos</h2>
-            <hr />
+        <div class="container">
+            <div>
+                <h2>Requerimientos por Proyectos</h2>
+                <hr />
+                <div class="p-3 mb-2 bg-warning text-dark">Aquí va la info general</div>
+            </div>
+
+            <div class="dropdown">
+                @ViewBag.idProjectFKPK
+                @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control" })
+
+            </div>
+
+
+
+
+
+
         </div>
     }
 </body>
