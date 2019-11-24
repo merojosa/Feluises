@@ -12,12 +12,12 @@
         //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
 
         $(document).ready(function () {
-            $('#devKnowledgeIndex').DataTable();
+            $('#devKnowledgeIndex').DataTable({ searching: false, paging: false });
         });
     </script>
 </head>
 <body>
-    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
+    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0))
     {
 
         <div class="container">
@@ -40,9 +40,9 @@
             {
                 @Html.AntiForgeryToken()
 
-                <h2>devsKnowledgeLaborSeniority</h2>
-
-                @Html.Editor("Knowledge")
+                <h2>Antigüedad de desarrolladores por conocimiento</h2>
+                <hr>
+                <div class="p-3 mb-2 bg-info text-white"><b>Buscar por conocimiento: </b> <input name="knowledge" class="form-control text-box single-line" id="knowledge" type="text" value=""></div>
             }
             @if (Model != null)
             {
@@ -56,7 +56,7 @@
                                 Cantidad de empleados
                             </th>
                             <th>
-                                Promedio antiguedad laboral
+                                Promedio antigüedad laboral
                             </th>
                         </tr>
                     </thead>

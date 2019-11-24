@@ -45,5 +45,10 @@ namespace FeLuisesScrumDEV.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetKnowledgesSP_Result>("GetKnowledgesSP", conocimientoParameter);
         }
+    
+        public virtual ObjectResult<GetReqStatsbyComplexity_Result> GetReqStatsbyComplexity()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReqStatsbyComplexity_Result>("GetReqStatsbyComplexity");
+        }
     }
 }

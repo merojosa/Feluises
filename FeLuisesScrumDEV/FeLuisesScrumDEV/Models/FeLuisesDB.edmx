@@ -216,6 +216,7 @@
         <Function Name="GetKnowledgesSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="conocimiento" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetReqStatsbyComplexity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Gr02Proy2ModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
@@ -520,13 +521,23 @@
             <End Role="WorksIn" EntitySet="WorksIn" />
           </AssociationSet>
           <FunctionImport Name="GetKnowledgesSP" ReturnType="Collection(Gr02Proy2Model.GetKnowledgesSP_Result)">
-            <Parameter Name="conocimiento" Mode="In" Type="String" />
+          <Parameter Name="conocimiento" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetReqStatsbyComplexity" ReturnType="Collection(Gr02Proy2Model.GetReqStatsbyComplexity_Result)" />
         </EntityContainer>
         <ComplexType Name="GetKnowledgesSP_Result">
           <Property Type="String" Name="Conocimiento" Nullable="false" MaxLength="30" />
           <Property Type="Int32" Name="Total" Nullable="true" />
           <Property Type="Int32" Name="Promedio_Antiguedad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetReqStatsbyComplexity_Result">
+          <Property Type="Int16" Name="Dificultad" Nullable="true" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="Int32" Name="Minima_Diff" Nullable="true" />
+          <Property Type="Int32" Name="Max_Diff" Nullable="true" />
+          <Property Type="Int32" Name="Avg_Diff" Nullable="true" />
+          <Property Type="Int32" Name="Avg_Real" Nullable="true" />
+          <Property Type="Int32" Name="Avg_Est" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -656,6 +667,19 @@
                 <ScalarProperty Name="Conocimiento" ColumnName="Conocimiento" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Promedio_Antiguedad" ColumnName="Promedio Antiguedad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReqStatsbyComplexity" FunctionName="Gr02Proy2Model.Store.GetReqStatsbyComplexity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy2Model.GetReqStatsbyComplexity_Result">
+                <ScalarProperty Name="Dificultad" ColumnName="Dificultad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Minima_Diff" ColumnName="Minima Diff" />
+                <ScalarProperty Name="Max_Diff" ColumnName="Max Diff" />
+                <ScalarProperty Name="Avg_Diff" ColumnName="Avg Diff" />
+                <ScalarProperty Name="Avg_Real" ColumnName="Avg Real" />
+                <ScalarProperty Name="Avg_Est" ColumnName="Avg Est" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

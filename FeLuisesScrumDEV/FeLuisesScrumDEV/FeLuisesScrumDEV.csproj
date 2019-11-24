@@ -183,6 +183,9 @@
     <Compile Include="Models\GetKnowledgesSP_Result.cs">
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetReqStatsbyComplexity_Result.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Module.cs">
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
@@ -376,6 +379,7 @@
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\devsKnowledgeLaborSeniority.cshtml" />
+    <Content Include="Views\Reports\compareReqStatsbyComplexity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

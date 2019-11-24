@@ -1,0 +1,102 @@
+﻿<html>
+<head>
+    @model IEnumerable<FeLuisesScrumDEV.Models.GetReqStatsbyComplexity_Result>
+    @{
+        ViewBag.Title = "compareReqStatsbyComplexity";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @foreach( var item in Model )
+            {
+                var id = "#" + @item.Dificultad.ToString();
+                <text>
+                $('@id').hide();
+                </text>
+            }
+            $("#complexity").change(function () {
+                @foreach( var item in Model )
+                {
+                    var id = "#" + @item.Dificultad.ToString();
+                    <text>
+                    $('@id').hide();
+                    </text>
+                }
+                var categoryId = '#'+$("#complexity").val();
+                $(categoryId.toString()).show();
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h2>compareReqStatsbyComplexity</h2>
+
+    @Html.DropDownList("complexity", null, htmlAttributes: new { @class = "form-control" })
+
+    @if (Model != null)
+    {
+        foreach (var item in Model.ToList())
+        {
+            <div class="card border-dark shadow rounded" id="@item.Dificultad" style="width: auto; height: auto;">
+                <h2 class="card-header text-white" id="back-Fe1">Complejidad: @item.Dificultad</h2>
+                <div class="card-body">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Cantidad de requerimientos
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </dd>
+
+                            <dt>
+                                Diferencia mínima de estimación-realidad
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Minima_Diff)
+                            </dd>
+
+                            <dt>
+                                Diferencia promedio de estimación-realidad
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Avg_Diff)
+                            </dd>
+
+                            <dt>
+                                Diferencia máxima de estimación-realidad
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Max_Diff)
+                            </dd>
+
+                            <dt>
+                                Promedio duración estimada
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Avg_Est)
+                            </dd>
+
+                            <dt>
+                                Promedio duración real
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Avg_Real)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</body>
+</html>

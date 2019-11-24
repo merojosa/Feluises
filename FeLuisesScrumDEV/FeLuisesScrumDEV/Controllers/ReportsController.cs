@@ -71,9 +71,19 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Comparar las duraciones reales y estimadas entre requerimientos de un mismo nivel de complejidad.
-        public ActionResult compareDuration()
+        public ActionResult compareReqStatsbyComplexity()
         {
-            return View();
+            var results = db.GetReqStatsbyComplexity().ToList();
+            List<SelectListItem> list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No asignado" },
+                new SelectListItem { Value = "1", Text = "Simple" },
+                new SelectListItem { Value = "2", Text = "Mediano" },
+                new SelectListItem { Value = "3", Text = "Complejo" },
+                new SelectListItem { Value = "4", Text = "Muy complejo" }
+            };
+            ViewBag.complexity = list;
+            return View(results);
         }
 
         public ActionResult devsKnowledgeLaborSeniority()

@@ -154,7 +154,7 @@ namespace FeLuisesScrumDEV.Controllers
                 }
             }
             ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            ViewBag.idModuleFKPK = new SelectList(db.Module, "idModulePK", "name", requeriment.idProjectFKPK);
+            ViewBag.idModuleFKPK = new SelectList(db.Module.Where(x => x.idProjectFKPK == requeriment.idProjectFKPK), "idModulePK", "name", requeriment.idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(requeriment.complexity);
             ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
