@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @model IEnumerable<FeLuisesScrumDEV.Models.GetKnowledgesSP_Result>
+    @{
+        ViewBag.Title = "devsKnowledgeLaborSeniority";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <title>devsKnowledgeLaborSeniority</title>
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+
+        $(document).ready(function () {
+            $('#devKnowledgeIndex').DataTable();
+        });
+    </script>
+</head>
+<body>
+    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <h2>devsKnowledgeLaborSeniority</h2>
+
+                @Html.Editor("Knowledge")
+            }
+            @if (Model != null)
+            {
+                <table id="devKnowledgeIndex" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Conocimiento
+                            </th>
+                            <th>
+                                Cantidad de empleados
+                            </th>
+                            <th>
+                                Promedio antiguedad laboral
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Conocimiento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Promedio_Antiguedad)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+        </div>
+    }
+</body>
+</html>

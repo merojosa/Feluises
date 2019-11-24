@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FeLuisesScrumDEV.Models;
+using FeLuisesScrumDEV.viewModel;
 
 namespace FeLuisesScrumDEV.Controllers
 {
     public class ReportsController : Controller
     {
+        private FeLuisesEntities db = new FeLuisesEntities();
+
         //La pantalla en la que estan todos los accesos a los reportes
         public ActionResult Index()
         {
@@ -69,11 +76,18 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-
-        //Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad laboral.
-        public ActionResult devsInKnownledgeAndAtiguedad()
+        public ActionResult devsKnowledgeLaborSeniority()
         {
             return View();
+        }
+
+        //Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad laboral.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult devsKnowledgeLaborSeniority([Bind(Include = "Knowledge")]string knowledge)
+        {
+            var results = db.GetKnowledgesSP(knowledge).ToList();
+            return View(results);
         }
 
 
