@@ -36,28 +36,28 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
 
-        public IEnumerable<Project> GetProjectsbyClient(string client)
-        {
-            
-            return db.Project.Where(p => p.idClientFK == client).AsEnumerable<Project>();
-        }
-
         //Cantidad de requerimientos por desarrollador para un proyecto específico  (LuisC)
         public ActionResult numReqPerDev()
         {
-            var actualUsr = Session["userName"].ToString(); 
-            var proyectos = db.Project.Where(p => p.idClientFK== actualUsr);
-            var prb = db.Project;
-            List<Project> results = db.Project.Where(p => p.idClientFK == actualUsr).ToList();
-            //ViewBag.idProjectFKPK = new SelectList(db.Project.Where(p => p.idClientFK == actualUsr), "idProjectPK", "projectName").FirstOrDefault();
-            //ViewData["idProjectFKPK"] = new SelectList(db.Project.Where(p => p.idClientFK == actualUsr), "idProjectPK", "projectName").FirstOrDefault();
+            var query
 
-            var projects = GetProjectsbyClient(actualUsr);
-            var caca = new SelectList(projects, "idProjectPK", "projectName");
-            ViewBag.idProjectFKPK = caca;
+            return View();
+        }
+        /*SELECT R.objective, E.employeeName, R.complexity, R.status
+FROM Project P JOIN Module M ON P.idProjectPK = M.idProjectFKPK
+JOIN Requeriment R ON M.idModulePK = R.idModuleFKPK
+JOIN Employee E ON E.idEmployeePK = R.idEmployeeFK
+WHERE P.idClientFK = 999977775*/
 
-
-            return View(projects.ToList());
+        //EFE: Crea una lista con los proyectos de un cliente
+        public SelectList ProjectsList()
+        {
+            var xd = db.Project.Include(p => p.Client);
+            var actualUsr = Session["userID"];
+            var query = from a in db.Project
+                        where a.idClientFK == actualUsr.ToString()
+                        select a.projectName;
+            return new SelectList(query.ToList());
         }
 
         //Comparar la duración estimada y real para requerimiento de un desarrollador.
