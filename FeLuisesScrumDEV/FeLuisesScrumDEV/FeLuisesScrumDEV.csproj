@@ -372,6 +372,7 @@
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\DeveloperState.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

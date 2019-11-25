@@ -3,20 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FeLuisesScrumDEV.Models;
+using System.Data.Entity.SqlServer;
+//using System.Data.Entity.SqlServerCompact;
 
 namespace FeLuisesScrumDEV.Controllers
 {
     public class ReportsController : Controller
     {
+        private FeLuisesEntities db = new FeLuisesEntities();
+
         //La pantalla en la que estan todos los accesos a los reportes
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
 
         //Ver todos los desarrolladores, disponibles y ocupados, en su proyecto
         public ActionResult DeveloperState()
         {
+
+            ViewBag.EmployeesInProyects = (from E in db.Employee
+                                           join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
+                                           join P in db.Project on W.idProjectFKPK equals P.idProjectPK
+                                           join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
+                                           //group E by new { E.employeeName, E.employeeLastName } into Nombre_Desarrollador
+                                           where R.estimatedDuration != null
+                                           select new
+                                           {
+                                               Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
+                                               Nombre_Proyecto = P.projectName,
+                                               Fecha_Inicio = P.startingDate,
+                                               Fecha_Estimada = P.startingDate.GetValueOrDefault().AddDays(Convert.ToDouble(R.estimatedDuration / 24))
+                                              // Fecha_Estimada = DateAdd("DAY", Convert.ToDouble(R.estimatedDuration / 24))
+                                               //Fecha_Estimada = DbFunctions.
+
+
+                                           }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Fecha_Inicio, q.Fecha_Estimada });
+
+
             return View();
         }
 
