@@ -50,5 +50,18 @@ namespace FeLuisesScrumDEV.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReqStatsbyComplexity_Result>("GetReqStatsbyComplexity");
         }
+        /*
+        [DbFunction("YouDbContext.Store", "calculateDDiff")]
+        public int calculateDDiff(string parameter)
+        {
+            var lObjectContext = ((IObjectContextAdapter)this).ObjectContext;
+
+            return (int)lObjectContext.
+                CreateQuery<string>(
+                    "FeLuisesEntities.Store.YourScalarFunction",
+                    new ObjectParameter("date", parameter)).
+                Execute(MergeOption.NoTracking).
+                FirstOrDefault();
+        }*/
     }
 }

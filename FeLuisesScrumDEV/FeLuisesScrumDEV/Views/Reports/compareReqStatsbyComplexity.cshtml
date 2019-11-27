@@ -1,6 +1,6 @@
 ﻿<html>
 <head>
-    @model IEnumerable<FeLuisesScrumDEV.Models.GetReqStatsbyComplexity_Result>
+    @model IEnumerable<FeLuisesScrumDEV.viewModel.GetReqStatsbyComplexity_Result_Mapped>
     @{
         ViewBag.Title = "compareReqStatsbyComplexity";
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,8 +26,6 @@
 </head>
 <body>
     <h2>compareReqStatsbyComplexity</h2>
-
-    @Html.DropDownList("complexity", null, htmlAttributes: new { @class = "form-control" })
 
     @if (Model != null)
     {
