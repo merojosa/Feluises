@@ -39,7 +39,7 @@ namespace FeLuisesScrumDEV.Controllers
         //Cantidad de requerimientos por desarrollador para un proyecto específico  (LuisC)
         public ActionResult numReqPerDev()
         {
-            var query
+           // var query
 
             return View();
         }
@@ -52,7 +52,7 @@ WHERE P.idClientFK = 999977775*/
         //EFE: Crea una lista con los proyectos de un cliente
         public SelectList ProjectsList()
         {
-            var xd = db.Project.Include(p => p.Client);
+            //var xd = db.Project.Include(p => p.Client);
             var actualUsr = Session["userID"];
             var query = from a in db.Project
                         where a.idClientFK == actualUsr.ToString()
