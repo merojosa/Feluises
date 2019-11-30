@@ -10,7 +10,7 @@ namespace FeLuisesScrumDEV.viewModel
     public partial class StateResponsableReqClient_Result_Mapped
     {
         public string Nombre { get; set; }
-        public Nullable<int> Estado { get; set; }
+        public Nullable<short>  Estado { get; set; }
         public string Responsable { get; set; }
     }
 }
