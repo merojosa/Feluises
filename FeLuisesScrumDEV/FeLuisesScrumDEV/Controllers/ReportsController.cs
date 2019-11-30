@@ -43,22 +43,6 @@ namespace FeLuisesScrumDEV.Controllers
 
             return View();
         }
-        /*SELECT R.objective, E.employeeName, R.complexity, R.status
-FROM Project P JOIN Module M ON P.idProjectPK = M.idProjectFKPK
-JOIN Requeriment R ON M.idModulePK = R.idModuleFKPK
-JOIN Employee E ON E.idEmployeePK = R.idEmployeeFK
-WHERE P.idClientFK = 999977775*/
-
-        //EFE: Crea una lista con los proyectos de un cliente
-        public SelectList ProjectsList()
-        {
-            //var xd = db.Project.Include(p => p.Client);
-            var actualUsr = Session["userID"];
-            var query = from a in db.Project
-                        where a.idClientFK == actualUsr.ToString()
-                        select a.projectName;
-            return new SelectList(query.ToList());
-        }
 
         //Comparar la duración estimada y real para requerimiento de un desarrollador.
         public ActionResult estimatedRealTimeDev()
@@ -100,10 +84,22 @@ WHERE P.idClientFK = 999977775*/
 
 
 
-        //Ver el estado y responsables de un requerimiento.
+        //Ver el estado y responsables de un requerimiento. Según un cliente
         public ActionResult stateResponsableRequirement()
         {
             return View();
+        }
+
+
+        //EFE: Crea una lista con los proyectos de un cliente
+        public SelectList ProjectsList()
+        {
+            //var xd = db.Project.Include(p => p.Client);
+            var actualUsr = Session["userID"];
+            var query = from a in db.Project
+                        where a.idClientFK == actualUsr.ToString()
+                        select a.projectName;
+            return new SelectList(query.ToList());
         }
 
         //Ver el total de requerimientos de un proyecto.

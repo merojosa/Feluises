@@ -374,6 +374,8 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\numReqPerDev.cshtml" />
     <Content Include="Views\Reports\estimatedRealTimeDev.cshtml" />
+    <Content Include="Views\Reports\stateResponsableRequirement.cshtml" />
+    <Content Include="Views\Reports\stateResponsableReqClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
