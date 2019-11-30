@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using FeLuisesScrumDEV.Models;
 using System.Data.Entity.SqlServer;
-//using System.Data.Entity.SqlServerCompact;
+using System.Data.Entity;
+using FeLuisesScrumDEV.viewModel;
 
 namespace FeLuisesScrumDEV.Controllers
 {
@@ -23,26 +24,33 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult DeveloperState()
         {
 
-            ViewBag.EmployeesInProyects = (from E in db.Employee
+            var query = (from E in db.Employee
                                            join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
                                            join P in db.Project on W.idProjectFKPK equals P.idProjectPK
                                            join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
-                                           //group E by new { E.employeeName, E.employeeLastName } into Nombre_Desarrollador
-                                           where R.estimatedDuration != null
+                                           where W.role == 1
                                            select new
                                            {
                                                Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
                                                Nombre_Proyecto = P.projectName,
+                                               Nombre_Requerimiento = R.objective,
                                                Fecha_Inicio = P.startingDate,
-                                               Fecha_Estimada = P.startingDate.GetValueOrDefault().AddDays(Convert.ToDouble(R.estimatedDuration / 24))
-                                              // Fecha_Estimada = DateAdd("DAY", Convert.ToDouble(R.estimatedDuration / 24))
-                                               //Fecha_Estimada = DbFunctions.
+                                               Fecha_EstimadaFin = DbFunctions.AddDays(P.startingDate, R.estimatedDuration/8)
+                                           }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Nombre_Requerimiento, q.Fecha_Inicio, q.Fecha_EstimadaFin })
+                                           .OrderByDescending(q=> q.Key.Fecha_EstimadaFin).ToList();
 
 
-                                           }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Fecha_Inicio, q.Fecha_Estimada });
+            ViewBag.freeEmployees = new SelectList(db.Employee.Where(e => e.availability == 0), "employeeName", "employeeLastName");
 
-
-            return View();
+            var EmployeesInProyects = query.ToList().Select(e => new GetDevs
+            {
+                Nombre_Desarrollador = e.Key.Nombre_Desarrollador,
+                Nombre_Proyecto = e.Key.Nombre_Proyecto,
+                Nombre_Requerimiento = e.Key.Nombre_Requerimiento,
+                Fecha_Inicio = e.Key.Fecha_Inicio.Value.Date.ToShortDateString(),
+                Fecha_EstimadaFin = e.Key.Fecha_EstimadaFin.Value.Date.ToShortDateString()
+            });
+            return View(EmployeesInProyects);
         }
 
         //Conocer los periodos de desocupación de los desarrolladores.

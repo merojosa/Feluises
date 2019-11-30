@@ -1,15 +1,34 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        @{
-            Layout = "~/Views/Shared/_Layout.cshtml";
+<head>
+    <meta charset="utf-8" />
+    @model IEnumerable<FeLuisesScrumDEV.viewModel.GetDevs>
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <style>
+        #tabla1 {
+           padding: 10px 
         }
-        <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-    </head>
+        #tabla2 {
+           padding: 10px;
+           float: right;
+        }
+
+        td{
+            border:1px solid #000;
+        }
+
+        tr td:last-child{
+            width:1%;
+            white-space:nowrap;
+        }
+    </style>
+</head>
 
     <body>
-         if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2 ) )
+        @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2 ) )
         {
 
             <div class="container">
@@ -28,56 +47,96 @@
 
             <div class="container">
 
-                <div class="card border-dark rounded" id="shadow-Fe1" style="width:auto; height:auto;">
-                    <h2 class="card-header text-white" id="back-Fe1">Administrar Equipo</h2>
-                    <div class="card-body">
-                        <table id="employeesIndex" class="table table-striped table-bordered">
+            <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <br />
+                            <b>Desarrolladores asignados a req.</b>
+                        </center>
+                    </div>
+                    <div class="col-md-6">
+                        <center>
+                            <br />
+                            @*<b>Desarrolladores disponibles</b>*@
+                        </center>
+                    </div>
+                </div>
 
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Nombre Desarrolladores
-                                    </th>
-                                    <th>
-                                       Proyecto
-                                    </th>
-                                    <th>
-                                        Fecha inicio
-                                    </th>
-                                    <th>
-                                        Fecha estimada finalización
-                                    </th>
+                <div class="row">
+                    <div class="col-md-6">
+                        <center>
+                            <table id="tabla1" class="table table-striped table-bordered">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(var item in ViewBag.EmployeesInProyects)
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Desarrollador
+                                        </th>
+                                        <th>
+                                            Proyecto
+                                        </th>
+                                        <th>
+                                            Objetivo Req.
+                                        </th>
+                                        <th>
+                                            Fecha inicio
+                                        </th>
+                                        <th>
+                                            Fecha estimada finalización
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ToList())
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre_Desarrollador)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre_Requerimiento)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Fecha_Inicio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Fecha_EstimadaFin)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </center>
+                    </div>
+                    <br/>
+                    <div class="col-md-6">
+                        <center>
+                            <table id="tabla2" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Desarrolladores disponibles
+                                        </th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in ViewBag.freeEmployees)
                                 {
                                     <tr>
                                         <td>
-                                            item.Nombre_Desarrollador
+                                            @item.Value @item.Text
                                         </td>
-                                        <td>
-                                            item.Nombre_Proyecto
-                                        </td> 
-                                        <td>
-                                            item.Fecha_Inicio
-                                        </td>
-                                        <td>
-                                            item.Fecha_Estimada
-                                        </td> 
-
                                     </tr>
                                 }
-                            </tbody>
-                        </table>
-
-                        
+                            </table>
+                        </center>
                     </div>
                 </div>
             </div>
         }
-    }
-
     </body>
 </html>
