@@ -70,6 +70,9 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Comparar las duraciones reales y estimadas entre requerimientos de un mismo nivel de complejidad.
+        // Esta consulta va a sacar todos los requerimientos y agruparlos en cuanto a complejidad para así
+        // poder calcular datos estadisticos tales como el total de requerimientos asignados a dicha complejidad, la minima diferencia entre estimación y duración real,
+        // maxima diferencia, promedio de dicha diferencia y promedio de la estimación y la duración real
         public ActionResult CompareReqStatsbyComplexity()
         {
             var query = from r in db.Requeriment
@@ -85,6 +88,7 @@ namespace FeLuisesScrumDEV.Controllers
                             Avg_Real = rGroup.Average(x => x.realDuration),
                             Avg_Est = rGroup.Average(x => x.estimatedDuration)
                         };
+            // Se realiza la transición de variables anonimas a viewModels para poder pasar a la vista de manera correcta
             var results = query.ToList().Select(r => new GetReqStatsbyComplexity_Result_Mapped
             {
                 Dificultad = r.Dificultad,
@@ -104,6 +108,8 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad laboral.
+        // Se procede en esta consulta a dado uno o varios conocimientos calcular la cantidad de empleados que poseen dicho conocimiento
+        // Y el promedio de la antiguedad laboral
         public PartialViewResult viewKnowledges(string knowledge, int? mode)
         {
             if(string.IsNullOrWhiteSpace(knowledge))
@@ -112,6 +118,8 @@ namespace FeLuisesScrumDEV.Controllers
             var basequery = db.DeveloperKnowledge.Include(c => c.idEmployeeFKPK);
             if (mode == null)
             {
+                // En caso de que no se especifique el modo se toma como que se estan pidiendo todos los conocimientos disponibles
+                // No se logro separar la query en segmentos por lo que tuvo que replicarse innecesariamente el código 
                 var query = from dk in basequery
                             group dk by dk.devKnowledgePK into dkGroup
                             orderby dkGroup.Key descending
@@ -119,8 +127,9 @@ namespace FeLuisesScrumDEV.Controllers
                             {
                                 Conocimiento = dkGroup.Key,
                                 Total = dkGroup.Count(),
-                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))//(long)dkGroup.Average(x => DateTime.Now.Ticks-(x.Employee.employeeHireDate).Ticks)
+                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))
                             };
+                // Se utilizan variables anonimas para pasar de los resultados de las consultas a los viewModel con el fin de poder pasarlos a las vistas
                 var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
                 {
                     Conocimiento = x.Conocimiento,
@@ -131,6 +140,7 @@ namespace FeLuisesScrumDEV.Controllers
             }
             else
             {
+                // si se especifica cualquier cosa en el modo se toma en cuenta como que se pregunta por unos conocimientos en especifico
                 var query = from dk in basequery
                             where dk.devKnowledgePK.ToLower().Contains(knowledge.ToLower())
                             group dk by dk.devKnowledgePK into dkGroup
@@ -141,6 +151,7 @@ namespace FeLuisesScrumDEV.Controllers
                                 Total = dkGroup.Count(),
                                 Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))//(long)dkGroup.Average(x => DateTime.Now.Ticks-(x.Employee.employeeHireDate).Ticks)
                             };
+                // se realiza la transición para llenar los viewModel
                 var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
                 {
                     Conocimiento = x.Conocimiento,
