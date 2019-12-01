@@ -1,0 +1,76 @@
+﻿}
+<!DOCTYPE html>
+
+<html>
+@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>numReqPerDev</title>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#idProjectFKPK").change(function () {
+                var categoryId = $("#idProjectFKPK").val();
+                $("#info").load('@(Url.Action("stateResponsableReqClient","Reports",null, Request.Url.Scheme))?idProject=' + categoryId);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    @if (Session["userName"] == null && Convert.ToInt32(Session["userRole"]) == 3)
+    {
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+<div class="container">
+    <div>
+        <h2>Estado de Requerimientos</h2>
+        <hr />
+    </div>
+    @if (Convert.ToInt32(Session["userRol"]) == 0) // Si es jefe escoge un proyecto
+    {
+        <div class="dropdown">
+            @Html.DropDownList("idProjectFKPK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).ProjectsList(0), "PROYECTOS", new { @class = "form-control" })
+            <div id="bossQuery"></div>
+        </div>
+    }
+    else if (Convert.ToInt32(Session["userRol"]) == 1) // si es desarrollador
+    {
+        <div class="p-3 mb-2 bg-warning text-dark">
+            <b>Proyecto: </b>
+        </div>
+
+        <!--Desplegar parcial o normal de una-->
+    }
+    else if (Convert.ToInt32(Session["userRol"]) == 1) // si es líder
+    {
+        <div class="p-3 mb-2 bg-warning text-dark">
+            <b>Proyecto: </b>
+        </div>
+        <div class="dropdown">
+            @Html.DropDownList("idEmployeePK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).EmployeeList(), "PROYECTOS", new { @class = "form-control" })
+            <div id="info"></div>
+        </div>
+    }
+
+
+
+
+</div>
+    }
+</body>
+
+</html>

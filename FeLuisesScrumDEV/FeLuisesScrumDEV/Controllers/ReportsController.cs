@@ -37,10 +37,10 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
 
-        //Cantidad de requerimientos por desarrollador para un proyecto específico  (LuisC)
+        //Cantidad de requerimientos por desarrollador para un proyecto específico
         public ActionResult numReqPerDev()
         {
-           // var query
+           
 
             return View();
         }
@@ -64,11 +64,49 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-        //Ver el estado de avance de un requerimiento.
+        //Ver el estado de avance de un requerimiento. Quizá esta /*/*/*/*/*/*/*/*/*/**/*/
         public ActionResult requirmentState()
         {
+
+
             return View();
         }
+        //EFE: Retorna una lista con los empleados del equipo
+        public SelectList EmployeeList()
+        {
+            var idLeader = Session["userName"].ToString();
+            var project = from p in db.Project
+                          join wi in db.WorksIn on p.idProjectPK equals wi.idProjectFKPK
+                          join e in db.Employee on wi.idEmployeeFKPK equals e.idEmployeePK
+                          where wi.role == 1
+                          && wi.idEmployeeFKPK == idLeader
+                          select p.idProjectPK; //Saca el proyecto del líder
+
+            var query = from p in db.Project
+                        join wi in db.WorksIn on p.idProjectPK equals wi.idProjectFKPK
+                        join e in db.Employee on wi.idEmployeeFKPK equals e.idEmployeePK
+                        where project.First() == p.idProjectPK
+                        select (e.idEmployeePK); //Saca la lista del equipo
+            return new SelectList(query.ToList());
+        }
+        //Vista parcial en el caso de ser un leader el que ingresa al reporte
+        public PartialViewResult requirmentStatusLeader(string idProject)
+        {
+
+
+
+            return PartialView("requirmentStatusLeader", null);
+        }
+
+        public PartialViewResult requirmentStatusBoss(string idProject)
+        {
+
+
+
+            return PartialView("requirmentStatusBoss", null);
+        }
+
+        //Ver el estado de avance de un requerimiento. Quizá esta /*/*/*/*/*/*/*/*/*/**/*/
 
         //Comparar las duraciones reales y estimadas entre requerimientos de un mismo nivel de complejidad.
         public ActionResult compareDuration()
@@ -88,19 +126,15 @@ namespace FeLuisesScrumDEV.Controllers
         //Ver el estado y responsables de un requerimiento. Según un cliente
         public ActionResult stateResponsableRequirement()
         {
-            //var usr = Session["userName"].ToString();
-            //var query = db.Client.Where(c => c.idClientPK == usr);
-            //ViewBag.info = usr;
             //Como se usa una PartialView, la consulta esá abajo
-            return View(/*query.ToList()*/);
+            return View();
         }
         //EFE: Realiza la consulta de: Ver el estado y responsables de un requerimiento. Según un cliente
         //REQ: Id del cliente que se obtiene de la variable de session y el IdProject que se obtiene del dropdown
         public PartialViewResult stateResponsableReqClient(string idProject)
         {
-            //var client = idClientPK;
+            
             var rClient = Session["userID"].ToString();
-          //  var prb = Convert.ToInt32(idProject);
             var query = 
                 from c in db.Client
                 join p in db.Project on c.idClientPK equals p.idClientFK
@@ -116,23 +150,6 @@ namespace FeLuisesScrumDEV.Controllers
                     Estado = r.status,
                     Responable = e.employeeName
                 };
-            /*
-            var query2 =
-                from c in db.Client
-                join p in db.Project on c.idClientPK equals p.idClientFK
-                join wi in db.WorksIn on p.idProjectPK equals wi.idProjectFKPK
-                join e in db.Employee on wi.idEmployeeFKPK equals e.idEmployeePK
-                join r in db.Requeriment on p.idProjectPK equals r.idProjectFKPK
-                where p.idProjectPK == idProject// c.idClientPK == rClient
-                //&& p.idProjectPK == idProject
-                select new
-                {
-                    Nombre = r.objective,
-                    Estado = r.status,
-                    Responable = e.employeeName
-                };
-                */
-
 
             var results = query.ToList().Select(r => new StateResponsableReqClient_Result_Mapped
             {
@@ -140,20 +157,28 @@ namespace FeLuisesScrumDEV.Controllers
                 Estado = r.Estado,
                 Responsable = r.Responable
             }).ToList();
-
             return PartialView("stateResponsableReqClient", results);
         }
 
 
         //EFE: Crea una lista con los proyectos de un cliente
-        public SelectList ProjectsList()
+        public SelectList ProjectsList(int rol)
         {
-            //var xd = db.Project.Include(p => p.Client);
             var actualUsr = Session["userID"];
-            var query = from a in db.Project
-                        where a.idClientFK == actualUsr.ToString()
-                        select a.projectName;
-            return new SelectList(query.ToList());
+            if (rol == 3) //Cliente
+            { 
+                var query = from a in db.Project
+                            where a.idClientFK == actualUsr.ToString()
+                            select a.projectName;
+                return new SelectList(query.ToList());
+            } else if (rol == 0) // Jefe
+            {
+                var query = from a in db.Project
+                            select a.projectName;
+                return new SelectList(query.ToList());
+            }
+
+            return null;
         }
 
         //Ver el total de requerimientos de un proyecto.

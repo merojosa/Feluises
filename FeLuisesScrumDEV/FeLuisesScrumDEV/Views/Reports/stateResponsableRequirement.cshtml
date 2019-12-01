@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    @if (Session["userName"] == null && Convert.ToInt32(Session["userRole"]) != 0)
+    @if (Session["userName"] == null && Convert.ToInt32(Session["userRole"]) != 3)
     {
         <div class="container">
 
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                @Html.DropDownList("idProjectFKPK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).ProjectsList(), "PROYECTOS", new { @class = "form-control" })
+                @Html.DropDownList("idProjectFKPK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).ProjectsList(3), "PROYECTOS", new { @class = "form-control" })
                 <div id="info"></div>
             </div>
         </div>

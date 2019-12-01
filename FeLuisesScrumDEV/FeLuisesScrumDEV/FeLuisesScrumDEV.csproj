@@ -377,6 +377,9 @@
     <Content Include="Views\Reports\estimatedRealTimeDev.cshtml" />
     <Content Include="Views\Reports\stateResponsableRequirement.cshtml" />
     <Content Include="Views\Reports\stateResponsableReqClient.cshtml" />
+    <Content Include="Views\Reports\requirmentState.cshtml" />
+    <Content Include="Views\Reports\requirmentStatusLeader.cshtml" />
+    <Content Include="Views\Reports\requirmentStatusBoss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
