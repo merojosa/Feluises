@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "devsHistoryOnProjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<FeLuisesScrumDEV.viewModel.GetHistory_Results_Mapped>
+
+@{
+    ViewBag.Title = "devsHistoryOnProjects";
+}
+
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+
+@if (Session["userName"] == null)
+{
+
+    <div class="container">
+
+        <div class="card">
+            <div class="card-header">
+                <h2 id="heading-red">No se vale hackear!</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class=" container">
+        @using (Html.BeginForm())
+        {
+            <script>
+                //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+                $(document).ready(function () {
+                    $('#DeveloperHistory').DataTable({ searching: false, paging: false });
+                });
+            </script>
+            <h2><b>Historial de Participación de Empleado</b></h2>
+            <hr />
+            <h3>Buscar por Empleado: <input name="employee" class="form-control text-box single-line" id="employee" type="text" value=""></h3><!--Inicio y fin de encabezado de la card (título)-->
+
+            <table id="DeveloperHistory" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Nombre del Empleado
+                        </th>
+                        <th>
+                            Nombre de Proyecto
+                        </th>
+                        <th>
+                            Rol
+                        </th>
+                        <th>
+                            Horas Trabajadas
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Empleado)
+                                @Html.DisplayFor(modelItem => item.Apellido_Empleado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+                            </td>
+                            <td>
+                                @if (item.Rol == 0)
+                                {
+                                    <p class="text">Desarrollador</p>
+                                }
+                                @if (item.Rol == 1)
+                                {
+                                    <p class="text">Líder</p>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Horas_trabajadas)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        }
+    </div>
+}

@@ -58,9 +58,52 @@ namespace FeLuisesScrumDEV.Controllers
 
 
         //Historial de participación de un desarrollador en diferentes proyectos.
-        public ActionResult paticipationHistory()
+        public ActionResult devsHistoryOnProjects([Bind(Include = "employee")]string employee)
         {
-            return View();
+            var query = from wi in db.WorksIn
+                        join p in db.Project on wi.idProjectFKPK equals p.idProjectPK
+                        join e in db.Employee on wi.idEmployeeFKPK equals e.idEmployeePK
+                        join r in db.Requeriment on e.idEmployeePK equals r.idEmployeeFK
+                        where r.idProjectFKPK == p.idProjectPK && (e.employeeName.ToLower().Contains(employee.ToLower()) || e.employeeLastName.ToLower().Contains(employee.ToLower()))
+                        group new { wi, p, e, r } by new { e.employeeName, e.employeeLastName, p.projectName, wi.role } into wiGroup
+                        select new
+                        {
+                            Nombre_Empleado = wiGroup.Key.employeeName,
+                            Apellido_Empleado = wiGroup.Key.employeeLastName,
+                            Nombre_Proyecto = wiGroup.Key.projectName,
+                            rol = wiGroup.Key.role,
+                            Horas_Trabajadas = wiGroup.Sum(w => w.r.realDuration)
+                        };
+            var liderQuery = from wi in db.WorksIn
+                             join p in db.Project on wi.idProjectFKPK equals p.idProjectPK
+                             join e in db.Employee on wi.idEmployeeFKPK equals e.idEmployeePK
+                             where (e.employeeName.ToLower().Contains(employee.ToLower()) || e.employeeLastName.ToLower().Contains(employee.ToLower())) && wi.role == 1
+                             group new { wi, p, e } by new { e.employeeName, e.employeeLastName, p.projectName, wi.role } into leadGroup
+                             select new
+                             {
+                                 Nombre_Empleado = leadGroup.Key.employeeName,
+                                 Apellido_Empleado = leadGroup.Key.employeeLastName,
+                                 Nombre_Proyecto = leadGroup.Key.projectName,
+                                 rol = leadGroup.Key.role
+                             };
+            var results = query.ToList().Select(r => new GetHistory_Results_Mapped
+            {
+                Nombre_Empleado = r.Nombre_Empleado,
+                Apellido_Empleado = r.Apellido_Empleado,
+                Nombre_Proyecto = r.Nombre_Proyecto,
+                Rol = r.rol,
+                Horas_trabajadas = r.Horas_Trabajadas
+            }).ToList();
+
+            var results2 = liderQuery.ToList().Select(p => new GetHistory_Results_Mapped
+            {
+                Nombre_Empleado = p.Nombre_Empleado,
+                Apellido_Empleado = p.Apellido_Empleado,
+                Nombre_Proyecto = p.Nombre_Proyecto,
+                Rol = p.rol
+            }).ToList();
+            results = results.Concat(results2).ToList();
+            return View(results);
         }
 
         //Ver el estado de avance de un requerimiento.
@@ -171,8 +214,97 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Ver el total de requerimientos de un proyecto.
-        public ActionResult totalRequirements()
+        public ActionResult totalRequirements([Bind(Include = "cliente")]string cliente, [Bind(Include = "Proyecto")]string proyecto)
         {
+            if (Convert.ToInt32(Session["userRole"]) == 0)
+            { //si es jefe
+                var query = from r in db.Requeriment
+                            join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                            join p in db.Project on r.idProjectFKPK equals p.idProjectPK
+                            join c in db.Client on p.idClientFK equals c.idClientPK
+                            where c.clientName.ToLower().Contains(cliente.ToLower()) || c.clientLastName.ToLower().Contains(cliente.ToLower())
+                            group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
+                            select new
+                            {
+                                Nombre_Proyecto = rGroup.Key.projectName,
+                                Nombre_Cliente = rGroup.Key.clientName,
+                                Apellido_Cliente = rGroup.Key.clientLastName,
+                                Terminados = rGroup.Count(x => x.r.status == 3),
+                                Proceso = rGroup.Count(x => x.r.status != 3),
+                                Fecha_Finalizacion = rGroup.Key.finishingDate
+                            };
+                var results = query.ToList().Select(x => new GetFinished_Reqs_Mapped
+                {
+                    Nombre_Proyecto = x.Nombre_Proyecto,
+                    Nombre_Cliente = x.Nombre_Cliente,
+                    Apellido_Cliente = x.Apellido_Cliente,
+                    Requerimientos_Terminados = x.Terminados,
+                    Requerimientos_En_Proceso = x.Proceso,
+                    Fecha_Finalizacion = x.Fecha_Finalizacion
+                }).ToList();
+                return View(results);
+            }
+            else if (Convert.ToInt32(Session["userRole"]) == 3) // si es cliente
+            {
+                if (proyecto == "")
+                {
+                    var actualUsr = Session["userID"].ToString();
+                    var query = from r in db.Requeriment
+                                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                                join p in db.Project on r.idProjectFKPK equals p.idProjectPK
+                                join c in db.Client on p.idClientFK equals c.idClientPK
+                                where c.idClientPK == actualUsr
+                                group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
+                                select new
+                                {
+                                    Nombre_Proyecto = rGroup.Key.projectName,
+                                    Nombre_Cliente = rGroup.Key.clientName,
+                                    Apellido_Cliente = rGroup.Key.clientLastName,
+                                    Terminados = rGroup.Count(x => x.r.status == 3),
+                                    Proceso = rGroup.Count(x => x.r.status != 3),
+                                    Fecha_Finalizacion = rGroup.Key.finishingDate
+                                };
+                    var results = query.ToList().Select(x => new GetFinished_Reqs_Mapped
+                    {
+                        Nombre_Proyecto = x.Nombre_Proyecto,
+                        Nombre_Cliente = x.Nombre_Cliente,
+                        Apellido_Cliente = x.Apellido_Cliente,
+                        Requerimientos_Terminados = x.Terminados,
+                        Requerimientos_En_Proceso = x.Proceso,
+                        Fecha_Finalizacion = x.Fecha_Finalizacion
+                    }).ToList();
+                    return View(results);
+                }
+                else
+                {
+                    var actualUsr = Session["userID"].ToString();
+                    var query = from r in db.Requeriment
+                                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                                join p in db.Project on r.idProjectFKPK equals p.idProjectPK
+                                join c in db.Client on p.idClientFK equals c.idClientPK
+                                where c.idClientPK == actualUsr && p.projectName.ToLower().Contains(proyecto.ToLower())
+                                group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
+                                select new
+                                {
+                                    Nombre_Proyecto = rGroup.Key.projectName,
+                                    Nombre_Cliente = rGroup.Key.clientName,
+                                    Apellido_Cliente = rGroup.Key.clientLastName,
+                                    Terminados = rGroup.Count(x => x.r.status == 3),
+                                    Proceso = rGroup.Count(x => x.r.status != 3),
+                                    Fecha_Finalizacion = rGroup.Key.finishingDate
+                                };
+                    var results = query.ToList().Select(x => new GetFinished_Reqs_Mapped
+                    {
+                        Nombre_Proyecto = x.Nombre_Proyecto,
+                        Nombre_Cliente = x.Nombre_Cliente,
+                        Apellido_Cliente = x.Apellido_Cliente,
+                        Requerimientos_Terminados = x.Terminados,
+                        Requerimientos_En_Proceso = x.Proceso,
+                        Fecha_Finalizacion = x.Fecha_Finalizacion
+                    }).ToList();
+                    return View(results);
+                }
+            }
             return View();
         }
 
