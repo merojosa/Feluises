@@ -20,11 +20,11 @@ namespace FeLuisesScrumDEV.Controllers
            return View();
         }
 
-        //Ver todos los desarrolladores, disponibles y ocupados, en su proyecto
+        //EFE: Muestra el reporte de ver todos los desarrolladores disponibles y ocupadodos, estos ultimos asociados a un proyecto
         public ActionResult DeveloperState()
         {
-            ViewBag.freeEmployees = new SelectList(db.Employee.Where(e => e.availability == 0), "employeeName", "employeeLastName");
-            if (Convert.ToInt32(Session["userRole"]) == 0)
+            ViewBag.freeEmployees = new SelectList(db.Employee.Where(e => e.availability == 0), "employeeName", "employeeLastName"); //Empleados disponibles
+            if (Convert.ToInt32(Session["userRole"]) == 0) //caso jefe desarrollador
             {
                 var query = (from E in db.Employee
                              join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
@@ -50,7 +50,7 @@ namespace FeLuisesScrumDEV.Controllers
                     Fecha_EstimadaFin = e.Key.Fecha_EstimadaFin.Value.Date.ToShortDateString()
                 });
                 return View(EmployeesInProyects);
-            }else{ // if (Convert.ToInt32(Session["userRole"]) == 2)
+            }else{ //caso lider
                 string id = Session["userID"].ToString();
                 var query = (from E in db.Employee
                              join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
