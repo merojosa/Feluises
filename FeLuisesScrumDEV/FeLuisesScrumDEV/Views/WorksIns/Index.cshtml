@@ -3,7 +3,7 @@
 @model FeLuisesScrumDEV.Models.WorksIn
 <head>
 
-    @{ 
+    @{
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
@@ -14,6 +14,9 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>*@
 
     <style>
         #sortable1, #sortable2 {
@@ -93,13 +96,14 @@
                         currentProject: project
                     },
                     success: function (json) {
-                        if (!json.isRedirect) {
-                            console.log('Exito');
-                        }
+                        //$(document).ready(function(){
+                        //  $('.toast').toast('show');
+                        //});
+                        alert('Operación exitosa');
                     },
                     error: function (errorList) {
                         console.log(errorList);
-                        console.log("error");
+                        alert('Ocurrió un error');
                     }
                 })
 
@@ -164,7 +168,7 @@
             li = ul.getElementsByTagName('li');
             for (i = 0; i < li.length; i++) {
                 imgSkills = li[i].getElementsByTagName("img")[0].getAttribute("title");
-                if (imgSkills.indexOf(textInFilter) > -1) {
+                if (imgSkills.toLowerCase().indexOf(textInFilter) > -1) {
                     li[i].style.display = "";
                 } else {
                     li[i].style.display = "none";
@@ -178,7 +182,7 @@
 <body onload="getMembers()">
     @using (Html.BeginForm())
     {
-        if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2 ) )
+        if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
         {
 
             <div class="container">
@@ -193,7 +197,9 @@
                     </div>
                 </div>
             </div>
-        }else{
+        }
+        else
+        {
 
             <div class="container">
 
@@ -294,6 +300,12 @@
             </div>
         }
     }
+
+    <div class="toast" data-autohide="true" data-delay="5000">
+        <div class="toast-body">
+            Some text inside the toast body
+        </div>
+    </div>
 </body>
 
 </html>

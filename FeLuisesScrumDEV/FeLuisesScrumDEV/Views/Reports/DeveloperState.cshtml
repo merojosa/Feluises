@@ -9,11 +9,14 @@
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
     <style>
         #tabla1 {
-           padding: 10px 
+           padding: 10px;
+           float: left;
+           width:500px;
         }
         #tabla2 {
            padding: 10px;
            float: right;
+           width:300px;
         }
 
         td{
@@ -134,6 +137,9 @@
                                 }
                             </table>
                         </center>
+                        <a class="btn" role="button" href="@Url.Action("Index", "Reports")">
+                            <img src="~/Images/b-back.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                        </a>
                     </div>
                 </div>
             </div>

@@ -23,34 +23,61 @@ namespace FeLuisesScrumDEV.Controllers
         //Ver todos los desarrolladores, disponibles y ocupados, en su proyecto
         public ActionResult DeveloperState()
         {
-
-            var query = (from E in db.Employee
-                                           join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
-                                           join P in db.Project on W.idProjectFKPK equals P.idProjectPK
-                                           join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
-                                           where W.role == 1
-                                           select new
-                                           {
-                                               Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
-                                               Nombre_Proyecto = P.projectName,
-                                               Nombre_Requerimiento = R.objective,
-                                               Fecha_Inicio = P.startingDate,
-                                               Fecha_EstimadaFin = DbFunctions.AddDays(P.startingDate, R.estimatedDuration/8)
-                                           }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Nombre_Requerimiento, q.Fecha_Inicio, q.Fecha_EstimadaFin })
-                                           .OrderByDescending(q=> q.Key.Fecha_EstimadaFin).ToList();
-
-
             ViewBag.freeEmployees = new SelectList(db.Employee.Where(e => e.availability == 0), "employeeName", "employeeLastName");
-
-            var EmployeesInProyects = query.ToList().Select(e => new GetDevs
+            if (Convert.ToInt32(Session["userRole"]) == 0)
             {
-                Nombre_Desarrollador = e.Key.Nombre_Desarrollador,
-                Nombre_Proyecto = e.Key.Nombre_Proyecto,
-                Nombre_Requerimiento = e.Key.Nombre_Requerimiento,
-                Fecha_Inicio = e.Key.Fecha_Inicio.Value.Date.ToShortDateString(),
-                Fecha_EstimadaFin = e.Key.Fecha_EstimadaFin.Value.Date.ToShortDateString()
-            });
-            return View(EmployeesInProyects);
+                var query = (from E in db.Employee
+                             join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
+                             join P in db.Project on W.idProjectFKPK equals P.idProjectPK
+                             join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
+                             where W.role == 1
+                             select new
+                             {
+                                 Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
+                                 Nombre_Proyecto = P.projectName,
+                                 Nombre_Requerimiento = R.objective,
+                                 Fecha_Inicio = P.startingDate,
+                                 Fecha_EstimadaFin = DbFunctions.AddDays(P.startingDate, R.estimatedDuration / 8)
+                             }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Nombre_Requerimiento, q.Fecha_Inicio, q.Fecha_EstimadaFin })
+                             .OrderByDescending(q => q.Key.Fecha_EstimadaFin).ToList();
+
+                var EmployeesInProyects = query.ToList().Select(e => new GetDevs
+                {
+                    Nombre_Desarrollador = e.Key.Nombre_Desarrollador,
+                    Nombre_Proyecto = e.Key.Nombre_Proyecto,
+                    Nombre_Requerimiento = e.Key.Nombre_Requerimiento,
+                    Fecha_Inicio = e.Key.Fecha_Inicio.Value.Date.ToShortDateString(),
+                    Fecha_EstimadaFin = e.Key.Fecha_EstimadaFin.Value.Date.ToShortDateString()
+                });
+                return View(EmployeesInProyects);
+            }else{ // if (Convert.ToInt32(Session["userRole"]) == 2)
+                string id = Session["userID"].ToString();
+                var query = (from E in db.Employee
+                             join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
+                             join P in db.Project on W.idProjectFKPK equals P.idProjectPK
+                             join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
+                             where W.role == 1 && P.idProjectPK == W.idProjectFKPK && E.idEmployeePK == W.idEmployeeFKPK && E.idEmployeePK == id
+                             select new
+                             {
+                                 Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
+                                 Nombre_Proyecto = P.projectName,
+                                 Nombre_Requerimiento = R.objective,
+                                 Fecha_Inicio = P.startingDate,
+                                 Fecha_EstimadaFin = DbFunctions.AddDays(P.startingDate, R.estimatedDuration / 8)
+                             }).GroupBy(q => new { q.Nombre_Desarrollador, q.Nombre_Proyecto, q.Nombre_Requerimiento, q.Fecha_Inicio, q.Fecha_EstimadaFin })
+                             .OrderByDescending(q => q.Key.Fecha_EstimadaFin).ToList();
+
+                var EmployeesInProyects = query.ToList().Select(e => new GetDevs
+                {
+                    Nombre_Desarrollador = e.Key.Nombre_Desarrollador,
+                    Nombre_Proyecto = e.Key.Nombre_Proyecto,
+                    Nombre_Requerimiento = e.Key.Nombre_Requerimiento,
+                    Fecha_Inicio = e.Key.Fecha_Inicio.Value.Date.ToShortDateString(),
+                    Fecha_EstimadaFin = e.Key.Fecha_EstimadaFin.Value.Date.ToShortDateString()
+                });
+                return View(EmployeesInProyects);
+            }
+
         }
 
         //Conocer los periodos de desocupación de los desarrolladores.
