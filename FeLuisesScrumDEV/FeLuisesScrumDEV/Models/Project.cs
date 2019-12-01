@@ -57,7 +57,8 @@ namespace FeLuisesScrumDEV.Models
         public string idClientFK { get; set; }
         public Nullable<System.DateTime> creationDate { get; set; }
         public Nullable<short> status { get; set; }
-    
+        public Nullable<int> realDuration { get; set; }
+
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Module> Module { get; set; }

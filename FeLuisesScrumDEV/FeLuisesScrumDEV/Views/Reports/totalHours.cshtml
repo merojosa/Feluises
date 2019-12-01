@@ -1,0 +1,143 @@
+﻿@*@model IEnumerable<FeLuisesScrumDEV.viewModel.estimatedRealTimeDevModel>
+    @{
+        Layout = null;
+    }
+*@
+<!--<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>estimatedRealTimeDev</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
+    -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @model IEnumerable<FeLuisesScrumDEV.viewModel.totalHoursModel>
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <style>
+        #tabla1 {
+            padding: 10px
+        }
+
+        #tabla2 {
+            padding: 10px;
+            float: right;
+        }
+
+        td {
+            border: 1px solid #000;
+        }
+
+        tr td:last-child {
+            width: 1%;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <br />
+                        <b>Total de horas estimadas y reales requeridas por un proyecto.</b>
+                    </center>
+                </div>
+                <div class="col-md-6">
+                    <center>
+                        <br />
+                        @*<b>Desarrolladores disponibles</b>*@
+                    </center>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <center>
+                        <table id="tabla1" class="table table-striped table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nombre del lider
+                                    </th>
+                                    <th>
+                                        Nombre del proyecto
+                                    </th>
+                                    <th>
+                                        Horas estimadas
+                                    </th>
+                                    <th>
+                                        Horas reales
+                                    </th>
+                                    @*<th>
+                                        Diferencia
+                                    </th>*@
+                                    <th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.ToList())
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LiderNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreProyecto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HorasEstimadas)
+                                    </td>
+                                   <td>
+                                        @Html.DisplayFor(modelItem => item.HorasReales)
+                                    </td>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Diferencia)
+                                    </td>*@
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+                <br />
+            </div>
+        </div>
+    }
+</body>
+</html>

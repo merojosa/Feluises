@@ -196,6 +196,8 @@
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewModel\totalHoursModel.cs" />
+    <Compile Include="viewModel\estimatedRealTimeDevModel.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
     <Compile Include="viewModel\StateResponsableReqClient_Result_Mapped.cs" />
@@ -377,6 +379,7 @@
     <Content Include="Views\Reports\estimatedRealTimeDev.cshtml" />
     <Content Include="Views\Reports\stateResponsableRequirement.cshtml" />
     <Content Include="Views\Reports\stateResponsableReqClient.cshtml" />
+    <Content Include="Views\Reports\totalHours.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
