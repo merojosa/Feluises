@@ -88,15 +88,19 @@ namespace FeLuisesScrumDEV.Controllers
         //Ver el estado y responsables de un requerimiento. Según un cliente
         public ActionResult stateResponsableRequirement()
         {
+            //var usr = Session["userName"].ToString();
+            //var query = db.Client.Where(c => c.idClientPK == usr);
+            //ViewBag.info = usr;
             //Como se usa una PartialView, la consulta esá abajo
-            return View();
+            return View(/*query.ToList()*/);
         }
         //EFE: Realiza la consulta de: Ver el estado y responsables de un requerimiento. Según un cliente
         //REQ: Id del cliente que se obtiene de la variable de session y el IdProject que se obtiene del dropdown
-        public PartialViewResult stateResponsableReqClient(int idProject)
+        public PartialViewResult stateResponsableReqClient(string idProject)
         {
             //var client = idClientPK;
             var rClient = Session["userID"].ToString();
+          //  var prb = Convert.ToInt32(idProject);
             var query = 
                 from c in db.Client
                 join p in db.Project on c.idClientPK equals p.idClientFK
@@ -105,7 +109,7 @@ namespace FeLuisesScrumDEV.Controllers
                 join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
                 where r.idProjectFKPK == p.idProjectPK
                 && c.idClientPK == rClient
-                && p.idProjectPK == idProject
+                && p.projectName == idProject
                 select new
                 {
                     Nombre = r.objective,
