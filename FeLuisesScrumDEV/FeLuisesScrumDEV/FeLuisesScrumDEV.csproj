@@ -196,6 +196,8 @@
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewModel\GetKnowledgesSP_Result_Mapped.cs" />
+    <Compile Include="viewModel\GetReqStatsbyComplexity_Result_Mapped.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
   </ItemGroup>
@@ -372,6 +374,8 @@
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\CompareReqStatsbyComplexity.cshtml" />
+    <Content Include="Views\Reports\DevsKnowledgeLaborSeniority.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
