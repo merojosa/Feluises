@@ -104,29 +104,51 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad laboral.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DevsKnowledgeLaborSeniority([Bind(Include = "Knowledge")]string knowledge)
+        public PartialViewResult viewKnowledges(string knowledge, int? mode)
         {
+            if(string.IsNullOrWhiteSpace(knowledge))
+                return PartialView("viewKnowledges", null);
             var now = DateTime.Now;
             var basequery = db.DeveloperKnowledge.Include(c => c.idEmployeeFKPK);
-            var query = from dk in basequery
-                        where dk.devKnowledgePK.ToLower().Contains(knowledge.ToLower())
-                        group dk by dk.devKnowledgePK into dkGroup
-                        orderby dkGroup.Key descending
-                        select new
-                        {
-                            Conocimiento = dkGroup.Key,
-                            Total = dkGroup.Count(),
-                            Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))//(long)dkGroup.Average(x => DateTime.Now.Ticks-(x.Employee.employeeHireDate).Ticks)
-                        };
-            var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
+            if (mode == null)
             {
-                Conocimiento = x.Conocimiento,
-                Promedio_Antiguedad = x.Promedio_Antiguedad,
-                Total = x.Total
-            }).ToList();
-            return View(results);
+                var query = from dk in basequery
+                            group dk by dk.devKnowledgePK into dkGroup
+                            orderby dkGroup.Key descending
+                            select new
+                            {
+                                Conocimiento = dkGroup.Key,
+                                Total = dkGroup.Count(),
+                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))//(long)dkGroup.Average(x => DateTime.Now.Ticks-(x.Employee.employeeHireDate).Ticks)
+                            };
+                var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
+                {
+                    Conocimiento = x.Conocimiento,
+                    Promedio_Antiguedad = x.Promedio_Antiguedad,
+                    Total = x.Total
+                }).ToList();
+                return PartialView("viewKnowledges", results);
+            }
+            else
+            {
+                var query = from dk in basequery
+                            where dk.devKnowledgePK.ToLower().Contains(knowledge.ToLower())
+                            group dk by dk.devKnowledgePK into dkGroup
+                            orderby dkGroup.Key descending
+                            select new
+                            {
+                                Conocimiento = dkGroup.Key,
+                                Total = dkGroup.Count(),
+                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))//(long)dkGroup.Average(x => DateTime.Now.Ticks-(x.Employee.employeeHireDate).Ticks)
+                            };
+                var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
+                {
+                    Conocimiento = x.Conocimiento,
+                    Promedio_Antiguedad = x.Promedio_Antiguedad,
+                    Total = x.Total
+                }).ToList();
+                return PartialView("viewKnowledges", results);
+            }
         }
 
 

@@ -376,6 +376,7 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\CompareReqStatsbyComplexity.cshtml" />
     <Content Include="Views\Reports\DevsKnowledgeLaborSeniority.cshtml" />
+    <Content Include="Views\Reports\viewKnowledges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

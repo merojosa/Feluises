@@ -25,21 +25,22 @@
 
 </head>
 <body>
-    <h2>compareReqStatsbyComplexity</h2>
 
     @if (Model != null)
     {
+     string[] complexity = { "No asignado", "Simple", "Mediano", "Complejo", "Muy complejo" };
 
         foreach (var item in Model)
         {
             var idCheck = item.Dificultad + "Check";
             var idItem = item.Dificultad.ToString();
+            <label for="@idCheck">@complexity[(int)item.Dificultad]</label>
             <input type="checkbox" id="@idCheck" onclick="myFunction('@idItem')">
         }
         <div class="row">
             <div class="col-md-10 my-4 mx-auto">
                 <h2 class="text-center">Comparación de estimaciones y duraciones reales de requerimientos según complejidad</h2>
-
+                <div class="p-3 mb-2 bg-info text-white">descripción</div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsve">
@@ -60,7 +61,7 @@
                                     {
                                         <tr id="@item.Dificultad">
                                             <td>
-                                                @item.Dificultad
+                                                @complexity[(int)item.Dificultad]
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Total)

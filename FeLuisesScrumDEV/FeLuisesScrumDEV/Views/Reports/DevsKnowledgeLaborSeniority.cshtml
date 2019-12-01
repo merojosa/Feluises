@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    @model IEnumerable<FeLuisesScrumDEV.viewModel.GetKnowledgesSP_Result_Mapped>
     @{
         ViewBag.Title = "devsKnowledgeLaborSeniority";
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,6 +12,13 @@
 
         $(document).ready(function () {
             $('#devKnowledgeIndex').DataTable({ searching: false, paging: false });
+            $("#test").click(function () {
+                var categoryId = $("#knowledgetest").val();
+                $("#results").load('/Reports/viewKnowledges?knowledge=' + categoryId + '&mode=0');
+            });
+            $("#test2").click(function () {
+                $("#results").load('/Reports/viewKnowledges?knowledge=all');
+            });
         });
     </script>
 </head>
@@ -36,49 +42,16 @@
     else
     {
         <div class="container">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <h2>Antigüedad de desarrolladores por conocimiento</h2>
-                <hr>
-                <div class="p-3 mb-2 bg-info text-white"><b>Buscar por conocimiento: </b> <input name="knowledge" class="form-control text-box single-line" id="knowledge" type="text" value=""></div>
-            }
-            @if (Model != null)
-            {
-                <table id="devKnowledgeIndex" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                Conocimiento
-                            </th>
-                            <th>
-                                Cantidad de empleados
-                            </th>
-                            <th>
-                                Promedio antigüedad laboral
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Conocimiento)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Total)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Promedio_Antiguedad)
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-
-            }
+            <h2>Antigüedad de desarrolladores por conocimiento</h2>
+            <hr>
+            <div class="p-3 mb-2 bg-info text-white">descripción</div>
+            <fieldset>
+                <input name="knowledge" class="form-control text-box single-line" id="knowledgetest" type="text" value="">
+                <button type="button" class="btn btn-primary" id="test">Especifico</button>
+                <button type="button" class="btn btn-primary" id="test2">Todos</button>
+            </fieldset>
+        </div>
+        <div id="results">
         </div>
     }
 </body>
