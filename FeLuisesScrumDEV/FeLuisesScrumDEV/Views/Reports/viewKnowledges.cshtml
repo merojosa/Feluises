@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @model IEnumerable<FeLuisesScrumDEV.viewModel.GetKnowledgesSP_Result_Mapped>
+    @{
+        ViewBag.Title = "devsKnowledgeLaborSeniorityPartial";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <title>devsKnowledgeLaborSeniorityPartial</title>
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+
+        $(document).ready(function () {
+            $('#devKnowledgeIndex').DataTable({ searching: false, paging: false });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="container">
+
+        @if (Model != null)
+        {
+            <table id="devKnowledgeIndex" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Conocimiento
+                        </th>
+                        <th>
+                            Cantidad de empleados
+                        </th>
+                        <th>
+                            Promedio antigüedad laboral
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Conocimiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Promedio_Antiguedad)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</body>
+</html>

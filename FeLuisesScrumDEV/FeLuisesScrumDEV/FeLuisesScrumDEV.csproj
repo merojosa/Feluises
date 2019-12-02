@@ -196,6 +196,10 @@
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewModel\GetFinished_Reqs_Mapped.cs" />
+    <Compile Include="viewModel\GetHistory_Results_Mapped.cs" />
+    <Compile Include="viewModel\GetKnowledgesSP_Result_Mapped.cs" />
+    <Compile Include="viewModel\GetReqStatsbyComplexity_Result_Mapped.cs" />
     <Compile Include="viewModel\GetDevs.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
@@ -373,6 +377,11 @@
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\CompareReqStatsbyComplexity.cshtml" />
+    <Content Include="Views\Reports\DevsKnowledgeLaborSeniority.cshtml" />
+    <Content Include="Views\Reports\viewKnowledges.cshtml" />
+    <Content Include="Views\Reports\devsHistoryOnProjects.cshtml" />
+    <Content Include="Views\Reports\totalRequirements.cshtml" />
     <Content Include="Views\Reports\DeveloperState.cshtml" />
     <Content Include="Views\Reports\InactivityPeriod.cshtml" />
   </ItemGroup>

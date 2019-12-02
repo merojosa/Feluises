@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "totalRequirements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<FeLuisesScrumDEV.viewModel.GetFinished_Reqs_Mapped>
+
+@{
+    ViewBag.Title = "totalRequirements";
+}
+
+<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+
+@if (Session["userName"] == null)
+{
+
+    <div class="container">
+
+        <div class="card">
+            <div class="card-header">
+                <h2 id="heading-red">No se vale hackear!</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class=" container">
+        @using (Html.BeginForm())
+        {
+            <script>
+            //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+            $(document).ready(function () {
+                $('#TotalRequeriments').DataTable({ searching: false, paging: false });
+            });
+            </script>
+            <h2><b>Historial de Participación de Empleado</b></h2>
+            <hr />
+            if (Convert.ToInt32(Session["userRole"]) == 0)
+            { // Si masterchef
+                <h3> Buscar por Cliente: <input name="cliente" class="form-control text-box single-line" id="cliente" type="text" value=""></h3>
+
+            }
+            if (Convert.ToInt32(Session["userRole"]) == 3)
+            { // Si masterchef
+                <h3> Buscar por Proyecto: <input name="Proyecto" class="form-control text-box single-line" id="Proyecto" type="text" value=""></h3>
+
+            }
+
+            <table id="TotalRequeriments" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Nombre del Cliente
+                        </th>
+                        <th>
+                            Nombre de Proyecto
+                        </th>
+                        <th>
+                            Requerimientos Terminados
+                        </th>
+                        <th>
+                            Requerimientos En Proceso
+                        </th>
+                        <th>
+                            Fecha Finalización Estimada
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Cliente)
+                                @Html.DisplayFor(modelItem => item.Apellido_Cliente)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requerimientos_Terminados)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requerimientos_En_Proceso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha_Finalizacion)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @{
+        ViewBag.Title = "devsKnowledgeLaborSeniority";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <title>devsKnowledgeLaborSeniority</title>
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+
+        $(document).ready(function () {
+            $('#devKnowledgeIndex').DataTable({ searching: false, paging: false });
+            $("#test").click(function () {
+                var categoryId = $("#knowledgetest").val();
+                $("#results").load('/Reports/viewKnowledges?knowledge=' + categoryId + '&mode=0');
+            });
+            $("#test2").click(function () {
+                $("#results").load('/Reports/viewKnowledges?knowledge=all');
+            });
+        });
+    </script>
+</head>
+<body>
+    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0))
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <h2>Antigüedad de desarrolladores por conocimiento</h2>
+            <hr>
+            <div class="p-3 mb-2 bg-info text-white">descripción</div>
+            <fieldset>
+                <input name="knowledge" class="form-control text-box single-line" id="knowledgetest" type="text" value="">
+                <button type="button" class="btn btn-primary" id="test">Especifico</button>
+                <button type="button" class="btn btn-primary" id="test2">Todos</button>
+            </fieldset>
+        </div>
+        <div id="results">
+        </div>
+    }
+</body>
+</html>
