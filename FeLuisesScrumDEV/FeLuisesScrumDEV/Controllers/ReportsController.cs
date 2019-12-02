@@ -629,13 +629,13 @@ namespace FeLuisesScrumDEV.Controllers
                             {
                                 Conocimiento = dkGroup.Key,
                                 Total = dkGroup.Count(),
-                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffYears(x.Employee.employeeHireDate, now))
+                                Promedio_Antiguedad = (int)dkGroup.Average(x => DbFunctions.DiffDays(x.Employee.employeeHireDate, now))
                             };
                 // Se utilizan variables anonimas para pasar de los resultados de las consultas a los viewModel con el fin de poder pasarlos a las vistas
                 var results = query.ToList().Select(x => new GetKnowledgesSP_Result_Mapped
                 {
                     Conocimiento = x.Conocimiento,
-                    Promedio_Antiguedad = x.Promedio_Antiguedad,
+                    Promedio_Antiguedad = x.Promedio_Antiguedad/365,
                     Total = x.Total
                 }).ToList();
                 return PartialView("viewKnowledges", results);
