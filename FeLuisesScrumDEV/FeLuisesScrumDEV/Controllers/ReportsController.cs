@@ -217,14 +217,14 @@ namespace FeLuisesScrumDEV.Controllers
         public ActionResult totalRequirements([Bind(Include = "cliente")]string cliente, [Bind(Include = "Proyecto")]string proyecto)
         {
             if (Convert.ToInt32(Session["userRole"]) == 0)
-            { //si es jefe
-                var query = from r in db.Requeriment
-                            join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
-                            join p in db.Project on r.idProjectFKPK equals p.idProjectPK
-                            join c in db.Client on p.idClientFK equals c.idClientPK
-                            where c.clientName.ToLower().Contains(cliente.ToLower()) || c.clientLastName.ToLower().Contains(cliente.ToLower())
+            { //si es jefe desarrollador
+                var query = from r in db.Requeriment //Desde Requerimiento
+                            join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK //Empleado
+                            join p in db.Project on r.idProjectFKPK equals p.idProjectPK //Proyecto
+                            join c in db.Client on p.idClientFK equals c.idClientPK //Y cliente
+                            where c.clientName.ToLower().Contains(cliente.ToLower()) || c.clientLastName.ToLower().Contains(cliente.ToLower()) //Donde el nombre del cliente es similar al buscado
                             group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
-                            select new
+                            select new //Selecciona los atributos
                             {
                                 Nombre_Proyecto = rGroup.Key.projectName,
                                 Nombre_Cliente = rGroup.Key.clientName,
@@ -246,14 +246,14 @@ namespace FeLuisesScrumDEV.Controllers
             }
             else if (Convert.ToInt32(Session["userRole"]) == 3) // si es cliente
             {
-                if (proyecto == "")
+                if (proyecto == "") //Y no escribió nada en el buscador
                 {
                     var actualUsr = Session["userID"].ToString();
                     var query = from r in db.Requeriment
                                 join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
                                 join p in db.Project on r.idProjectFKPK equals p.idProjectPK
                                 join c in db.Client on p.idClientFK equals c.idClientPK
-                                where c.idClientPK == actualUsr
+                                where c.idClientPK == actualUsr //Recupera los proyectos para el cliente loggeado
                                 group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
                                 select new
                                 {
@@ -276,13 +276,13 @@ namespace FeLuisesScrumDEV.Controllers
                     return View(results);
                 }
                 else
-                {
+                { //Si escribió algo en la búsqueda
                     var actualUsr = Session["userID"].ToString();
                     var query = from r in db.Requeriment
                                 join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
                                 join p in db.Project on r.idProjectFKPK equals p.idProjectPK
                                 join c in db.Client on p.idClientFK equals c.idClientPK
-                                where c.idClientPK == actualUsr && p.projectName.ToLower().Contains(proyecto.ToLower())
+                                where c.idClientPK == actualUsr && p.projectName.ToLower().Contains(proyecto.ToLower()) //busca proyectos similares al nombrado, especificamente para el cliente loggeado.
                                 group new { r, e, p, c } by new { p.projectName, c.clientName, c.clientLastName, p.finishingDate } into rGroup
                                 select new
                                 {
