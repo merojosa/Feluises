@@ -168,7 +168,6 @@
                         }
                         else if (Convert.ToInt32(Session["userRole"]) == 1) //Desarrollador
                         {
-                            <div class="row">
                                 <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                                     <div class="card-header" id="back-Fe">
                                         <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
@@ -185,30 +184,29 @@
                                     </div>
                                     <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
                                 </div>
-                            </div>
                         }
                         else if(Convert.ToInt32(Session["userRole"]) == 2) //Líder)
                         {
-                    <div class="row">
-                        <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                            <div class="card-header" id="back-Fe">
-                                <a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
-                                    <b>
-                                        1.Desarrolladores asignados a
-                                        proyectos y disponibles
-                                    </b>
-                                </a>
+                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                <div class="card-header" id="back-Fe">
+                                    <a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
+                                        <b>
+                                            1.Desarrolladores asignados a
+                                            proyectos y disponibles
+                                        </b>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Para desarrolladores actualmente asignados a los proyectos:
+                                        Nombre del desarrollador, nombre del proyecto, fecha de inicio,
+                                        fecha de estimada de terminación ordenado en forma descendente
+                                        por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
+                                    </p>
+                                </div>
+
+                                <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Para desarrolladores actualmente asignados a los proyectos:
-                                    Nombre del desarrollador, nombre del proyecto, fecha de inicio,
-                                    fecha de estimada de terminación ordenado en forma descendente
-                                    por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
-                                </p>
-                            </div>
-                            <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
-                        </div>
                         <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                             <div class="card-header" id="back-Fe">
                                 <a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>3. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
@@ -239,11 +237,9 @@
                             </div>
                             <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
                         </div>
-                    </div>
                         }
                         else if (Convert.ToInt32(Session["userRole"]) == 3) //Cliente
                         {
-                    <div class="row">
                         <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                             <div class="card-header" id="back-Fe">
                                 <a class="btn text-white" role="button" href="@Url.Action("stateResponsableRequirement", "Reports")"><b>9. Estado y responsables de cada requerimiento de un proyecto específico</b></a>
@@ -275,8 +271,6 @@
                                 <b class="text-white">Luis Valverde</b>
                             </div>
                         </div>
-                    </div>
-                 
                     }
                 </div>
                 </div><!--CardBody-->
