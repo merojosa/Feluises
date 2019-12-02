@@ -1,25 +1,34 @@
-﻿}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
-@model IEnumerable<FeLuisesScrumDEV.Models.Client>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.requirmentStatus_Result_Mapped>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" charset="utf-8" />
-    <title>numReqPerDev</title>
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript">
+
+    <script>
         $(document).ready(function () {
-            $("#idProjectFKPK").change(function () {
-                var categoryId = $("#idProjectFKPK").val();
-                $("#info").load('@(Url.Action("stateResponsableReqClient","Reports",null, Request.Url.Scheme))?idProject=' + categoryId);
+            $('#stateReqDev').DataTable({ searching: false, paging: false });
+
+            $("#Text").change(function () {
+                var categoryId = $("#Text").val();
+                $("#bossQuery").load('@(Url.Action("requirmentStatusBoss","Reports",null, Request.Url.Scheme))?projectID=' + categoryId);
             });
+
+            $("#Text").change(function () {
+                var categoryId = $("#Text").val();
+                $("#leaderQuery").load('@(Url.Action("requirmentStatusLeader","Reports",null, Request.Url.Scheme))?devID=' + categoryId);
+            });
+            
         });
     </script>
 </head>
 
 <body>
-    @if (Session["userName"] == null && Convert.ToInt32(Session["userRole"]) == 3)
+    @if (Session["userName"] == null || Convert.ToInt32(Session["userRole"]) == 3)
     {
         <div class="container">
             <div class="card">
@@ -35,42 +44,115 @@
     }
     else
     {
-<div class="container">
-    <div>
-        <h2>Estado de Requerimientos</h2>
-        <hr />
-    </div>
-    @if (Convert.ToInt32(Session["userRol"]) == 0) // Si es jefe escoge un proyecto
-    {
-        <div class="dropdown">
-            @Html.DropDownList("idProjectFKPK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).ProjectsList(0), "PROYECTOS", new { @class = "form-control" })
-            <div id="bossQuery"></div>
+        <div class="container">
+            <div>
+                <h2>Estado de Requerimientos</h2>
+                <hr />
+            </div>
+
+            @if (Convert.ToInt32(Session["userRole"]) == 0) // Si es jefe escoge un proyecto
+            {
+                <div class="dropdown">
+                    @Html.DropDownList("Text", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).ProjectsList(0), "PROYECTOS", new { @class = "form-control" })
+
+                    <div id="bossQuery"></div>
+                </div>
+
+            }
+            else if (Convert.ToInt32(Session["userRole"]) == 1) // si es desarrollador
+            {
+                <div class="p-3 mb-2 bg-warning text-dark">
+                    <b>Proyecto: @ViewBag.general </b>
+                </div>
+                <div id="devquery">
+                    <h3>Requerimientos Completados</h3>
+                    <hr />
+                    <table id="stateReqDev" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Requerimiento
+                                </th>
+                                <th>
+                                    Fecha de Inicio
+                                </th>
+                                <th>
+                                    Fecha de Finalización
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.Estado == 3)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Nombre_Requerimiento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Fecha_de_inicio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Fecha_de_Finalizacion)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <h3>Requerimientos en Proceso</h3>
+                    <hr />
+                    <table id="stateReqDev" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Requerimiento
+                                </th>
+                                <th>
+                                    Fecha de Inicio
+                                </th>
+                                <th>
+                                    Duración Estimada
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.Estado == 1)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Nombre_Requerimiento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Fecha_de_inicio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modeItem => item.Duracion_Estimada)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            }
+            else if (Convert.ToInt32(Session["userRole"]) == 2) // si es líder
+            {
+                <div class="p-3 mb-2 bg-warning text-dark">
+                    <b>Proyecto: </b>
+                </div>
+                <div class="dropdown">
+                    @Html.DropDownList("Text", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).EmployeeList(), "Empleados", new { @class = "form-control" })
+                    <div id="leaderQuery"></div>
+                </div>
+            }
+
         </div>
-    }
-    else if (Convert.ToInt32(Session["userRol"]) == 1) // si es desarrollador
-    {
-        <div class="p-3 mb-2 bg-warning text-dark">
-            <b>Proyecto: </b>
-        </div>
-
-        <!--Desplegar parcial o normal de una-->
-    }
-    else if (Convert.ToInt32(Session["userRol"]) == 1) // si es líder
-    {
-        <div class="p-3 mb-2 bg-warning text-dark">
-            <b>Proyecto: </b>
-        </div>
-        <div class="dropdown">
-            @Html.DropDownList("idEmployeePK", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).EmployeeList(), "PROYECTOS", new { @class = "form-control" })
-            <div id="info"></div>
-        </div>
-    }
-
-
-
-
-</div>
     }
 </body>
-
 </html>

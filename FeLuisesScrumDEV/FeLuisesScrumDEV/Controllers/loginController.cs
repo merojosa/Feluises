@@ -57,7 +57,7 @@ namespace FeLuisesScrumDEV.Controllers
 
                 if (Convert.ToInt32(masterChief.userName) == masterChiefID) // Si se esta loggueando el Chief
                 {
-                    Session["userName"] ="Jefe Desaarrollador";
+                    Session["userName"] ="Jefe Desarrollador";
                     Session["userRole"] = 0;
                     isChief = true;
                 } else if (Employee == null) //if (Employee == null)

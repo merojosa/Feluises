@@ -196,6 +196,7 @@
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewModel\requirmentStatus_Result_Mapped.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
     <Compile Include="viewModel\StateResponsableReqClient_Result_Mapped.cs" />

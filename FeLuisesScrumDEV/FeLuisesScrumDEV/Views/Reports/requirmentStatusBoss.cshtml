@@ -1,17 +1,111 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.requirmentStatus_Result_Mapped>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>requirmentStatusBoss</title>
+    @{
+
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#statusBoss').DataTable({ searching: false, paging: false });
+        });
+    </script>
 </head>
 <body>
-    <div> 
+    <div class="p-3 mb-2 bg-warning text-dark">
+        <b>Líder: </b>
+    </div>
+    <div class="container">
+        <h3>Requerimientos Completados</h3>
+        <hr />
+        <table id="statusBoss" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Requerimiento
+                    </th>
+                    <th>
+                        Fecha de Inicio
+                    </th>
+                    <th>
+                        Fecha de Finalización
+                    </th>
+                    <th>
+                        Desarrollador
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Estado == 3) // Req terminados
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Nombre_Requerimiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Fecha_de_inicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Fecha_de_Finalizacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Nombre_Desarrollador)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <h3>Requerimientos en Progreso</h3>
+        <hr />
+        <table id="statusBoss" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Requerimiento
+                    </th>
+                    <th>
+                        Fecha de Inicio
+                    </th>
+                    <th>
+                        Fecha de Finalización
+                    </th>
+                    <th>
+                        Desarrollador
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Estado == 1) //En proceso
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Nombre_Requerimiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Fecha_de_inicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Duracion_Estimada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Nombre_Desarrollador)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
