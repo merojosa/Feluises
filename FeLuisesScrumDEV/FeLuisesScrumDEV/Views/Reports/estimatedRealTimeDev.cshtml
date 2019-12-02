@@ -1,155 +1,110 @@
-﻿@*@model IEnumerable<FeLuisesScrumDEV.viewModel.estimatedRealTimeDevModel>
-@{
-    Layout = null;
-}
-**@
-<!--<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.estimatedRealTimeDevModel>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>estimatedRealTimeDev</title>
-</head>
-<body>
-    <div>
-    </div>
-</body>
-</html>
-    -->
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    @model IEnumerable<FeLuisesScrumDEV.viewModel.estimatedRealTimeDevModel>
     @{
+        ViewBag.Title = "estimatedRealTimeDev";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
-    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-    @*<style>
-            #tabla1 {
-                padding: 10px
-            }
-
-            td {
-                border: 1px solid #000;
-            }
-
-            tr td:last-child {
-                width: 1%;
-                white-space: nowrap;
-            }
-        </style>*@
+ @*   <title>Empleados</title>*@
     <script>
-        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
         $(document).ready(function () {
-            $('#tabla1').DataTable();
+            $('#TotalHoras').DataTable();
         });
     </script>
+
 </head>
 
-<body>
-    @if (Session["userName"] == null && (Convert.ToInt32(Session["userRole"]) != 0 || Convert.ToInt32(Session["userRole"]) != 2))
-    {
+@if (Session["userName"] == null)
+{
 
-        <div class="container">
+    <div class="container">
 
-            <div class="card">
-                <div class="card-header">
-                    <h2 id="heading-red">No se vale hackear!</h2>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
-                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <h2 id="heading-red">No se vale hackear!</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
             </div>
         </div>
-    }
-    else
-    {
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-6">
-            <center>
-                <br />
-                <b>Duracion real y estimada para los requerimientos de un desarrollador.</b>
-            </center>
-        </div>
-        <div class="col-md-6">
-            <center>
-                <br />
-                @*<b>Desarrolladores disponibles</b>*@
-            </center>
-        </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <center>
-                <table id="tabla1" class="table table-striped table-bordered">
+}
+else
+{
 
-                    <thead>
+    <div class=" container">
+        @using (Html.BeginForm())
+        {
+            @*<script>
+                    //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+                    $(document).ready(function () {
+                        $('#TotalHoras').DataTable({ searching: false, paging: false });
+                    });
+                </script>*@
+            <h2><b>Comparar la duración estimada y real para requerimiento de un desarrollador.</b></h2>
+            <hr />
+            @*<h3> Buscar por Proyecto: <input name="Proyecto" class="form-control text-box single-line" id="Proyecto" type="text" value=""></h3>*@
+
+            <table id="TotalHoras" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Desarrollador
+                        </th>
+                        <th>
+                            Proyecto
+                        </th>
+                        <th>
+                            Objetivo Req.
+                        </th>
+                        <th>
+                            Complejidad
+                        </th>
+                        <th>
+                            Duracion estimada
+                        </th>
+                        <th>
+                            Duracion real
+                        </th>
+                        <th>
+                            Diferiencia
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ToList())
+                    {
                         <tr>
-                            <th>
-                                Desarrollador
-                            </th>
-                            <th>
-                                Proyecto
-                            </th>
-                            <th>
-                                Objetivo Req.
-                            </th>
-                            <th>
-                                Complejidad
-                            </th>
-                            <th>
-                                Duracion estimada
-                            </th>
-                            <th>
-                                Duracion real
-                            </th>
-                            <th>
-                                Diferiencia
-                            </th>
-
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DesarrolladorNombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Proyecto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Requerimiento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Complejidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DuracionEstimada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DuracionReal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Diferencia)
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ToList())
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DesarrolladorNombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Proyecto)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Requerimiento)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Complejidad)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DuracionEstimada)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DuracionReal)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Diferencia)
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </center>
-        </div>
-        <br />
+                    }
+                </tbody>
+            </table>
+        }
     </div>
-</div>
-    }
-</body>
+}
 </html>
