@@ -41,18 +41,23 @@
     }
     else
     {
-        <div class="container">
-            <h2>Antigüedad de desarrolladores por conocimiento</h2>
-            <hr>
-            <div class="p-3 mb-2 bg-info text-white">descripción</div>
-            <fieldset>
-                <input name="knowledge" class="form-control text-box single-line" id="knowledgetest" type="text" value="">
-                <button type="button" class="btn btn-primary" id="test">Especifico</button>
-                <button type="button" class="btn btn-primary" id="test2">Todos</button>
-            </fieldset>
-        </div>
-        <div id="results">
-        </div>
+<div class="container">
+    <h2>Antigüedad de desarrolladores por conocimiento</h2>
+    <hr>
+
+    <h3>Filtrar por conocimiento: </h3>
+    <div class="row">
+        <input name="knowledge" class="form-control text-box single-line" id="knowledgetest" style="margin-left: 5px; margin-right: 5px" type="text" value="">
+        <button type="button" class="btn btn-primary" style="margin-left: 5px; margin-right: 5px" id="test">Buscar</button>
+        <button type="button" class="btn btn-primary" style="margin-left: 5px; margin-right: 5px" id="test2">Ver todos</button>
+    </div>
+    <div class="p-3 mb-4 bg-info text-white" style="margin-top: 10px; margin-right: 15px">
+        <b>PCaca </b>
+    </div>
+
+    <div id="results">
+    </div>
+</div>
     }
 </body>
 </html>

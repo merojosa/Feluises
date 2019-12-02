@@ -25,79 +25,82 @@
 
 </head>
 <body>
-
-    @if (Model != null)
-    {
-     string[] complexity = { "No asignado", "Simple", "Mediano", "Complejo", "Muy complejo" };
-
-        foreach (var item in Model)
+    <div class="container">
+        @if (Model != null)
         {
-            var idCheck = item.Dificultad + "Check";
-            var idItem = item.Dificultad.ToString();
-            <label for="@idCheck">@complexity[(int)item.Dificultad]</label>
-            <input type="checkbox" id="@idCheck" onclick="myFunction('@idItem')">
-        }
-        <div class="row">
-            <div class="col-md-10 my-4 mx-auto">
-                <h2 class="text-center">Comparación de estimaciones y duraciones reales de requerimientos según complejidad</h2>
-                <div class="p-3 mb-2 bg-info text-white">descripción</div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-responsve">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead-inverse">
-                                    <tr>
-                                        <th class="w-25"></th>
-                                        <th class="">Cantidad de requerimientos</th>
-                                        <th class="">Diferencia minima</th>
-                                        <th class="">Diferencia máxima</th>
-                                        <th class="">Diferencia promedio</th>
-                                        <th class="">Promedio duración real</th>
-                                        <th class="">Promedio duración estimada</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.ToList())
-                                    {
-                                        <tr id="@item.Dificultad">
-                                            <td>
-                                                @complexity[(int)item.Dificultad]
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Total)
-                                            </td>
+            string[] complexity = { "No asignado", "Simple", "Mediano", "Complejo", "Muy complejo" };
 
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Minima_Diff)
-                                            </td>
-
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Avg_Diff)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Max_Diff)
-                                            </td>
-
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Avg_Est)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Avg_Real)
-                                            </td>
+          
+            <div class="row">
+                <div class="col-md-10 my-4 mx-auto">
+                    <h2>Comparación de estimaciones y duraciones reales de requerimientos según complejidad</h2>
+                    <hr />
+                    @foreach (var item in Model)
+                    {
+                    var idCheck = item.Dificultad + "Check";
+                    var idItem = item.Dificultad.ToString();
+                    <label for="@idCheck">@complexity[(int)item.Dificultad]</label>
+                    <input type="checkbox" id="@idCheck" onclick="myFunction('@idItem')">
+                    }
+                    <div class="p-3 mb-2 bg-info text-white">descripción</div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsve">
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th class="w-25"></th>
+                                            <th class="">Cantidad de requerimientos</th>
+                                            <th class="">Diferencia minima</th>
+                                            <th class="">Diferencia máxima</th>
+                                            <th class="">Diferencia promedio</th>
+                                            <th class="">Promedio duración real</th>
+                                            <th class="">Promedio duración estimada</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ToList())
+                                        {
+                                            <tr id="@item.Dificultad">
+                                                <td>
+                                                    @complexity[(int)item.Dificultad]
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Total)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Minima_Diff)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Avg_Diff)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Max_Diff)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Avg_Est)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Avg_Real)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </body>
 </html>
