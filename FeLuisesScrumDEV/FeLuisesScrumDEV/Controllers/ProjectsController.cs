@@ -85,7 +85,7 @@ namespace FeLuisesScrumDEV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK,status")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
+        public ActionResult Create([Bind(Include = "idProjectPK,projectName,objective,estimatedCost,realCost,startingDate,finishingDate,budget,estimatedDuration,idClientFK,status, realDuration")] Project project, [Bind(Include = "idEmployeeFKPK")] WorksIn employee)
         {
             var EmployeesController = new EmployeesController(); //Controlador de empleados
             var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
@@ -105,6 +105,8 @@ namespace FeLuisesScrumDEV.Controllers
                     employee.idProjectFKPK = project.idProjectPK;
                     employee.role = 1;
                     db.WorksIn.Add(employee); //agrega la relación de lider a la tabla worksIn
+                    project.realDuration = 0;
+                    project.estimatedDuration = 0;
                     db.SaveChanges(); //guarda cambios
                     return RedirectToAction("Index"); //vuelve al index.
                 }

@@ -149,6 +149,17 @@ else
                             </div>
 
                             <div class="form-group">
+                                <b>Duración Real</b>
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.realDuration)
+                                    @if (Model.realDuration == null)
+                                    {
+                                        <p class="card-text text-info">Informacion no disponible</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <b>Estado</b>
                                 <div class="col-md-10">
                                     @if (Model.estimatedDuration == null)
