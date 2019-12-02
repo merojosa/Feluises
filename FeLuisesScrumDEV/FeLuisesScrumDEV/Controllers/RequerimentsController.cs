@@ -114,10 +114,11 @@ namespace FeLuisesScrumDEV.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
+            var employeeController = new EmployeesController();
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList(requeriment.idProjectFKPK);
             ViewBag.idModuleFKPK = new SelectList(db.Module.Where(x => x.idProjectFKPK == idProjectFKPK), "idModulePK", "name", requeriment.idModuleFKPK);
-            ViewBag.complexity = SelectListComplexity(null);
-            ViewBag.status = SelectListStatus(null);
+            ViewBag.complexity = SelectListComplexity(requeriment.complexity);
+            ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
         }
 
@@ -153,9 +154,9 @@ namespace FeLuisesScrumDEV.Controllers
                     ModelState.AddModelError("startingDate","La fecha de inicio no puede ser despues de la fecha de finalización.");
                 }
             }
-            ViewBag.idEmployeeFK = new SelectList(db.Employee, "idEmployeePK", "employeeName", requeriment.idEmployeeFK);
-            //ViewBag.idModuleFKPK = new SelectList(db.Module, "idModulePK", "name", requeriment.idProjectFKPK);
             ViewBag.idModuleFKPK = new SelectList(db.Module.Where(x => x.idProjectFKPK == requeriment.idProjectFKPK), "idModulePK", "name", requeriment.idModuleFKPK);
+            var employeeController = new EmployeesController();
+            ViewBag.idEmployeeFK = employeeController.EmployeeFromTeamSelectList(requeriment.idProjectFKPK);
             ViewBag.complexity = SelectListComplexity(requeriment.complexity);
             ViewBag.status = SelectListStatus(requeriment.status);
             return View(requeriment);
