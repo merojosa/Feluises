@@ -8,11 +8,11 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
  @*   <title>Empleados</title>*@
-    <script>
+ @*   <script>
         $(document).ready(function () {
             $('#TotalHoras').DataTable();
         });
-    </script>
+    </script>*@
 
 </head>
 
@@ -35,76 +35,76 @@
 else
 {
 
-    <div class=" container">
-        @using (Html.BeginForm())
-        {
-            @*<script>
-                    //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
-                    $(document).ready(function () {
-                        $('#TotalHoras').DataTable({ searching: false, paging: false });
-                    });
-                </script>*@
-            <h2><b>Comparar la duración estimada y real para requerimiento de un desarrollador.</b></h2>
-            <hr />
-            @*<h3> Buscar por Proyecto: <input name="Proyecto" class="form-control text-box single-line" id="Proyecto" type="text" value=""></h3>*@
+<div class=" container">
+    @using (Html.BeginForm())
+    {
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+        $(document).ready(function () {
+            $('#TotalHoras').DataTable({ searching: false, paging: false });
+        });
+    </script>
+        <h2><b>Comparar la duración estimada y real para requerimiento de un desarrollador.</b></h2>
+        <hr />
+        <h3> Buscar por Proyecto: <input name="Proyecto" class="form-control text-box single-line" id="Proyecto" type="text" value=""></h3>
 
-            <table id="TotalHoras" class="table table-striped table-bordered">
-                <thead>
+        <table id="TotalHoras" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Desarrollador
+                    </th>
+                    <th>
+                        Proyecto
+                    </th>
+                    <th>
+                        Objetivo Req.
+                    </th>
+                    <th>
+                        Complejidad
+                    </th>
+                    <th>
+                        Duracion estimada
+                    </th>
+                    <th>
+                        Duracion real
+                    </th>
+                    <th>
+                        Diferiencia
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ToList())
+                {
                     <tr>
-                        <th>
-                            Desarrollador
-                        </th>
-                        <th>
-                            Proyecto
-                        </th>
-                        <th>
-                            Objetivo Req.
-                        </th>
-                        <th>
-                            Complejidad
-                        </th>
-                        <th>
-                            Duracion estimada
-                        </th>
-                        <th>
-                            Duracion real
-                        </th>
-                        <th>
-                            Diferiencia
-                        </th>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DesarrolladorNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Proyecto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Requerimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Complejidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DuracionEstimada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DuracionReal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Diferencia)
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.ToList())
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DesarrolladorNombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Proyecto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Requerimiento)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Complejidad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DuracionEstimada)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DuracionReal)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Diferencia)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-    </div>
+                }
+            </tbody>
+        </table>
+    }
+</div>
 }
 </html>

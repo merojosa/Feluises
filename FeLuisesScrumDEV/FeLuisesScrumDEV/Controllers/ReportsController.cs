@@ -46,7 +46,7 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Comparar la duración estimada y real para requerimiento de un desarrollador.
-        public ActionResult estimatedRealTimeDev(/*string idEmployeePK, *//*int? idProject*/)//------------------------------se usa
+        public ActionResult estimatedRealTimeDev([Bind(Include = "Proyecto")]string proyecto/*string idEmployeePK, *//*int? idProject*/)//------------------------------se usa
         {
             /*var developer = idEmployeePK;//Desarrollador que realiza la consulta
             var rDeveloper = developer.ToString();*/
@@ -76,7 +76,7 @@ namespace FeLuisesScrumDEV.Controllers
                     DuracionReal = r.realDuration,
                     Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
                 };*/
-            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2) //caso jefe desarrollador
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2 && proyecto == null) //caso jefe desarrollador
             {
                 var query2 =
                 from p in db.Project
@@ -112,7 +112,7 @@ namespace FeLuisesScrumDEV.Controllers
                 }).ToList();
                 return PartialView("estimatedRealTimeDev", results);
             }
-            else// if (Convert.ToInt32(Session["userRole"]) == 0) //Si es un jefe desarrollador
+            else if (Convert.ToInt32(Session["userRole"]) == 0 && proyecto == null) //Si es un jefe desarrollador
             {
                 var query2 =
                 from p in db.Project
@@ -122,8 +122,45 @@ namespace FeLuisesScrumDEV.Controllers
                 where r.status == 3
                 && r.idProjectFKPK == p.idProjectPK
                 && r.idEmployeeFK == e.idEmployeePK
-                                //&& p.idProjectPK == idProject//------------------------------se usa
-                                //&& e.idEmployeePK == rDeveloper
+                //&& p.idProjectPK == idProject//------------------------------se usa
+                //&& e.idEmployeePK == rDeveloper
+                select new
+                {
+                    DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
+                    Proyecto = p.projectName,
+                    Requerimiento = r.objective,
+                    Complejidad = r.complexity,
+                    DuracionEstimada = r.estimatedDuration,
+                    DuracionReal = r.realDuration,
+                    Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
+                };
+
+                //Nota: COmo se genera este modelo
+                var results = query2.ToList().Select(r => new estimatedRealTimeDevModel
+                {
+                    DesarrolladorNombre = r.DesarrolladorNombre,
+                    Proyecto = r.Proyecto,
+                    Requerimiento = r.Requerimiento,
+                    Complejidad = r.Complejidad,
+                    DuracionEstimada = r.DuracionEstimada,
+                    DuracionReal = r.DuracionReal,
+                    Diferencia = r.Diferencia
+                }).ToList();
+                return PartialView("estimatedRealTimeDev", results);
+            }
+            else
+            {
+                var query2 =
+                from p in db.Project
+                join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                where r.status == 3
+                && r.idProjectFKPK == p.idProjectPK
+                && r.idEmployeeFK == e.idEmployeePK
+                && p.projectName.ToLower().Contains(proyecto.ToLower())
+                //&& p.idProjectPK == idProject//------------------------------se usa
+                //&& e.idEmployeePK == rDeveloper
                 select new
                 {
                     DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
@@ -151,9 +188,9 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Total de horas estimadas y reales requeridas por un proyecto.
-        public ActionResult totalHours(/*int? idProject*/)//------------------se ocupa
+        public ActionResult totalHours([Bind(Include = "Proyecto")]string proyecto)//------------------se ocupa
         {
-            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2) //caso jefe desarrollador
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2 && proyecto == null) //caso jefe desarrollador
             {
                 var actualUsr = Session["userID"]; //------------------------se ocupa
                 var idLeader = actualUsr.ToString(); //lider------------------------se ocupa
@@ -192,7 +229,7 @@ namespace FeLuisesScrumDEV.Controllers
                 }).ToList();
                 return PartialView("totalHours", results);
             }
-            else
+            else if (Convert.ToInt32(Session["userRole"]) == 0 && proyecto == null)
             {
                 //var actualUsr = Session["userID"]; //------------------------se ocupa
                 //var idLeader = actualUsr.ToString(); //lider------------------------se ocupa
@@ -211,7 +248,47 @@ namespace FeLuisesScrumDEV.Controllers
                            && w.role == 1
                      //&& p.idProjectPK == idProject------------------------------se usa
                      //&& e.idEmployeePK = idEmployeePK
-                    select new
+                     select new
+                     {
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
+                     }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
+
+                //Nota: COmo se genera este modelo
+                var results = query2.ToList().Select(r => new totalHoursModel
+                {
+                    LiderNombre = r.Key.LiderNombre,
+                    NombreProyecto = r.Key.NombreProyecto,
+                    HorasEstimadas = r.Key.HorasEstimadas,
+                    HorasReales = r.Key.HorasReales,
+                    Diferencia = r.Key.Diferencia
+                }).ToList();
+                return PartialView("totalHours", results);
+            }
+            else 
+            {
+                //var actualUsr = Session["userID"]; //------------------------se ocupa
+                //var idLeader = actualUsr.ToString(); //lider------------------------se ocupa
+                //var project = idProject;
+                //var idProjectSt = project.ToString();------------------------se ocupa
+
+                var query2 =
+                    (from p in db.Project
+                     join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                     join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                     join w in db.WorksIn on p.idProjectPK equals w.idProjectFKPK
+                     join e in db.Employee on w.idEmployeeFKPK equals e.idEmployeePK
+                     where p.status == 3
+                           && r.idProjectFKPK == p.idProjectPK
+                           //&& w.idEmployeeFKPK == idLeader
+                           && w.role == 1
+                           && p.projectName.ToLower().Contains(proyecto.ToLower())
+                     //&& p.idProjectPK == idProject------------------------------se usa
+                     //&& e.idEmployeePK = idEmployeePK
+                     select new
                      {
                          LiderNombre = e.employeeName + " " + e.employeeLastName,
                          NombreProyecto = p.projectName,
