@@ -92,44 +92,51 @@
 
                             <thead>
                                 <tr>
-                                    <th>
-                                        Nombre del lider
-                                    </th>
-                                    <th>
-                                        Nombre del proyecto
-                                    </th>
-                                    <th>
-                                        Horas estimadas
-                                    </th>
-                                    <th>
-                                        Horas reales
-                                    </th>
-                                    @*<th>
-                                        Diferencia
-                                    </th>*@
-                                    <th>
-                                </tr>
+                                    @if ((Convert.ToInt32(Session["userRole"]) != 1 && Convert.ToInt32(Session["userRole"]) != 2))
+                                    {
+                                        <th>
+                                            Nombre del lider
+                                        </th>
+                                    }
+                                        <th>
+                                            Nombre del proyecto
+                                        </th>
+                                        <th>
+                                            Horas estimadas
+                                        </th>
+                                        <th>
+                                            Horas reales
+                                        </th>
+                                        @*<th>
+                Diferencia
+            </th>*@
+                                        <th>
+                                    </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.ToList())
                                 {
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.LiderNombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NombreProyecto)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HorasEstimadas)
-                                    </td>
-                                   <td>
-                                        @Html.DisplayFor(modelItem => item.HorasReales)
-                                    </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Diferencia)
-                                    </td>*@
-                                </tr>
+
+                                    @if ((Convert.ToInt32(Session["userRole"]) != 1 && Convert.ToInt32(Session["userRole"]) != 2))
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LiderNombre)
+                                        </td>
+                                    }
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NombreProyecto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HorasEstimadas)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HorasReales)
+                                        </td>
+                                        @*<td>
+                @Html.DisplayFor(modelItem => item.Diferencia)
+            </td>*@
+                                    </tr>
                                 }
                             </tbody>
                         </table>

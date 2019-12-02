@@ -76,7 +76,7 @@ namespace FeLuisesScrumDEV.Controllers
                     DuracionReal = r.realDuration,
                     Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
                 };*/
-            if (Convert.ToInt32(Session["userRole"]) == 2/* || 1==1*/)// si es un desarrollador
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2) //caso jefe desarrollador
             {
                 var query2 =
                 from p in db.Project
@@ -123,8 +123,8 @@ namespace FeLuisesScrumDEV.Controllers
                 && r.idProjectFKPK == p.idProjectPK
                 && r.idEmployeeFK == e.idEmployeePK
                                 //&& p.idProjectPK == idProject//------------------------------se usa
-                                //&& e.idEmployeePK = idEmployeePK
-                                select new
+                                //&& e.idEmployeePK == rDeveloper
+                select new
                 {
                     DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
                     Proyecto = p.projectName,
@@ -138,7 +138,7 @@ namespace FeLuisesScrumDEV.Controllers
                 //Nota: COmo se genera este modelo
                 var results = query2.ToList().Select(r => new estimatedRealTimeDevModel
                 {
-                    //DesarrolladorNombre = r.DesarrolladorNombre,
+                    DesarrolladorNombre = r.DesarrolladorNombre,
                     Proyecto = r.Proyecto,
                     Requerimiento = r.Requerimiento,
                     Complejidad = r.Complejidad,
@@ -153,7 +153,7 @@ namespace FeLuisesScrumDEV.Controllers
         //Total de horas estimadas y reales requeridas por un proyecto.
         public ActionResult totalHours(/*int? idProject*/)//------------------se ocupa
         {
-            if (Convert.ToInt32(Session["userRole"]) == 1 || 1==1)// si es un lider
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2) //caso jefe desarrollador
             {
                 var actualUsr = Session["userID"]; //------------------------se ocupa
                 var idLeader = actualUsr.ToString(); //lider------------------------se ocupa
@@ -213,17 +213,17 @@ namespace FeLuisesScrumDEV.Controllers
                      //&& e.idEmployeePK = idEmployeePK
                      select new
                      {
-                         //LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
                          NombreProyecto = p.projectName,
                          HorasEstimadas = p.estimatedDuration,
                          //HorasReales = p.realDuration,
                          //Diferencia = ((int)p.estimatedDuration - (int)p.realDuration)
-                     }).GroupBy(q => new {/* q.LiderNombre, */q.NombreProyecto, q.HorasEstimadas/*, q.HorasReales, q.Diferencia*/ });
+                     }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas/*, q.HorasReales, q.Diferencia*/ });
 
                 //Nota: COmo se genera este modelo
                 var results = query2.ToList().Select(r => new totalHoursModel
                 {
-                    //LiderNombre = r.Key.LiderNombre,
+                    LiderNombre = r.Key.LiderNombre,
                     NombreProyecto = r.Key.NombreProyecto,
                     HorasEstimadas = r.Key.HorasEstimadas,
                     //HorasReales = r.Key.HorasReales,
