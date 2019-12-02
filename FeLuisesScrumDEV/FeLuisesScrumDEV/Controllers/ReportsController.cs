@@ -31,7 +31,7 @@ namespace FeLuisesScrumDEV.Controllers
                              join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
                              join P in db.Project on W.idProjectFKPK equals P.idProjectPK
                              join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
-                             where W.role == 1
+                             where W.role == 0 &&  R.idEmployeeFK == E.idEmployeePK
                              select new
                              {
                                  Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
@@ -57,7 +57,7 @@ namespace FeLuisesScrumDEV.Controllers
                              join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
                              join P in db.Project on W.idProjectFKPK equals P.idProjectPK
                              join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
-                             where W.role == 1 && P.idProjectPK == W.idProjectFKPK && E.idEmployeePK == W.idEmployeeFKPK && E.idEmployeePK == id
+                             where W.role == 0 && P.idProjectPK == W.idProjectFKPK && E.idEmployeePK == W.idEmployeeFKPK && E.idEmployeePK == id && R.idEmployeeFK == E.idEmployeePK
                              select new
                              {
                                  Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
