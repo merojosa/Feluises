@@ -70,16 +70,19 @@
                                 index = 0;
                             }
                             <div class="card mb-3 border-dark rounded" id="shadow-Fe1" style="width: 24rem; height: auto;">
-                                <div class="card-header" id="back-Fe1"><!--Inicio de card-headers-->
+                                <div class="card-header" id="back-Fe1">
+                                    <!--Inicio de card-headers-->
                                     <a class="btn text-white" role="button" href=@Url.Action("Details", "Projects", new { id = item.idProjectPK })>@item.projectName</a>
                                 </div><!--Fin del card-header-->
-                                <div class="card-body"><!--Inicio del card-body-->
+                                <div class="card-body">
+                                    <!--Inicio del card-body-->
                                     <p class="card-text"><b>Cliente:</b> @item.Client.clientName</p>
                                     <p class="card-text"><b>Objectivo:</b> @item.objective</p>
                                     <p class="card-text"><b>Costo Actual:</b> @item.realCost</p>
                                     <p class="card-text"><b>Estado:</b> @states[index]</p>
                                 </div><!--Fin del card-body-->
-                                <div class="card-footer text-white-50 text-center" id="back-Fe1"><!--Inicio del card-footer-->
+                                <div class="card-footer text-white-50 text-center" id="back-Fe1">
+                                    <!--Inicio del card-footer-->
                                     @Html.DisplayFor(modelItem => item.startingDate)
                                     @if (item.startingDate == null)
                                     {

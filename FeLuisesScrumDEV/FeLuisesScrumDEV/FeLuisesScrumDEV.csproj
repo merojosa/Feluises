@@ -201,6 +201,7 @@
     <Compile Include="viewModel\GetKnowledgesSP_Result_Mapped.cs" />
     <Compile Include="viewModel\GetReqStatsbyComplexity_Result_Mapped.cs" />
     <Compile Include="viewModel\GetDevs.cs" />
+    <Compile Include="viewModel\requirmentStatus_Result_Mapped.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
     <Compile Include="viewModel\StateResponsableReqClient_Result_Mapped.cs" />
