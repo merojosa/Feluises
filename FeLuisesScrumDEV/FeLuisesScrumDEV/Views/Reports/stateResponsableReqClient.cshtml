@@ -19,6 +19,9 @@
 </head>
 
 <body>
+    @{
+        string[] states = { "No iniciado", "En proceso", "Interrumpido", "Completado" };
+    } 
     <div class="container">
         <table id="stateReqClient" class="table table-striped table-bordered">
             <thead>
@@ -35,14 +38,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Nombre)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Estado)
+                            @states[(int)item.Estado]
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Responsable)
