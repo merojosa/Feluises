@@ -205,16 +205,15 @@ namespace FeLuisesScrumDEV.Controllers
             base.Dispose(disposing);
         }
         //falta
-        public SelectList EmployeeFromTeamSelectList(int? idProject)
+        public SelectList EmployeeFromTeamSelectList(int? idProject, int? devDefault)
         {
-
-            //var worksInController = new WorksInsController();
-            //List<WorksIn> worksInRegisters = worksInController.GetMembers((int)idProject);
-            //IEnumerable<Employee> team = db.Employee.Where(e => worksInRegisters.Exists(x => x.idEmployeeFKPK == e.idEmployeePK));
             IQueryable<WorksIn> test = db.WorksIn.Where(w => w.idProjectFKPK == idProject && w.role == 0);
             IQueryable<Requeriment> req = db.Requeriment.Where(r => r.idProjectFKPK == idProject);
             IQueryable<Employee> team = db.Employee.Where(e => test.Any(t => t.idEmployeeFKPK == e.idEmployeePK) == true && req.Where(r => r.idEmployeeFK == e.idEmployeePK).Count() <= 10 );
-            return new SelectList(team, "idEmployeePK", "employeeName");
+            if( devDefault == null )
+                return new SelectList(team, "idEmployeePK", "employeeName");
+            else
+                return new SelectList(team, "idEmployeePK", "employeeName", devDefault);
         }
     }
 }
