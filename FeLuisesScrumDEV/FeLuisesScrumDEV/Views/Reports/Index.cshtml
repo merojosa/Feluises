@@ -1,295 +1,305 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    @{
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8" />
+	@{
+		Layout = "~/Views/Shared/_Layout.cshtml";
+	}
+	<link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    @if (Session["userName"] == null)
-    {
-        <div class="container">
+	@if (Session["userName"] == null)
+	{
+		<div class="container">
 
-            <div class="card">
-                <div class="card-header">
-                    <h2 id="heading-red">No se vale hackear!</h2>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
-                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="container">
-            <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
-                <h2 class="card-header text-white" id="back-Fe1">Reportes disponibles</h2>
-                <div class="card-body">
-                    <div class="card-deck">
-                        @if (Convert.ToInt32(Session["userRole"]) == 0) //Reportes para jefe desarrollador
-                        {
+			<div class="card">
+				<div class="card-header">
+					<h2 id="heading-red">No se vale hackear!</h2>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+					<a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+				</div>
+			</div>
+		</div>
+	}
+	else
+	{
+		<div class="container">
+			<div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
+				<h2 class="card-header text-white" id="back-Fe1">Reportes disponibles</h2>
+				<div class="card-body">
+					<div class="card-deck">
+						@if (Convert.ToInt32(Session["userRole"]) == 0) //Reportes para jefe desarrollador
+						{
 
-                            <div class="col-sm-4">
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
-                                            <b>
-                                                1.Desarrolladores asignados a
-                                                proyectos y disponibles
-                                            </b>
-                                        </a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Para desarrolladores actualmente asignados a los proyectos:
-                                            Nombre del desarrollador, nombre del proyecto, fecha de inicio,
-                                            fecha de estimada de terminación ordenado en forma descendente
-                                            por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
-                                </div>
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("devsHistoryOnProjects", "Reports")"><b>4. Historial Desarrollador en Proyectos</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Al seleccionar el nombre del desarrollador,
-                                            se requiere conocer los nombres de los proyectos en los cuales
-                                            participó este desarrollador, su rol y total de horas dedicadas a
-                                            este proyecto. Para el líder la cantidad de horas debe ser un campo vacío.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Valverde</b></div>
-                                </div>
+							<div class="col-sm-4">
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
+											<b>
+												1.Desarrolladores asignados a
+												proyectos y disponibles
+											</b>
+										</a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Para desarrolladores actualmente asignados a los proyectos:
+											Nombre del desarrollador, nombre del proyecto, fecha de inicio,
+											fecha de estimada de terminación ordenado en forma descendente
+											por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
+								</div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("devsHistoryOnProjects", "Reports")"><b>4. Historial Desarrollador en Proyectos</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Al seleccionar el nombre del desarrollador,
+											se requiere conocer los nombres de los proyectos en los cuales
+											participó este desarrollador, su rol y total de horas dedicadas a
+											este proyecto. Para el líder la cantidad de horas debe ser un campo vacío.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Valverde</b></div>
+								</div>
 
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("CompareReqStatsbyComplexity", "Reports")"><b>7. Comparación de duraciones para requerimientos del mismo nivel de complejidad.</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Al seleccionar el nivel de complejidad específico o todos niveles, se requiere conocer la cantidad de requerimientos
-                                            que corresponden a este nivel, valor mínimo y valor máximo de la diferencia entre estimaciones y valores reales de
-                                            la duración del desarrollo de requerimientos y también la duración promedio de valor real.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Diego Naranjo </b></div>
-                                </div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("CompareReqStatsbyComplexity", "Reports")"><b>7. Comparación de duraciones para requerimientos del mismo nivel de complejidad.</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Al seleccionar el nivel de complejidad específico o todos niveles, se requiere conocer la cantidad de requerimientos
+											que corresponden a este nivel, valor mínimo y valor máximo de la diferencia entre estimaciones y valores reales de
+											la duración del desarrollo de requerimientos y también la duración promedio de valor real.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Diego Naranjo </b></div>
+								</div>
 
-                            </div>
-                            <div class="col-sm-4">
+							</div>
+							<div class="col-sm-4">
 
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            * Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
-                                            agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
-                                            con la fecha de inicio y duración estimada.
-                                            * Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
-                                            * Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
-                                            incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
-                                </div>
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("DevsKnowledgeLaborSeniority", "Reports")"><b>8. Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad en la empresa. </b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Se requiere el despliegue de nombre del conocimiento, cantidad de desarrolladores en la empresa y promedio de su antigüedad laboral
-                                            en años ordenado en forma ascendente por conocimiento. Debe existir la opción de seleccionar un conocimiento específico o ver todos
-                                            juntos existentes en la empresa.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Diego Naranjo </b></div>
-                                </div>
 
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">José Luis</b></div>
-                                </div>
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("InactivityPeriod", "Reports")"><b>6. Periodos de desocupación de los desarrolladores dentro de un rango de fechas.</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Dentro de un rango de fechas seleccionado, se debe desplegar nombre del desarrollador, periodos de desocupación),
-                                            días transcurridos en cada una de estas fechas y días totales de desocupación ordenado en forma descendente por
-                                            los días totales de desocupación.
-                                        </p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
-                                </div>
 
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("totalHours", "Reports")"><b>3. Total de horas estimadas y reales requeridas por un proyecto</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">Permite conocer si existe una brecha significativa entre el tiempo estimado y real que es un factor importante para las futuras planificaciones y ganancias de la empresa.</p>
-                                    </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
-                                </div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">José Luis</b></div>
+								</div>
 
-                            </div>
-                        }
-                        else if (Convert.ToInt32(Session["userRole"]) == 1) //Desarrollador
-                        {
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        * Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
-                                        agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
-                                        con la fecha de inicio y duración estimada.
-                                        * Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
-                                        * Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
-                                        incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
-                                    </p>
-                                </div>
-                                <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
-                            </div>
-                            <div>
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.</p>
-                                    </div>
-                                </div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											* Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
+											agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
+											con la fecha de inicio y duración estimada.
+											* Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
+											* Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
+											incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
+								</div>
 
-                            </div>
-                        }
-                        else if (Convert.ToInt32(Session["userRole"]) == 2) //Líder)
-                        {
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
-                                        <b>
-                                            1.Desarrolladores asignados a
-                                            proyectos y disponibles
-                                        </b>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Para desarrolladores actualmente asignados a los proyectos:
-                                        Nombre del desarrollador, nombre del proyecto, fecha de inicio,
-                                        fecha de estimada de terminación ordenado en forma descendente
-                                        por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
-                                    </p>
-                                </div>
+							</div>
+							<div class="col-sm-4">
 
-                                <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
-                            </div>
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.
-                                    </p>
-                                </div>
-                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
-                                </div>
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        * Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
-                                        agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
-                                        con la fecha de inicio y duración estimada.
-                                        * Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
-                                        * Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
-                                        incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
-                                    </p>
-                                </div>
-                                <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
-                            </div>
-                            <div>
-                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                    <div class="card-header" id="back-Fe">
-                                        <a class="btn text-white" role="button" href="@Url.Action("totalHours", "Reports")"><b>3. Total de horas estimadas y reales requeridas por un proyecto</b></a>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">Permite conocer si existe una brecha significativa entre el tiempo estimado y real que es un factor importante para las futuras planificaciones y ganancias de la empresa.</p>
-                                        <div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
-                                    </div>
-                                </div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("totalHours", "Reports")"><b>3. Total de horas estimadas y reales requeridas por un proyecto</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">Permite conocer si existe una brecha significativa entre el tiempo estimado y real que es un factor importante para las futuras planificaciones y ganancias de la empresa.</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
+								</div>
 
-                            </div>
-                        }
-                        else if (Convert.ToInt32(Session["userRole"]) == 3) //Cliente
-                        {
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("stateResponsableRequirement", "Reports")"><b>9. Estado y responsables de cada requerimiento de un proyecto específico</b></a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Se requiere desplegar datos generales del nombre del cliente y el nombre del proyecto.
-                                        Además, en detalle debe aparecer el nombre del requerimiento, estado y responsable
-                                        con la opción de despliegue ordenado por estado o por responsable. El cliente debe ser
-                                        capaz de seleccionar un proyecto específico o todos sus proyectos.
-                                    </p>
-                                </div>
-                                <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
-                            </div>
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("InactivityPeriod", "Reports")"><b>6. Periodos de desocupación de los desarrolladores dentro de un rango de fechas.</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Dentro de un rango de fechas seleccionado, se debe desplegar nombre del desarrollador, periodos de desocupación),
+											días transcurridos en cada una de estas fechas y días totales de desocupación ordenado en forma descendente por
+											los días totales de desocupación.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
+								</div>
 
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("totalRequirements", "Reports")"><b>10. Requerimientos Terminados y en Progreso</b></a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        Se requiere desplegar datos generales del nombre del cliente y el nombre del proyecto.
-                                        Además, en detalle debe aparecer el total de requerimientos terminados, total de requerimientos
-                                        en ejecución y fecha estimada de terminación de todos requerimientos.
-                                        El cliente debe ser capaz de seleccionar un proyecto específico o todos sus proyectos
-                                    </p>
-                                </div>
-                                <div class="card-footer" id="back-Fe">
-                                    <b class="text-white">Luis Valverde</b>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div><!--CardBody-->
-                <div class="card-footer" id="back-Fe1">
-                </div>
-            </div> <!--card-->
-        </div>
-    }
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("DevsKnowledgeLaborSeniority", "Reports")"><b>8. Cantidad de desarrolladores con conocimientos específicos y promedio de antigüedad en la empresa. </b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											Se requiere el despliegue de nombre del conocimiento, cantidad de desarrolladores en la empresa y promedio de su antigüedad laboral
+											en años ordenado en forma ascendente por conocimiento. Debe existir la opción de seleccionar un conocimiento específico o ver todos
+											juntos existentes en la empresa.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Diego Naranjo </b></div>
+								</div>
+
+							</div>
+						}
+						else if (Convert.ToInt32(Session["userRole"]) == 1) //Desarrollador
+						{
+							<div class="col-sm-4">
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											* Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
+											agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
+											con la fecha de inicio y duración estimada.
+											* Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
+											* Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
+											incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
+								</div>
+							</div>
+						}
+						else if (Convert.ToInt32(Session["userRole"]) == 2) //Líder)
+						{
+							<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+								<div class="card-header" id="back-Fe">
+									<a class="btn text-white" role="button" href=@Url.Action("DeveloperState", "Reports")>
+										<b>
+											1.Desarrolladores asignados a
+											proyectos y disponibles
+										</b>
+									</a>
+								</div>
+								<div class="card-body">
+									<p class="card-text">
+										Para desarrolladores actualmente asignados a los proyectos:
+										Nombre del desarrollador, nombre del proyecto, fecha de inicio,
+										fecha de estimada de terminación ordenado en forma descendente
+										por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
+									</p>
+								</div>
+								<div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
+							</div>
+
+
+							<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+								<div class="card-header" id="back-Fe">
+									<a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>2. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
+								</div>
+								<div class="card-body">
+									<p class="card-text">
+										Permite verificar el desempeño (cumplimiento de duraciones estimadas) de un desarrollador específico en un proyecto específico o en todos proyectos que participó.
+									</p>
+								</div>
+								<div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
+							</div>
+
+							<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+								<div class="card-header" id="back-Fe">
+									<a class="btn text-white" role="button" href="@Url.Action("totalHours", "Reports")"><b>3. Total de horas estimadas y reales requeridas por un proyecto</b></a>
+								</div>
+								<div class="card-body">
+									<p class="card-text">Permite conocer si existe una brecha significativa entre el tiempo estimado y real que es un factor importante para las futuras planificaciones y ganancias de la empresa.</p>
+								</div>
+								<div class="card-footer" id="back-Fe"><b class="text-white text-center">Jose Luis</b></div>
+							</div>
+
+							<div>
+
+								<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+									<div class="card-header" id="back-Fe">
+										<a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
+									</div>
+									<div class="card-body">
+										<p class="card-text">
+											* Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
+											agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
+											con la fecha de inicio y duración estimada.
+											* Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
+											* Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
+											incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
+										</p>
+									</div>
+									<div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
+								</div>
+
+							</div>
+						}
+						else if (Convert.ToInt32(Session["userRole"]) == 3) //Cliente
+						{
+							<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+								<div class="card-header" id="back-Fe">
+									<a class="btn text-white" role="button" href="@Url.Action("stateResponsableRequirement", "Reports")"><b>9. Estado y responsables de cada requerimiento de un proyecto específico</b></a>
+								</div>
+								<div class="card-body">
+									<p class="card-text">
+										Se requiere desplegar datos generales del nombre del cliente y el nombre del proyecto.
+										Además, en detalle debe aparecer el nombre del requerimiento, estado y responsable
+										con la opción de despliegue ordenado por estado o por responsable. El cliente debe ser
+										capaz de seleccionar un proyecto específico o todos sus proyectos.
+									</p>
+								</div>
+								<div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
+							</div>
+
+							<div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+								<div class="card-header" id="back-Fe">
+									<a class="btn text-white" role="button" href="@Url.Action("totalRequirements", "Reports")"><b>10. Requerimientos Terminados y en Progreso</b></a>
+								</div>
+								<div class="card-body">
+									<p class="card-text">
+										Se requiere desplegar datos generales del nombre del cliente y el nombre del proyecto.
+										Además, en detalle debe aparecer el total de requerimientos terminados, total de requerimientos
+										en ejecución y fecha estimada de terminación de todos requerimientos.
+										El cliente debe ser capaz de seleccionar un proyecto específico o todos sus proyectos
+									</p>
+								</div>
+								<div class="card-footer" id="back-Fe">
+									<b class="text-white">Luis Valverde</b>
+								</div>
+							</div>
+						}
+					</div>
+				</div><!--CardBody-->
+				<div class="card-footer" id="back-Fe1">
+				</div>
+			</div> <!--card-->
+		</div>
+	}
 </body>
 </html>
-
 
 
