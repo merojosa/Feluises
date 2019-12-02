@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.totalHoursModel>
+<head>
+
+    @{
+        ViewBag.Title = "totalHours";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+</head>
+
+<body>
+    @if (Session["userName"] == null)
+    {
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="heading-red">No se vale hackear!</h2>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Debe logguearse para hacer uso de la aplicación</h5>
+                    <a href=@Url.Action("Index", "Login") class="btn btn-danger">Volver</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        <div class=" container">
+            @using (Html.BeginForm())
+            {
+                <script>
+                        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+                        $(document).ready(function () {
+                            $('#TotalHoras').DataTable({ searching: false, paging: false });
+                        });
+                    </script>
+                <h2><b>Total de horas estimadas y reales requeridas por un proyecto.</b></h2>
+                <hr />
+                <h3> Buscar por Proyecto: <input name="Proyecto" class="form-control text-box single-line" id="Proyecto" type="text" value=""></h3>
+
+                <table id="TotalHoras" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre del lider
+                            </th>
+                            <th>
+                                Nombre del proyecto
+                            </th>
+                            <th>
+                                Horas estimadas
+                            </th>
+                            <th>
+                                Horas reales
+                            </th>
+                            <th>
+                                Diferencia
+                            </th>
+                            <th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ToList())
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LiderNombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NombreProyecto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HorasEstimadas)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HorasReales)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Diferencia)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    }
+</body>
+</html>

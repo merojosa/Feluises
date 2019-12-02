@@ -202,6 +202,8 @@
     <Compile Include="viewModel\GetReqStatsbyComplexity_Result_Mapped.cs" />
     <Compile Include="viewModel\GetDevs.cs" />
     <Compile Include="viewModel\requirmentStatus_Result_Mapped.cs" />
+    <Compile Include="viewModel\totalHoursModel.cs" />
+    <Compile Include="viewModel\estimatedRealTimeDevModel.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
     <Compile Include="viewModel\StateResponsableReqClient_Result_Mapped.cs" />
@@ -393,6 +395,7 @@
     <Content Include="Views\Reports\totalRequirements.cshtml" />
     <Content Include="Views\Reports\DeveloperState.cshtml" />
     <Content Include="Views\Reports\InactivityPeriod.cshtml" />
+    <Content Include="Views\Reports\totalHours.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

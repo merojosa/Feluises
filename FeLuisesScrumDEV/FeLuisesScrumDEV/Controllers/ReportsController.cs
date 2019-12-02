@@ -103,15 +103,214 @@ namespace FeLuisesScrumDEV.Controllers
         }
 
         //Comparar la duración estimada y real para requerimiento de un desarrollador.
-        public ActionResult estimatedRealTimeDev()
+        public ActionResult estimatedRealTimeDev([Bind(Include = "Proyecto")]string proyecto/*string idEmployeePK, *//*int? idProject*/)//------------------------------se usa
         {
-            return View();
+            var actualUsr = Session["userID"]; //Desarrollador
+            var rDeveloper = actualUsr.ToString();
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2 && proyecto == null) //caso jefe desarrollador
+            {
+                var query2 =
+                from p in db.Project
+                join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                where r.status == 3
+                && r.idProjectFKPK == p.idProjectPK
+                && r.idEmployeeFK == e.idEmployeePK
+                && e.idEmployeePK == rDeveloper
+                select new
+                {
+                    DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
+                    Proyecto = p.projectName,
+                    Requerimiento = r.objective,
+                    Complejidad = r.complexity,
+                    DuracionEstimada = r.estimatedDuration,
+                    DuracionReal = r.realDuration,
+                    Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
+                };
+
+                var results = query2.ToList().Select(r => new estimatedRealTimeDevModel
+                {
+                    DesarrolladorNombre = r.DesarrolladorNombre,
+                    Proyecto = r.Proyecto,
+                    Requerimiento = r.Requerimiento,
+                    Complejidad = r.Complejidad,
+                    DuracionEstimada = r.DuracionEstimada,
+                    DuracionReal = r.DuracionReal,
+                    Diferencia = r.Diferencia
+                }).ToList();
+                return PartialView("estimatedRealTimeDev", results);
+            }
+            else if (Convert.ToInt32(Session["userRole"]) == 0 && proyecto == null) //Si es un jefe desarrollador
+            {
+                var query2 =
+                from p in db.Project
+                join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                where r.status == 3
+                && r.idProjectFKPK == p.idProjectPK
+                && r.idEmployeeFK == e.idEmployeePK
+                select new
+                {
+                    DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
+                    Proyecto = p.projectName,
+                    Requerimiento = r.objective,
+                    Complejidad = r.complexity,
+                    DuracionEstimada = r.estimatedDuration,
+                    DuracionReal = r.realDuration,
+                    Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
+                };
+
+                var results = query2.ToList().Select(r => new estimatedRealTimeDevModel
+                {
+                    DesarrolladorNombre = r.DesarrolladorNombre,
+                    Proyecto = r.Proyecto,
+                    Requerimiento = r.Requerimiento,
+                    Complejidad = r.Complejidad,
+                    DuracionEstimada = r.DuracionEstimada,
+                    DuracionReal = r.DuracionReal,
+                    Diferencia = r.Diferencia
+                }).ToList();
+                return PartialView("estimatedRealTimeDev", results);
+            }
+            else
+            {
+                var query2 =
+                from p in db.Project
+                join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                join e in db.Employee on r.idEmployeeFK equals e.idEmployeePK
+                where r.status == 3
+                && r.idProjectFKPK == p.idProjectPK
+                && r.idEmployeeFK == e.idEmployeePK
+                && p.projectName.ToLower().Contains(proyecto.ToLower())
+                select new
+                {
+                    DesarrolladorNombre = e.employeeName + " " + e.employeeLastName,
+                    Proyecto = p.projectName,
+                    Requerimiento = r.objective,
+                    Complejidad = r.complexity,
+                    DuracionEstimada = r.estimatedDuration,
+                    DuracionReal = r.realDuration,
+                    Diferencia = ((int)r.estimatedDuration - (int)r.realDuration)
+                };
+
+                var results = query2.ToList().Select(r => new estimatedRealTimeDevModel
+                {
+                    DesarrolladorNombre = r.DesarrolladorNombre,
+                    Proyecto = r.Proyecto,
+                    Requerimiento = r.Requerimiento,
+                    Complejidad = r.Complejidad,
+                    DuracionEstimada = r.DuracionEstimada,
+                    DuracionReal = r.DuracionReal,
+                    Diferencia = r.Diferencia
+                }).ToList();
+                return PartialView("estimatedRealTimeDev", results);
+            }
         }
 
         //Total de horas estimadas y reales requeridas por un proyecto.
-        public ActionResult totalHours()
+        public ActionResult totalHours([Bind(Include = "Proyecto")]string proyecto)//------------------se ocupa
         {
-            return View();
+            if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2 && proyecto == null) //caso jefe desarrollador
+            {
+                var actualUsr = Session["userID"];
+                var idLeader = actualUsr.ToString();
+
+                var query2 =
+                    (from p in db.Project
+                     join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                     join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                     join w in db.WorksIn on p.idProjectPK equals w.idProjectFKPK
+                     join e in db.Employee on w.idEmployeeFKPK equals e.idEmployeePK
+                     where p.status == 3
+                           && r.idProjectFKPK == p.idProjectPK
+                           && w.idEmployeeFKPK == idLeader
+                           && w.role == 1
+                     select new
+                     {
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
+                     }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
+
+                //Nota: COmo se genera este modelo
+                var results = query2.ToList().Select(r => new totalHoursModel
+                {
+                    LiderNombre = r.Key.LiderNombre,
+                    NombreProyecto = r.Key.NombreProyecto,
+                    HorasEstimadas = r.Key.HorasEstimadas,
+                    HorasReales = r.Key.HorasReales,
+                    Diferencia = r.Key.Diferencia
+                }).ToList();
+                return PartialView("totalHours", results);
+            }
+            else if (Convert.ToInt32(Session["userRole"]) == 0 && proyecto == null)
+            {
+
+                var query2 =
+                    (from p in db.Project
+                     join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                     join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                     join w in db.WorksIn on p.idProjectPK equals w.idProjectFKPK
+                     join e in db.Employee on w.idEmployeeFKPK equals e.idEmployeePK
+                     where p.status == 3
+                           && r.idProjectFKPK == p.idProjectPK
+                           && w.role == 1
+                     select new
+                     {
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
+                     }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
+
+                var results = query2.ToList().Select(r => new totalHoursModel
+                {
+                    LiderNombre = r.Key.LiderNombre,
+                    NombreProyecto = r.Key.NombreProyecto,
+                    HorasEstimadas = r.Key.HorasEstimadas,
+                    HorasReales = r.Key.HorasReales,
+                    Diferencia = r.Key.Diferencia
+                }).ToList();
+                return PartialView("totalHours", results);
+            }
+            else 
+            {
+                var query2 =
+                    (from p in db.Project
+                     join m in db.Module on p.idProjectPK equals m.idProjectFKPK
+                     join r in db.Requeriment on m.idModulePK equals r.idModuleFKPK
+                     join w in db.WorksIn on p.idProjectPK equals w.idProjectFKPK
+                     join e in db.Employee on w.idEmployeeFKPK equals e.idEmployeePK
+                     where p.status == 3
+                           && r.idProjectFKPK == p.idProjectPK
+                           && w.role == 1
+                           && p.projectName.ToLower().Contains(proyecto.ToLower())
+                     select new
+                     {
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
+                     }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
+
+                var results = query2.ToList().Select(r => new totalHoursModel
+                {
+                    LiderNombre = r.Key.LiderNombre,
+                    NombreProyecto = r.Key.NombreProyecto,
+                    HorasEstimadas = r.Key.HorasEstimadas,
+                    HorasReales = r.Key.HorasReales,
+                    Diferencia = r.Key.Diferencia
+                }).ToList();
+                return PartialView("totalHours", results);
+            }
+
         }
 
 

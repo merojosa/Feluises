@@ -11,10 +11,7 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,40 +20,20 @@ namespace FeLuisesScrumDEV.Models
             this.Module = new HashSet<Module>();
             this.WorksIn = new HashSet<WorksIn>();
         }
-
-        [Key]
+    
         public int idProjectPK { get; set; }
-        [MaxLength(20, ErrorMessage = "El nombre del proyecto no debe de contener más de 20 caracteres.")]
-        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el nombre del proyecto*")]
         public string projectName { get; set; }
-        [MaxLength(256, ErrorMessage = "La descripción del proyecto no debe de contener más de 256 caracteres.")]
-        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el objetivo del proyecto*.")]
         public string objective { get; set; }
-        //[RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El costo Estimado no debe de contener más de 18 enteros y 2 decimales.")]
-        //[Range(0, 9999999999999999.99)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> estimatedCost { get; set; }
-        //[RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El coste real no debe de contener más de 18 enteros y 2 decimales.")]
-        //[Range(0, 9999999999999999.99)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> realCost { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de inicio del proyecto*")]
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy-MM-dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> startingDate { get; set; }
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy-MM-dd")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> finishingDate { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El presupuesto no debe de contener más de 18 enteros y 2 decimales.")]
-        [Range(0, 9999999999999999.99)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> budget { get; set; }
-        [ReadOnly(true)]
-        [Range(0, 9999999999999999)]
         public Nullable<int> estimatedDuration { get; set; }
         public string idClientFK { get; set; }
         public Nullable<System.DateTime> creationDate { get; set; }
         public Nullable<short> status { get; set; }
+        public Nullable<int> realDuration { get; set; }
     
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -79,6 +79,7 @@
           <Property Name="idClientFK" Type="char" MaxLength="9" />
           <Property Name="creationDate" Type="date" />
           <Property Name="status" Type="smallint" />
+          <Property Name="realDuration" Type="int" />
         </EntityType>
         <EntityType Name="Requeriment">
           <Key>
@@ -340,6 +341,7 @@
           <NavigationProperty Name="WorksIn" Relationship="Self.FK_WorksIn_Project" FromRole="Project" ToRole="WorksIn" />
           <Property Name="creationDate" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int16" />
+          <Property Name="realDuration" Type="Int32" />
         </EntityType>
         <EntityType Name="Requeriment">
           <Key>
@@ -587,6 +589,7 @@
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="Gr02Proy2Model.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="realDuration" ColumnName="realDuration" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="creationDate" ColumnName="creationDate" />
                 <ScalarProperty Name="idProjectPK" ColumnName="idProjectPK" />
