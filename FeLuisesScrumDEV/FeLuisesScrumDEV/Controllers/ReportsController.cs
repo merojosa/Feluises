@@ -695,7 +695,7 @@ namespace FeLuisesScrumDEV.Controllers
                 && p.idProjectPK == idProject
                 select new
                 {
-                    Nombre = r.objective,
+                    Nombre = r.objective, //para commit
                     Estado = r.status,
                     Responable = e.employeeName
                 };
