@@ -27,25 +27,26 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-    <style>
-        #tabla1 {
-            padding: 10px
-        }
+    @*<style>
+            #tabla1 {
+                padding: 10px
+            }
 
-        #tabla2 {
-            padding: 10px;
-            float: right;
-        }
+            td {
+                border: 1px solid #000;
+            }
 
-        td {
-            border: 1px solid #000;
-        }
-
-        tr td:last-child {
-            width: 1%;
-            white-space: nowrap;
-        }
-    </style>
+            tr td:last-child {
+                width: 1%;
+                white-space: nowrap;
+            }
+        </style>*@
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+        $(document).ready(function () {
+            $('#tabla1').DataTable();
+        });
+    </script>
 </head>
 
 <body>

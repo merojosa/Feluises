@@ -27,7 +27,7 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
-    <style>
+    @*<style>
         #tabla1 {
             padding: 10px
         }
@@ -45,7 +45,15 @@
             width: 1%;
             white-space: nowrap;
         }
-    </style>
+    </style>*@
+
+    <script>
+        //Este script es para lograr hacer una tabla que acomode y busque sus tuplas.
+        $(document).ready(function () {
+            $('#tabla1').DataTable();
+        });
+    </script>
+
 </head>
 
 <body>
