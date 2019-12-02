@@ -162,7 +162,7 @@ else
                             <div class="form-group">
                                 <b>Estado</b>
                                 <div class="col-md-10">
-                                    @if (Model.estimatedDuration == null)
+                                    @if (Model.status != null)
                                     {
                                         string[] states = { "No iniciado", "En proceso", "Interrumpido", "Completado" };
                                         int index;
