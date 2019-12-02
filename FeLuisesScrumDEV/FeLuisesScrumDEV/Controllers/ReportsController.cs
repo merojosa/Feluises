@@ -531,6 +531,14 @@ namespace FeLuisesScrumDEV.Controllers
         //EFE: Realiza la consulta desde el Jefe Desarrollador
         public PartialViewResult requirmentStatusBoss(int? projectID)
         {
+            var leaderÌD = from wi in db.WorksIn
+                         where wi.idProjectFKPK == projectID
+                         && wi.role == 1
+                         select wi.idEmployeeFKPK;
+            var leader = from e in db.Employee
+                         where e.idEmployeePK == leaderÌD.FirstOrDefault()
+                         select e.employeeName;
+            ViewBag.leader = leader.FirstOrDefault();
 
             var query = //La consulta :v 
                 from p in db.Project
@@ -661,6 +669,12 @@ namespace FeLuisesScrumDEV.Controllers
         //Ver el estado y responsables de un requerimiento. Según un cliente
         public ActionResult stateResponsableRequirement()
         {
+            var usr = Session["userID"].ToString();
+            var client = from c in db.Client
+                         where usr == c.idClientPK
+                         select c.clientName;
+
+            ViewBag.clientName = client.FirstOrDefault();
             //Como se usa una PartialView, la consulta esá abajo
             return View();
         }
