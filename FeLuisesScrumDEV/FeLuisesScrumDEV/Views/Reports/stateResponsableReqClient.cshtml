@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<FeLuisesScrumDEV.viewModel.StateResponsableReqClient_Result_Mapped>
+<head>
+    @{
+
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/FeStyles/feLuisesStyles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#stateReqClient').DataTable({ searching: false, paging: false });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <table id="stateReqClient" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Requerimiento
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Responsable
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Responsable)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div> <!--Container-->
+</body>
+</html>
+
+

@@ -64,6 +64,7 @@ namespace FeLuisesScrumDEV.Controllers
                 {
                     //Tiene que ser cliente
                     var Client = db.Client.Find(userDetails.userName);
+                    Session["userRealName"] = Client.clientName;
                     Session["userName"] = Client.clientName + " " + Client.clientLastName + " Cliente" ;
                     Session["userRole"] = 3; // Es cliente
                 }

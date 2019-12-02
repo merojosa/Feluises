@@ -32,13 +32,13 @@ namespace FeLuisesScrumDEV.Models
         [MaxLength(256, ErrorMessage = "La descripción del proyecto no debe de contener más de 256 caracteres.")]
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el objetivo del proyecto*.")]
         public string objective { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El costo Estimado no debe de contener más de 18 enteros y 2 decimales.")]
-        [Range(0, 9999999999999999.99)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
+        //[RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El costo Estimado no debe de contener más de 18 enteros y 2 decimales.")]
+        //[Range(0, 9999999999999999.99)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> estimatedCost { get; set; }
-        [RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El coste real no debe de contener más de 18 enteros y 2 decimales.")]
-        [Range(0, 9999999999999999.99)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
+        //[RegularExpression(@"^\d{1,18}.\d{0,2}$", ErrorMessage = "El coste real no debe de contener más de 18 enteros y 2 decimales.")]
+        //[Range(0, 9999999999999999.99)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:#}")]
         public Nullable<decimal> realCost { get; set; }
         [Required(ErrorMessage = "Campo obligatorio, debe de ingresar la fecha de inicio del proyecto*")]
         [DataType(DataType.DateTime, ErrorMessage = "Invalid format, valid format is yyyy-MM-dd")]

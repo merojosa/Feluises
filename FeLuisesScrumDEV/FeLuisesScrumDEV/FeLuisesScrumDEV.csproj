@@ -203,6 +203,7 @@
     <Compile Include="viewModel\GetDevs.cs" />
     <Compile Include="viewModel\SelectModuleViewModel.cs" />
     <Compile Include="viewModel\IndexViewModel.cs" />
+    <Compile Include="viewModel\StateResponsableReqClient_Result_Mapped.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -377,6 +378,13 @@
     <Content Include="Views\LogIn\ClientProfile.cshtml" />
     <Content Include="Views\LogIn\ChangePassword.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\numReqPerDev.cshtml" />
+    <Content Include="Views\Reports\estimatedRealTimeDev.cshtml" />
+    <Content Include="Views\Reports\stateResponsableRequirement.cshtml" />
+    <Content Include="Views\Reports\stateResponsableReqClient.cshtml" />
+    <Content Include="Views\Reports\requirmentState.cshtml" />
+    <Content Include="Views\Reports\requirmentStatusLeader.cshtml" />
+    <Content Include="Views\Reports\requirmentStatusBoss.cshtml" />
     <Content Include="Views\Reports\CompareReqStatsbyComplexity.cshtml" />
     <Content Include="Views\Reports\DevsKnowledgeLaborSeniority.cshtml" />
     <Content Include="Views\Reports\viewKnowledges.cshtml" />
@@ -387,6 +395,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\StateResponsableReqClient_Result_Mapped\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
