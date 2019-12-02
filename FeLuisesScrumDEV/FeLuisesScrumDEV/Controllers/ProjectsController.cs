@@ -89,6 +89,7 @@ namespace FeLuisesScrumDEV.Controllers
         {
             var EmployeesController = new EmployeesController(); //Controlador de empleados
             var availableEmployees = EmployeesController.AvailableEmployees(); //retorna los desarrolladores disponibles.
+            var fecha = DateTime.Now;
             if (db.Project.Any(x => x.projectName == project.projectName)) //si el nombre del proyecto ya existe
             {
                 ModelState.AddModelError("projectName", "Ya existe un proyecto registrado con ese nombre");
@@ -107,6 +108,7 @@ namespace FeLuisesScrumDEV.Controllers
                     db.WorksIn.Add(employee); //agrega la relación de lider a la tabla worksIn
                     project.realDuration = 0;
                     project.estimatedDuration = 0;
+                    project.creationDate = fecha;
                     db.SaveChanges(); //guarda cambios
                     return RedirectToAction("Index"); //vuelve al index.
                 }
