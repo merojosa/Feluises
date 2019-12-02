@@ -30,9 +30,9 @@
             <div class="card border-dark rounded mb-3" id="shadow-Fe" style="width: auto; height:auto;">
                 <h2 class="card-header text-white" id="back-Fe1">Reportes disponibles</h2>
                 <div class="card-body">
+                <div class="card-deck">
                         @if (Convert.ToInt32(Session["userRole"]) == 0) //Reportes para jefe desarrollador
                         {
-                            <div class="row">
 
                                 <div class="col-sm-4">
                                     <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
@@ -165,7 +165,6 @@
                                         <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
                                     </div>
                                 </div>
-                            </div><!--row-->
                         }
                         else if (Convert.ToInt32(Session["userRole"]) == 1) //Desarrollador
                         {
@@ -277,7 +276,9 @@
                             </div>
                         </div>
                     </div>
-                        }
+                 
+                    }
+                </div>
                 </div><!--CardBody-->
                 <div class="card-footer" id="back-Fe1">
                 </div>
