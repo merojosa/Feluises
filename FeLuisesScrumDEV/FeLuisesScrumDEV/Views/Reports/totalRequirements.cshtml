@@ -55,9 +55,12 @@ else
             <table id="TotalRequeriments" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>
-                            Nombre del Cliente
-                        </th>
+                        @if (Convert.ToInt32(Session["userRole"]) == 0)
+                        { // Si masterchef
+                            <th>
+                                Nombre del Cliente
+                            </th>
+                        }
                         <th>
                             Nombre de Proyecto
                         </th>
@@ -76,10 +79,13 @@ else
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre_Cliente)
-                                @Html.DisplayFor(modelItem => item.Apellido_Cliente)
-                            </td>
+                            @if (Convert.ToInt32(Session["userRole"]) == 0)
+                            { // Si masterchef
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre_Cliente)
+                                    @Html.DisplayFor(modelItem => item.Apellido_Cliente)
+                                </td>
+                            }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Nombre_Proyecto)
                             </td>
