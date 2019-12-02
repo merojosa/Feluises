@@ -11,19 +11,47 @@ namespace FeLuisesScrumDEV.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using FeLuisesScrumDEV.Controllers;
+    using System.ComponentModel;
     
     public partial class Requeriment
     {
+        [Key]
         public int idProjectFKPK { get; set; }
+ 
+        [Key]
         public int idModuleFKPK { get; set; }
+        
+        [Key]
         public int idRequerimentPK { get; set; }
+        
+        [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "La cédula debe de contener 9 dígitos.")]
+        [MaxLength(9, ErrorMessage = "La cédula debe de contener 9 dígitos.")]
         public string idEmployeeFK { get; set; }
+        
+        [Range(0, 9999999999999999)]
         public Nullable<int> estimatedDuration { get; set; }
+        
+        [Range(0, 9999999999999999)]
         public Nullable<int> realDuration { get; set; }
+        
         public Nullable<short> status { get; set; }
+        
+        [Required(ErrorMessage = "Debe de ingresar una fecha de inicio.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime startingDate { get; set; }
+        
+        [Required(ErrorMessage = "Debe de ingresar una fecha de finalizacion.")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> endDate { get; set; }
         public Nullable<short> complexity { get; set; }
+
+        [MaxLength(30, ErrorMessage = "El objetivo no debe ser de más de 30 caracteres")]
+        [Required(ErrorMessage = "Campo obligatorio, debe de ingresar el objetivo del requerimiento*")]
         public string objective { get; set; }
     
         public virtual Employee Employee { get; set; }
