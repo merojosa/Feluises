@@ -143,8 +143,8 @@
             }
             else if (Convert.ToInt32(Session["userRole"]) == 2) // si es líder
             {
-                <div class="p-3 mb-2 bg-warning text-dark">
-                    <b>Proyecto: </b>
+                <div class="p-3 mb-2 bg-info text-dark">
+                    <b class="text-white">Proyecto: </b>
                 </div>
                 <div class="dropdown">
                     @Html.DropDownList("Text", ((FeLuisesScrumDEV.Controllers.ReportsController)this.ViewContext.Controller).EmployeeList(), "Empleados", new { @class = "form-control" })
