@@ -53,11 +53,19 @@ namespace FeLuisesScrumDEV.Controllers
                 return View(EmployeesInProyects);
             }else{ //caso lider
                 string id = Session["userID"].ToString();
-                var query = (from E in db.Employee
+                int idProject = 0;
+                var p = new SelectList(db.WorksIn.Where(t => t.idEmployeeFKPK == id), "idEmployeeFKPK", "idProjectFKPK");
+                foreach (var item in p)
+                {
+                    idProject = Int32.Parse(item.Text);
+                }
+
+                var query = (
+                             from E in db.Employee
                              join W in db.WorksIn on E.idEmployeePK equals W.idEmployeeFKPK
                              join P in db.Project on W.idProjectFKPK equals P.idProjectPK
                              join R in db.Requeriment on P.idProjectPK equals R.idProjectFKPK
-                             where W.role == 0 && P.idProjectPK == 71 && E.idEmployeePK == W.idEmployeeFKPK && R.idEmployeeFK == E.idEmployeePK
+                             where W.role == 0 && P.idProjectPK == W.idProjectFKPK && E.idEmployeePK == W.idEmployeeFKPK && R.idEmployeeFK == E.idEmployeePK && W.idProjectFKPK == idProject
                              select new
                              {
                                  Nombre_Desarrollador = E.employeeName + " " + E.employeeLastName,
