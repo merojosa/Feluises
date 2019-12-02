@@ -172,14 +172,13 @@ namespace FeLuisesScrumDEV.Controllers
                            && w.role == 1
                      //&& p.idProjectPK == idProject------------------------------se usa
                      //&& e.idEmployeePK = idEmployeePK
-                     group new { e, p, r } by new { e.employeeName, e.employeeLastName, p.projectName, r.estimatedDuration, r.realDuration } into rGroup
                      select new
                      {
-                         LiderNombre = rGroup.Key.employeeName + " " + rGroup.Key.employeeLastName,
-                         NombreProyecto = rGroup.Key.projectName,
-                         HorasEstimadas = rGroup.Key.estimatedDuration,
-                         HorasReales = rGroup.Sum(x => x.r.realDuration),
-                         Diferencia = ((int)rGroup.Sum(x => x.r.estimatedDuration) - (int)rGroup.Sum(x => x.r.realDuration))
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
                      }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
 
                 //Nota: COmo se genera este modelo
@@ -212,14 +211,13 @@ namespace FeLuisesScrumDEV.Controllers
                            && w.role == 1
                      //&& p.idProjectPK == idProject------------------------------se usa
                      //&& e.idEmployeePK = idEmployeePK
-                     group new { e, p, r } by new { e.employeeName, e.employeeLastName, p.projectName, r.estimatedDuration, r.realDuration } into rGroup
-                     select new
+                    select new
                      {
-                         LiderNombre = rGroup.Key.employeeName + " " + rGroup.Key.employeeLastName,
-                         NombreProyecto = rGroup.Key.projectName,
-                         HorasEstimadas = rGroup.Key.estimatedDuration,
-                         HorasReales = rGroup.Sum(x => x.r.realDuration),
-                         Diferencia = ((int)rGroup.Sum(x => x.r.estimatedDuration) - (int)rGroup.Sum(x => x.r.realDuration))
+                         LiderNombre = e.employeeName + " " + e.employeeLastName,
+                         NombreProyecto = p.projectName,
+                         HorasEstimadas = p.estimatedDuration,
+                         HorasReales = p.realDuration,
+                         Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
                      }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
 
                 //Nota: COmo se genera este modelo
