@@ -49,16 +49,27 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            Esta consulta permite al Jefe de desarrollo tomar la decisión si en el caso de que un nuevo cliente quiere contratar la
-                                            empresa para un nuevo proyecto, se cuenta con los desarrolladores ya libres o pronto de desocuparse.
-                                            Los líderes de proyecto pueden consultar con quién se puede contar adicionalmente en el caso de requerir más
-                                            desarrolladores de lo planeado anteriormente.
+                                            Para desarrolladores actualmente asignados a los proyectos: 
+                                            Nombre del desarrollador, nombre del proyecto, fecha de inicio, 
+                                            fecha de estimada de terminación ordenado en forma descendente 
+                                            por fecha de estimada de terminación. Para los desarrolladores disponibles: lista de sus nombres.
                                         </p>
                                     </div>
                                     <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
                                 </div>
+                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                    <div class="card-header" id="back-Fe">
+                                        <a class="btn text-white" role="button" href="@Url.Action("devsHistoryOnProjects", "Reports")"><b>4. Historial Desarrollador en Proyectos</b></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">Al seleccionar el nombre del desarrollador,
+                                        se requiere conocer los nombres de los proyectos en los cuales 
+                                        participó este desarrollador, su rol y total de horas dedicadas a 
+                                        este proyecto. Para el líder la cantidad de horas debe ser un campo vacío.</p>
+                                    </div>
+                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Valderde</b></div>
+                                </div>
                             </div>
-
                             <div class="col-sm-4">
                                 <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                                     <div class="card-header" id="back-Fe">
@@ -70,16 +81,62 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
-                                            En la parte general debe aparecer el nombre del desarrollador y se debe poder 
-                                            seleccionar un proyecto específico terminado o todos proyectos ya terminados 
-                                            en los cuales participó este desarrollador. En los detalles para cada proyecto 
-                                            de este desarrollador debe aparecer: nombre del proyecto (si son todos), 
-                                            nombre del requerimiento, complejidad, duración estimada, duración real y 
-                                            la diferencia entre estas dos duraciones.
+                                            En la parte general debe aparecer el nombre del desarrollador
+                                            y se debe poder seleccionar un proyecto específico terminado o
+                                            todos proyectos ya terminados en los cuales participó este desarrollador.
+                                            En los detalles para cada proyecto de este desarrollador debe aparecer:
+                                            nombre del proyecto (si son todos), nombre del requerimiento, complejidad,
+                                            duración estimada, duración real y la diferencia entre estas dos duraciones.
                                         </p>
                                     </div>
                                     <div class="card-footer" id="back-Fe"><b class="text-white text-center">José Luis</b></div>
                                 </div>
+                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                    <div class="card-header" id="back-Fe">
+                                        <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")"><b>5. Estado de Requerimientos</b></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            * Para el desarrollador debe desplegarse los nombres de los requerimientos asignados en el proyecto actual,
+                                            agrupados por requerimientos (1) con el estado terminado con fecha inicio y fecha de terminación, (2) con el estado en ejecución
+                                            con la fecha de inicio y duración estimada.
+                                            * Para el líder se deben desplegar los mismos datos seleccionando un desarrollador específico o todos asignados al proyecto.
+                                            * Para el Jefe de desarrollo se deben desplegar los mismos datos seleccionando un proyecto específico. Adicionalmente, debe
+                                            incluirse el nombre del líder y nombres de cada desarrollador para quién se despliegan los requerimientos.
+                                        </p>
+                                    </div>
+                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Luis Carvajal</b></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                    <div class="card-header" id="back-Fe">
+                                        <a class="btn text-white" role="button" href="@Url.Action("estimatedRealTimeDev", "Reports")"><b>3. Comparar la duración estimada y real para requerimiento de un desarrollador</b></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Para el líder debe desplegarse el nombre del proyecto donde es líder actualmente,
+                                            total de horas estimadas y reales y la diferencia entre estos valores. Para el jefe de desarrollo debe
+                                            poderse seleccionar un proyecto específico o todos proyectos con los mismos despliegues que para el
+                                            líder y con un dato adicional que es el nombre del líder de este proyecto.
+                                        </p>
+                                    </div>
+                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">José Luis</b></div>
+                                </div>
+                                <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
+                                    <div class="card-header" id="back-Fe">
+                                        <a class="btn text-white" role="button" href="#"><b>6. Periodos de desocupación de los desarrolladores dentro de un rango de fechas.</b></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Dentro de un rango de fechas seleccionado, se debe desplegar nombre del desarrollador, periodos de desocupación),
+                                            días transcurridos en cada una de estas fechas y días totales de desocupación ordenado en forma descendente por 
+                                            los días totales de desocupación.
+                                        </p>
+                                    </div>
+                                    <div class="card-footer" id="back-Fe"><b class="text-white text-center">Felipe Solís</b></div>
+                                </div>
+
                             </div>
 
 
@@ -91,14 +148,8 @@
 
 
 
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("requirmentState", "Reports")">Estado de Requerimientos</a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Estado del desarrollo de requeriminetos asignados a un desarrollador. Luis Carvajal</p>
-                                </div>
-                            </div>
+
+
                             <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
                                 <div class="card-header" id="back-Fe">
                                     <a class="btn text-white" role="button" href="@Url.Action("totalRequirements", "Reports")">10. Requerimientos Terminados y en Progreso</a>
@@ -124,17 +175,6 @@
                                 </div>
                             </div>
 
-                            <div class="card border-dark rounded shadow-none" style="margin-top: 15px">
-                                <div class="card-header" id="back-Fe">
-                                    <a class="btn text-white" role="button" href="@Url.Action("devsHistoryOnProjects", "Reports")">4. Historial Desarrollador en Proyectos</a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Esta consulta permite al Jefe de desarrollo analizar la ocupación de un desarrollador específico y también, si su rol en mayoría de los proyectos es de desarrollador o de líder. Luis Valverde.</p>
-                                </div>
-                                <div class="card-footer" id="back-Fe">
-
-                                </div>
-                            </div>
                         </div>
 
                         <div class="col-sm-4">
