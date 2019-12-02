@@ -223,7 +223,7 @@ namespace FeLuisesScrumDEV.Controllers
         {
             if (Convert.ToInt32(Session["userRole"]) == 1 || Convert.ToInt32(Session["userRole"]) == 2 && proyecto == null) //caso jefe desarrollador
             {
-                var actualUsr = Session["userID"];
+                var actualUsr = Session["userID"];//si se especifica el usuario es un
                 var idLeader = actualUsr.ToString();
 
                 var query2 =
@@ -245,7 +245,6 @@ namespace FeLuisesScrumDEV.Controllers
                          Diferencia = ((int)(p.estimatedDuration) - (int)(p.realDuration))
                      }).GroupBy(q => new { q.LiderNombre, q.NombreProyecto, q.HorasEstimadas, q.HorasReales, q.Diferencia });
 
-                //Nota: COmo se genera este modelo
                 var results = query2.ToList().Select(r => new totalHoursModel
                 {
                     LiderNombre = r.Key.LiderNombre,
