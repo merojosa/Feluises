@@ -113,28 +113,58 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-		public ActionResult BringPeriod(string currentEmployee)
+		public ActionResult BringPeriod(string currentEmployee ,string[] range)
 		{
 			List<string> dates = new List<string>();
 			ViewBag.aux = new SelectList(db.WorksIn.Where(p => p.idEmployeeFKPK == currentEmployee), "idEmployeeFKPK","idProjectFKPK");
 			Employee emp = db.Employee.Find(currentEmployee);
 			Project proc;
-			dates.Add(emp.employeeHireDate.ToShortDateString());
+
+            DateTime AuxStart;
+
+            dates.Add(emp.employeeHireDate.ToString("dd/MM/yyyy"));
+
+            if (DateTime.Parse(range[0]) <= emp.employeeHireDate)
+            {
+                //AuxStart = emp.employeeHireDate;
+                dates.Add(emp.employeeHireDate.ToString("dd/MM/yyyy"));
+            }
+            else {
+                dates.Add(DateTime.Parse(range[0]).ToString("dd/MM/yyyy"));
+            }
+
+			
 			foreach (var item in ViewBag.aux){
 				if (item.Text != null)
 				{
 					proc = db.Project.Find(Int32.Parse(item.Text));
 					if (proc != null)
 					{
-						dates.Add(proc.startingDate.Value.ToShortDateString());
-						dates.Add(proc.finishingDate.Value.ToShortDateString());
-					}
-				}else{
-					dates.Add(DateTime.Now.ToString("dd/M/yyyy"));
-				}
+                        if(proc.startingDate.Value < DateTime.Parse(range[0]))
+                        {
+                            if(proc.finishingDate.Value < DateTime.Parse(range[0])){
+                                continue;
+                            }else{
+                                dates.Add(proc.finishingDate.Value.ToString("dd/MM/yyyy"));
+                            }
+                        }
 
+                        dates.Add(proc.startingDate.Value.ToString("dd/MM/yyyy"));
+						dates.Add(proc.finishingDate.Value.ToString("dd/MM/yyyy"));
+					}
+                }else{
+                    break;
+                }
 			}
-			dates.Add(DateTime.Now.ToString("dd/M/yyyy"));
+
+
+            if (DateTime.Parse(range[1]) <= DateTime.Now)
+            {
+                dates.Add(DateTime.Parse(range[1]).ToString("dd/MM/yyyy"));
+            }else{
+                dates.Add(DateTime.Now.ToString("dd/MM/yyyy"));
+            }
+            
 			return Json(new
 			{
 				myArray = dates.ToArray()

@@ -11,10 +11,21 @@
     <title>Periodos de inactividad</title>
 
     <script>
-		function getPeriods() {
+        function formatDate(input) {
+            var datePart = input.match(/\d+/g),
+                year = datePart[0],
+                month = datePart[1],
+                day = datePart[2];
+            return month + '/' + day + '/' + year;
+        }
+
+        function getPeriods() {
             var idEmployee = document.getElementById("EmployeeSelect").value;
             var inputStart = document.getElementById('Start').value;
             var inputEnd = document.getElementById('End').value;
+            var rangeDates = [];
+            rangeDates.push(formatDate(inputStart));
+            rangeDates.push(formatDate(inputEnd));
             console.log(inputStart);
             console.log(inputEnd);
 			$.ajax({
@@ -24,7 +35,8 @@
                     traditional: true,
                     async: false,
                     data: {
-                        currentEmployee: idEmployee
+                        currentEmployee: idEmployee,
+                        range: rangeDates
                     },
 					success: function (json) {
                         var myArray = json.myArray;
@@ -59,7 +71,7 @@
                         var row = table.insertRow();
 						var cell1 = row.insertCell(0);
 						var cell2 = row.insertCell(1);
-                        cell1.innerHTML = "<b>Total</b>";
+                        cell1.innerHTML = "<b>Total días</b>";
                         cell2.innerHTML = "<b>" + Total + "</b>";
                     },
                     error: function (errorList) {
