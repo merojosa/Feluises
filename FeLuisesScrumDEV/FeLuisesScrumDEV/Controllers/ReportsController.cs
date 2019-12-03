@@ -92,7 +92,10 @@ namespace FeLuisesScrumDEV.Controllers
         //Conocer los periodos de desocupación de los desarrolladores.
         public ActionResult InactivityPeriod()
         {
-            return View();
+
+			ViewBag.idEmployeePK = new SelectList(db.Employee.Where(e => e.idEmployeePK != "000000000"), "idEmployeePK", "employeeName");
+
+			return View();
         }
 
         //Buscar desarrolladores de acuerdo al tipo de conocimiento y disponibilidad.
@@ -110,8 +113,36 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
-        //Comparar la duración estimada y real para requerimiento de un desarrollador.
-        public ActionResult estimatedRealTimeDev([Bind(Include = "Proyecto")]string proyecto/*string idEmployeePK, *//*int? idProject*/)//------------------------------se usa
+		public ActionResult BringPeriod(string currentEmployee)
+		{
+			List<string> dates = new List<string>();
+			ViewBag.aux = new SelectList(db.WorksIn.Where(p => p.idEmployeeFKPK == currentEmployee), "idEmployeeFKPK","idProjectFKPK");
+			Employee emp = db.Employee.Find(currentEmployee);
+			Project proc;
+			dates.Add(emp.employeeHireDate.ToShortDateString());
+			foreach (var item in ViewBag.aux){
+				if (item.Text != null)
+				{
+					proc = db.Project.Find(Int32.Parse(item.Text));
+					if (proc != null)
+					{
+						dates.Add(proc.startingDate.Value.ToShortDateString());
+						dates.Add(proc.finishingDate.Value.ToShortDateString());
+					}
+				}else{
+					dates.Add(DateTime.Now.ToString("dd/M/yyyy"));
+				}
+
+			}
+			dates.Add(DateTime.Now.ToString("dd/M/yyyy"));
+			return Json(new
+			{
+				myArray = dates.ToArray()
+			}); 
+		}
+
+		//Comparar la duración estimada y real para requerimiento de un desarrollador.
+		public ActionResult estimatedRealTimeDev([Bind(Include = "Proyecto")]string proyecto/*string idEmployeePK, *//*int? idProject*/)//------------------------------se usa
         {
             var actualUsr = Session["userID"]; //Desarrollador
             var rDeveloper = actualUsr.ToString();
