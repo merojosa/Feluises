@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    @model FeLuisesScrumDEV.viewModel.GetDatePickers
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
@@ -9,60 +10,64 @@
     <meta name="viewport" content="width=device-width" />
     <title>Periodos de inactividad</title>
 
-	<script>
+    <script>
 		function getPeriods() {
-                var idEmployee = document.getElementById("EmployeeSelect").value;
-			    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: '@Url.Action("BringPeriod", "Reports")',
-                        traditional: true,
-                        async: false,
-                        data: {
-                            currentEmployee: idEmployee
-                        },
-						success: function (json) {
-                            var myArray = json.myArray;
-                            console.log(myArray);
-							var periodo = "";
-                            var Total = 0;
-                            var aux = "";
-                            var date1;
-                            var date2;
-                            var difDates;
-                            var table = document.getElementById("myTable");
-                            table.innerHTML = " <tr><td><b>Períodos</b></td><td><b>Horas</b></td></tr>";
-							for (var i = 0; i < myArray.length; i++){
-                                periodo = "";
-                                if (i % 2 === 0) {
-                                    date1 = new Date(myArray[i]);
-                                    aux = myArray[i] + " - ";
-								} else {
-                                    periodo = aux + myArray[i];
-                                    console.log(periodo);
-                                    date2 = new Date(myArray[i]);
-                                    difDates = (date2.getTime() - date1.getTime())/(1000 * 3600 * 24)
-								    var row = table.insertRow();
-								    var cell1 = row.insertCell(0);
-								    var cell2 = row.insertCell(1);
-                                    cell1.innerHTML = periodo;
-                                    cell2.innerHTML = Math.floor(difDates);
-                                    Total += Math.floor(difDates);
-								}
-                            }
-
-                            var row = table.insertRow();
-							var cell1 = row.insertCell(0);
-							var cell2 = row.insertCell(1);
-                            cell1.innerHTML = "<b>Total</b>";
-                            cell2.innerHTML = "<b>" + Total + "</b>";
-                        },
-                        error: function (errorList) {
-                            console.log(errorList);
+            var idEmployee = document.getElementById("EmployeeSelect").value;
+            var inputStart = document.getElementById('Start').value;
+            var inputEnd = document.getElementById('End').value;
+            console.log(inputStart);
+            console.log(inputEnd);
+			$.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '@Url.Action("BringPeriod", "Reports")',
+                    traditional: true,
+                    async: false,
+                    data: {
+                        currentEmployee: idEmployee
+                    },
+					success: function (json) {
+                        var myArray = json.myArray;
+                        console.log(myArray);
+						var periodo = "";
+                        var Total = 0;
+                        var aux = "";
+                        var date1;
+                        var date2;
+                        var difDates;
+                        var table = document.getElementById("myTable");
+                        table.innerHTML = " <tr><td><b>Períodos</b></td><td><b>Horas</b></td></tr>";
+						for (var i = 0; i < myArray.length; i++){
+                            periodo = "";
+                            if (i % 2 === 0) {
+                                date1 = new Date(myArray[i]);
+                                aux = myArray[i] + " - ";
+							} else {
+                                periodo = aux + myArray[i];
+                                console.log(periodo);
+                                date2 = new Date(myArray[i]);
+                                difDates = (date2.getTime() - date1.getTime())/(1000 * 3600 * 24)
+								var row = table.insertRow();
+								var cell1 = row.insertCell(0);
+								var cell2 = row.insertCell(1);
+                                cell1.innerHTML = periodo;
+                                cell2.innerHTML = Math.floor(difDates);
+                                Total += Math.floor(difDates);
+							}
                         }
-                })
+
+                        var row = table.insertRow();
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+                        cell1.innerHTML = "<b>Total</b>";
+                        cell2.innerHTML = "<b>" + Total + "</b>";
+                    },
+                    error: function (errorList) {
+                        console.log(errorList);
+                    }
+            })
          }
-	</script>
+    </script>
 
 </head>
 <body>
@@ -81,33 +86,44 @@
 				</div>
 			</div>
 		</div>
-	}
-	else
-	{
+	}else{
         <div class="container">
-            <h3>Periodos de desocupación de los desarrolladores dentro de un rango de fechas</h3>
+            <h3>Periodos de desocupación desarrolladores</h3>
             <br />
             <br />
-            @*<div class="form-control" type="date" ></div>*@
-            @Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()" })
-            <br />
+            @*@using (Html.BeginForm())
+            {*@
+                
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h4>Fecha inicio</h4>
+                        @Html.EditorFor(model => model.Start_Range, new { htmlAttributes = new { @class = "form-control", type = "date", @id = "Start" } })
+                        @Html.ValidationMessageFor(model => model.Start_Range, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h4>Fecha final</h4>
+                        @Html.EditorFor(model => model.End_Range, new { htmlAttributes = new { @class = "form-control", type = "date", @id = "End" } })
+                        @Html.ValidationMessageFor(model => model.End_Range, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h4>Desarrollador</h4>
+                        @Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()" })
+                    </div>
+                </div>
+            </div>   
 
             <h4 id="employeeName"></h4>
 
             <br />
-            <br />
             @*class="table table-striped table-bordered"*@
             <table id="myTable" class="table table-striped table-bordered">
-
-                @*<thead>
-                    <th>
-                        Períodos
-                    </th>
-                    <th>
-                        Horas
-                    </th>
-                    </thead>*@
-
                 <tr>
                     <td>
                         <b>Períodos</b>
@@ -116,14 +132,10 @@
                         <b>Horas</b>
                     </td>
                 </tr>
-
-                @*<tbody></tbody>*@
-
             </table>
-
         </div>
 	
 	}
-
+    <br/>
 </body>
 </html>
