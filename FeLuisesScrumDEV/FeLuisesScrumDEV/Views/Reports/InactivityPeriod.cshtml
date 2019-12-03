@@ -22,59 +22,43 @@
                             currentEmployee: idEmployee
                         },
 						success: function (json) {
-
-							console.log(json.myArray);
-							var myArray = json.myArray;
+                            var myArray = json.myArray;
+                            console.log(myArray);
 							var periodo = "";
-							var count = 1;
-							for (i = 0; i < json.myArray.length; i++){
-								 periodo = "";
-
-								for (j = 0; i < 2; j++) {
-									if (i % 2 === 0) {
-										periodo = myArray[i] + " - ";
-									} else {
-										periodo = periodo + myArray[i];
-									}
+                            var Total = 0;
+                            var aux = "";
+                            var date1;
+                            var date2;
+                            var difDates;
+                            var table = document.getElementById("myTable");
+                            table.innerHTML = " <tr><td><b>Períodos</b></td><td><b>Horas</b></td></tr>";
+							for (var i = 0; i < myArray.length; i++){
+                                periodo = "";
+                                if (i % 2 === 0) {
+                                    date1 = new Date(myArray[i]);
+                                    aux = myArray[i] + " - ";
+								} else {
+                                    periodo = aux + myArray[i];
+                                    console.log(periodo);
+                                    date2 = new Date(myArray[i]);
+                                    difDates = (date2.getTime() - date1.getTime())/(1000 * 3600 * 24)
+								    var row = table.insertRow();
+								    var cell1 = row.insertCell(0);
+								    var cell2 = row.insertCell(1);
+                                    cell1.innerHTML = periodo;
+                                    cell2.innerHTML = Math.floor(difDates);
+                                    Total += Math.floor(difDates);
 								}
-								var table = document.getElementById("myTable");
-								var row = table.insertRow(count);
-								var cell1 = row.insertCell(0);
-								var cell2 = row.insertCell(1);
-								cell1.innerHTML = periodo;
-								cell2.innerHTML = periodo;
-								count += 1;
+                            }
 
-							}
-								//var ids = json.ids;
-								//var names = json.names;
-								//var knowledges = json.knowledges;
-								//var leaderName = json.leaderName;
-								//var skills = "";
-								//var pathImage = "../../Images/info.svg";
-								//var num = 25; //Para las dimensiones de la imagen
-								//document.getElementById("leaderName").innerHTML = leaderName;
-								//document.getElementById("sortable2").innerHTML = "";
-								//var ul = document.getElementById("sortable2");
-								//for (var cont = 0; cont < ids.length; cont++){
-								//    for (var i = 0; i < knowledges[cont].length; i++) {
-								//        if (knowledges[cont][i] != null) {
-								//            skills = skills + knowledges[cont][i] + "\n";
-								//        }
-								//    }
-								//    var li = document.createElement("li");
-								//    li.setAttribute("id", ids[cont]);
-								//    li.setAttribute("class", "ui-state-default ui-sortable-handle");
-								//    ul.appendChild(li);
-								//    document.getElementById(ids[cont])
-								//        .innerHTML = '<label>' + names[cont] + '</label><img src="' + pathImage + '" width="' + num.toString(10) + '" height="' + num.toString(10) + '" class="d - inline - block align - top" title="' + skills + '">';
-								//    skills = "";
-								//}
-
+                            var row = table.insertRow();
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+                            cell1.innerHTML = "<b>Total</b>";
+                            cell2.innerHTML = "<b>" + Total + "</b>";
                         },
                         error: function (errorList) {
-                            //console.log(errorList);
-                            //console.log("error");
+                            console.log(errorList);
                         }
                 })
          }
@@ -100,35 +84,44 @@
 	}
 	else
 	{
-		<div class="container">
-			<h3>Periodos de desocupación de los desarrolladores dentro de un rango de fechas</h3>
-			<br />
-			<br />
-			@*<div class="form-control" type="date" ></div>*@
-			@Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()" })
-			<br />
+        <div class="container">
+            <h3>Periodos de desocupación de los desarrolladores dentro de un rango de fechas</h3>
+            <br />
+            <br />
+            @*<div class="form-control" type="date" ></div>*@
+            @Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()" })
+            <br />
 
-			<h4 id="employeeName"></h4>
+            <h4 id="employeeName"></h4>
 
-			<br />
-			<br />
+            <br />
+            <br />
+            @*class="table table-striped table-bordered"*@
+            <table id="myTable" class="table table-striped table-bordered">
 
-			<table id="myTable" class="table table-striped table-bordered">
+                @*<thead>
+                    <th>
+                        Períodos
+                    </th>
+                    <th>
+                        Horas
+                    </th>
+                    </thead>*@
 
-				<thead>
-				<th>
-					Períodos
-				</th>
-				<th>
-					Horas
-				</th>
-				</thead>
+                <tr>
+                    <td>
+                        <b>Períodos</b>
+                    </td>
+                    <td>
+                        <b>Horas</b>
+                    </td>
+                </tr>
 
-				<tbody></tbody>
+                @*<tbody></tbody>*@
 
-			</table>
+            </table>
 
-		</div>
+        </div>
 	
 	}
 
