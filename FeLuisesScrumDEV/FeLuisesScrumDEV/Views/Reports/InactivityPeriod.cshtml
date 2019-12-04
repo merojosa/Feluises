@@ -26,8 +26,8 @@
             var rangeDates = [];
             rangeDates.push(formatDate(inputStart));
             rangeDates.push(formatDate(inputEnd));
-            console.log(inputStart);
-            console.log(inputEnd);
+            //console.log(inputStart);
+            //console.log(inputEnd);
 			$.ajax({
                     type: "post",
                     dataType: "json",
@@ -38,41 +38,55 @@
                         currentEmployee: idEmployee,
                         range: rangeDates
                     },
-					success: function (json) {
+                    success: function (json) {
                         var myArray = json.myArray;
                         console.log(myArray);
-						var periodo = "";
-                        var Total = 0;
-                        var aux = "";
-                        var date1;
-                        var date2;
-                        var difDates;
                         var table = document.getElementById("myTable");
-                        table.innerHTML = " <tr><td><b>Períodos</b></td><td><b>Horas</b></td></tr>";
-						for (var i = 0; i < myArray.length; i++){
-                            periodo = "";
-                            if (i % 2 === 0) {
-                                date1 = new Date(myArray[i]);
-                                aux = myArray[i] + " - ";
-							} else {
-                                periodo = aux + myArray[i];
-                                console.log(periodo);
-                                date2 = new Date(myArray[i]);
-                                difDates = (date2.getTime() - date1.getTime())/(1000 * 3600 * 24)
-								var row = table.insertRow();
-								var cell1 = row.insertCell(0);
-								var cell2 = row.insertCell(1);
-                                cell1.innerHTML = periodo;
-                                cell2.innerHTML = Math.floor(difDates);
-                                Total += Math.floor(difDates);
-							}
-                        }
+                        //if (myArray.length != 0) {
+                            var periodo = "";
+                            var Total = 0;
+                            var aux = "";
+                            var date1;
+                            var date2;
+                            var difDates;
+                            table.innerHTML = " <tr><td><b>Períodos</b></td><td><b>Horas</b></td></tr>";
+                            for (var i = 0; i < myArray.length; i++) {
+                                periodo = "";
+                                if (i % 2 === 0) {
+                                    date1 = new Date(myArray[i]);
+                                    aux = myArray[i] + " - ";
+                                } else {
+                                    periodo = aux + myArray[i];
+                                    console.log(periodo);
+                                    date2 = new Date(myArray[i]);
+                                    difDates = (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)
+                                    if (!isNaN(difDates)) {
+                                        var row = table.insertRow();
+                                        var cell1 = row.insertCell(0);
+                                        var cell2 = row.insertCell(1);
+                                        cell1.innerHTML = periodo;
+                                        cell2.innerHTML = difDates.toString;
+                                        Total += Math.floor(difDates);
+                                    }
+                                    var row = table.insertRow();
+                                    var cell1 = row.insertCell(0);
+                                    var cell2 = row.insertCell(1);
+                                    cell1.innerHTML = periodo;
+                                    cell2.innerHTML = Math.floor(difDates);
+                                    Total += Math.floor(difDates);
+                                }
+                            }
+                            var row = table.insertRow();
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            cell1.innerHTML = "<b>Total días</b>";
+                            cell2.innerHTML = "<b>" + Total + "</b>";
 
-                        var row = table.insertRow();
-						var cell1 = row.insertCell(0);
-						var cell2 = row.insertCell(1);
-                        cell1.innerHTML = "<b>Total días</b>";
-                        cell2.innerHTML = "<b>" + Total + "</b>";
+                        //} else {
+                        //    var row = table.insertRow();
+                        //    var cell1 = row.insertCell(0);
+                        //    cell1.innerHTML = "<b>No se encontraron periodos en el rango</b>";
+                        //}
                     },
                     error: function (errorList) {
                         console.log(errorList);
@@ -126,7 +140,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <h4>Desarrollador</h4>
-                        @Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()" })
+                        @Html.DropDownList("idEmployeePK", null, htmlAttributes: new { @class = "form-control", @id = "EmployeeSelect", @onchange = "getPeriods()", @value = "Desarrolladores" })
                     </div>
                 </div>
             </div>   
