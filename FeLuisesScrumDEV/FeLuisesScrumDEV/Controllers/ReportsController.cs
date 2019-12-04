@@ -113,6 +113,7 @@ namespace FeLuisesScrumDEV.Controllers
             return View();
         }
 
+        //Efecto: Trae los periodos de inactividad para un empleado especifico
 		public ActionResult BringPeriod(string currentEmployee ,string[] range)
 		{
 			List<string> dates = new List<string>();
@@ -120,7 +121,7 @@ namespace FeLuisesScrumDEV.Controllers
 			Employee emp = db.Employee.Find(currentEmployee);
 			Project proc;
 
-            dates.Add(DateTime.Parse(range[0]).ToString("dd/MM/yyyy"));
+            dates.Add(DateTime.Parse(range[0]).ToShortDateString());
             foreach(var item in ViewBag.auxList)
             {
                 if (item.Text != null)
@@ -129,105 +130,14 @@ namespace FeLuisesScrumDEV.Controllers
                     if(proc != null)
                     {
                         if(proc.startingDate > DateTime.Parse(range[0]) && proc.finishingDate < DateTime.Parse(range[1])){
-                            dates.Add(proc.startingDate.Value.ToString("dd/MM/yyyy"));
-                            dates.Add(proc.finishingDate.Value.ToString("dd/MM/yyyy"));
+                            dates.Add(proc.startingDate.Value.ToShortDateString());
+                            dates.Add(proc.finishingDate.Value.ToShortDateString());
                         }
 
                     }
                 }   
             }
-            dates.Add(DateTime.Parse(range[1]).ToString("dd/MM/yyyy"));
-
-            //DateTime AuxStart = new DateTime(); //PAra establecer el inicio del rango
-            //DateTime AuxEnd; //Para establecer el fin de un rango
-
-            //if (DateTime.Parse(range[1]) <= DateTime.Now)
-            //{
-            //    AuxEnd = DateTime.Parse(range[1]);
-            //    //dates.Add(DateTime.Parse(range[1]).ToString("dd/MM/yyyy"));
-            //}else{
-            //    AuxEnd = DateTime.Now;
-            //    //dates.Add(DateTime.Now.ToString("dd/MM/yyyy"));
-            //}
-
-            //dates.Add(emp.employeeHireDate.ToString("dd/MM/yyyy"));
-
-            //if(DateTime.Parse(range[1]) > emp.employeeHireDate && (DateTime.Parse(range[1]) > DateTime.Parse(range[0]))) //Si hire menor que el fin del rango
-            //{
-            //    if (DateTime.Parse(range[0]) <= emp.employeeHireDate) //hire mayor que inicio empleado
-            //    {
-            //        AuxStart = emp.employeeHireDate; 
-            //        dates.Add(emp.employeeHireDate.ToString("dd/MM/yyyy")); //tomo hiredate como inicio de rango
-
-            //        //Sigo con el start del primer proyecto
-            //        foreach (var item in ViewBag.aux)
-            //        {
-            //            if (item.Text != null)
-            //            {
-            //                proc = db.Project.Find(Int32.Parse(item.Text));
-            //                if (proc != null)
-            //                {
-            //                    if(proc.startingDate.Value <= AuxEnd) // Si es menor que el end, es valido
-            //                    {
-            //                        dates.Add(proc.startingDate.Value.ToString("dd/MM/yyyy"));
-            //                        if(proc.finishingDate.Value <= AuxEnd) // Si el finish es menor que el end lo guardo
-            //                        {
-            //                            dates.Add(proc.finishingDate.Value.ToString("dd/MM/yyyy"));
-            //                        }
-            //                        else{
-            //                            break;
-            //                        }
-
-            //                    }
-            //                    else { // Si no escribo el end
-            //                        dates.Add(AuxEnd.ToString("dd/MM/yyyy"));
-            //                        break;
-            //                    }
-            //                }
-            //            }
-            //        }
-
-            //    }
-            //    else{//Empieza desde finish del primer proyecto
-            //        foreach (var item in ViewBag.aux)
-            //        {
-            //            if (item.Text != null)
-            //            {
-            //                proc = db.Project.Find(Int32.Parse(item.Text));
-            //                if(DateTime.Parse(range[0]) <= proc.finishingDate.Value) //Si la finalizacion de un proyecto esta en el rango
-            //                {
-            //                    AuxStart = proc.finishingDate.Value; //Se empieza por ahi
-            //                    break;
-            //                } 
-            //            }
-            //        }
-            //        dates.Add(AuxStart.ToString("dd/MM/yyyy"));
-
-            //        foreach (var item in ViewBag.aux)
-            //        {
-            //            if (item.Text != null)
-            //            {
-            //                proc = db.Project.Find(Int32.Parse(item.Text));
-            //                if (AuxStart <= proc.finishingDate.Value) 
-            //                {
-
-            //                    if (proc.startingDate.Value <= AuxEnd)
-            //                    {
-            //                        dates.Add(proc.startingDate.Value.ToString("dd/MM/yyyy"));
-
-            //                        if(proc.finishingDate.Value <= AuxEnd)
-            //                        {
-            //                            dates.Add(proc.finishingDate.Value.ToString("dd/MM/yyyy"));
-            //                        }else{
-            //                            break;
-            //                        }
-            //                    }
-
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            dates.Add(DateTime.Parse(range[1]).ToShortDateString());
 
             return Json(new
 			{

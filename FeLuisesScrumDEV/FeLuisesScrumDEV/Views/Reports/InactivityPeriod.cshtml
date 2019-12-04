@@ -59,27 +59,20 @@
                                     periodo = aux + myArray[i];
                                     console.log(periodo);
                                     date2 = new Date(myArray[i]);
-                                    difDates = (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24)
-                                    if (!isNaN(difDates)) {
-                                        var row = table.insertRow();
-                                        var cell1 = row.insertCell(0);
-                                        var cell2 = row.insertCell(1);
-                                        cell1.innerHTML = periodo;
-                                        cell2.innerHTML = difDates.toString;
-                                        Total += Math.floor(difDates);
-                                    }
+                                    difDates = (date2.getTime() - date1.getTime()) / (3600 * 1000);
                                     var row = table.insertRow();
                                     var cell1 = row.insertCell(0);
                                     var cell2 = row.insertCell(1);
                                     cell1.innerHTML = periodo;
-                                    cell2.innerHTML = Math.floor(difDates);
-                                    Total += Math.floor(difDates);
+                                    cell2.innerHTML = difDates;
+                                    Total += difDates;
+                                    aux = "";
                                 }
                             }
                             var row = table.insertRow();
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
-                            cell1.innerHTML = "<b>Total días</b>";
+                            cell1.innerHTML = "<b>Total horas</b>";
                             cell2.innerHTML = "<b>" + Total + "</b>";
 
                         //} else {
