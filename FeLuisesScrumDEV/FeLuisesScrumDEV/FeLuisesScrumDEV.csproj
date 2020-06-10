@@ -139,6 +139,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\DeveloperKnowledgesController.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RequerimentsController.cs" />
+    <Compile Include="Models\CalendarData.cs" />
     <Compile Include="Controllers\WorksInsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -397,6 +399,7 @@
     <Content Include="Views\Reports\DeveloperState.cshtml" />
     <Content Include="Views\Reports\InactivityPeriod.cshtml" />
     <Content Include="Views\Reports\totalHours.cshtml" />
+    <Content Include="Views\Calendar\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
