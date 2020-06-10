@@ -1,4 +1,4 @@
-﻿using FeLuisesScrumDEV.Controllers.Services;
+﻿using FeLuisesScrumDEV.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +10,17 @@ namespace FeLuisesScrumDEV.Controllers
     public class CalendarController : Controller
     {
         // GET: Calendar
-        public ActionResult Index()
+        public ActionResult Index(string projectId)
         {
-            // Obtengo datos por medio del procedimiento almacenado
-
             List<CalendarData> listCalendarData = new List<CalendarData>();
 
-            // Detecto si es cliente u otro rol
-            // Session["userRole"]
+            // Obtengo el id del usuario
+            string id = Session["userID"].ToString();
 
-            // Si es cliente, hago consulta para obtener los proyectos de ese cliente
+            // Call SP with userId and projectId as parameters
 
-            // Si es otro rol, obtengo todos los proyectos existentes
+            // Iterate the SP result to add the tuples to listCalendarData
 
-            // Obtengo el id cliente
-            // string id = Session["userID"].ToString();
-
-            // Llamo al procedimiento almacenado
-
-            // Itero para poblar la lista del calendario
-
-            // Mando los datos a la vista
             return View(listCalendarData);
         }
     }
