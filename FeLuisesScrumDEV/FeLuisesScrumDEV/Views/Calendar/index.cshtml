@@ -1,7 +1,13 @@
-﻿
+﻿@model List<FeLuisesScrumDEV.Models.CalendarData>
+
 @{
     ViewBag.Title = "index";
 }
 
 <h2>index</h2>
+
+@foreach (CalendarData item in Model)
+{
+    <span>@item</span>
+}
 
