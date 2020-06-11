@@ -77,9 +77,9 @@
           <Property Name="budget" Type="numeric" Precision="20" Scale="2" />
           <Property Name="estimatedDuration" Type="int" />
           <Property Name="idClientFK" Type="char" MaxLength="9" />
+          <Property Name="realDuration" Type="int" />
           <Property Name="creationDate" Type="date" />
           <Property Name="status" Type="smallint" />
-          <Property Name="realDuration" Type="int" />
         </EntityType>
         <EntityType Name="Requeriment">
           <Key>
@@ -91,13 +91,13 @@
           <Property Name="idModuleFKPK" Type="int" Nullable="false" />
           <Property Name="idRequerimentPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idEmployeeFK" Type="char" MaxLength="9" />
+          <Property Name="objective" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estimatedDuration" Type="int" />
           <Property Name="realDuration" Type="int" />
           <Property Name="status" Type="smallint" />
           <Property Name="startingDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
           <Property Name="complexity" Type="smallint" />
-          <Property Name="objective" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -171,9 +171,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Requeriment_Project">
-          <End Role="Module" Type="Self.Module" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="Requeriment" Type="Self.Requeriment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
@@ -214,6 +212,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_GetRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idClient" Type="char" Mode="In" />
+          <Parameter Name="idProject" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Gr02Proy2ModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
@@ -518,7 +520,19 @@
             <End Role="Project" EntitySet="Project" />
             <End Role="WorksIn" EntitySet="WorksIn" />
           </AssociationSet>
+          <FunctionImport Name="SP_GetRequirements" ReturnType="Collection(Gr02Proy2Model.SP_GetRequirements_Result)">
+            <Parameter Name="idClient" Mode="In" Type="String" />
+            <Parameter Name="idProject" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_GetRequirements_Result">
+          <Property Type="Int32" Name="idProjectFKPK" Nullable="false" />
+          <Property Type="Int32" Name="idModuleFKPK" Nullable="false" />
+          <Property Type="Int32" Name="idRequerimentPK" Nullable="false" />
+          <Property Type="Int16" Name="status" Nullable="true" />
+          <Property Type="DateTime" Name="startingDate" Nullable="false" />
+          <Property Type="DateTime" Name="endDate" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -642,6 +656,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetRequirements" FunctionName="Gr02Proy2Model.Store.SP_GetRequirements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy2Model.SP_GetRequirements_Result">
+                <ScalarProperty Name="idProjectFKPK" ColumnName="idProjectFKPK" />
+                <ScalarProperty Name="idModuleFKPK" ColumnName="idModuleFKPK" />
+                <ScalarProperty Name="idRequerimentPK" ColumnName="idRequerimentPK" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

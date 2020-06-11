@@ -191,6 +191,9 @@
     <Compile Include="Models\Requeriment.cs">
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_GetRequirements_Result.cs">
+      <DependentUpon>FeLuisesDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>FeLuisesDB.tt</DependentUpon>
     </Compile>
