@@ -1,15 +1,23 @@
 ﻿@using FeLuisesScrumDEV.Models
-
+<!DOCTYPE html>
+<html lang="en">
 @model List<CalendarData>
+<head>
+    <meta charset="utf-8" />
+    @{
+        ViewBag.Title = "Calendario";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <title>Calendario</title>
+</head>
 
-@{
-    ViewBag.Title = "Calendario";
-}
-
-<h2>Calendario</h2>
-
-@foreach (CalendarData item in Model)
-{
-    <div>@item.idRequerimentPK</div>
-}
-
+<body>
+    <div class="container my-3">
+        <div id="calendar"></div>
+    </div>
+    @foreach (CalendarData item in Model)
+    {
+        <div>@item.idRequerimentPK</div>
+    }
+</body>
+</html>
