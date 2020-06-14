@@ -21,7 +21,7 @@ namespace FeLuisesScrumDEV.Controllers
 
             // Iterate the SP result to add the tuples to listCalendarData
 
-            return View(listCalendarData);
+            return View("Index", listCalendarData);
         }
 
         private List<CalendarData> getRequeriments(string clientId, int? projectId)

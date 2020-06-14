@@ -27,6 +27,22 @@ namespace TestFeLuisesScrumDEV
             return calendarController;
         }
 
+        [TestMethod]
+        public void indexNotNullTest()
+        {
+            CalendarController calendarController = initCalendarController(existentUserId);
+            ViewResult result = calendarController.Index(existentProjectId) as ViewResult;
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void indexViewTest()
+        {
+            CalendarController calendarController = initCalendarController(existentUserId);
+            ViewResult result = calendarController.Index(existentProjectId) as ViewResult;
+            Assert.AreEqual("Index", result.ViewName);
+        }
+
         // Existe usuario, existe proyecto
         [TestMethod]
         public void getRequirementsTest()
