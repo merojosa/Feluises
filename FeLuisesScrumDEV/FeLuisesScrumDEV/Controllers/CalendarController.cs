@@ -17,14 +17,14 @@ namespace FeLuisesScrumDEV.Controllers
             // Obtengo el id del usuario
             string clientId = Session["userID"].ToString();
 
-            List<CalendarData> listCalendarData = getRequeriments(clientId, 1);
+            List<CalendarData> listCalendarData = getRequeriments(clientId, projectId);
 
             // Iterate the SP result to add the tuples to listCalendarData
 
             return View(listCalendarData);
         }
 
-        private List<CalendarData> getRequeriments(string clientId, int projectId)
+        private List<CalendarData> getRequeriments(string clientId, int? projectId)
         {
             List<CalendarData> listCalendarData = new List<CalendarData>();
 
