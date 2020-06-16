@@ -9,12 +9,31 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
     <title>Calendario</title>
+    <link href='~/Scripts/fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='~/Scripts/fullcalendar/daygrid/main.css' rel='stylesheet' />
+
+    <script src='~/Scripts/fullcalendar/core/main.js'></script>
+    <script src='~/Scripts/fullcalendar/daygrid/main.js'></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid']
+            });
+
+            calendar.render();
+        });
+
+    </script>
 </head>
 
 <body>
-    <div class="container my-3">
-        <div id="calendar"></div>
-    </div>
+    <h2>Calendario</h2>
+    <hr />
+    <div id='calendar'></div>
     @foreach (CalendarData item in Model)
     {
         <div>@item.idRequerimentPK</div>
