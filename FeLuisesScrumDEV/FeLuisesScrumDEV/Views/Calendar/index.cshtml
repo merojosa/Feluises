@@ -23,6 +23,25 @@
 
     <script>
 
+        let requerimientos = [
+            {
+                title: 'SUPER PRUEBA',
+                start: '2020-06-14',
+                end: '2020-06-16',
+                backgroundColor: 'red',
+                borderColor: 'red',
+                textColor: 'white'
+            }
+        ];
+
+
+        var model = @Html.Raw(Json.Encode(Model));
+
+        for (let contador = 0; contador < model.length; ++contador)
+        {
+            console.log(model[contador]);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
@@ -45,9 +64,6 @@
     <h2>Calendario</h2>
     <hr />
     <div id='calendar'></div>
-    @foreach (CalendarData item in Model)
-    {
-        <div>@item.idRequerimentPK</div>
-    }
+    
 </body>
 </html>
