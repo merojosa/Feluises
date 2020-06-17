@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeLuisesScrumDEV", "FeLuisesScrumDEV\FeLuisesScrumDEV.csproj", "{08F9809F-7DE8-443A-B3B9-21F08D0085AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFeLuisesScrumDEV", "TestFeLuisesScrumDEV\TestFeLuisesScrumDEV.csproj", "{AD492A8F-4FB5-4E9D-B579-8090F24EE3AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{08F9809F-7DE8-443A-B3B9-21F08D0085AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08F9809F-7DE8-443A-B3B9-21F08D0085AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08F9809F-7DE8-443A-B3B9-21F08D0085AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD492A8F-4FB5-4E9D-B579-8090F24EE3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD492A8F-4FB5-4E9D-B579-8090F24EE3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD492A8F-4FB5-4E9D-B579-8090F24EE3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD492A8F-4FB5-4E9D-B579-8090F24EE3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
