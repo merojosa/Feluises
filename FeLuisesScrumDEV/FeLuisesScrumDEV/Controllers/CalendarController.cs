@@ -39,8 +39,16 @@ namespace FeLuisesScrumDEV.Controllers
                 calendarData.idModuleFKPK = item.idModuleFKPK;
                 calendarData.idRequerimentPK = item.idRequerimentPK;
                 calendarData.status = item.status;
-                calendarData.startingDate = item.startingDate;
-                calendarData.endDate = item.endDate;
+                calendarData.startingDate = item.startingDate.ToString("yyyy-MM-dd");
+                if (item.endDate == null)
+                {
+                    calendarData.endDate = "";
+                }
+                else
+                {
+                    calendarData.endDate = ((DateTime)(item.endDate)).ToString("yyyy-MM-dd");
+                }
+                
 
                 listCalendarData.Add(calendarData);
             }

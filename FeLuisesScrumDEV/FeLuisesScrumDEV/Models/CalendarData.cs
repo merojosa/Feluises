@@ -11,7 +11,7 @@ namespace FeLuisesScrumDEV.Models
         public int idModuleFKPK { get; set; }
         public int idRequerimentPK { get; set; }
         public short? status { get; set; }
-        public System.DateTime startingDate { get; set; }
-        public System.DateTime? endDate { get; set; }
+        public string startingDate { get; set; }
+        public string endDate { get; set; }
     }
 }
