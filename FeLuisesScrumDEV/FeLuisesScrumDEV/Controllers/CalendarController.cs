@@ -17,7 +17,7 @@ namespace FeLuisesScrumDEV.Controllers
             // Obtengo el id del usuario
             string clientId = Session["userID"].ToString();
 
-            List<CalendarData> listCalendarData = getRequeriments(clientId, 1);
+            List<CalendarData> listCalendarData = getRequeriments(clientId, projectId == null ? 1 : projectId);
 
             // Iterate the SP result to add the tuples to listCalendarData
 
