@@ -31,12 +31,19 @@
 
 
         var model = @Html.Raw(Json.Encode(Model));
-
+        let color = '';
         for (let contador = 0; contador < model.length; ++contador)
         {
+            if (model[contador].status == 0) {
+                color = 'blue';
+            }
+            else {
+                color = 'red';
+            }
+
             requerimientos.push({
                 title: model[contador].idRequerimentPK, start: model[contador].startingDate,
-                end: model[contador].endDate, backgroundColor: 'blue', borderColor: 'blue',
+                end: model[contador].endDate, backgroundColor: color, borderColor: color,
                 textColor: 'white'
             });
         }
