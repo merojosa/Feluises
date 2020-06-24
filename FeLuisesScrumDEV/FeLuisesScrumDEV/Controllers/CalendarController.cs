@@ -13,7 +13,8 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Calendar
         public ActionResult Index(int? projectId)
         {
-            var projects = db.Project.Include(r => r.Client);
+            //var projects = db.Project.Include(r => r.Client); Agregar si hay más projectos
+
             ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
 
             // Obtengo el id del usuario
