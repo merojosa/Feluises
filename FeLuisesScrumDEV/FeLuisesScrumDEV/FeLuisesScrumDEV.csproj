@@ -245,6 +245,7 @@
     <Content Include="Images\edit.svg" />
     <Content Include="Images\info.svg" />
     <Content Include="Images\key.svg" />
+    <Content Include="Images\legenda.PNG" />
     <Content Include="Images\logo.svg" />
     <Content Include="Images\logo1.svg" />
     <Content Include="Images\prb.jpg" />
