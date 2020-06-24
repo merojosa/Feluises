@@ -51,9 +51,18 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                events: requerimientos
+                buttonText: {
+                    today: 'Hoy',
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Día',
+                    list: 'Lista'
+                },
+                events: requerimientos,
+                locale: 'es',
+                allDayText: 'Todo el día'
             });
             calendar.render();
         });
