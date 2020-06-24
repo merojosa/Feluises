@@ -59,7 +59,7 @@ namespace TestFeLuisesScrumDEV
         public void getRequirementsNoProjectTest()
         {
             CalendarController calendarController = initCalendarController(existentUserId);
-            ViewResult result = calendarController.Index(null) as ViewResult;
+            ViewResult result = calendarController.Index(-1) as ViewResult;
 
             List<CalendarData> list = (List<CalendarData>)result.Model;
             Assert.IsFalse(list.Count > 0);

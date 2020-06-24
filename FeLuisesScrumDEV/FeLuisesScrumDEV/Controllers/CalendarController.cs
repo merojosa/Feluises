@@ -17,7 +17,8 @@ namespace FeLuisesScrumDEV.Controllers
 
             // Obtengo el id del usuario
             string clientId = Session["userID"].ToString();
-            List<CalendarData> listCalendarData = getRequeriments(clientId, 1);
+
+            List<CalendarData> listCalendarData = getRequeriments(clientId, projectId == null ? 1 : projectId);
 
             // Iterate the SP result to add the tuples to listCalendarData
             //Nada importante
@@ -40,8 +41,16 @@ namespace FeLuisesScrumDEV.Controllers
                 calendarData.idModuleFKPK = item.idModuleFKPK;
                 calendarData.idRequerimentPK = item.idRequerimentPK;
                 calendarData.status = item.status;
-                calendarData.startingDate = item.startingDate;
-                calendarData.endDate = item.endDate;
+                calendarData.startingDate = item.startingDate.ToString("yyyy-MM-dd");
+                if (item.endDate == null)
+                {
+                    calendarData.endDate = "";
+                }
+                else
+                {
+                    calendarData.endDate = ((DateTime)(item.endDate)).ToString("yyyy-MM-dd");
+                }
+                
 
                 listCalendarData.Add(calendarData);
             }
