@@ -135,19 +135,23 @@
 
                         @if (Convert.ToInt32(Session["userRole"]) == 3)
                         {  //Cliente
-                        <ul class="navbar-nav mr-auto ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
-                            </li>
+                    <ul class="navbar-nav mr-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Projects")">Proyectos</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=@Url.Action("Index", "Requeriments")>Requerimientos</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
-                            </li>
-                        </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Reports")">Reportes</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Calendar")">Calendario</a>
+                        </li>
+                    </ul>
                         }
 
                         @{ 
