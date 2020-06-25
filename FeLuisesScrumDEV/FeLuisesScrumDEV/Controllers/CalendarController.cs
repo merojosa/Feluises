@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System;
+using System.Linq;
 
 namespace FeLuisesScrumDEV.Controllers
 {
@@ -13,17 +14,13 @@ namespace FeLuisesScrumDEV.Controllers
         // GET: Calendar
         public ActionResult Index(int? projectId)
         {
-            //var projects = db.Project.Include(r => r.Client); Agregar si hay más projectos
-
-            ViewBag.idProjectFKPK = new SelectList(db.Project, "idProjectPK", "projectName");
+            var projects = db.Project;
+            ViewBag.idProjectFKPK = new SelectList(projects, "idProjectPK", "projectName");
 
             // Obtengo el id del usuario
             string clientId = Session["userID"].ToString();
 
-            List<CalendarData> listCalendarData = getRequeriments(clientId, projectId == null ? 1 : projectId);
-
-            // Iterate the SP result to add the tuples to listCalendarData
-            //Nada importante
+            List<CalendarData> listCalendarData = getRequeriments(clientId, projectId == null ? projects.First().idProjectPK : projectId);
 
             return View("Index", listCalendarData);
         }
