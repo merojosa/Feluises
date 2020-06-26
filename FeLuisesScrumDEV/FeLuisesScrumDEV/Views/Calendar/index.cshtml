@@ -25,7 +25,22 @@
 
                 <div class="col">
                     <div id="dropDownProjects" style="margin-top: 50px; margin-bottom:50px">
-                        @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control" })
+                        <select class="form-control" id="idProjectFKPK" name="idProjectFKPK">
+                            @*Iterate through the projects that were setted on controller*@
+                            @foreach (var project in ViewBag.idProjectFKPK)
+                            {
+                                // If the project id is the current, select it.
+                                if (int.Parse(project.Value) == Model.First().idProjectFKPK)
+                                {
+                                    <option value="@project.Value" selected>@project.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@project.Value">@project.Text</option>
+                                }
+
+                            }
+                        </select>
                     </div>
                 </div>
 
