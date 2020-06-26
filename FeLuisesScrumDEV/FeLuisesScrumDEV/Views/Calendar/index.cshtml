@@ -13,13 +13,33 @@
     <link href='~/Scripts/fullcalendar/daygrid/main.css' rel='stylesheet' />
     <link href='~/Scripts/fullcalendar/timegrid/main.css' rel='stylesheet' />
     <link href='~/Scripts/fullcalendar/list/main.css' rel='stylesheet' />
+</head>
 
+<body>
+    <div class="container">
+        <h2>Calendario</h2>
+        <hr />
 
-    <script src='~/Scripts/fullcalendar/core/main.js'></script>
-    <script src='~/Scripts/fullcalendar/daygrid/main.js'></script>
-    <script src='~/Scripts/fullcalendar/timegrid/main.js'></script>
-    <script src='~/Scripts/fullcalendar/list/main.js'></script>
-    <script src='~/Scripts/fullcalendar/interaction/main.js'></script>
+        <div class="form">
+            <div class="form-row">
+
+                <div class="col">
+                    <div id="dropDownProjects" style="margin-top: 50px; margin-bottom:50px">
+                        @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col" style="text-align:right">
+                    <div>
+                        <img src="~/Images/legenda.PNG" width="200" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <div id='calendar'></div>
+    </div>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -83,32 +103,12 @@
         });
 
     </script>
-</head>
 
-<body>
-    <div class="container">
-        <h2>Calendario</h2>
-        <hr />
 
-        <div class="form">
-            <div class="form-row">
-
-                <div class="col">
-                    <div id="dropDownProjects" style="margin-top: 50px; margin-bottom:50px">
-                        @Html.DropDownList("idProjectFKPK", null, "Proyecto", new { @class = "form-control" })
-                    </div>
-                </div>
-
-                <div class="col" style="text-align:right">
-                    <div>
-                        <img src="~/Images/legenda.PNG" width="200"/>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <hr />
-        <div id='calendar'></div>
-    </div>
+    <script src='~/Scripts/fullcalendar/core/main.js'></script>
+    <script src='~/Scripts/fullcalendar/daygrid/main.js'></script>
+    <script src='~/Scripts/fullcalendar/timegrid/main.js'></script>
+    <script src='~/Scripts/fullcalendar/list/main.js'></script>
+    <script src='~/Scripts/fullcalendar/interaction/main.js'></script>
 </body>
 </html>
